@@ -287,10 +287,10 @@
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="loader-text">Loading something special...</div>
-  <div class="loader-sub">Just a moment</div>
+<!-- LOADER (tap to enter) -->
+<div id="loader" style="cursor:pointer;">
+  <div class="loader-text">Happy Birthday!</div>
+  <div class="loader-sub" style="margin-top:1rem;">Tap anywhere to enter</div>
 </div>
 
 <!-- CONFETTI -->
@@ -444,13 +444,30 @@
 
 <script>
 (function(){
-  // ===== LOADER =====
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.getElementById('loader').classList.add('hide');
-      launchConfetti();
-    }, 1200);
-  });
+  // ===== MUSIC INIT =====
+  const audio = new Audio('Tum Mile (Slowed  Reverb)  Javed Ali, Pritam  SR Lofi.mp3');
+  audio.loop = true;
+  audio.volume = 0.3;
+  let isPlaying = false;
+  function startMusic() {
+    audio.play().then(() => {
+      isPlaying = true;
+      document.getElementById('music-btn').classList.add('playing');
+    }).catch(() => {});
+  }
+
+  // ===== LOADER (tap to enter + start music) =====
+  const loader = document.getElementById('loader');
+  function enterSite() {
+    loader.classList.add('hide');
+    launchConfetti();
+    // start music on this user gesture
+    startMusic();
+    loader.removeEventListener('click', enterSite);
+    loader.removeEventListener('touchstart', enterSite);
+  }
+  loader.addEventListener('click', enterSite);
+  loader.addEventListener('touchstart', enterSite);
 
   // ===== CONFETTI =====
   function launchConfetti() {
@@ -563,33 +580,8 @@
   });
   lb.addEventListener('click', () => { lb.classList.remove('open'); });
 
-  // ===== MUSIC =====
+  // ===== MUSIC (toggle only, autoplay handled by loader tap) =====
   const musicBtn = document.getElementById('music-btn');
-  const audio = new Audio('Tum Mile (Slowed  Reverb)  Javed Ali, Pritam  SR Lofi.mp3');
-  audio.loop = true;
-  audio.volume = 0.3;
-  let isPlaying = false;
-
-  function startMusic() {
-    audio.play().then(() => {
-      isPlaying = true;
-      musicBtn.classList.add('playing');
-    }).catch(() => {});
-  }
-
-  // autoplay on first user interaction (browsers require gesture)
-  function autoplayOnce() {
-    startMusic();
-    document.removeEventListener('click', autoplayOnce);
-    document.removeEventListener('touchstart', autoplayOnce);
-    document.removeEventListener('scroll', autoplayOnce);
-  }
-  document.addEventListener('click', autoplayOnce);
-  document.addEventListener('touchstart', autoplayOnce);
-  document.addEventListener('scroll', autoplayOnce);
-  // also try immediate play (works in some browsers)
-  startMusic();
-
   musicBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (isPlaying) { audio.pause(); musicBtn.classList.remove('playing'); isPlaying = false; }
