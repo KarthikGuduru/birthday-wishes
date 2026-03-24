@@ -964,6 +964,7 @@
     /* ── Parallax ── */
     .hero { will-change: transform; }
   </style>
+  <link rel="stylesheet" href="../../css/ux-polish.css">
 </head>
 <body>
 
@@ -1031,6 +1032,10 @@
 
 <!-- Hero -->
 <section class="hero" id="hero">
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80');opacity:0.15;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
+    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.07;z-index:0;pointer-events:none;" aria-hidden="true">
+      <source src="https://videos.pexels.com/video-files/4507714/4507714-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    </video>
   <!-- Vastu Mandala Watermark -->
   <svg class="vastu-mandala" viewBox="0 0 540 540" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -1284,6 +1289,10 @@
     <div class="pooja-title-telugu reveal">పూజా కార్యక్రమం</div>
   </div>
 
+  <div style="text-align:center;margin-bottom:2rem;">
+    <img src="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=700&q=80" alt="Diya and pooja items" loading="lazy" style="max-width:min(700px,100%);height:250px;object-fit:cover;object-position:center;border:1px solid rgba(201,148,42,0.3);display:inline-block;" onerror="this.remove();">
+  </div>
+
   <div class="timeline">
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
@@ -1339,25 +1348,25 @@
   <div class="section-subtitle reveal">A blessed abode for our family</div>
   <div class="rooms-grid reveal">
     <div class="room-card">
-      <div class="room-card-inner">
-        <div class="room-emoji">🛋️</div>
-        <div class="room-name">Living Room</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,227,0.8);font-size:0.95rem;">Where family gathers</div>
+      <div class="room-card" style="overflow:hidden;height:180px;">
+        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80" alt="Room" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(145deg,#c86820,#2a7020)';this.remove();">
       </div>
+      <div class="room-name">Living Room</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,227,0.8);font-size:0.95rem;">Where family gathers</div>
     </div>
     <div class="room-card">
-      <div class="room-card-inner">
-        <div class="room-emoji">🍳</div>
-        <div class="room-name">Kitchen</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,227,0.8);font-size:0.95rem;">Heart of the home</div>
+      <div class="room-card" style="overflow:hidden;height:180px;">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Room" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(145deg,#c86820,#2a7020)';this.remove();">
       </div>
+      <div class="room-name">Kitchen</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,227,0.8);font-size:0.95rem;">Heart of the home</div>
     </div>
     <div class="room-card">
-      <div class="room-card-inner">
-        <div class="room-emoji">🌿</div>
-        <div class="room-name">Garden</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,227,0.8);font-size:0.95rem;">Our little paradise</div>
+      <div class="room-card" style="overflow:hidden;height:180px;">
+        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80" alt="Room" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(145deg,#c86820,#2a7020)';this.remove();">
       </div>
+      <div class="room-name">Garden</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,227,0.8);font-size:0.95rem;">Our little paradise</div>
     </div>
   </div>
   <div class="blessing-box reveal">
@@ -1672,6 +1681,7 @@
     });
   });
 </script>
+<script src="../../js/ux-polish.js" defer></script>
 <script src="../../js/features-bar.js" defer></script>
 </body>
 </html>

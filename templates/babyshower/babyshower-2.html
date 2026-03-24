@@ -845,6 +845,7 @@
     }
     .footer-back:hover { color: var(--soft-pink); }
   </style>
+  <link rel="stylesheet" href="../../css/ux-polish.css">
 </head>
 <body>
 
@@ -937,6 +938,7 @@
      HERO SECTION
      ============================================= -->
 <section class="hero" id="home">
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1519689680058-324335c77eba?w=1400&q=80');opacity:0.12;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
 
   <!-- Canvas starfield -->
   <canvas id="star-canvas"></canvas>
@@ -1157,21 +1159,25 @@
     <div class="nursery-title-line reveal" data-field="theme">Twinkle Little Star</div>
     <div class="nursery-grid reveal">
       <div class="nursery-card">
+        <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=400&q=80" alt="Ceremony memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#d4a010,#1a6a1a)';this.src='';">
         <span class="nursery-card-emoji">&#127769;</span>
         <div class="nursery-card-name">Star &amp; Moon Mobile</div>
         <div class="nursery-card-desc">Hand-crafted wooden stars and crescent moons dangling from a gentle mobile</div>
       </div>
       <div class="nursery-card">
+        <img src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=400&q=80" alt="Ceremony memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#d4a010,#1a6a1a)';this.src='';">
         <span class="nursery-card-emoji">&#127752;</span>
         <div class="nursery-card-name">Rainbow Blanket</div>
         <div class="nursery-card-desc">Soft hand-knitted blanket in pastel rainbow stripes — cozy and colorful</div>
       </div>
       <div class="nursery-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Ceremony memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#d4a010,#1a6a1a)';this.src='';">
         <span class="nursery-card-emoji">&#128024;</span>
         <div class="nursery-card-name">Elephant Stuffed Toy</div>
         <div class="nursery-card-desc">Plush lavender elephant plushie — baby's first cuddly companion</div>
       </div>
       <div class="nursery-card">
+        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&q=80" alt="Ceremony memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#d4a010,#1a6a1a)';this.src='';">
         <span class="nursery-card-emoji">&#10024;</span>
         <div class="nursery-card-name">Fairy Lights</div>
         <div class="nursery-card-desc">Warm golden fairy lights strung along the crib — a constellation of warmth</div>
@@ -1232,23 +1238,23 @@
     <p class="section-subtitle reveal" style="color:#6050a0">Snapshots from our journey</p>
     <div class="polaroid-grid reveal">
       <div class="polaroid">
-        <div class="polaroid-photo">&#127800;</div>
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400&q=80" alt="Ceremony memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#d4a010,#1a6a1a)';this.src='';"></div>
         <div class="polaroid-caption">Baby Shower Prep</div>
       </div>
       <div class="polaroid">
-        <div class="polaroid-photo">&#127775;</div>
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1490750967868-88df5691cc5b?w=400&q=80" alt="Ceremony memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#d4a010,#1a6a1a)';this.src='';"></div>
         <div class="polaroid-caption">Starry Night</div>
       </div>
       <div class="polaroid">
-        <div class="polaroid-photo">&#128024;</div>
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400&q=80" alt="Ceremony memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#d4a010,#1a6a1a)';this.src='';"></div>
         <div class="polaroid-caption">Nursery Ready</div>
       </div>
       <div class="polaroid">
-        <div class="polaroid-photo">&#127873;</div>
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=400&q=80" alt="Ceremony memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#d4a010,#1a6a1a)';this.src='';"></div>
         <div class="polaroid-caption">Gift Opening</div>
       </div>
       <div class="polaroid">
-        <div class="polaroid-photo">&#128149;</div>
+        <div class="polaroid-photo"><img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&q=80" alt="Ceremony memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#d4a010,#1a6a1a)';this.src='';"></div>
         <div class="polaroid-caption">With Love</div>
       </div>
     </div>
@@ -1733,6 +1739,7 @@
     };
   }
 </script>
+<script src="../../js/ux-polish.js" defer></script>
 <script src="../../js/features-bar.js" defer></script>
 </body>
 </html>

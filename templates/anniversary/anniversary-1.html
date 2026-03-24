@@ -1006,6 +1006,7 @@
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
   </style>
+  <link rel="stylesheet" href="../../css/ux-polish.css">
 </head>
 <body>
 
@@ -1043,6 +1044,10 @@
 
 <!-- Hero -->
 <section id="hero">
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1400&q=80');opacity:0.18;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
+    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.07;z-index:0;pointer-events:none;" aria-hidden="true">
+      <source src="https://videos.pexels.com/video-files/3254178/3254178-uhd_2560_1440_30fps.mp4" type="video/mp4">
+    </video>
   <canvas id="hero-canvas"></canvas>
   <div class="hero-glow"></div>
   <div class="damask-overlay"></div>
@@ -1147,37 +1152,37 @@
   <div class="photo-grid">
     <div class="vintage-photo-wrap reveal" onclick="openLightbox(0)">
       <div class="vintage-frame">
-        <div class="vintage-photo-img"><span class="vintage-photo-icon">💍</span></div>
+        <div class="vintage-photo-img"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500&q=80" alt="Anniversary memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:sepia(0.4) brightness(0.85) contrast(1.1);" onerror="this.style.background='linear-gradient(145deg,#8b0000,#c9942a)';this.src='';"></div>
         <div class="vintage-caption">Wedding Day</div>
       </div>
     </div>
     <div class="vintage-photo-wrap reveal reveal-delay-1" onclick="openLightbox(1)">
       <div class="vintage-frame">
-        <div class="vintage-photo-img v2"><span class="vintage-photo-icon">🏠</span></div>
+        <div class="vintage-photo-img v2"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&q=80" alt="Anniversary memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:sepia(0.4) brightness(0.85) contrast(1.1);" onerror="this.style.background='linear-gradient(145deg,#8b0000,#c9942a)';this.src='';"></div>
         <div class="vintage-caption">Our First Home</div>
       </div>
     </div>
     <div class="vintage-photo-wrap reveal reveal-delay-2" onclick="openLightbox(2)">
       <div class="vintage-frame">
-        <div class="vintage-photo-img v3"><span class="vintage-photo-icon">👶</span></div>
+        <div class="vintage-photo-img v3"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500&q=80" alt="Anniversary memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:sepia(0.4) brightness(0.85) contrast(1.1);" onerror="this.style.background='linear-gradient(145deg,#8b0000,#c9942a)';this.src='';"></div>
         <div class="vintage-caption">Family Grew</div>
       </div>
     </div>
     <div class="vintage-photo-wrap reveal" onclick="openLightbox(3)">
       <div class="vintage-frame">
-        <div class="vintage-photo-img v4"><span class="vintage-photo-icon">✈️</span></div>
+        <div class="vintage-photo-img v4"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80" alt="Anniversary memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:sepia(0.4) brightness(0.85) contrast(1.1);" onerror="this.style.background='linear-gradient(145deg,#8b0000,#c9942a)';this.src='';"></div>
         <div class="vintage-caption">Adventures Together</div>
       </div>
     </div>
     <div class="vintage-photo-wrap reveal reveal-delay-1" onclick="openLightbox(4)">
       <div class="vintage-frame">
-        <div class="vintage-photo-img v5"><span class="vintage-photo-icon">❤️</span></div>
+        <div class="vintage-photo-img v5"><img src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80" alt="Anniversary memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:sepia(0.4) brightness(0.85) contrast(1.1);" onerror="this.style.background='linear-gradient(145deg,#8b0000,#c9942a)';this.src='';"></div>
         <div class="vintage-caption">Still in Love</div>
       </div>
     </div>
     <div class="vintage-photo-wrap reveal reveal-delay-2" onclick="openLightbox(5)">
       <div class="vintage-frame">
-        <div class="vintage-photo-img v6"><span class="vintage-photo-icon">✨</span></div>
+        <div class="vintage-photo-img v6"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500&q=80" alt="Anniversary memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:sepia(0.4) brightness(0.85) contrast(1.1);" onerror="this.style.background='linear-gradient(145deg,#8b0000,#c9942a)';this.src='';"></div>
         <div class="vintage-caption">Our Golden Day</div>
       </div>
     </div>
@@ -1255,6 +1260,9 @@
     <p class="vows-text">
       "I take you again, as I did <span data-field="years">25</span> years ago, with the same love and greater wisdom. In your eyes I have found my home; in your heart, my belonging; in your arms, my peace. You are my home, my adventure, my forever."
     </p>
+    <div style="text-align:center;margin:1.5rem 0;">
+  <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&q=80" alt="A lifetime together" loading="lazy" style="max-width:min(600px,100%);height:280px;object-fit:cover;object-position:top;border:2px solid rgba(201,148,42,0.3);display:inline-block;filter:sepia(0.2);" onerror="this.remove();">
+</div>
   </div>
 </section>
 
@@ -1771,6 +1779,7 @@
     });
   });
 </script>
+<script src="../../js/ux-polish.js" defer></script>
 <script src="../../js/features-bar.js" defer></script>
 </body>
 </html>

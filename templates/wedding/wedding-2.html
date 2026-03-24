@@ -743,6 +743,7 @@
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
+  <link rel="stylesheet" href="../../css/ux-polish.css">
 </head>
 <body>
 
@@ -815,6 +816,7 @@
 
 <!-- HERO -->
 <section id="hero">
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=1400&q=80');opacity:0.20;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
   <div id="floats-container"></div>
   <div id="notes-container"></div>
 
@@ -1289,27 +1291,27 @@
   </div>
   <div class="gallery-grid">
     <div class="miniature-card reveal" onclick="openLightbox(0)">
-      <div class="miniature-photo m1">💛</div>
+      <div class="miniature-photo m1"><img src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">Mehendi Night</div>
     </div>
     <div class="miniature-card reveal" onclick="openLightbox(1)">
-      <div class="miniature-photo m2">🎊</div>
+      <div class="miniature-photo m2"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">Sangeet</div>
     </div>
     <div class="miniature-card reveal" onclick="openLightbox(2)">
-      <div class="miniature-photo m3">🐎</div>
+      <div class="miniature-photo m3"><img src="https://images.unsplash.com/photo-1604604557008-0cbb4e48a645?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">Baraat</div>
     </div>
     <div class="miniature-card reveal" onclick="openLightbox(3)">
-      <div class="miniature-photo m4">🔥</div>
+      <div class="miniature-photo m4"><img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">Pheras</div>
     </div>
     <div class="miniature-card reveal" onclick="openLightbox(4)">
-      <div class="miniature-photo m5">🥂</div>
+      <div class="miniature-photo m5"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">Reception</div>
     </div>
     <div class="miniature-card reveal" onclick="openLightbox(5)">
-      <div class="miniature-photo m6">💑</div>
+      <div class="miniature-photo m6"><img src="https://images.unsplash.com/photo-1525772764200-be829a350797?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">The Couple</div>
     </div>
   </div>
@@ -1596,6 +1598,7 @@ document.addEventListener('DOMContentLoaded', () => {
   InviteCustomize.initPreview({groom:"Aryan Sharma",bride:"Priya Agarwal",weddingDate:"May 5, 2026",weddingTime:"11:00 AM",receptionDate:"May 5, 2026",receptionTime:"7:00 PM",venue:"Umaid Bhawan Palace, Jodhpur",receptionVenue:"Royal Heritage Banquet, Jaipur",groomFamily:"Shri Vikram Sharma & Smt. Kavita Sharma",brideFamily:"Shri Mahesh Agarwal & Smt. Sunita Agarwal",message:"Shubh Vivah! With joy in our hearts, we invite you to witness this divine union"});
 });
 </script>
+<script src="../../js/ux-polish.js" defer></script>
 <script src="../../js/features-bar.js" defer></script>
 </body>
 </html>

@@ -502,6 +502,7 @@
       100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
   </style>
+  <link rel="stylesheet" href="../../css/ux-polish.css">
 </head>
 <body>
 
@@ -541,6 +542,7 @@
 
 <!-- Hero Section -->
 <section id="hero">
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1400&q=80');opacity:0.15;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
   <canvas id="constellation-canvas"></canvas>
   <div class="hero-geo-pattern"></div>
 
@@ -706,27 +708,27 @@
 
   <div class="photo-booth-grid">
     <div class="photo-strip reveal" style="transition-delay:0s">
-      <div class="strip-frame" style="background:linear-gradient(180deg,#c9607a,#a84060);">💕</div>
+      <div class="strip-frame"><img loading="lazy" style="width:100%;height:100%;object-fit:cover;" src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500&q=80" alt="Engagement memory" onerror="this.style.background='linear-gradient(180deg,#c9607a,#a84060)';this.remove();"></div>
       <div class="strip-divider"></div>
-      <div class="strip-frame" style="background:linear-gradient(180deg,#8b1a3a,#c9607a);">🥂</div>
+      <div class="strip-frame"><img loading="lazy" style="width:100%;height:100%;object-fit:cover;" src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80" alt="Engagement memory" onerror="this.style.background='linear-gradient(180deg,#8b1a3a,#c9607a)';this.remove();"></div>
       <div class="strip-divider"></div>
-      <div class="strip-frame" style="background:linear-gradient(180deg,#c9607a,#7a1040);">💍</div>
+      <div class="strip-frame"><img loading="lazy" style="width:100%;height:100%;object-fit:cover;" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&q=80" alt="Engagement memory" onerror="this.style.background='linear-gradient(180deg,#c9607a,#7a1040)';this.remove();"></div>
       <div class="strip-label">Strip #1 · Nov 2026</div>
     </div>
     <div class="photo-strip reveal" style="transition-delay:0.12s">
-      <div class="strip-frame" style="background:linear-gradient(180deg,#080818,#1a1a2a);">✨</div>
+      <div class="strip-frame"><img loading="lazy" style="width:100%;height:100%;object-fit:cover;" src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500&q=80" alt="Engagement memory" onerror="this.style.background='linear-gradient(180deg,#080818,#1a1a2a)';this.remove();"></div>
       <div class="strip-divider"></div>
-      <div class="strip-frame" style="background:linear-gradient(180deg,#1a1a2a,#c9607a);">🌟</div>
+      <div class="strip-frame"><img loading="lazy" style="width:100%;height:100%;object-fit:cover;" src="https://images.unsplash.com/photo-1604604557008-0cbb4e48a645?w=500&q=80" alt="Engagement memory" onerror="this.style.background='linear-gradient(180deg,#1a1a2a,#c9607a)';this.remove();"></div>
       <div class="strip-divider"></div>
-      <div class="strip-frame" style="background:linear-gradient(180deg,#c9607a,#080818);">❤️</div>
+      <div class="strip-frame"><img loading="lazy" style="width:100%;height:100%;object-fit:cover;" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80" alt="Engagement memory" onerror="this.style.background='linear-gradient(180deg,#c9607a,#080818)';this.remove();"></div>
       <div class="strip-label">Strip #2 · Nov 2026</div>
     </div>
     <div class="photo-strip reveal" style="transition-delay:0.24s">
-      <div class="strip-frame" style="background:linear-gradient(180deg,#f5e8c0,#c9607a);">😊</div>
+      <div class="strip-frame"><img loading="lazy" style="width:100%;height:100%;object-fit:cover;" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&q=80" alt="Engagement memory" onerror="this.style.background='linear-gradient(180deg,#f5e8c0,#c9607a)';this.remove();"></div>
       <div class="strip-divider"></div>
-      <div class="strip-frame" style="background:linear-gradient(180deg,#c9607a,#f5e8c0);">🎊</div>
+      <div class="strip-frame"><img loading="lazy" style="width:100%;height:100%;object-fit:cover;" src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500&q=80" alt="Engagement memory" onerror="this.style.background='linear-gradient(180deg,#c9607a,#f5e8c0)';this.remove();"></div>
       <div class="strip-divider"></div>
-      <div class="strip-frame" style="background:linear-gradient(180deg,#a84060,#c9607a);">💫</div>
+      <div class="strip-frame"><img loading="lazy" style="width:100%;height:100%;object-fit:cover;" src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=500&q=80" alt="Engagement memory" onerror="this.style.background='linear-gradient(180deg,#a84060,#c9607a)';this.remove();"></div>
       <div class="strip-label">Strip #3 · Nov 2026</div>
     </div>
   </div>
@@ -1113,6 +1115,7 @@
     InviteCustomize.initPreview({groomName:"Rohan Kapoor",brideName:"Simran Singh",date:"November 8, 2026",time:"6:00 PM",venue:"The Taj Hotel, Colaba, Mumbai",groomFamily:"Mr. & Mrs. Suresh Kapoor",brideFamily:"Mr. & Mrs. Harpreet Singh",message:"Love is the beginning of everything — join us to celebrate ours",host:"The Kapoor & Singh Families"});
   });
 </script>
+<script src="../../js/ux-polish.js" defer></script>
 <script src="../../js/features-bar.js" defer></script>
 </body>
 </html>

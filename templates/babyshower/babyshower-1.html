@@ -941,6 +941,7 @@
     }
     .footer-back:hover { color: var(--gold-light); }
   </style>
+  <link rel="stylesheet" href="../../css/ux-polish.css">
 </head>
 <body>
 
@@ -1036,6 +1037,7 @@
      HERO SECTION
      ============================================= -->
 <section class="hero" id="home">
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=1400&q=80');opacity:0.13;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
 
   <!-- Banana Leaf Canopy -->
   <div class="banana-leaf-canopy" aria-hidden="true">
@@ -1373,6 +1375,9 @@
   <div class="container">
     <h2 class="section-title reveal" style="color:var(--gold-light)">Blessings &amp; Gifts &#127873;</h2>
     <p class="section-subtitle reveal" style="color:rgba(200,230,200,0.68)">Thoughtful gifts for the mother and little one</p>
+    <div style="margin-bottom:2rem;border-radius:2px;overflow:hidden;">
+  <img src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=800&q=80" alt="Baby shower gifts" loading="lazy" style="width:100%;height:200px;object-fit:cover;filter:brightness(0.7) saturate(1.2);" onerror="this.remove();">
+</div>
     <div class="gifts-grid reveal">
       <div class="gift-card">
         <div class="gift-emoji">&#128118;</div>
@@ -1764,6 +1769,7 @@
     });
   });
 </script>
+<script src="../../js/ux-polish.js" defer></script>
 <script src="../../js/features-bar.js" defer></script>
 </body>
 </html>

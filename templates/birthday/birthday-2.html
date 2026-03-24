@@ -892,6 +892,7 @@
       .rsvp-btn { padding: 0.8rem 2rem; font-size: 1rem; }
     }
   </style>
+  <link rel="stylesheet" href="../../css/ux-polish.css">
 </head>
 <body>
 
@@ -978,6 +979,7 @@
 
   <!-- Hero Section -->
   <section id="hero">
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1513151233558-d860c5398176?w=1400&q=80');opacity:0.12;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
     <div id="balloons-container"></div>
 
     <!-- Sparkle decorations -->
@@ -1154,19 +1156,23 @@
 
     <div class="polaroids-grid">
       <div class="polaroid r">
-        <div class="polaroid-img" style="background:linear-gradient(135deg,#e84090,#7b20c0);"></div>
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=500&q=80" alt="Birthday memory" loading="lazy" class="polaroid-img" style="object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(135deg,#e84090,#7b20c0)';this.src='';">
+
         <div class="polaroid-caption" style="color:#c02080;">Party Squad!</div>
       </div>
       <div class="polaroid r">
-        <div class="polaroid-img" style="background:linear-gradient(135deg,#ffd700,#ff8c00);"></div>
+        <img src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=500&q=80" alt="Birthday memory" loading="lazy" class="polaroid-img" style="object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(135deg,#ffd700,#ff8c00)';this.src='';">
+
         <div class="polaroid-caption" style="color:#c06000;">Cake Time!</div>
       </div>
       <div class="polaroid r">
-        <div class="polaroid-img" style="background:linear-gradient(135deg,#2090e8,#40e080);"></div>
+        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=500&q=80" alt="Birthday memory" loading="lazy" class="polaroid-img" style="object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(135deg,#2090e8,#40e080)';this.src='';">
+
         <div class="polaroid-caption" style="color:#1060a0;">Dance Floor!</div>
       </div>
       <div class="polaroid r">
-        <div class="polaroid-img" style="background:linear-gradient(135deg,#7b20c0,#e84090,#ffd700);"></div>
+        <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=500&q=80" alt="Birthday memory" loading="lazy" class="polaroid-img" style="object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(135deg,#7b20c0,#e84090,#ffd700)';this.src='';">
+
         <div class="polaroid-caption" style="color:#7b20c0;">Best Day Ever!</div>
       </div>
     </div>
@@ -1453,6 +1459,7 @@
     initRSVP();
   });
   </script>
+<script src="../../js/ux-polish.js" defer></script>
 <script src="../../js/features-bar.js" defer></script>
 </body>
 </html>

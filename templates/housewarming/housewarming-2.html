@@ -571,6 +571,7 @@
     }
     .reveal.visible { opacity: 1; transform: none; }
   </style>
+  <link rel="stylesheet" href="../../css/ux-polish.css">
 </head>
 <body>
 
@@ -621,6 +622,7 @@
 
 <!-- Hero -->
 <section class="hero" id="hero">
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&q=80');opacity:0.18;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
   <!-- Copper Dots -->
   <div class="copper-dots-container" id="copperDots"></div>
 
@@ -849,36 +851,40 @@
   <div class="section-subtitle reveal">Hover to explore each space</div>
   <div class="rooms-grid-2x2">
     <div class="room-card-modern reveal">
-      <div class="room-bg">
-        <div class="room-icon">🛋️</div>
-        <div class="room-name-modern">Living Room</div>
+      <div class="room-bg" style="background:none;padding:0;">
+        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80" alt="Living Room" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;" onerror="this.parentElement.style.background='linear-gradient(135deg,#c07830 0%,#e09848 100%)';this.remove();">
+        <div class="room-icon" style="position:relative;z-index:1;">🛋️</div>
+        <div class="room-name-modern" style="position:relative;z-index:1;">Living Room</div>
       </div>
       <div class="room-overlay">
         <div class="room-overlay-text">"Where stories are made and memories are born"</div>
       </div>
     </div>
     <div class="room-card-modern reveal">
-      <div class="room-bg">
-        <div class="room-icon">🍳</div>
-        <div class="room-name-modern">Kitchen</div>
+      <div class="room-bg" style="background:none;padding:0;">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Kitchen" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;" onerror="this.parentElement.style.background='linear-gradient(135deg,#b05828 0%,#d07838 100%)';this.remove();">
+        <div class="room-icon" style="position:relative;z-index:1;">🍳</div>
+        <div class="room-name-modern" style="position:relative;z-index:1;">Kitchen</div>
       </div>
       <div class="room-overlay">
         <div class="room-overlay-text">"Heart of the home — where love is cooked daily"</div>
       </div>
     </div>
     <div class="room-card-modern reveal">
-      <div class="room-bg">
-        <div class="room-icon">🛏️</div>
-        <div class="room-name-modern">Master Bedroom</div>
+      <div class="room-bg" style="background:none;padding:0;">
+        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="Master Bedroom" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a6070 0%,#2a8090 100%)';this.remove();">
+        <div class="room-icon" style="position:relative;z-index:1;">🛏️</div>
+        <div class="room-name-modern" style="position:relative;z-index:1;">Master Bedroom</div>
       </div>
       <div class="room-overlay">
         <div class="room-overlay-text">"Our sanctuary — where dreams begin and end"</div>
       </div>
     </div>
     <div class="room-card-modern reveal">
-      <div class="room-bg">
-        <div class="room-icon">🌿</div>
-        <div class="room-name-modern">Garden / Balcony</div>
+      <div class="room-bg" style="background:none;padding:0;">
+        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80" alt="Garden / Balcony" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;" onerror="this.parentElement.style.background='linear-gradient(135deg,#3a6040 0%,#5a8060 100%)';this.remove();">
+        <div class="room-icon" style="position:relative;z-index:1;">🌿</div>
+        <div class="room-name-modern" style="position:relative;z-index:1;">Garden / Balcony</div>
       </div>
       <div class="room-overlay">
         <div class="room-overlay-text">"Our little paradise — mornings with chai and golden sunsets"</div>
@@ -1218,6 +1224,7 @@
     });
   });
 </script>
+<script src="../../js/ux-polish.js" defer></script>
 <script src="../../js/features-bar.js" defer></script>
 </body>
 </html>
