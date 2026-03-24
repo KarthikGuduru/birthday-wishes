@@ -423,12 +423,12 @@
 
     // ── Button handlers ──
     document.getElementById('previewBtn').addEventListener('click', () => {
-      window.open('wedding-2.html', '_blank');
+      window.open(InviteCustomize.generateShareUrl('wedding-2.html'), '_blank');
     });
 
     function triggerPurchase() {
-      if (window.InvitePayment && InvitePayment.initiate) {
-        InvitePayment.initiate('wedding-2', 'Rajasthani Wedding', 'wedding-2.html');
+      if (window.InvitePayment) {
+        InvitePayment.showModal('wedding-2', 'Rajasthani Wedding', 'wedding-2-customize.html');
       } else {
         alert('Payment system loading — please try again.');
       }

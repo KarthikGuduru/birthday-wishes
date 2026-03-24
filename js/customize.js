@@ -71,6 +71,17 @@
     return data;
   }
 
+  // ── Collect data from [data-preview] inputs ─────────────
+  function collectPreviewInputs() {
+    const data = {};
+    document.querySelectorAll('[data-preview]').forEach(el => {
+      const key = el.dataset.preview;
+      const val = (el.value || '').trim();
+      if (val) data[key] = val;
+    });
+    return data;
+  }
+
   // ── Public API ───────────────────────────────────────────
   window.InviteCustomize = {
     getUrlId,
@@ -80,6 +91,14 @@
     isPurchased,
     applyPreview,
     collectForm,
+    encodeData,
+    collectPreviewInputs,
+
+    /** Build a shareable preview URL with embedded data from form inputs */
+    generateShareUrl(baseUrl) {
+      const data = collectPreviewInputs();
+      return baseUrl + '?d=' + encodeData(data);
+    },
 
     /**
      * Initialize a customize page.

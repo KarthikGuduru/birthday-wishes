@@ -385,12 +385,12 @@
 
     // ── Button handlers ──
     document.getElementById('previewBtn').addEventListener('click', () => {
-      window.open('wedding-1.html', '_blank');
+      window.open(InviteCustomize.generateShareUrl('wedding-1.html'), '_blank');
     });
 
     function triggerPurchase() {
-      if (window.InvitePayment && InvitePayment.initiate) {
-        InvitePayment.initiate('wedding-1', 'South Indian Wedding', 'wedding-1.html');
+      if (window.InvitePayment) {
+        InvitePayment.showModal('wedding-1', 'South Indian Wedding', 'wedding-1-customize.html');
       } else {
         alert('Payment system loading — please try again.');
       }

@@ -359,12 +359,12 @@
     });
 
     document.getElementById('previewBtn').addEventListener('click', () => {
-      window.open('engagement-1.html', '_blank');
+      window.open(InviteCustomize.generateShareUrl('engagement-1.html'), '_blank');
     });
 
     function triggerPurchase() {
-      if (window.InvitePayment && InvitePayment.initiate) {
-        InvitePayment.initiate('engagement-1', 'Traditional Engagement', 'engagement-1.html');
+      if (window.InvitePayment) {
+        InvitePayment.showModal('engagement-1', 'Traditional Engagement', 'engagement-1-customize.html');
       } else {
         alert('Payment system loading — please try again.');
       }

@@ -367,12 +367,12 @@
     });
 
     document.getElementById('previewBtn').addEventListener('click', () => {
-      window.open('babyshower-1.html', '_blank');
+      window.open(InviteCustomize.generateShareUrl('babyshower-1.html'), '_blank');
     });
 
     function triggerPurchase() {
-      if (window.InvitePayment && InvitePayment.initiate) {
-        InvitePayment.initiate('babyshower-1', 'Seemantham', 'babyshower-1.html');
+      if (window.InvitePayment) {
+        InvitePayment.showModal('babyshower-1', 'Seemantham', 'babyshower-1-customize.html');
       } else {
         alert('Payment system loading — please try again.');
       }

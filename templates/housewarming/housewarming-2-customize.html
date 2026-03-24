@@ -323,12 +323,12 @@
     });
 
     document.getElementById('previewBtn').addEventListener('click', () => {
-      window.open('housewarming-2.html', '_blank');
+      window.open(InviteCustomize.generateShareUrl('housewarming-2.html'), '_blank');
     });
 
     function triggerPurchase() {
-      if (window.InvitePayment && InvitePayment.initiate) {
-        InvitePayment.initiate('housewarming-2', 'Modern Housewarming', 'housewarming-2.html');
+      if (window.InvitePayment) {
+        InvitePayment.showModal('housewarming-2', 'Modern Housewarming', 'housewarming-2-customize.html');
       } else {
         alert('Payment system loading — please try again.');
       }

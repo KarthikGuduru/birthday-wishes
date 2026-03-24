@@ -375,12 +375,12 @@
     });
 
     document.getElementById('previewBtn').addEventListener('click', () => {
-      window.open('babyshower-2.html', '_blank');
+      window.open(InviteCustomize.generateShareUrl('babyshower-2.html'), '_blank');
     });
 
     function triggerPurchase() {
-      if (window.InvitePayment && InvitePayment.initiate) {
-        InvitePayment.initiate('babyshower-2', 'Modern Baby Shower', 'babyshower-2.html');
+      if (window.InvitePayment) {
+        InvitePayment.showModal('babyshower-2', 'Modern Baby Shower', 'babyshower-2-customize.html');
       } else {
         alert('Payment system loading — please try again.');
       }
