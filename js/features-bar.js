@@ -60,7 +60,7 @@
     style.textContent = `
       #is-fab {
         position: fixed;
-        bottom: 2rem;
+        bottom: 5.5rem;
         right: 1.5rem;
         z-index: 500;
         display: flex;
@@ -132,7 +132,7 @@
       }
 
       @media (max-width: 640px) {
-        #is-fab { bottom: 1rem; right: 1rem; }
+        #is-fab { bottom: 5rem; right: 1rem; }
         .is-fab-btn { font-size: 0.68rem; padding: 0.55rem 0.9rem; }
       }
     `;

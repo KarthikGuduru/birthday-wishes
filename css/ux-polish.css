@@ -149,7 +149,7 @@ button, a, [role="button"], input[type="submit"] {
 /* ── WhatsApp Chat Button ───────────────────────────────────── */
 #wa-chat-btn {
   position: fixed;
-  bottom: 5.5rem;
+  bottom: 1.5rem;
   right: 1.5rem;
   z-index: 490;
   width: 52px; height: 52px;
@@ -172,7 +172,7 @@ button, a, [role="button"], input[type="submit"] {
 }
 #wa-chat-tooltip {
   position: fixed;
-  bottom: 7rem;
+  bottom: 2.5rem;
   right: 5rem;
   background: #075e54;
   color: #fff;
@@ -189,5 +189,5 @@ button, a, [role="button"], input[type="submit"] {
 #wa-chat-btn:hover + #wa-chat-tooltip { opacity: 1; }
 
 @media (max-width: 640px) {
-  #wa-chat-btn { bottom: 1.2rem; right: 1rem; }
+  #wa-chat-btn { bottom: 1rem; right: 1rem; }
 }
