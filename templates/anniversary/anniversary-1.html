@@ -7,23 +7,111 @@
   <link rel="stylesheet" href="../../css/marketplace.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    /* ── Root Variables ── */
+    :root {
+      --crimson: #6a0000;
+      --crimson-dark: #3d0000;
+      --gold: #c9942a;
+      --gold-light: #e8b84b;
+      --gold-pale: #f5e8c0;
+      --champagne: #f5e8c0;
+      --ivory: #fffcf2;
+      --near-black: #0d0000;
+      --black: #000000;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      background: #1a0000;
-      color: var(--gold-pale);
+      background: var(--near-black);
+      color: var(--champagne);
+      font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
     }
 
-    /* ── Preview Banner ── */
+    /* ── Loading Screen ── */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--near-black);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #loading-screen.hidden { opacity: 0; visibility: hidden; }
+
+    .loading-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .spark {
+      position: absolute;
+      bottom: -10px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0;
+      animation: riseUp var(--dur, 3s) var(--delay, 0s) infinite ease-out;
+    }
+    @keyframes riseUp {
+      0%   { transform: translateY(0) scale(1); opacity: 0.9; }
+      100% { transform: translateY(-110vh) scale(0.2); opacity: 0; }
+    }
+    .spark-line {
+      position: absolute;
+      bottom: -20px;
+      width: 2px;
+      background: linear-gradient(to top, var(--gold), transparent);
+      opacity: 0;
+      animation: riseUp var(--dur, 4s) var(--delay, 0s) infinite ease-out;
+    }
+
+    .loading-numeral {
+      font-family: 'Playfair Display', serif;
+      font-size: 8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--champagne), var(--gold));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmerText 2s infinite linear;
+      line-height: 1;
+      position: relative;
+      z-index: 2;
+    }
+    @keyframes shimmerText {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+
+    .loading-tagline {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.4rem;
+      color: var(--gold-pale);
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 20px rgba(201,148,42,0.6);
+    }
+
+    /* ── Purchase / Preview Banner ── */
     .preview-banner {
       background: linear-gradient(135deg, #1a0000, #2e0505);
-      border-bottom: 1px solid rgba(201,148,42,0.3);
-      color: var(--gold-pale);
+      border-bottom: 1px solid rgba(201,148,42,0.35);
+      color: var(--champagne);
       text-align: center;
-      padding: 0.75rem 4rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
+      padding: 0.7rem 4rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.09em;
       position: relative;
       z-index: 50;
       display: flex;
@@ -31,627 +119,1657 @@
       justify-content: center;
       gap: 1.5rem;
       flex-wrap: wrap;
+      font-family: 'Poppins', sans-serif;
     }
     .preview-banner .buy-btn {
       display: inline-block;
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
       color: #1a0000;
-      padding: 0.4rem 1.2rem;
+      padding: 0.4rem 1.3rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+    }
+    .preview-banner .customize-btn {
+      display: inline-block;
+      border: 1px solid rgba(201,148,42,0.6);
+      color: var(--gold);
+      padding: 0.4rem 1.3rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ── Back Nav ── */
+    .back-nav {
+      position: fixed;
+      top: 1.2rem;
+      left: 1.5rem;
+      z-index: 300;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      white-space: nowrap;
+      color: rgba(201,148,42,0.7);
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      transition: color 0.3s;
     }
-    .preview-banner .buy-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(201,148,42,0.4);
+    .back-nav:hover { color: var(--gold); }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(61,0,0,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,148,42,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 2.5rem;
+    }
+    .nav-logo {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.8rem;
+      color: var(--gold);
+      text-shadow: 0 0 12px rgba(201,148,42,0.5);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--champagne);
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      transition: opacity 0.3s, color 0.3s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      transition: transform 0.3s;
+    }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(61,0,0,0.98);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(201,148,42,0.2);
+      }
+      .nav-links.open { display: flex; }
     }
 
     /* ── Hero ── */
-    .a1-hero {
+    #hero {
+      position: relative;
       min-height: 100vh;
-      background: #1a0000;
+      background: var(--near-black);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
       overflow: hidden;
-      padding: 6rem 2rem 5rem;
-      text-align: center;
     }
-
-    /* SVG Medallion watermark */
-    .a1-medallion {
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .hero-glow {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(90vw, 700px);
-      height: min(90vw, 700px);
-      opacity: 0.07;
+      transform: translate(-50%,-50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,148,42,0.15) 0%, transparent 70%);
       pointer-events: none;
-      animation: slowSpin 120s linear infinite;
     }
-
-    /* Floating hearts */
-    .float-heart {
+    .damask-overlay {
       position: absolute;
-      font-size: 1rem;
-      opacity: 0;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 5 Q55 20 40 40 Q25 20 40 5Z M40 75 Q55 60 40 40 Q25 60 40 75Z M5 40 Q20 55 40 40 Q20 25 5 40Z M75 40 Q60 55 40 40 Q60 25 75 40Z' fill='none' stroke='rgba(201,148,42,0.04)' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='6' fill='none' stroke='rgba(201,148,42,0.03)' stroke-width='1'/%3E%3C/svg%3E");
       pointer-events: none;
-      animation: heartFloat linear infinite;
+      opacity: 1;
     }
-
-    @keyframes heartFloat {
-      0%   { transform: translateY(0) scale(0.8); opacity: 0; }
-      15%  { opacity: 0.7; }
-      85%  { opacity: 0.5; }
-      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 3rem 2rem;
     }
-
-    .a1-year-numeral {
-      font-family: var(--font-display);
-      font-size: clamp(7rem, 22vw, 14rem);
+    .hero-years-numeral {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(6rem, 18vw, 12rem);
       font-weight: 700;
       line-height: 0.9;
-      background: linear-gradient(160deg, var(--gold-light) 0%, var(--gold) 40%, #a06810 70%, var(--gold-pale) 100%);
+      background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 40%, #8a6010 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      position: relative;
       text-shadow: none;
-      filter: drop-shadow(0 0 40px rgba(201,148,42,0.3));
-      margin-bottom: 0;
+      filter: drop-shadow(0 0 30px rgba(201,148,42,0.4));
     }
-
-    .a1-years-label {
-      font-family: var(--font-script);
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      color: var(--gold-pale);
-      line-height: 1;
-      margin-bottom: 1.5rem;
-      position: relative;
+    .hero-years-label {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--champagne);
+      margin-top: 0.3rem;
+      text-shadow: 0 0 20px rgba(245,232,192,0.4);
     }
-
-    .a1-names {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
-      margin-bottom: 1rem;
-      position: relative;
+    .hero-rings-svg {
+      margin: 1.5rem auto;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(201,148,42,0.5));
     }
-    .a1-name {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 5vw, 3.2rem);
-      font-weight: 700;
-      color: var(--gold-light);
-      letter-spacing: 0.05em;
-    }
-    .a1-ampersand {
-      font-family: var(--font-script);
-      font-size: clamp(2.5rem, 7vw, 4.5rem);
-      color: var(--gold);
-      line-height: 1;
-    }
-
-    .a1-badge {
-      display: inline-block;
-      border: 1px solid rgba(201,148,42,0.5);
-      padding: 0.35rem 1.5rem;
-      font-family: var(--font-display);
-      font-size: 0.72rem;
-      letter-spacing: 0.45em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-
-    .a1-ornament {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      color: var(--gold);
+    .hero-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 300;
+      color: var(--ivory);
+      letter-spacing: 0.06em;
       margin: 0.5rem 0;
-      position: relative;
     }
-    .a1-ornament .line {
-      width: 80px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold));
+    .hero-names .ampersand {
+      font-style: italic;
+      color: var(--gold);
+      font-size: 1.4em;
+      margin: 0 0.4em;
     }
-    .a1-ornament .line.r { transform: scaleX(-1); }
-    .a1-ornament .diamond {
-      width: 7px; height: 7px;
-      background: var(--gold);
-      transform: rotate(45deg);
-    }
-    .a1-ornament .dot {
-      width: 3px; height: 3px;
-      background: var(--gold-light);
-      border-radius: 50%;
-    }
-
-    .a1-scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.6rem;
-      letter-spacing: 0.4em;
+    .hero-date {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: rgba(201,148,42,0.45);
-      animation: bobDown 2.5s ease-in-out infinite;
+      color: rgba(245,232,192,0.6);
+      margin-top: 1rem;
     }
-
-    /* ── Journey Card ── */
-    .a1-journey {
-      padding: var(--section-pad);
-      background: linear-gradient(180deg, #1a0000 0%, #2a0505 100%);
+    .hero-countdown {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
     }
-    .a1-journey-inner {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .a1-detail-card {
-      position: relative;
-      background: linear-gradient(145deg, rgba(253,246,227,0.07), rgba(201,148,42,0.05));
-      border: 1px solid rgba(201,148,42,0.35);
-      padding: 2.8rem 3rem;
+    .countdown-box {
+      background: rgba(201,148,42,0.1);
+      border: 1px solid rgba(201,148,42,0.3);
+      border-radius: 4px;
+      padding: 0.8rem 1.2rem;
+      min-width: 70px;
       text-align: center;
     }
-    .a1-detail-card::before,
-    .a1-detail-card::after {
-      content: '';
-      position: absolute;
-      width: 30px; height: 30px;
-      border-color: var(--gold);
-      border-style: solid;
-      opacity: 0.55;
-    }
-    .a1-detail-card::before { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
-    .a1-detail-card::after  { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
-    .a1-detail-card .corner-tr,
-    .a1-detail-card .corner-bl {
-      position: absolute;
-      width: 30px; height: 30px;
-      border-color: var(--gold);
-      border-style: solid;
-      opacity: 0.55;
-    }
-    .a1-detail-card .corner-tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
-    .a1-detail-card .corner-bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
-
-    .a1-anni-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #1a0000;
-      font-family: var(--font-display);
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
+    .countdown-box .cnt-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
       font-weight: 700;
-      padding: 0.3rem 1.2rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .a1-detail-row {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1.1rem 0;
-      border-bottom: 1px solid rgba(201,148,42,0.12);
-    }
-    .a1-detail-row:last-child { border-bottom: none; }
-    .a1-detail-label {
-      font-size: 0.58rem;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 0.35rem;
+      line-height: 1;
     }
-    .a1-detail-value {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      color: var(--gold-pale);
-      line-height: 1.4;
+    .countdown-box .cnt-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,232,192,0.5);
+      margin-top: 0.2rem;
     }
-    .a1-detail-icon { font-size: 1rem; margin-bottom: 0.25rem; }
 
-    /* ── Memory Lane ── */
-    .a1-memory {
-      padding: var(--section-pad);
-      background: #1a0000;
+    /* ── Section Base ── */
+    section { padding: 5rem 2rem; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
     }
-    .a1-memory-inner {
-      max-width: 960px;
+    .section-title h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      color: var(--gold);
+      line-height: 1;
+    }
+    .section-title .subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(245,232,192,0.5);
+      margin-top: 0.5rem;
+    }
+    .gold-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 1rem auto;
+    }
+    .gold-divider::before,
+    .gold-divider::after {
+      content: '';
+      height: 1px;
+      width: 80px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .gold-divider .diamond { color: var(--gold); font-size: 0.7rem; }
+
+    /* ── Story / Timeline ── */
+    #story {
+      background: linear-gradient(180deg, #1a0000 0%, #0d0000 100%);
+    }
+    .timeline-scroll-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      display: flex;
+      gap: 1.5rem;
+      padding: 1rem 2rem 2rem;
+      cursor: grab;
+    }
+    .timeline-scroll-container::-webkit-scrollbar { height: 4px; }
+    .timeline-scroll-container::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+    .timeline-scroll-container::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+    .timeline-card {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      width: 280px;
+      background: linear-gradient(160deg, #1e0505, #0d0000);
+      border-top: 3px solid var(--gold);
+      border-radius: 2px;
+      padding: 2rem 1.5rem;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .timeline-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(201,148,42,0.2);
+    }
+    .timeline-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      opacity: 0.35;
+    }
+    .timeline-icon { font-size: 2rem; margin: 0.5rem 0; }
+    .timeline-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold-pale);
+      margin-bottom: 0.5rem;
+    }
+    .timeline-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: rgba(245,232,192,0.6);
+      font-style: italic;
+      line-height: 1.6;
+    }
+    .timeline-deco {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      width: 30px;
+      height: 30px;
+      border-right: 1px solid rgba(201,148,42,0.2);
+      border-bottom: 1px solid rgba(201,148,42,0.2);
+    }
+
+    /* ── Photos Gallery ── */
+    #photos {
+      background: #0d0000;
+    }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
       margin: 0 auto;
     }
-    .a1-milestones {
+    @media (max-width: 700px) { .photo-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .photo-grid { grid-template-columns: 1fr; } }
+    .vintage-photo-wrap {
+      cursor: pointer;
+      transition: transform 0.35s ease, box-shadow 0.35s;
+    }
+    .vintage-photo-wrap:nth-child(1) { transform: rotate(-3deg); }
+    .vintage-photo-wrap:nth-child(2) { transform: rotate(2deg); }
+    .vintage-photo-wrap:nth-child(3) { transform: rotate(-1.5deg); }
+    .vintage-photo-wrap:nth-child(4) { transform: rotate(3.5deg); }
+    .vintage-photo-wrap:nth-child(5) { transform: rotate(-2.5deg); }
+    .vintage-photo-wrap:nth-child(6) { transform: rotate(1deg); }
+    .vintage-photo-wrap:hover {
+      transform: rotate(0deg) translateY(-8px) scale(1.04) !important;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      z-index: 10;
+    }
+    .vintage-frame {
+      background: #f5edd0;
+      border: 2px solid #c8a96e;
+      box-shadow: inset 0 0 0 8px #f0e4c0, 0 4px 15px rgba(0,0,0,0.5);
+      padding: 12px 12px 36px;
+    }
+    .vintage-photo-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #8b6914, #c9942a, #6b4f10, #a07820);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: sepia(0.6) contrast(1.1);
+    }
+    .vintage-photo-img.v2 { background: linear-gradient(135deg, #4a3810, #8b6020, #3d2f0a, #7a5518); }
+    .vintage-photo-img.v3 { background: linear-gradient(135deg, #6b4a10, #a07018, #5a3d0c, #8a6014); }
+    .vintage-photo-img.v4 { background: linear-gradient(135deg, #3d2800, #7a5010, #2e1e00, #6b4008); }
+    .vintage-photo-img.v5 { background: linear-gradient(135deg, #5a3e0a, #946818, #4a3208, #836010); }
+    .vintage-photo-img.v6 { background: linear-gradient(135deg, #7a5814, #c0901e, #6b4c10, #b07818); }
+    .vintage-photo-icon {
+      font-size: 3rem;
+      opacity: 0.4;
+    }
+    .vintage-caption {
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.2rem;
+      color: #5a3a08;
+      margin-top: 6px;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 8000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-inner {
+      max-width: 500px;
+      width: 90%;
+      animation: zoomIn 0.3s ease;
+    }
+    @keyframes zoomIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .lightbox-close {
+      color: var(--gold);
+      font-size: 2rem;
+      cursor: pointer;
+      align-self: flex-end;
+      margin-right: 5%;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+
+    /* ── Decade Cards ── */
+    #memories {
+      background: linear-gradient(180deg, var(--ivory) 0%, var(--champagne) 100%);
+    }
+    #memories .section-title h2 { color: var(--crimson); }
+    #memories .section-title .subtitle { color: rgba(106,0,0,0.4); }
+    .decade-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .decade-card {
+      border-radius: 3px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .decade-card:hover {
+      transform: translateX(6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    }
+    .decade-card:nth-child(even) {
+      margin-left: 5%;
+      flex-direction: row-reverse;
+    }
+    .decade-card:nth-child(even):hover { transform: translateX(-6px); }
+    .decade-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 90px;
+      padding: 1.5rem;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: white;
+    }
+    .decade-card.d-crimson .decade-badge { background: var(--crimson); }
+    .decade-card.d-gold .decade-badge { background: linear-gradient(135deg, var(--gold), #a07418); color: var(--near-black); }
+    .decade-card.d-champagne .decade-badge { background: linear-gradient(135deg, #c8a050, #9a7830); }
+    .decade-card.d-dark .decade-badge { background: #1a0000; }
+    .decade-card.d-special .decade-badge { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: var(--near-black); }
+    .decade-body {
+      flex: 1;
+      padding: 1.8rem;
+      background: white;
+    }
+    .decade-card.d-crimson .decade-body { background: #fff8f8; }
+    .decade-card.d-gold .decade-body { background: #fffbf0; }
+    .decade-card.d-champagne .decade-body { background: var(--champagne); }
+    .decade-card.d-dark .decade-body { background: #1e0000; color: var(--champagne); }
+    .decade-card.d-special .decade-body { background: linear-gradient(135deg, #fff8e0, #ffefc0); }
+    .decade-year-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.3;
+    }
+    .decade-card.d-dark .decade-year-label { color: var(--gold-light); opacity: 0.4; }
+    .decade-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--crimson);
+      margin-bottom: 0.5rem;
+    }
+    .decade-card.d-dark .decade-title { color: var(--gold); }
+    .decade-card.d-special .decade-title { color: var(--crimson); }
+    .decade-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(0,0,0,0.6);
+    }
+    .decade-card.d-dark .decade-text { color: rgba(245,232,192,0.6); }
+    .decade-deco { font-size: 1.5rem; margin-top: 0.5rem; }
+
+    /* ── Vows Section ── */
+    #vows {
+      background: linear-gradient(135deg, var(--crimson-dark) 0%, #4d0000 50%, var(--crimson-dark) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .vows-border-frame {
+      max-width: 800px;
+      margin: 0 auto;
+      border: 1px solid rgba(201,148,42,0.4);
+      box-shadow:
+        0 0 0 8px rgba(201,148,42,0.06),
+        0 0 0 16px rgba(201,148,42,0.04),
+        inset 0 0 60px rgba(0,0,0,0.3);
+      padding: 3.5rem 3rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .vows-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 20px rgba(201,148,42,0.4);
+    }
+    .vows-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--champagne);
+      line-height: 2;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .floating-hearts-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .floating-heart {
+      position: absolute;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: floatHeart var(--dur, 5s) var(--delay, 0s) infinite ease-out;
+    }
+    @keyframes floatHeart {
+      0%   { transform: translateY(0) scale(0.8); opacity: 0; }
+      20%  { opacity: 0.5; }
+      80%  { opacity: 0.2; }
+      100% { transform: translateY(-300px) scale(0.3) rotate(20deg); opacity: 0; }
+    }
+
+    /* ── Milestones ── */
+    #milestones {
+      background: var(--near-black);
+    }
+    .milestones-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (max-width: 700px) { .milestones-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 420px) { .milestones-grid { grid-template-columns: 1fr; } }
+    .milestone-card {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,148,42,0.15);
+      border-radius: 3px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .milestone-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(201,148,42,0.1);
+      border-color: rgba(201,148,42,0.4);
+    }
+    .milestone-badge {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #8a6010);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--near-black);
+      box-shadow: 0 0 20px rgba(201,148,42,0.3);
+    }
+    .milestone-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .milestone-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--gold-pale);
+      margin-bottom: 0.3rem;
+    }
+    .milestone-year-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    /* ── Tribute ── */
+    #tribute {
+      background: linear-gradient(180deg, var(--ivory) 0%, var(--champagne) 100%);
+    }
+    #tribute .section-title h2 { color: var(--crimson); }
+    #tribute .section-title .subtitle { color: rgba(106,0,0,0.4); }
+    .tribute-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      margin-top: 2.5rem;
+      max-width: 960px;
+      margin: 0 auto 2.5rem;
     }
-    @media (max-width: 640px) {
-      .a1-milestones { grid-template-columns: 1fr; }
-    }
-    .a1-milestone-card {
-      background: linear-gradient(145deg, rgba(139,0,0,0.25), rgba(60,0,0,0.4));
-      border: 1px solid rgba(201,148,42,0.2);
-      padding: 2rem 1.5rem;
-      text-align: center;
+    @media (max-width: 700px) { .tribute-grid { grid-template-columns: 1fr; } }
+    .tribute-card {
+      background: white;
+      border-radius: 3px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border-top: 3px solid var(--gold);
       position: relative;
+      animation: fadeInUp 0.5s ease both;
     }
-    .a1-milestone-icon {
-      font-size: 1.8rem;
-      margin-bottom: 0.8rem;
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .a1-milestone-year {
-      font-family: var(--font-display);
-      font-size: 0.6rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
+    .tribute-quote-mark {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
       color: var(--gold);
+      opacity: 0.3;
+      line-height: 0.5;
       margin-bottom: 0.5rem;
     }
-    .a1-milestone-title {
-      font-family: var(--font-display);
+    .tribute-text {
+      font-family: 'Cormorant Garamond', serif;
       font-size: 1.05rem;
-      color: var(--gold-pale);
-      line-height: 1.4;
-    }
-
-    /* ── Message Section ── */
-    .a1-message {
-      padding: var(--section-pad);
-      background: linear-gradient(180deg, #1a0000, #2a0505);
-      text-align: center;
-    }
-    .a1-message-inner {
-      max-width: 620px;
-      margin: 0 auto;
-      position: relative;
-    }
-    .a1-quote-mark {
-      font-family: var(--font-script);
-      font-size: 9rem;
-      color: rgba(201,148,42,0.1);
-      line-height: 0.6;
-      position: absolute;
-      top: -1.5rem;
-      left: -1.5rem;
-      pointer-events: none;
-    }
-    .a1-message-text {
-      font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(1.1rem, 2.8vw, 1.45rem);
-      color: var(--gold-pale);
-      line-height: 1.75;
-      position: relative;
+      color: #333;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .tribute-author {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      font-weight: 500;
+    }
+    .tribute-form-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 3px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .tribute-form-wrap h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--crimson);
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .form-field label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.5);
+    }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      border: 1px solid #e0d0b0;
+      border-radius: 2px;
+      padding: 0.6rem 0.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: #333;
+      background: #fffdf5;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus { border-color: var(--gold); }
+    .btn-gold {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--near-black);
+      border: none;
+      padding: 0.9rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: opacity 0.3s, transform 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── Event Details ── */
+    #event {
+      background: linear-gradient(135deg, var(--crimson-dark) 0%, #4d0000 100%);
+    }
+    .event-card {
+      max-width: 700px;
+      margin: 0 auto;
+      border: 1px solid rgba(201,148,42,0.5);
+      box-shadow:
+        0 0 0 6px rgba(201,148,42,0.08),
+        0 0 0 12px rgba(201,148,42,0.04);
+      border-radius: 2px;
+      padding: 3rem;
+      text-align: center;
+      background: rgba(0,0,0,0.3);
+    }
+    .event-card-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .event-detail-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    .event-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .event-detail-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+    .event-detail-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--champagne);
+    }
+    .dress-code-badge {
+      display: inline-block;
+      border: 1px solid rgba(201,148,42,0.4);
+      padding: 0.4rem 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-radius: 20px;
+      margin-top: 1rem;
     }
 
-    /* ── Photo Gallery Placeholders ── */
-    .a1-gallery {
-      padding: var(--section-pad);
-      background: #1a0000;
+    /* ── RSVP ── */
+    #rsvp {
+      background: linear-gradient(180deg, var(--champagne) 0%, var(--ivory) 100%);
     }
-    .a1-gallery-inner {
-      max-width: 960px;
+    #rsvp .section-title h2 { color: var(--crimson); }
+    #rsvp .section-title .subtitle { color: rgba(106,0,0,0.4); }
+    .rsvp-form-container {
+      max-width: 580px;
       margin: 0 auto;
+      background: white;
+      padding: 2.5rem;
+      border-radius: 3px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+      border-top: 3px solid var(--gold);
     }
-    .a1-photos {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-      margin-top: 2.5rem;
-    }
-    @media (max-width: 640px) {
-      .a1-photos { grid-template-columns: 1fr; }
-    }
-    .a1-photo-placeholder {
-      position: relative;
-      aspect-ratio: 3/4;
-      overflow: hidden;
-      border: 1px solid rgba(201,148,42,0.2);
-    }
-    .a1-photo-placeholder:nth-child(1) {
-      background: linear-gradient(145deg, #5c0000, #8b0000, #3d0000);
-    }
-    .a1-photo-placeholder:nth-child(2) {
-      background: linear-gradient(145deg, #3d0000, #6b1010, #c9942a33);
-    }
-    .a1-photo-placeholder:nth-child(3) {
-      background: linear-gradient(145deg, #7b1818, #c9942a44, #1a0000);
-    }
-    .a1-photo-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 1rem;
-      background: linear-gradient(transparent, rgba(26,0,0,0.8));
-      font-family: var(--font-script);
-      font-size: 1.5rem;
-      color: var(--gold-pale);
+    .rsvp-success {
+      display: none;
       text-align: center;
+      padding: 2rem;
+    }
+    .rsvp-success.show { display: block; animation: fadeInUp 0.5s ease; }
+    .rsvp-success p {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: var(--crimson);
+    }
+
+    /* ── Confetti ── */
+    .confetti-piece {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9000;
+      animation: confettiFall var(--dur, 2s) var(--delay, 0s) forwards ease-in;
+    }
+    @keyframes confettiFall {
+      0%   { transform: translateY(-20px) rotate(0deg) translateX(0); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg) translateX(var(--dx, 0)); opacity: 0; }
     }
 
     /* ── Footer ── */
-    .a1-footer {
-      padding: 3rem 2rem 4.5rem;
-      background: linear-gradient(180deg, #2a0505, #0d0000);
+    footer {
+      background: var(--crimson-dark);
       text-align: center;
-      border-top: 1px solid rgba(201,148,42,0.15);
+      padding: 4rem 2rem;
+      border-top: 1px solid rgba(201,148,42,0.2);
     }
-    .a1-footer-names {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      color: var(--gold-light);
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.05em;
-    }
-    .a1-footer-years {
-      font-family: var(--font-script);
-      font-size: 1.8rem;
+    .footer-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3rem, 9vw, 5.5rem);
       color: var(--gold);
-      margin-bottom: 0.5rem;
+      text-shadow: 0 0 30px rgba(201,148,42,0.3);
+      line-height: 1.1;
     }
-    .a1-footer-date {
+    .footer-subtitle {
+      font-family: 'Poppins', sans-serif;
       font-size: 0.7rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(201,148,42,0.5);
-      margin-bottom: 2rem;
-    }
-    .a1-footer-divider {
-      width: 60px; height: 1px;
-      background: rgba(201,148,42,0.3);
-      margin: 0 auto 1.5rem;
-    }
-    .a1-footer-link {
-      font-size: 0.65rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: rgba(201,148,42,0.4);
-      transition: color 0.2s ease;
+      color: rgba(245,232,192,0.4);
+      margin-top: 0.8rem;
     }
-    .a1-footer-link:hover { color: var(--gold); }
+    .footer-back {
+      display: inline-block;
+      margin-top: 2rem;
+      color: rgba(201,148,42,0.6);
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .footer-back:hover { color: var(--gold); }
 
-    @media (max-width: 600px) {
-      .a1-detail-card { padding: 2rem 1.5rem; }
-      .preview-banner { padding: 0.75rem 1rem; font-size: 0.72rem; }
+    /* ── Scroll Reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
+    .reveal.revealed { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
   </style>
 </head>
 <body>
 
-  <!-- Preview Banner -->
-  <div class="preview-banner">
-    <span>✨ Live Preview — Buy for ₹500 to customize</span>
-    <button class="buy-btn" data-buy="anniversary-1" data-name="Golden Anniversary" data-customize="anniversary-1-customize.html">
-      Buy &amp; Customize →
-    </button>
-  </div>
+<!-- Back Nav -->
+<a href="../../index.html" class="back-nav">← Marketplace</a>
 
-  <!-- Back Navigation -->
-  <a href="../../index.html" class="back-nav">← Marketplace</a>
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <div class="loading-particles" id="loading-particles"></div>
+  <div class="loading-numeral" id="loading-numeral">25</div>
+  <div class="loading-tagline">A Golden Celebration...</div>
+</div>
 
-  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
-  <section class="a1-hero">
+<!-- Purchase Banner -->
+<div class="preview-banner">
+  <span>✨ You are previewing <strong>Golden Anniversary</strong> — Customize it for your special occasion</span>
+  <a href="anniversary-1-customize.html" class="customize-btn" data-buy="anniversary-1" data-name="Golden Anniversary" data-customize="anniversary-1-customize.html">Customize</a>
+  <button class="buy-btn" onclick="PaymentFlow.start('anniversary-1','Golden Anniversary')">Use This Template</button>
+</div>
 
-    <!-- SVG Medallion Watermark -->
-    <svg class="a1-medallion" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <!-- Concentric rings -->
-      <circle cx="250" cy="250" r="240" stroke="white" stroke-width="1"/>
-      <circle cx="250" cy="250" r="200" stroke="white" stroke-width="0.5"/>
-      <circle cx="250" cy="250" r="160" stroke="white" stroke-width="1"/>
-      <circle cx="250" cy="250" r="120" stroke="white" stroke-width="0.5"/>
-      <circle cx="250" cy="250" r="80"  stroke="white" stroke-width="1"/>
-      <circle cx="250" cy="250" r="40"  stroke="white" stroke-width="0.5"/>
-      <!-- 8 diamond shapes at compass points (N,NE,E,SE,S,SW,W,NW) -->
-      <polygon points="250,10 265,50 250,90 235,50"   fill="white"/>
-      <polygon points="430,70 460,95 440,130 410,105"  fill="white"/>
-      <polygon points="490,250 450,235 410,250 450,265" fill="white"/>
-      <polygon points="430,430 410,395 440,370 460,405" fill="white"/>
-      <polygon points="250,490 265,450 250,410 235,450" fill="white"/>
-      <polygon points="70,430 90,405 120,430 90,455"   fill="white"/>
-      <polygon points="10,250 50,265 90,250 50,235"    fill="white"/>
-      <polygon points="70,70 105,90 80,120 45,100"     fill="white"/>
-      <!-- Radial lines -->
-      <line x1="250" y1="10" x2="250" y2="490" stroke="white" stroke-width="0.5"/>
-      <line x1="10" y1="250" x2="490" y2="250" stroke="white" stroke-width="0.5"/>
-      <line x1="74" y1="74" x2="426" y2="426" stroke="white" stroke-width="0.5"/>
-      <line x1="426" y1="74" x2="74" y2="426" stroke="white" stroke-width="0.5"/>
-      <!-- Inner ring decorative diamonds -->
-      <polygon points="250,170 258,200 250,230 242,200" fill="white"/>
-      <polygon points="330,250 300,242 270,250 300,258" fill="white"/>
-      <polygon points="250,330 258,300 250,270 242,300" fill="white"/>
-      <polygon points="170,250 200,242 230,250 200,258" fill="white"/>
-      <!-- Center -->
-      <circle cx="250" cy="250" r="8" fill="white"/>
-      <circle cx="250" cy="250" r="18" stroke="white" stroke-width="1.5"/>
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">✨ Golden Anniversary ✨</div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#photos">Memories</a></li>
+    <li><a href="#milestones">Milestones</a></li>
+    <li><a href="#event">Celebration</a></li>
+    <li><a href="#rsvp">RSVP</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow"></div>
+  <div class="damask-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-years-numeral" id="hero-years">0</div>
+    <div class="hero-years-label">Years of Love</div>
+
+    <!-- Interlocking Rings SVG -->
+    <svg class="hero-rings-svg" width="110" height="55" viewBox="0 0 110 55">
+      <circle cx="35" cy="27" r="22" fill="none" stroke="url(#ringGrad1)" stroke-width="3"/>
+      <circle cx="75" cy="27" r="22" fill="none" stroke="url(#ringGrad2)" stroke-width="3"/>
+      <defs>
+        <linearGradient id="ringGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e8b84b"/>
+          <stop offset="100%" stop-color="#c9942a"/>
+        </linearGradient>
+        <linearGradient id="ringGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#c9942a"/>
+          <stop offset="100%" stop-color="#a07010"/>
+        </linearGradient>
+      </defs>
     </svg>
 
-    <!-- Content -->
-    <div class="a1-year-numeral r" data-field="years">25</div>
-    <div class="a1-years-label r" style="transition-delay:0.1s">Years of Love</div>
-
-    <div class="a1-ornament r" style="transition-delay:0.15s">
-      <span class="line r"></span>
-      <span class="dot"></span>
-      <span class="diamond"></span>
-      <span class="dot"></span>
-      <span class="line"></span>
+    <div class="hero-names">
+      <span data-field="name1">Rajesh</span>
+      <span class="ampersand">&amp;</span>
+      <span data-field="name2">Sunita</span>
+    </div>
+    <div class="hero-date">
+      <span data-field="date">December 20, 2026</span>
     </div>
 
-    <div class="a1-names r" style="transition-delay:0.2s">
-      <span class="a1-name" data-field="name1">Rajesh</span>
-      <span class="a1-ampersand">&amp;</span>
-      <span class="a1-name" data-field="name2">Sunita</span>
+    <div class="hero-countdown" id="hero-countdown">
+      <div class="countdown-box"><div class="cnt-num" id="cnt-days">--</div><div class="cnt-label">Days</div></div>
+      <div class="countdown-box"><div class="cnt-num" id="cnt-hours">--</div><div class="cnt-label">Hours</div></div>
+      <div class="countdown-box"><div class="cnt-num" id="cnt-mins">--</div><div class="cnt-label">Minutes</div></div>
+      <div class="countdown-box"><div class="cnt-num" id="cnt-secs">--</div><div class="cnt-label">Seconds</div></div>
     </div>
+  </div>
+</section>
 
-    <div class="a1-badge r" style="transition-delay:0.25s" data-field="anniversary">Silver Anniversary</div>
-
-    <div class="a1-scroll-hint">Scroll to explore ↓</div>
-  </section>
-
-  <!-- ═══════════════════════════════ JOURNEY CARD ═══════════════════════ -->
-  <section class="a1-journey">
-    <div class="a1-journey-inner">
-
-      <div class="t-center r" style="margin-bottom:2rem;">
-        <div class="sec-tag">The Celebration</div>
-        <h2 class="sec-title" style="color:var(--gold-pale);">You Are Invited</h2>
-      </div>
-
-      <div class="a1-detail-card r" style="transition-delay:0.1s">
-        <span class="corner-tr"></span>
-        <span class="corner-bl"></span>
-
-        <div class="a1-anni-badge" data-field="anniversary">Silver Anniversary</div>
-
-        <div class="a1-detail-row">
-          <div class="a1-detail-icon">📅</div>
-          <div class="a1-detail-label">Date</div>
-          <div class="a1-detail-value" data-field="date">December 20, 2026</div>
-        </div>
-        <div class="a1-detail-row">
-          <div class="a1-detail-icon">🕖</div>
-          <div class="a1-detail-label">Time</div>
-          <div class="a1-detail-value" data-field="time">7:00 PM</div>
-        </div>
-        <div class="a1-detail-row">
-          <div class="a1-detail-icon">📍</div>
-          <div class="a1-detail-label">Venue</div>
-          <div class="a1-detail-value" data-field="venue">The Leela Palace, Bengaluru</div>
-        </div>
-        <div class="a1-detail-row">
-          <div class="a1-detail-icon">🎊</div>
-          <div class="a1-detail-label">Years Together</div>
-          <div class="a1-detail-value"><span data-field="years">25</span> Beautiful Years</div>
-        </div>
-      </div>
-
+<!-- Story / Timeline -->
+<section id="story">
+  <div class="section-title reveal">
+    <h2>Through the Years</h2>
+    <div class="gold-divider"><span class="diamond">✦</span></div>
+    <p class="subtitle">A journey of love, written together</p>
+  </div>
+  <div class="timeline-scroll-container" id="timeline-scroll">
+    <div class="timeline-card reveal">
+      <div class="timeline-year">1</div>
+      <div class="timeline-icon">💍</div>
+      <div class="timeline-title">The Wedding</div>
+      <div class="timeline-text">It all began with a promise, a ring, and a lifetime of tomorrows...</div>
+      <div class="timeline-deco"></div>
     </div>
-  </section>
+    <div class="timeline-card reveal reveal-delay-1">
+      <div class="timeline-year">5</div>
+      <div class="timeline-icon">🌱</div>
+      <div class="timeline-title">Growing Together</div>
+      <div class="timeline-text">Building our home, our life, and the foundations of something beautiful.</div>
+      <div class="timeline-deco"></div>
+    </div>
+    <div class="timeline-card reveal reveal-delay-2">
+      <div class="timeline-year">10</div>
+      <div class="timeline-icon">🎉</div>
+      <div class="timeline-title">A Decade Strong</div>
+      <div class="timeline-text">Ten beautiful years — and every single one more precious than the last.</div>
+      <div class="timeline-deco"></div>
+    </div>
+    <div class="timeline-card reveal">
+      <div class="timeline-year">15</div>
+      <div class="timeline-icon">🌳</div>
+      <div class="timeline-title">Deepening Roots</div>
+      <div class="timeline-text">Watching the family grow, the love deepen, the laughter multiply.</div>
+      <div class="timeline-deco"></div>
+    </div>
+    <div class="timeline-card reveal reveal-delay-1">
+      <div class="timeline-year">20</div>
+      <div class="timeline-icon">⭐</div>
+      <div class="timeline-title">Two Decades</div>
+      <div class="timeline-text">Twenty years of adventures, challenges overcome, and joy rediscovered.</div>
+      <div class="timeline-deco"></div>
+    </div>
+    <div class="timeline-card reveal reveal-delay-2">
+      <div class="timeline-year" data-field="years">25</div>
+      <div class="timeline-icon">🌟</div>
+      <div class="timeline-title">Today</div>
+      <div class="timeline-text">Celebrating <span data-field="years">25</span> golden years — and so many more to come!</div>
+      <div class="timeline-deco"></div>
+    </div>
+  </div>
+</section>
 
-  <!-- ═══════════════════════════════ MEMORY LANE ═══════════════════════ -->
-  <section class="a1-memory">
-    <div class="a1-memory-inner">
-      <div class="t-center r" style="margin-bottom:0.5rem;">
-        <div class="sec-tag">Memory Lane</div>
-        <h2 class="sec-title" style="color:var(--gold-pale);">A Journey of Love</h2>
-      </div>
-
-      <div class="a1-milestones">
-        <div class="a1-milestone-card r">
-          <div class="a1-milestone-icon">💍</div>
-          <div class="a1-milestone-year">Year 1</div>
-          <div class="a1-milestone-title">The Beginning</div>
-        </div>
-        <div class="a1-milestone-card r" style="transition-delay:0.1s">
-          <div class="a1-milestone-icon">❤️</div>
-          <div class="a1-milestone-year">Year 10</div>
-          <div class="a1-milestone-title">Growing Together</div>
-        </div>
-        <div class="a1-milestone-card r" style="transition-delay:0.2s">
-          <div class="a1-milestone-icon">✨</div>
-          <div class="a1-milestone-year">Year 25</div>
-          <div class="a1-milestone-title">Golden Love</div>
-        </div>
+<!-- Photo Gallery -->
+<section id="photos">
+  <div class="section-title reveal">
+    <h2>A Life in Pictures</h2>
+    <div class="gold-divider"><span class="diamond">✦</span></div>
+    <p class="subtitle">Memories framed in gold</p>
+  </div>
+  <div class="photo-grid">
+    <div class="vintage-photo-wrap reveal" onclick="openLightbox(0)">
+      <div class="vintage-frame">
+        <div class="vintage-photo-img"><span class="vintage-photo-icon">💍</span></div>
+        <div class="vintage-caption">Wedding Day</div>
       </div>
     </div>
-  </section>
-
-  <!-- ═══════════════════════════════ MESSAGE ═══════════════════════════ -->
-  <section class="a1-message">
-    <div class="a1-message-inner r">
-      <div class="sec-tag" style="margin-bottom:1.5rem;">A Message</div>
-      <div class="a1-quote-mark">"</div>
-      <p class="a1-message-text" data-field="message">Twenty-five years of love, laughter, and endless joy. Join us in celebrating this golden milestone.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════ GALLERY ═══════════════════════════ -->
-  <section class="a1-gallery">
-    <div class="a1-gallery-inner">
-      <div class="t-center r" style="margin-bottom:0.5rem;">
-        <div class="sec-tag">Memories</div>
-        <h2 class="sec-title" style="color:var(--gold-pale);">Then, Now &amp; Forever</h2>
-      </div>
-
-      <div class="a1-photos">
-        <div class="a1-photo-placeholder r">
-          <div class="a1-photo-caption">Then</div>
-        </div>
-        <div class="a1-photo-placeholder r" style="transition-delay:0.1s">
-          <div class="a1-photo-caption">Now</div>
-        </div>
-        <div class="a1-photo-placeholder r" style="transition-delay:0.2s">
-          <div class="a1-photo-caption">Forever</div>
-        </div>
+    <div class="vintage-photo-wrap reveal reveal-delay-1" onclick="openLightbox(1)">
+      <div class="vintage-frame">
+        <div class="vintage-photo-img v2"><span class="vintage-photo-icon">🏠</span></div>
+        <div class="vintage-caption">Our First Home</div>
       </div>
     </div>
-  </section>
-
-  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════ -->
-  <footer class="a1-footer">
-    <div class="a1-footer-names r">
-      <span data-field="name1">Rajesh</span> &amp; <span data-field="name2">Sunita</span>
+    <div class="vintage-photo-wrap reveal reveal-delay-2" onclick="openLightbox(2)">
+      <div class="vintage-frame">
+        <div class="vintage-photo-img v3"><span class="vintage-photo-icon">👶</span></div>
+        <div class="vintage-caption">Family Grew</div>
+      </div>
     </div>
-    <div class="a1-footer-years r"><span data-field="years">25</span> Years</div>
-    <div class="a1-footer-date r" data-field="date">December 20, 2026</div>
-    <div class="a1-footer-divider r"></div>
-    <a href="../../index.html" class="a1-footer-link r">invite.studio</a>
-  </footer>
+    <div class="vintage-photo-wrap reveal" onclick="openLightbox(3)">
+      <div class="vintage-frame">
+        <div class="vintage-photo-img v4"><span class="vintage-photo-icon">✈️</span></div>
+        <div class="vintage-caption">Adventures Together</div>
+      </div>
+    </div>
+    <div class="vintage-photo-wrap reveal reveal-delay-1" onclick="openLightbox(4)">
+      <div class="vintage-frame">
+        <div class="vintage-photo-img v5"><span class="vintage-photo-icon">❤️</span></div>
+        <div class="vintage-caption">Still in Love</div>
+      </div>
+    </div>
+    <div class="vintage-photo-wrap reveal reveal-delay-2" onclick="openLightbox(5)">
+      <div class="vintage-frame">
+        <div class="vintage-photo-img v6"><span class="vintage-photo-icon">✨</span></div>
+        <div class="vintage-caption">Our Golden Day</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script src="../../js/payment.js"></script>
-  <script src="../../js/customize.js"></script>
-  <script>
-    // ── Floating hearts ───────────────────────────────────────────────────
-    (function spawnHearts() {
-      const icons = ['❤️', '✨', '💛', '🌹', '💕'];
-      const container = document.querySelector('.a1-hero');
-      for (let i = 0; i < 20; i++) {
-        const h = document.createElement('div');
-        h.className = 'float-heart';
-        h.textContent = icons[Math.floor(Math.random() * icons.length)];
-        h.style.cssText = [
-          `left:${Math.random() * 100}%`,
-          `bottom:${-5 + Math.random() * 20}%`,
-          `font-size:${0.7 + Math.random() * 1.2}rem`,
-          `animation-duration:${10 + Math.random() * 18}s`,
-          `animation-delay:${Math.random() * 15}s`
-        ].join(';');
-        container.appendChild(h);
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close">✕</button>
+  <div class="lightbox-inner" id="lightbox-inner"></div>
+</div>
+
+<!-- Decade Memories -->
+<section id="memories">
+  <div class="section-title reveal">
+    <h2>A Decade by Decade Journey</h2>
+    <div class="gold-divider"><span class="diamond">✦</span></div>
+    <p class="subtitle">Every era, a new chapter</p>
+  </div>
+  <div class="decade-grid">
+    <div class="decade-card d-crimson reveal">
+      <div class="decade-badge">1990s</div>
+      <div class="decade-body">
+        <div class="decade-year-label">1990–2000</div>
+        <div class="decade-title">The Beginning</div>
+        <div class="decade-text">Two hearts found each other and chose forever. The wedding, the vows, and the first home — the decade that started it all with joy and wonder.</div>
+        <div class="decade-deco">💍 ❤️</div>
+      </div>
+    </div>
+    <div class="decade-card d-gold reveal">
+      <div class="decade-badge">2000s</div>
+      <div class="decade-body">
+        <div class="decade-year-label">2000–2010</div>
+        <div class="decade-title">New Millennium, New Family</div>
+        <div class="decade-text">A new century brought new beginnings — the family grew, roots deepened, and every milestone became a shared treasure of love and belonging.</div>
+        <div class="decade-deco">🌱 👶</div>
+      </div>
+    </div>
+    <div class="decade-card d-champagne reveal">
+      <div class="decade-badge">2010s</div>
+      <div class="decade-body">
+        <div class="decade-year-label">2010–2020</div>
+        <div class="decade-title">Our Golden Years</div>
+        <div class="decade-text">Adventures around the world, children coming into their own, and a love that had grown richer and more radiant with every passing season.</div>
+        <div class="decade-deco">✈️ 🌍</div>
+      </div>
+    </div>
+    <div class="decade-card d-dark reveal">
+      <div class="decade-badge">2020s</div>
+      <div class="decade-body">
+        <div class="decade-year-label">2020–Present</div>
+        <div class="decade-title">Stronger Than Ever</div>
+        <div class="decade-text">Through every storm and every sunrise, you stood side by side. Each challenge only proved what the world already knew — this love is unbreakable.</div>
+        <div class="decade-deco">⭐ 🛡️</div>
+      </div>
+    </div>
+    <div class="decade-card d-special reveal">
+      <div class="decade-badge">Now</div>
+      <div class="decade-body">
+        <div class="decade-year-label">The Golden Milestone</div>
+        <div class="decade-title">The Celebration</div>
+        <div class="decade-text">Today we gather to honour <span data-field="years">25</span> extraordinary years. Not the end of any chapter — simply the most radiant page yet in your forever story.</div>
+        <div class="decade-deco">🌟 ✨</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Renewal of Vows -->
+<section id="vows">
+  <div class="floating-hearts-container" id="hearts-container"></div>
+  <div class="vows-border-frame reveal">
+    <div class="vows-title">💍 Renewal of Vows</div>
+    <div class="gold-divider"><span class="diamond">✦</span></div>
+    <p class="vows-text">
+      "I take you again, as I did <span data-field="years">25</span> years ago, with the same love and greater wisdom. In your eyes I have found my home; in your heart, my belonging; in your arms, my peace. You are my home, my adventure, my forever."
+    </p>
+  </div>
+</section>
+
+<!-- Milestones -->
+<section id="milestones">
+  <div class="section-title reveal">
+    <h2>Our Milestones</h2>
+    <div class="gold-divider"><span class="diamond">✦</span></div>
+    <p class="subtitle">Every achievement, shared</p>
+  </div>
+  <div class="milestones-grid">
+    <div class="milestone-card reveal">
+      <div class="milestone-icon">💍</div>
+      <div class="milestone-badge">1</div>
+      <div class="milestone-name">Married</div>
+      <div class="milestone-year-label">Year One</div>
+    </div>
+    <div class="milestone-card reveal reveal-delay-1">
+      <div class="milestone-icon">🏠</div>
+      <div class="milestone-badge">3</div>
+      <div class="milestone-name">First Home</div>
+      <div class="milestone-year-label">Year Three</div>
+    </div>
+    <div class="milestone-card reveal reveal-delay-2">
+      <div class="milestone-icon">👶</div>
+      <div class="milestone-badge">5</div>
+      <div class="milestone-name">Family Grew</div>
+      <div class="milestone-year-label">Year Five</div>
+    </div>
+    <div class="milestone-card reveal">
+      <div class="milestone-icon">🌍</div>
+      <div class="milestone-badge">10</div>
+      <div class="milestone-name">Adventures</div>
+      <div class="milestone-year-label">Year Ten</div>
+    </div>
+    <div class="milestone-card reveal reveal-delay-1">
+      <div class="milestone-icon">🎓</div>
+      <div class="milestone-badge">20</div>
+      <div class="milestone-name">Children Grown</div>
+      <div class="milestone-year-label">Year Twenty</div>
+    </div>
+    <div class="milestone-card reveal reveal-delay-2">
+      <div class="milestone-icon">✨</div>
+      <div class="milestone-badge" data-field="years">25</div>
+      <div class="milestone-name">Golden Day</div>
+      <div class="milestone-year-label">Today</div>
+    </div>
+  </div>
+</section>
+
+<!-- Gratitude Wall -->
+<section id="tribute">
+  <div class="section-title reveal">
+    <h2>Words from Our Family</h2>
+    <div class="gold-divider"><span class="diamond">✦</span></div>
+    <p class="subtitle">Love letters from those who know you best</p>
+  </div>
+  <div class="tribute-grid" id="tribute-grid">
+    <div class="tribute-card">
+      <div class="tribute-quote-mark">"</div>
+      <p class="tribute-text">Watching you two has taught me what real love looks like — patient, joyful, and always growing deeper.</p>
+      <div class="tribute-author">— Son</div>
+    </div>
+    <div class="tribute-card">
+      <div class="tribute-quote-mark">"</div>
+      <p class="tribute-text">Thank you for showing us that love only grows stronger with time, laughter, and unwavering devotion.</p>
+      <div class="tribute-author">— Daughter</div>
+    </div>
+    <div class="tribute-card">
+      <div class="tribute-quote-mark">"</div>
+      <p class="tribute-text">Our family's greatest blessing is having you both as our guiding light. We love you endlessly.</p>
+      <div class="tribute-author">— Grandchildren</div>
+    </div>
+  </div>
+  <div class="tribute-form-wrap reveal">
+    <h3>Add Your Tribute</h3>
+    <div class="form-row">
+      <div class="form-field">
+        <label>Your Name</label>
+        <input type="text" id="tribute-name" placeholder="Name">
+      </div>
+      <div class="form-field">
+        <label>Relationship</label>
+        <input type="text" id="tribute-relation" placeholder="e.g. Friend, Niece">
+      </div>
+    </div>
+    <div class="form-field" style="margin-bottom:1rem;">
+      <label>Your Message</label>
+      <textarea id="tribute-message" rows="3" placeholder="Share your love and wishes..."></textarea>
+    </div>
+    <button class="btn-gold" onclick="submitTribute()">✦ Submit Tribute</button>
+  </div>
+</section>
+
+<!-- Event Details -->
+<section id="event">
+  <div class="section-title reveal">
+    <h2>The Celebration</h2>
+    <div class="gold-divider"><span class="diamond">✦</span></div>
+    <p class="subtitle" style="color:rgba(245,232,192,0.4);">An evening to remember, always</p>
+  </div>
+  <div class="event-card reveal">
+    <div class="event-card-title" data-field="anniversary">Silver Anniversary Celebration</div>
+    <div class="event-detail-row">
+      <div class="event-icon">📅</div>
+      <div>
+        <div class="event-detail-label">Date</div>
+        <div class="event-detail-value" data-field="date">December 20, 2026</div>
+      </div>
+    </div>
+    <div class="event-detail-row">
+      <div class="event-icon">🕖</div>
+      <div>
+        <div class="event-detail-label">Time</div>
+        <div class="event-detail-value" data-field="time">7:00 PM</div>
+      </div>
+    </div>
+    <div class="event-detail-row">
+      <div class="event-icon">📍</div>
+      <div>
+        <div class="event-detail-label">Venue</div>
+        <div class="event-detail-value" data-field="venue">The Leela Palace, Bengaluru</div>
+      </div>
+    </div>
+    <div class="event-detail-row">
+      <div class="event-icon">✉️</div>
+      <div>
+        <div class="event-detail-label">Hosted by</div>
+        <div class="event-detail-value" data-field="host">The Kumar Family</div>
+      </div>
+    </div>
+    <div class="dress-code-badge">Dress Code: Formal — Gold & Crimson palette preferred</div>
+    <p style="margin-top:1.5rem;font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(245,232,192,0.6);font-size:1rem;line-height:1.8;" data-field="message">
+      Twenty-five years of love, laughter, and endless joy. Join us in celebrating this golden milestone.
+    </p>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp">
+  <div class="section-title reveal">
+    <h2>RSVP</h2>
+    <div class="gold-divider"><span class="diamond">✦</span></div>
+    <p class="subtitle">Let us know you'll be there</p>
+  </div>
+  <div class="rsvp-form-container reveal">
+    <div id="rsvp-form-inner">
+      <div class="form-row">
+        <div class="form-field">
+          <label>Full Name</label>
+          <input type="text" id="rsvp-name" placeholder="Your name">
+        </div>
+        <div class="form-field">
+          <label>Relationship to Couple</label>
+          <select id="rsvp-relation">
+            <option value="">Select...</option>
+            <option>Family</option>
+            <option>Friend</option>
+            <option>Colleague</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field" style="margin-bottom:1rem;">
+        <label>Will you attend?</label>
+        <select id="rsvp-attending">
+          <option value="">Select...</option>
+          <option>Joyfully Attending</option>
+          <option>Attending with Family</option>
+          <option>Unable to Attend</option>
+        </select>
+      </div>
+      <div class="form-field" style="margin-bottom:1rem;">
+        <label>Message for the Couple</label>
+        <textarea id="rsvp-message" rows="3" placeholder="Share your wishes..."></textarea>
+      </div>
+      <button class="btn-gold" onclick="submitRSVP()">✦ Confirm RSVP</button>
+    </div>
+    <div class="rsvp-success" id="rsvp-success">
+      <p>💕 Thank you for celebrating with us!</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#555;margin-top:1rem;">We look forward to seeing you on the day!</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-names">
+    <span data-field="name1">Rajesh</span> &amp; <span data-field="name2">Sunita</span>
+  </div>
+  <div class="footer-subtitle"><span data-field="years">25</span> Years &amp; Counting ✦ Forever &amp; Always</div>
+  <a href="../../index.html" class="footer-back">← Back to Marketplace</a>
+</footer>
+
+<script src="../../js/payment.js"></script>
+<script src="../../js/customize.js"></script>
+<script>
+  /* ─── Loading Screen ─── */
+  (function() {
+    const container = document.getElementById('loading-particles');
+    for (let i = 0; i < 20; i++) {
+      const el = document.createElement('div');
+      const isLine = i % 5 === 0;
+      el.className = 'spark' + (isLine ? ' spark-line' : '');
+      el.style.cssText = `
+        left: ${Math.random() * 100}%;
+        width: ${isLine ? '2px' : (3 + Math.random() * 6) + 'px'};
+        height: ${isLine ? (20 + Math.random() * 40) + 'px' : (3 + Math.random() * 6) + 'px'};
+        --dur: ${2 + Math.random() * 3}s;
+        --delay: ${Math.random() * 2}s;
+        background: ${Math.random() > 0.5 ? '#c9942a' : '#f5e8c0'};
+      `;
+      container.appendChild(el);
+    }
+    setTimeout(() => {
+      document.getElementById('loading-screen').classList.add('hidden');
+    }, 2000);
+  })();
+
+  /* ─── Hamburger ─── */
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+
+  /* ─── Hero Canvas Particles ─── */
+  (function() {
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const colors = ['#c9942a', '#e8b84b', '#f5e8c0', '#a07010', '#d4a030'];
+
+    function spawnParticle() {
+      return {
+        x: Math.random() * W,
+        y: H + 10,
+        size: 1.5 + Math.random() * 4,
+        speedY: 0.4 + Math.random() * 1.2,
+        speedX: (Math.random() - 0.5) * 0.5,
+        opacity: 0.6 + Math.random() * 0.4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        isStar: Math.random() > 0.7,
+        life: 0,
+        maxLife: 0.4 + Math.random() * 0.6,
+      };
+    }
+
+    for (let i = 0; i < 80; i++) {
+      const p = spawnParticle();
+      p.y = Math.random() * H;
+      particles.push(p);
+    }
+
+    function drawStar(x, y, r, color, opacity) {
+      ctx.save();
+      ctx.globalAlpha = opacity;
+      ctx.fillStyle = color;
+      ctx.translate(x, y);
+      ctx.beginPath();
+      for (let i = 0; i < 4; i++) {
+        const angle = (i / 4) * Math.PI * 2;
+        const outerR = r * 2;
+        const innerR = r * 0.5;
+        const outerX = Math.cos(angle) * outerR;
+        const outerY = Math.sin(angle) * outerR;
+        const innerAngle = angle + Math.PI / 4;
+        const innerX = Math.cos(innerAngle) * innerR;
+        const innerY = Math.sin(innerAngle) * innerR;
+        i === 0 ? ctx.moveTo(outerX, outerY) : ctx.lineTo(outerX, outerY);
+        ctx.lineTo(innerX, innerY);
       }
-    })();
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
 
-    // ── initPreview ───────────────────────────────────────────────────────
-    document.addEventListener('DOMContentLoaded', () => {
-      InviteCustomize.initPreview({
-        name1:       "Rajesh",
-        name2:       "Sunita",
-        years:       "25",
-        date:        "December 20, 2026",
-        time:        "7:00 PM",
-        venue:       "The Leela Palace, Bengaluru",
-        message:     "Twenty-five years of love, laughter, and endless joy. Join us in celebrating this golden milestone.",
-        host:        "The Kumar Family",
-        anniversary: "Silver"
+    function animate() {
+      ctx.clearRect(0, 0, W, H);
+      const toRemove = [];
+      particles.forEach((p, i) => {
+        p.y -= p.speedY;
+        p.x += p.speedX;
+        p.life += p.speedY / H;
+        const fade = p.life < 0.2 ? p.life / 0.2 : Math.max(0, 1 - (p.life - 0.2) / 0.8);
+        const alpha = p.opacity * fade;
+        if (p.life >= 1) toRemove.push(i);
+        if (alpha <= 0) return;
+        if (p.isStar) {
+          drawStar(p.x, p.y, p.size, p.color, alpha);
+        } else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = alpha;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
       });
-    });
-  </script>
+      for (let i = toRemove.length - 1; i >= 0; i--) {
+        particles.splice(toRemove[i], 1);
+        particles.push(spawnParticle());
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
 
+  /* ─── Years Counter ─── */
+  function animateCounter(el, target, duration) {
+    let start = null;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      el.textContent = Math.floor(progress * target);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  }
+
+  /* ─── Parallax Hero ─── */
+  window.addEventListener('scroll', () => {
+    const hero = document.getElementById('hero');
+    const heroContent = hero.querySelector('.hero-content');
+    const scrollY = window.scrollY;
+    if (scrollY < window.innerHeight) {
+      heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
+    }
+  });
+
+  /* ─── Countdown Timer ─── */
+  function updateCountdown() {
+    const dateEl = document.querySelector('[data-field="date"]');
+    if (!dateEl) return;
+    const targetDate = new Date(dateEl.textContent);
+    if (isNaN(targetDate)) return;
+    const now = new Date();
+    const diff = targetDate - now;
+    if (diff <= 0) {
+      document.getElementById('cnt-days').textContent = '0';
+      document.getElementById('cnt-hours').textContent = '0';
+      document.getElementById('cnt-mins').textContent = '0';
+      document.getElementById('cnt-secs').textContent = '0';
+      return;
+    }
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cnt-days').textContent = String(days).padStart(2,'0');
+    document.getElementById('cnt-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cnt-mins').textContent = String(mins).padStart(2,'0');
+    document.getElementById('cnt-secs').textContent = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ─── Floating Hearts ─── */
+  (function() {
+    const container = document.getElementById('hearts-container');
+    const emojis = ['❤️', '💛', '✨', '💝', '💖'];
+    for (let i = 0; i < 15; i++) {
+      const el = document.createElement('div');
+      el.className = 'floating-heart';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.cssText = `
+        left: ${Math.random() * 100}%;
+        bottom: ${Math.random() * 30}%;
+        font-size: ${0.8 + Math.random() * 1.2}rem;
+        --dur: ${4 + Math.random() * 4}s;
+        --delay: ${Math.random() * 4}s;
+      `;
+      container.appendChild(el);
+    }
+  })();
+
+  /* ─── Gallery Lightbox ─── */
+  const lightboxCaptions = ['Wedding Day','Our First Home','Family Grew','Adventures Together','Still in Love','Our Golden Day'];
+  const lightboxIcons = ['💍','🏠','👶','✈️','❤️','✨'];
+  function openLightbox(idx) {
+    const lb = document.getElementById('lightbox');
+    const inner = document.getElementById('lightbox-inner');
+    inner.innerHTML = `
+      <div style="background:#f5edd0;border:2px solid #c8a96e;box-shadow:inset 0 0 0 8px #f0e4c0,0 10px 40px rgba(0,0,0,0.6);padding:16px 16px 48px;">
+        <div style="width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#8b6914,#c9942a,#6b4f10);display:flex;align-items:center;justify-content:center;font-size:5rem;">${lightboxIcons[idx]}</div>
+        <div style="text-align:center;font-family:'Great Vibes',cursive;font-size:1.8rem;color:#5a3a08;margin-top:8px;">${lightboxCaptions[idx]}</div>
+      </div>
+    `;
+    lb.classList.add('active');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+
+  /* ─── Timeline drag scroll ─── */
+  (function() {
+    const el = document.getElementById('timeline-scroll');
+    let isDown = false, startX, scrollLeft;
+    el.addEventListener('mousedown', e => { isDown = true; el.style.cursor='grabbing'; startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft; });
+    el.addEventListener('mouseleave', () => { isDown = false; el.style.cursor='grab'; });
+    el.addEventListener('mouseup', () => { isDown = false; el.style.cursor='grab'; });
+    el.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - el.offsetLeft;
+      el.scrollLeft = scrollLeft - (x - startX);
+    });
+  })();
+
+  /* ─── Tribute Form ─── */
+  function submitTribute() {
+    const name = document.getElementById('tribute-name').value.trim();
+    const relation = document.getElementById('tribute-relation').value.trim();
+    const message = document.getElementById('tribute-message').value.trim();
+    if (!name || !message) { alert('Please fill in your name and message.'); return; }
+    const card = document.createElement('div');
+    card.className = 'tribute-card';
+    card.innerHTML = `
+      <div class="tribute-quote-mark">"</div>
+      <p class="tribute-text">${message}</p>
+      <div class="tribute-author">— ${name}${relation ? ', ' + relation : ''}</div>
+    `;
+    document.getElementById('tribute-grid').appendChild(card);
+    const tributes = JSON.parse(localStorage.getItem('ann1-tributes') || '[]');
+    tributes.push({ name, relation, message });
+    localStorage.setItem('ann1-tributes', JSON.stringify(tributes));
+    document.getElementById('tribute-name').value = '';
+    document.getElementById('tribute-relation').value = '';
+    document.getElementById('tribute-message').value = '';
+  }
+
+  /* ─── RSVP + Confetti ─── */
+  function launchConfetti() {
+    const colors = ['#c9942a','#e8b84b','#f5e8c0','#6a0000','#ffffff'];
+    for (let i = 0; i < 60; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      el.style.cssText = `
+        left: ${20 + Math.random() * 60}%;
+        background: ${colors[Math.floor(Math.random() * colors.length)]};
+        width: ${5 + Math.random() * 8}px;
+        height: ${5 + Math.random() * 8}px;
+        border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+        --dur: ${1.5 + Math.random() * 1.5}s;
+        --delay: ${Math.random() * 0.5}s;
+        --dx: ${(Math.random() - 0.5) * 200}px;
+      `;
+      document.body.appendChild(el);
+      el.addEventListener('animationend', () => el.remove());
+    }
+  }
+
+  function submitRSVP() {
+    const name = document.getElementById('rsvp-name').value.trim();
+    const relation = document.getElementById('rsvp-relation').value;
+    const attending = document.getElementById('rsvp-attending').value;
+    const message = document.getElementById('rsvp-message').value.trim();
+    if (!name || !attending) { alert('Please fill in your name and attendance.'); return; }
+    const rsvps = JSON.parse(localStorage.getItem('ann1-rsvps') || '[]');
+    rsvps.push({ name, relation, attending, message });
+    localStorage.setItem('ann1-rsvps', JSON.stringify(rsvps));
+    launchConfetti();
+    document.getElementById('rsvp-form-inner').style.display = 'none';
+    document.getElementById('rsvp-success').classList.add('show');
+  }
+
+  /* ─── Scroll Reveal ─── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('revealed');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ─── Init after DOMContentLoaded ─── */
+  document.addEventListener('DOMContentLoaded', () => {
+    InviteCustomize.initPreview({
+      name1: "Rajesh",
+      name2: "Sunita",
+      years: "25",
+      date: "December 20, 2026",
+      time: "7:00 PM",
+      venue: "The Leela Palace, Bengaluru",
+      message: "Twenty-five years of love, laughter, and endless joy. Join us in celebrating this golden milestone.",
+      host: "The Kumar Family",
+      anniversary: "Silver"
+    });
+
+    /* Years counter after loading */
+    setTimeout(() => {
+      const yearsEl = document.getElementById('hero-years');
+      const yearsData = document.querySelector('[data-field="years"]');
+      const target = yearsData ? parseInt(yearsData.textContent) || 25 : 25;
+      animateCounter(yearsEl, target, 2500);
+    }, 2200);
+
+    /* Load saved tributes */
+    const tributes = JSON.parse(localStorage.getItem('ann1-tributes') || '[]');
+    tributes.forEach(t => {
+      const card = document.createElement('div');
+      card.className = 'tribute-card';
+      card.innerHTML = `<div class="tribute-quote-mark">"</div><p class="tribute-text">${t.message}</p><div class="tribute-author">— ${t.name}${t.relation ? ', ' + t.relation : ''}</div>`;
+      document.getElementById('tribute-grid').appendChild(card);
+    });
+  });
+</script>
 </body>
 </html>

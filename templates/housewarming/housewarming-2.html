@@ -6,424 +6,1217 @@
   <title>Modern Housewarming — The Mehta Family</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../../css/marketplace.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --teal:        #1a6070;
-      --teal-dark:   #0a1a1c;
-      --teal-mid:    #0f3a44;
-      --teal-light:  #2a8090;
-      --copper:      #c07830;
-      --copper-light:#d89448;
-      --copper-pale: #f0c880;
-      --off-white:   #f4f4f0;
-      --warm-white:  #fafaf6;
+      --teal:         #1a6070;
+      --teal-dark:    #0e3a47;
+      --teal-light:   #2a8090;
+      --copper:       #c07830;
+      --copper-light: #e09848;
+      --terracotta:   #b05828;
+      --warm-white:   #fffcf8;
+      --off-black:    #0a1214;
+      --sage:         #5a8060;
+      --sage-light:   #7aaa80;
+      --gold:         #c9942a;
+      --gold-light:   #e8b84a;
     }
 
-    body { background: var(--teal-dark); color: var(--off-white); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--off-black);
+      color: var(--warm-white);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
 
-    /* ── Back nav ── */
+    /* ── Loading Screen ── */
+    #loading-screen {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--off-black);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 28px;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loading-screen.hidden { opacity: 0; visibility: hidden; }
+
+    .house-draw-svg { width: 100px; height: 90px; }
+    .house-outline {
+      fill: none;
+      stroke: var(--teal-light);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      animation: drawHouse 1.4s ease forwards;
+    }
+    .house-fill {
+      fill: var(--teal);
+      opacity: 0;
+      animation: fillHouse 0.5s ease forwards;
+      animation-delay: 1.4s;
+    }
+    @keyframes drawHouse { to { stroke-dashoffset: 0; } }
+    @keyframes fillHouse { to { opacity: 0.35; } }
+
+    .loading-text-modern {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--teal-light);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ── Back Nav ── */
     .back-nav {
-      position: fixed; top: 14px; left: 16px; z-index: 1000;
-      color: var(--copper-pale); text-decoration: none; font-size: 0.85rem;
-      background: rgba(10,26,28,.85); border: 1px solid rgba(192,120,48,.4);
-      padding: 6px 14px; border-radius: 20px; backdrop-filter: blur(6px);
-      transition: background .2s;
+      position: fixed; top: 14px; left: 16px; z-index: 1100;
+      background: rgba(10,18,20,0.88);
+      border: 1px solid var(--teal-light);
+      color: var(--teal-light);
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-decoration: none;
+      backdrop-filter: blur(6px);
+      transition: background 0.2s, color 0.2s;
     }
-    .back-nav:hover { background: rgba(10,26,28,.98); }
+    .back-nav:hover { background: var(--teal); color: white; }
 
-    /* ── Purchase banner ── */
+    /* ── Purchase Banner ── */
     .purchase-banner {
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-      background: linear-gradient(90deg, var(--teal-dark), var(--teal-mid));
-      border-top: 2px solid var(--copper);
-      padding: 12px 24px;
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      flex-wrap: wrap;
+      position: fixed; top: 0; right: 0; left: 0; z-index: 1050;
+      background: linear-gradient(90deg, var(--teal-dark), var(--off-black));
+      padding: 10px 20px;
+      display: flex; align-items: center; justify-content: flex-end; gap: 12px;
+      border-bottom: 1px solid var(--teal);
     }
-    .purchase-banner .banner-text { color: var(--copper-pale); font-size: 0.9rem; }
-    .purchase-banner .banner-text span { color: var(--copper-light); font-weight: 600; }
-    .btn-buy {
-      background: linear-gradient(135deg, var(--copper), var(--copper-light));
-      color: var(--teal-dark); border: none; padding: 10px 24px;
-      border-radius: 24px; font-family: 'Inter', sans-serif;
-      font-weight: 700; font-size: 0.9rem; cursor: pointer;
-      white-space: nowrap; text-decoration: none;
-      box-shadow: 0 4px 18px rgba(192,120,48,.45);
-      transition: transform .2s, box-shadow .2s;
+    .purchase-banner .banner-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(255,252,248,0.7);
+      margin-right: auto;
+      padding-left: 120px;
     }
-    .btn-buy:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(192,120,48,.6); }
+    .banner-btn {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 7px 18px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .banner-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(26,96,112,0.4); }
+    .btn-customize { background: transparent; border: 1.5px solid var(--teal-light); color: var(--teal-light); }
+    .btn-buy { background: var(--teal); color: white; }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: sticky; top: 44px; z-index: 900;
+      background: var(--teal-dark);
+      padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(26,96,112,0.5);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+    .navbar-logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem; font-weight: 600;
+      color: var(--warm-white);
+      padding: 14px 0; letter-spacing: 0.04em;
+    }
+    .navbar-logo span { color: var(--teal-light); }
+    .nav-links { display: flex; gap: 0; list-style: none; }
+    .nav-links a {
+      display: block;
+      padding: 14px 16px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem; font-weight: 500;
+      color: rgba(255,252,248,0.7);
+      text-decoration: none;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--warm-white); border-radius: 2px; }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--teal-dark); flex-direction: column;
+        border-bottom: 1px solid var(--teal);
+      }
+      .nav-links.open { display: flex; }
+    }
 
     /* ── Hero ── */
     .hero {
-      min-height: 100vh; position: relative; overflow: hidden;
-      background: var(--teal-dark);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 80px 24px 120px;
-    }
-
-    /* Hexagon geometric pattern */
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
+      min-height: 100vh;
+      padding-top: 44px;
+      background-color: var(--off-black);
       background-image:
-        repeating-linear-gradient(
-          60deg,
-          transparent,
-          transparent 28px,
-          rgba(26,96,112,.18) 28px,
-          rgba(26,96,112,.18) 29px
-        ),
-        repeating-linear-gradient(
-          -60deg,
-          transparent,
-          transparent 28px,
-          rgba(26,96,112,.18) 28px,
-          rgba(26,96,112,.18) 29px
-        ),
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 28px,
-          rgba(26,96,112,.12) 28px,
-          rgba(26,96,112,.12) 29px
-        );
-      pointer-events: none;
+        repeating-linear-gradient(60deg,  transparent, transparent 28px, rgba(26,96,112,0.06) 28px, rgba(26,96,112,0.06) 30px),
+        repeating-linear-gradient(-60deg, transparent, transparent 28px, rgba(26,96,112,0.06) 28px, rgba(26,96,112,0.06) 30px),
+        repeating-linear-gradient(0deg,   transparent, transparent 28px, rgba(26,96,112,0.03) 28px, rgba(26,96,112,0.03) 30px);
+      position: relative;
+      overflow: hidden;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
 
-    /* Floating home icons */
-    .floating-homes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-    .float-home {
-      position: absolute; font-size: 1.6rem; opacity: 0.07;
-      animation: floatUp linear infinite;
+    /* Copper floating dots */
+    .copper-dots-container { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .copper-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--copper);
+      animation: floatDot linear infinite;
     }
-    @keyframes floatUp {
-      0%   { transform: translateY(0) rotate(0deg); opacity: .07; }
-      50%  { opacity: .12; }
-      100% { transform: translateY(-110vh) rotate(15deg); opacity: 0; }
-    }
-
-    /* Copper accent lines */
-    .hero-accent-line {
-      width: min(300px, 80vw); height: 1px;
-      background: linear-gradient(90deg, transparent, var(--copper), transparent);
-      margin: 0 auto 20px;
+    @keyframes floatDot {
+      0%   { transform: translateY(0) scale(1); opacity: 0.6; }
+      50%  { opacity: 0.9; transform: translateY(-40vh) scale(1.1); }
+      100% { transform: translateY(-110vh) scale(0.6); opacity: 0; }
     }
 
-    .hero-overline {
-      font-family: 'Inter', sans-serif; font-weight: 500;
-      font-size: clamp(0.65rem, 2vw, 0.8rem);
-      letter-spacing: 6px; text-transform: uppercase;
-      color: var(--copper-light); margin-bottom: 16px;
+    /* Building silhouette */
+    .building-silhouette {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 200px; pointer-events: none;
     }
+    .building-svg { width: 100%; height: 100%; }
+
+    /* Plant motifs */
+    .plant-motif { position: absolute; pointer-events: none; opacity: 0.55; }
+    .plant-svg { width: 80px; height: 100px; }
+
+    .hero-content {
+      position: relative; z-index: 10;
+      text-align: center;
+      padding: 100px 24px 220px;
+      max-width: 700px;
+    }
+
+    /* House icon in hero */
+    .hero-house-icon { width: 70px; height: 60px; margin: 0 auto 28px; }
+    .hero-house-outline {
+      fill: none; stroke: var(--teal-light); stroke-width: 2.5;
+      stroke-dasharray: 400; stroke-dashoffset: 400;
+      animation: drawHouse 2s ease forwards; animation-delay: 2s;
+    }
+    .hero-house-fill {
+      fill: rgba(26,96,112,0.3); opacity: 0;
+      animation: fillHouse 0.6s ease forwards; animation-delay: 4s;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--teal-light); margin-bottom: 12px;
+    }
+    .hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 600; color: var(--warm-white);
+      line-height: 1.1; margin-bottom: 8px;
+    }
+    .hero-title .accent { color: var(--teal-light); }
     .hero-family {
-      font-family: 'Playfair Display', serif; font-weight: 700;
-      font-size: clamp(2.6rem, 9vw, 6rem);
-      color: #fff; line-height: 1.05; margin-bottom: 8px;
-      text-shadow: 0 4px 40px rgba(26,96,112,.8);
-    }
-    .hero-invite {
-      font-family: 'Inter', sans-serif; font-weight: 300;
-      font-size: clamp(0.85rem, 2.5vw, 1.1rem);
-      color: rgba(244,244,240,.65); letter-spacing: 3px;
-      text-transform: uppercase; margin-bottom: 28px;
-    }
-    .hero-date-pill {
-      display: inline-block;
-      border: 1px solid var(--copper);
-      padding: 10px 28px;
-      color: var(--copper-pale);
       font-family: 'Playfair Display', serif;
-      font-size: clamp(0.85rem, 2vw, 1rem);
-      letter-spacing: 2px;
-      background: rgba(192,120,48,.08);
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
+      color: var(--copper-light);
+      margin-bottom: 24px; font-style: italic;
+    }
+    .hero-badge {
+      display: inline-block;
+      border: 1.5px solid var(--teal-light);
+      border-radius: 6px; padding: 10px 24px;
+      font-size: 0.9rem; color: var(--warm-white);
+      margin-bottom: 28px;
+      background: rgba(26,96,112,0.15);
+      backdrop-filter: blur(4px);
+    }
+    .hero-badge span { color: var(--teal-light); font-weight: 600; }
+
+    /* Countdown */
+    .countdown { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .countdown-unit {
+      background: rgba(26,96,112,0.2);
+      border: 1px solid var(--teal);
+      border-radius: 8px; padding: 10px 16px;
+      min-width: 68px; text-align: center;
+    }
+    .countdown-unit .num {
+      font-size: 1.8rem; font-weight: 600;
+      color: var(--teal-light); line-height: 1; display: block;
+    }
+    .countdown-unit .lbl {
+      font-size: 0.6rem; color: rgba(255,252,248,0.55);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      display: block; margin-top: 3px;
     }
 
-    /* ── Section base ── */
-    section { padding: 60px 24px; }
+    /* ── Section helpers ── */
+    .section { padding: 80px 24px; }
     .section-title {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 4vw, 2.2rem);
-      color: var(--copper-light); text-align: center; margin-bottom: 8px;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 600; color: var(--warm-white);
+      text-align: center; margin-bottom: 8px;
     }
-    .section-sub {
-      font-size: 0.8rem; letter-spacing: 3px; color: rgba(244,244,240,.5);
-      text-align: center; margin-bottom: 36px; text-transform: uppercase;
+    .section-title .teal { color: var(--teal-light); }
+    .section-subtitle {
+      font-size: 0.9rem; color: rgba(255,252,248,0.5);
+      text-align: center; margin-bottom: 52px;
     }
 
     /* ── Details Card ── */
-    .details-section { background: var(--warm-white); }
     .details-card {
-      max-width: 580px; margin: 0 auto;
-      background: #fff; color: var(--teal-dark);
+      max-width: 680px; margin: 0 auto;
+      background: var(--warm-white);
+      border-radius: 12px;
       border-left: 5px solid var(--teal);
-      padding: 36px 32px;
-      box-shadow: 0 8px 40px rgba(10,26,28,.12);
+      padding: 36px 40px;
+      color: var(--off-black);
+      box-shadow: 0 16px 50px rgba(0,0,0,0.25);
     }
-    .details-card .section-title { color: var(--teal); text-align: left; margin-bottom: 24px; }
-    .detail-row {
-      display: grid; grid-template-columns: 28px 1fr; gap: 12px;
-      align-items: flex-start; margin-bottom: 20px;
+    .details-card-title {
+      font-size: 1.2rem; font-weight: 600;
+      color: var(--teal-dark); margin-bottom: 24px;
     }
-    .detail-icon { font-size: 1.2rem; padding-top: 2px; }
-    .detail-label { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal-light); margin-bottom: 3px; }
-    .detail-value { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--teal-dark); line-height: 1.5; }
-
-    /* ── Open House section ── */
-    .openhouse-section { background: var(--teal); }
-    .invite-banner {
-      text-align: center; margin-bottom: 40px;
+    .details-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;
     }
-    .invite-banner-text {
-      font-family: 'Great Vibes', cursive; font-size: clamp(2rem, 6vw, 3.5rem);
-      color: #fff; display: block; margin-bottom: 8px;
-    }
-    .invite-banner-sub { font-size: 0.82rem; letter-spacing: 3px; color: rgba(255,255,255,.6); text-transform: uppercase; }
-
-    .event-list { max-width: 520px; margin: 0 auto; }
-    .event-row {
-      display: flex; align-items: stretch; gap: 0;
-      border-left: 2px solid var(--copper); margin-bottom: 0;
-    }
-    .event-time-col {
-      width: 90px; flex-shrink: 0; padding: 14px 16px 14px 0;
-      text-align: right;
-      font-family: 'Playfair Display', serif; font-size: 0.82rem;
-      color: var(--copper-pale); font-weight: 700;
-    }
-    .event-dot-col {
-      width: 20px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center;
-      padding-top: 18px;
-    }
-    .event-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--copper); flex-shrink: 0;
-      box-shadow: 0 0 8px rgba(192,120,48,.7);
-    }
-    .event-content { padding: 12px 0 12px 16px; flex: 1; }
-    .event-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: #fff; margin-bottom: 2px; }
-    .event-desc { font-size: 0.75rem; color: rgba(255,255,255,.6); }
-
-    /* ── Gallery placeholders ── */
-    .gallery-section { background: #0f2428; }
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 800px; margin: 0 auto; }
-    @media (max-width: 600px) { .gallery-grid { grid-template-columns: 1fr; } }
-    .gallery-item { text-align: center; }
-    .gallery-rect {
-      width: 100%; aspect-ratio: 4/3;
-      background: linear-gradient(135deg, var(--copper) 0%, var(--copper-light) 40%, var(--teal-mid) 100%);
+    @media (max-width: 500px) { .details-grid { grid-template-columns: 1fr; } }
+    .detail-row { display: flex; align-items: flex-start; gap: 12px; }
+    .detail-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(26,96,112,0.1);
       display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; color: rgba(255,255,255,.4);
-      margin-bottom: 10px;
+      flex-shrink: 0; font-size: 1rem;
     }
-    .gallery-caption {
-      font-family: 'Playfair Display', serif; font-size: 0.82rem;
-      color: var(--copper-pale); letter-spacing: 1px;
+    .detail-label {
+      font-size: 0.68rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--teal); margin-bottom: 3px;
     }
+    .detail-value { font-size: 0.92rem; color: var(--off-black); font-weight: 500; }
+    .detail-row.full { grid-column: 1 / -1; }
+    .open-house-note {
+      background: rgba(26,96,112,0.07);
+      border: 1px solid rgba(26,96,112,0.2);
+      border-radius: 8px; padding: 12px 16px;
+      font-size: 0.85rem; color: var(--teal-dark);
+      font-weight: 500; margin-bottom: 20px;
+    }
+    .address-copy-box {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      flex-wrap: wrap;
+      background: rgba(26,96,112,0.06);
+      border: 1.5px solid var(--teal);
+      border-radius: 8px; padding: 12px 16px;
+    }
+    .address-text-small { font-size: 0.85rem; color: #333; font-weight: 500; }
+    .copy-btn {
+      background: var(--teal); color: white; border: none;
+      border-radius: 6px; padding: 8px 16px;
+      font-size: 0.72rem; font-weight: 600; cursor: pointer;
+      font-family: 'Poppins', sans-serif; letter-spacing: 0.04em;
+      white-space: nowrap; transition: background 0.2s;
+    }
+    .copy-btn:hover { background: var(--teal-dark); }
+    .copy-btn.copied { background: var(--sage); }
+
+    /* ── Neighborhood ── */
+    .neighborhood-section {
+      background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 100%);
+      padding: 80px 24px;
+    }
+    .neighborhood-section .section-title { color: var(--warm-white); }
+    .neighborhood-grid {
+      max-width: 880px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+    }
+    @media (max-width: 600px) { .neighborhood-grid { grid-template-columns: 1fr; } }
+    .neighbor-card {
+      background: rgba(255,252,248,0.08);
+      border: 1px solid rgba(255,252,248,0.15);
+      border-radius: 12px; padding: 24px;
+      transition: transform 0.3s, background 0.3s;
+      backdrop-filter: blur(4px);
+    }
+    .neighbor-card:hover { transform: translateY(-4px); background: rgba(255,252,248,0.13); }
+    .neighbor-icon { font-size: 2rem; margin-bottom: 10px; }
+    .neighbor-title { font-weight: 600; font-size: 0.95rem; color: var(--warm-white); margin-bottom: 6px; }
+    .neighbor-desc { font-size: 0.82rem; color: rgba(255,252,248,0.65); line-height: 1.5; }
+
+    /* ── Room Tour ── */
+    .rooms-section { background: var(--off-black); padding: 80px 24px; }
+    .rooms-grid-2x2 {
+      max-width: 860px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+    }
+    @media (max-width: 600px) { .rooms-grid-2x2 { grid-template-columns: 1fr; } }
+    .room-card-modern {
+      border-radius: 12px; overflow: hidden;
+      position: relative; cursor: default;
+      transition: transform 0.35s, box-shadow 0.35s; height: 220px;
+    }
+    .room-card-modern:hover { transform: scale(1.03); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .room-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+    }
+    .room-card-modern:nth-child(1) .room-bg { background: linear-gradient(135deg, #c07830 0%, #e09848 100%); }
+    .room-card-modern:nth-child(2) .room-bg { background: linear-gradient(135deg, #b05828 0%, #d07838 100%); }
+    .room-card-modern:nth-child(3) .room-bg { background: linear-gradient(135deg, #1a6070 0%, #2a8090 100%); }
+    .room-card-modern:nth-child(4) .room-bg { background: linear-gradient(135deg, #3a6040 0%, #5a8060 100%); }
+    .room-icon { font-size: 2.8rem; }
+    .room-name-modern { font-weight: 600; font-size: 1.05rem; color: rgba(255,252,248,0.95); }
+    .room-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,18,20,0.72);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.3s; padding: 20px;
+    }
+    .room-card-modern:hover .room-overlay { opacity: 1; }
+    .room-overlay-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-style: italic;
+      color: var(--warm-white); text-align: center;
+    }
+
+    /* ── Potluck ── */
+    .potluck-section { background: var(--warm-white); color: var(--off-black); padding: 80px 24px; }
+    .potluck-section .section-title { color: var(--teal-dark); }
+    .potluck-section .section-subtitle { color: #666; }
+    .potluck-inner { max-width: 700px; margin: 0 auto; }
+    .potluck-desc { text-align: center; font-size: 0.9rem; color: #555; margin-bottom: 32px; line-height: 1.6; }
+    .potluck-list { list-style: none; margin-bottom: 32px; }
+    .potluck-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; border-radius: 8px; margin-bottom: 8px;
+      background: rgba(26,96,112,0.06);
+      border: 1px solid rgba(26,96,112,0.12);
+      font-size: 0.9rem; color: #333;
+    }
+    .potluck-item .taken-badge {
+      margin-left: auto; font-size: 0.68rem; font-weight: 600;
+      background: var(--sage); color: white; padding: 3px 8px; border-radius: 12px;
+    }
+    .potluck-form {
+      background: rgba(26,96,112,0.05);
+      border: 1px solid rgba(26,96,112,0.15);
+      border-radius: 12px; padding: 28px;
+    }
+    .potluck-form-title { font-weight: 600; font-size: 1rem; color: var(--teal-dark); margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { margin-bottom: 0; }
+    .form-group label {
+      display: block; font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--teal); margin-bottom: 6px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      border: 1.5px solid rgba(26,96,112,0.25);
+      border-radius: 6px; padding: 10px 14px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem; color: var(--off-black);
+      background: white; outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); }
+    .btn-submit-modern {
+      width: 100%; background: var(--teal); color: white;
+      border: none; border-radius: 8px; padding: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      letter-spacing: 0.05em; transition: background 0.2s, transform 0.15s; margin-top: 8px;
+    }
+    .btn-submit-modern:hover { background: var(--teal-dark); transform: translateY(-1px); }
+
+    /* ── Moving Timeline ── */
+    .moving-timeline-section {
+      background: linear-gradient(180deg, var(--teal-dark) 0%, var(--off-black) 100%);
+      padding: 80px 24px;
+    }
+    .moving-timeline { max-width: 600px; margin: 0 auto; position: relative; }
+    .moving-timeline::before {
+      content: ''; position: absolute;
+      left: 24px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--teal-light) 10%, var(--teal-light) 90%, transparent);
+    }
+    .mt-item { display: flex; gap: 24px; margin-bottom: 40px; padding-left: 8px; }
+    .mt-dot {
+      width: 20px; height: 20px;
+      background: var(--teal); border: 3px solid var(--teal-light);
+      border-radius: 50%; flex-shrink: 0; position: relative; z-index: 1;
+      margin-top: 4px; box-shadow: 0 0 12px rgba(26,128,144,0.5);
+    }
+    .mt-content {
+      flex: 1;
+      background: rgba(26,96,112,0.12);
+      border: 1px solid rgba(26,128,144,0.2);
+      border-radius: 10px; padding: 18px 20px; transition: transform 0.3s;
+    }
+    .mt-content:hover { transform: translateX(6px); }
+    .mt-emoji { font-size: 1.5rem; margin-bottom: 6px; display: block; }
+    .mt-title { font-weight: 600; font-size: 1rem; color: var(--teal-light); margin-bottom: 6px; }
+    .mt-desc { font-size: 0.84rem; color: rgba(255,252,248,0.6); line-height: 1.5; }
+
+    /* ── Smart Home ── */
+    .smart-section { background: var(--off-black); padding: 80px 24px; }
+    .smart-grid {
+      max-width: 860px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+    }
+    @media (max-width: 600px) { .smart-grid { grid-template-columns: 1fr; } }
+    .smart-card {
+      background: rgba(26,96,112,0.08);
+      border: 1px solid rgba(26,128,144,0.2);
+      border-radius: 12px; padding: 28px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .smart-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(26,96,112,0.3);
+      border-color: var(--teal-light);
+    }
+    .smart-icon { font-size: 2.2rem; margin-bottom: 12px; display: block; }
+    .smart-title { font-weight: 600; font-size: 1rem; color: var(--warm-white); margin-bottom: 8px; }
+    .smart-desc { font-size: 0.82rem; color: rgba(255,252,248,0.55); line-height: 1.5; }
+    .smart-badge {
+      display: inline-block; margin-top: 10px;
+      font-size: 0.65rem; font-weight: 600;
+      background: rgba(26,96,112,0.3); color: var(--teal-light);
+      padding: 3px 10px; border-radius: 12px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    /* ── RSVP ── */
+    .rsvp-section { background: var(--warm-white); color: var(--off-black); padding: 80px 24px; }
+    .rsvp-section .section-title { color: var(--teal-dark); }
+    .rsvp-section .section-subtitle { color: #666; }
+    .rsvp-form {
+      max-width: 540px; margin: 0 auto;
+      background: white; border-radius: 16px; padding: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      border-top: 4px solid var(--teal);
+    }
+    .rsvp-attending { display: flex; gap: 12px; margin-bottom: 16px; }
+    .attending-btn {
+      flex: 1; border: 2px solid rgba(26,96,112,0.25);
+      border-radius: 8px; padding: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      background: transparent; color: #555; transition: all 0.2s;
+    }
+    .attending-btn.selected-yes { border-color: var(--teal); background: rgba(26,96,112,0.1); color: var(--teal-dark); }
+    .attending-btn.selected-no  { border-color: #c84040; background: rgba(200,64,64,0.07); color: #c84040; }
+    .star-rating { display: flex; gap: 6px; margin-top: 4px; }
+    .star {
+      font-size: 1.6rem; cursor: pointer; color: #ccc;
+      transition: color 0.15s, transform 0.15s; user-select: none;
+    }
+    .star.active { color: var(--gold); }
+    .star:hover { transform: scale(1.2); }
+    .rsvp-success { display: none; text-align: center; padding: 32px; }
+    .rsvp-success.show { display: block; }
+    .rsvp-success-emoji { font-size: 3rem; margin-bottom: 12px; }
+    .rsvp-success-msg { font-weight: 600; font-size: 1.1rem; color: var(--teal-dark); margin-bottom: 6px; }
+    .rsvp-success-sub { font-size: 0.85rem; color: #777; }
+    .form-group-mb { margin-bottom: 18px; }
 
     /* ── Footer ── */
-    .footer {
-      background: var(--teal-dark); border-top: 1px solid rgba(192,120,48,.25);
-      text-align: center; padding: 40px 24px 100px;
+    footer {
+      background: var(--teal-dark);
+      border-top: 2px solid var(--teal);
+      padding: 48px 24px; text-align: center;
     }
-    .footer-family {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.8rem);
-      color: var(--copper-light); margin-bottom: 6px; font-weight: 700;
+    .footer-family-modern {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--copper-light); margin-bottom: 8px;
     }
-    .footer-bar {
-      width: 60px; height: 2px; background: var(--copper); margin: 12px auto 16px;
+    .footer-date-modern {
+      font-size: 0.82rem; color: rgba(255,252,248,0.5);
+      margin-bottom: 24px; letter-spacing: 0.06em;
     }
-    .footer-date { font-size: 0.8rem; color: rgba(244,244,240,.45); letter-spacing: 2px; margin-bottom: 20px; }
-    .footer-link { color: var(--copper); font-size: 0.8rem; text-decoration: none; opacity: .7; }
-    .footer-link:hover { opacity: 1; }
+    .footer-link-modern {
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--teal-light); text-decoration: none;
+      border: 1px solid var(--teal-light);
+      padding: 8px 20px; border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .footer-link-modern:hover { background: var(--teal-light); color: var(--off-black); }
 
-    /* ── Scroll reveal ── */
-    .r, .v { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
-    .r.visible, .v.visible { opacity: 1; transform: translateY(0); }
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
   </style>
 </head>
 <body>
 
-  <a href="../../index.html" class="back-nav">← Marketplace</a>
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <svg class="house-draw-svg" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+    <polygon class="house-fill" points="50,5 95,42 85,42 85,85 15,85 15,42 5,42"/>
+    <rect class="house-fill" x="38" y="60" width="24" height="25"/>
+    <polyline class="house-outline" points="5,42 50,5 95,42 85,42 85,85 15,85 15,42 5,42 85,42"/>
+    <rect class="house-outline" x="38" y="60" width="24" height="25" rx="2"/>
+    <rect class="house-outline" x="20" y="50" width="18" height="16" rx="2"/>
+    <rect class="house-outline" x="62" y="50" width="18" height="16" rx="2"/>
+  </svg>
+  <div class="loading-text-modern">Loading...</div>
+</div>
 
-  <!-- Floating homes -->
-  <div class="floating-homes" id="floatingHomes"></div>
+<!-- Back Nav -->
+<a href="../../marketplace.html" class="back-nav">← Marketplace</a>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero">
-    <p class="hero-overline">OUR NEW HOME</p>
-    <div class="hero-accent-line"></div>
-    <h1 class="hero-family" data-field="family">The Mehta Family</h1>
-    <div class="hero-accent-line"></div>
-    <p class="hero-invite">invites you to celebrate</p>
-    <div class="hero-date-pill">
-      <span data-field="date">July 20, 2026</span> &nbsp;·&nbsp; <span data-field="time">11:00 AM</span>
-    </div>
-  </section>
+<!-- Purchase Banner -->
+<div class="purchase-banner">
+  <span class="banner-label">Preview: Modern Housewarming — Contemporary Indian Design</span>
+  <a href="housewarming-2-customize.html" class="banner-btn btn-customize"
+     data-buy="housewarming-2"
+     data-name="Modern Housewarming"
+     data-customize="housewarming-2-customize.html">Customize</a>
+  <button class="banner-btn btn-buy"
+     data-buy="housewarming-2"
+     data-name="Modern Housewarming"
+     data-customize="housewarming-2-customize.html"
+     onclick="InvitePayment && InvitePayment.startPurchase(this)">Buy ₹299</button>
+</div>
 
-  <!-- ═══ DETAILS CARD ═══ -->
-  <section class="details-section">
-    <div style="padding:60px 24px;">
-      <div class="details-card r">
-        <h2 class="section-title">Event Details</h2>
-        <div class="detail-row">
-          <span class="detail-icon">🏡</span>
-          <div>
-            <p class="detail-label">Occasion</p>
-            <p class="detail-value" data-field="ceremony">Housewarming &amp; Open House</p>
-          </div>
-        </div>
-        <div class="detail-row">
-          <span class="detail-icon">📅</span>
-          <div>
-            <p class="detail-label">Date</p>
-            <p class="detail-value" data-field="date">July 20, 2026</p>
-          </div>
-        </div>
-        <div class="detail-row">
-          <span class="detail-icon">🕐</span>
-          <div>
-            <p class="detail-label">Time</p>
-            <p class="detail-value" data-field="time">11:00 AM</p>
-          </div>
-        </div>
-        <div class="detail-row">
-          <span class="detail-icon">📍</span>
-          <div>
-            <p class="detail-label">Address</p>
-            <p class="detail-value" data-field="address">3B, Prestige Towers, Whitefield, Bangalore 560066</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-logo">🏠 <span>Modern</span> Housewarming</div>
+  <div class="hamburger" onclick="document.getElementById('navLinks2').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+  <ul class="nav-links" id="navLinks2">
+    <li><a href="#details">Details</a></li>
+    <li><a href="#neighborhood">Neighborhood</a></li>
+    <li><a href="#rooms">Rooms</a></li>
+    <li><a href="#potluck">Potluck</a></li>
+    <li><a href="#rsvp">RSVP</a></li>
+  </ul>
+</nav>
 
-  <!-- ═══ OPEN HOUSE ═══ -->
-  <section class="openhouse-section">
-    <div class="invite-banner r">
-      <span class="invite-banner-text" data-field="message">Our home is your home — come celebrate with us!</span>
-      <p class="invite-banner-sub">— <span data-field="host">Anil &amp; Divya Mehta</span></p>
-    </div>
-    <h2 class="section-title r" style="color:#fff;">The Day's Programme</h2>
-    <p class="section-sub r">You're warmly invited</p>
-    <div class="event-list">
-      <div class="event-row v">
-        <div class="event-time-col" data-field="time">11:00 AM</div>
-        <div class="event-dot-col"><div class="event-dot"></div></div>
-        <div class="event-content">
-          <p class="event-name">Welcome &amp; Arrivals</p>
-          <p class="event-desc">Greet the family in their new home</p>
-        </div>
-      </div>
-      <div class="event-row v">
-        <div class="event-time-col">12:00 PM</div>
-        <div class="event-dot-col"><div class="event-dot"></div></div>
-        <div class="event-content">
-          <p class="event-name">House Tour</p>
-          <p class="event-desc">Explore every corner of the new space</p>
-        </div>
-      </div>
-      <div class="event-row v">
-        <div class="event-time-col">1:00 PM</div>
-        <div class="event-dot-col"><div class="event-dot"></div></div>
-        <div class="event-content">
-          <p class="event-name">Lunch &amp; Celebrations</p>
-          <p class="event-desc">Enjoy a festive meal together</p>
-        </div>
-      </div>
-      <div class="event-row v">
-        <div class="event-time-col">3:00 PM</div>
-        <div class="event-dot-col"><div class="event-dot"></div></div>
-        <div class="event-content">
-          <p class="event-name">Open House</p>
-          <p class="event-desc">Drop by anytime through the afternoon</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- Hero -->
+<section class="hero" id="hero">
+  <!-- Copper Dots -->
+  <div class="copper-dots-container" id="copperDots"></div>
 
-  <!-- ═══ GALLERY PLACEHOLDERS ═══ -->
-  <section class="gallery-section">
-    <h2 class="section-title r">A Peek Inside</h2>
-    <p class="section-sub r">Our new space</p>
-    <div class="gallery-grid">
-      <div class="gallery-item v">
-        <div class="gallery-rect">🛋️</div>
-        <p class="gallery-caption">Living Room</p>
-      </div>
-      <div class="gallery-item v">
-        <div class="gallery-rect">🍳</div>
-        <p class="gallery-caption">Kitchen</p>
-      </div>
-      <div class="gallery-item v">
-        <div class="gallery-rect">🌿</div>
-        <p class="gallery-caption">Garden</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ FOOTER ═══ -->
-  <footer class="footer">
-    <p class="footer-family" data-field="family">The Mehta Family</p>
-    <div class="footer-bar"></div>
-    <p class="footer-date" data-field="date">July 20, 2026</p>
-    <a href="../../index.html" class="footer-link">← Back to Marketplace</a>
-  </footer>
-
-  <!-- ═══ PURCHASE BANNER ═══ -->
-  <div class="purchase-banner">
-    <p class="banner-text">✨ Live Preview — Buy for <span>₹500</span> to customize</p>
-    <button
-      class="btn-buy"
-      data-buy="housewarming-2"
-      data-name="Modern Housewarming"
-      data-customize="housewarming-2-customize.html"
-    >Buy &amp; Customize →</button>
+  <!-- Plant motifs -->
+  <div class="plant-motif" style="left:-10px;top:15%;transform:rotate(-20deg)">
+    <svg class="plant-svg" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="40" cy="50" rx="32" ry="42" fill="#5a8060" opacity="0.7"/>
+      <path d="M40,50 Q55,30 60,10" stroke="#3a5a40" stroke-width="1.5" fill="none"/>
+      <path d="M40,50 Q25,35 15,20" stroke="#3a5a40" stroke-width="1.5" fill="none"/>
+      <path d="M40,50 Q58,45 72,38" stroke="#3a5a40" stroke-width="1.5" fill="none"/>
+      <path d="M40,50 Q22,45 8,38" stroke="#3a5a40" stroke-width="1.5" fill="none"/>
+      <line x1="40" y1="90" x2="40" y2="50" stroke="#3a5a40" stroke-width="2"/>
+      <path d="M40,20 Q32,30 28,40 Q40,36 48,28 Q46,24 40,20Z" fill="#3a6040" opacity="0.5"/>
+      <path d="M40,20 Q48,30 52,40 Q40,36 32,28 Q34,24 40,20Z" fill="#3a6040" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="plant-motif" style="right:-10px;top:20%;transform:rotate(15deg)">
+    <svg class="plant-svg" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="40" cy="50" rx="30" ry="38" fill="#4a7050" opacity="0.65"/>
+      <path d="M40,50 Q55,28 58,8" stroke="#2a4a30" stroke-width="1.5" fill="none"/>
+      <path d="M40,50 Q22,32 18,14" stroke="#2a4a30" stroke-width="1.5" fill="none"/>
+      <path d="M40,50 Q60,42 70,35" stroke="#2a4a30" stroke-width="1.5" fill="none"/>
+      <line x1="40" y1="88" x2="40" y2="50" stroke="#2a4a30" stroke-width="2"/>
+      <path d="M40,18 Q30,28 26,40 Q40,35 50,26 Q48,22 40,18Z" fill="#2a5030" opacity="0.5"/>
+      <path d="M40,18 Q50,28 54,40 Q40,35 30,26 Q32,22 40,18Z" fill="#2a5030" opacity="0.5"/>
+    </svg>
+  </div>
+  <div class="plant-motif" style="left:5%;bottom:220px">
+    <svg viewBox="0 0 80 100" style="width:60px;height:75px" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="40" cy="50" rx="28" ry="36" fill="#5a8060" opacity="0.5"/>
+      <line x1="40" y1="85" x2="40" y2="45" stroke="#3a5a40" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="plant-motif" style="right:5%;bottom:220px">
+    <svg viewBox="0 0 80 100" style="width:60px;height:75px" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="40" cy="50" rx="28" ry="36" fill="#4a7050" opacity="0.5"/>
+      <line x1="40" y1="85" x2="40" y2="45" stroke="#2a4a30" stroke-width="2"/>
+    </svg>
   </div>
 
-  <script src="../../js/payment.js"></script>
-  <script src="../../js/customize.js"></script>
-  <script>
-    // ── Floating homes ──
-    (function() {
-      const wrap = document.getElementById('floatingHomes');
-      for (let i = 0; i < 12; i++) {
-        const el = document.createElement('span');
-        el.className = 'float-home';
-        el.textContent = '🏠';
-        const left = Math.random() * 100;
-        const dur  = 18 + Math.random() * 16;
-        const delay = Math.random() * 20;
-        el.style.cssText = `left:${left}%;bottom:-60px;animation-duration:${dur}s;animation-delay:${delay}s;font-size:${1+Math.random()*1.2}rem;`;
-        wrap.appendChild(el);
-      }
-    })();
+  <div class="hero-content">
+    <!-- Hero house icon -->
+    <svg class="hero-house-icon" viewBox="0 0 80 70" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="hero-house-fill" points="40,4 76,32 68,32 68,66 12,66 12,32 4,32"/>
+      <polyline class="hero-house-outline" points="4,32 40,4 76,32 68,32 68,66 12,66 12,32 4,32 68,32"/>
+      <rect class="hero-house-outline" x="30" y="46" width="20" height="20" rx="2"/>
+      <rect class="hero-house-outline" x="16" y="38" width="14" height="12" rx="2"/>
+      <rect class="hero-house-outline" x="50" y="38" width="14" height="12" rx="2"/>
+    </svg>
 
-    // ── Scroll reveal ──
-    (function() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.12 });
-      document.querySelectorAll('.r,.v').forEach(el => observer.observe(el));
-    })();
+    <div class="hero-eyebrow">Housewarming Celebration</div>
+    <h1 class="hero-title">Our <span class="accent">New</span> Home</h1>
+    <div class="hero-family" data-field="family">The Mehta Family</div>
+    <div class="hero-badge">
+      📅 <span data-field="date">July 20, 2026</span> &nbsp;·&nbsp; ⏰ <span data-field="time">11:00 AM</span>
+    </div>
+    <div class="countdown" id="countdown">
+      <div class="countdown-unit"><span class="num" id="cd-days">--</span><span class="lbl">Days</span></div>
+      <div class="countdown-unit"><span class="num" id="cd-hours">--</span><span class="lbl">Hours</span></div>
+      <div class="countdown-unit"><span class="num" id="cd-mins">--</span><span class="lbl">Mins</span></div>
+      <div class="countdown-unit"><span class="num" id="cd-secs">--</span><span class="lbl">Secs</span></div>
+    </div>
+  </div>
 
-    // ── Init preview ──
-    document.addEventListener('DOMContentLoaded', () => {
-      const defaults = {
-        family:   "The Mehta Family",
-        date:     "July 20, 2026",
-        time:     "11:00 AM",
-        address:  "3B, Prestige Towers, Whitefield, Bangalore 560066",
-        ceremony: "Housewarming & Open House",
-        message:  "Our home is your home — come celebrate with us!",
-        host:     "Anil & Divya Mehta"
-      };
-      if (window.InviteCustomize && InviteCustomize.initPreview) {
-        InviteCustomize.initPreview(defaults);
-      }
+  <!-- Building Silhouette -->
+  <div class="building-silhouette">
+    <svg class="building-svg" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- Tower 1 -->
+      <rect x="200" y="30" width="120" height="170" fill="#0e3a47"/>
+      <rect x="220" y="0" width="80" height="40" fill="#1a5060"/>
+      <rect x="225" y="-2" width="10" height="12" fill="#3a6040"/>
+      <rect x="240" y="-4" width="8" height="14" fill="#4a7050"/>
+      <rect x="255" y="-3" width="10" height="13" fill="#3a6040"/>
+      <rect x="270" y="-1" width="8" height="11" fill="#4a7050"/>
+      <rect x="285" y="-4" width="10" height="14" fill="#3a6040"/>
+      <rect x="210" y="50" width="20" height="16" rx="2" fill="#f0b040" opacity="0.8"/>
+      <rect x="240" y="50" width="20" height="16" rx="2" fill="#f0b040" opacity="0.6"/>
+      <rect x="270" y="50" width="20" height="16" rx="2" fill="#f0b040" opacity="0.9"/>
+      <rect x="210" y="80" width="20" height="16" rx="2" fill="#e8a030" opacity="0.7"/>
+      <rect x="240" y="80" width="20" height="16" rx="2" fill="#f0b040" opacity="0.5"/>
+      <rect x="270" y="80" width="20" height="16" rx="2" fill="#f0b040" opacity="0.8"/>
+      <rect x="210" y="110" width="20" height="16" rx="2" fill="#f0b040" opacity="0.6"/>
+      <rect x="240" y="110" width="20" height="16" rx="2" fill="#e8a030" opacity="0.9"/>
+      <rect x="270" y="110" width="20" height="16" rx="2" fill="#f0b040" opacity="0.7"/>
+      <rect x="210" y="140" width="20" height="16" rx="2" fill="#f0b040" opacity="0.5"/>
+      <rect x="270" y="140" width="20" height="16" rx="2" fill="#f0b040" opacity="0.8"/>
+      <rect x="200" y="30" width="4" height="170" fill="#c07830" opacity="0.6"/>
+      <rect x="316" y="30" width="4" height="170" fill="#c07830" opacity="0.6"/>
+      <!-- Tower 2 center -->
+      <rect x="520" y="20" width="160" height="180" fill="#112e3a"/>
+      <rect x="545" y="-10" width="110" height="36" fill="#1a4a5a"/>
+      <rect x="548" y="-12" width="12" height="16" fill="#3a6040"/>
+      <rect x="566" y="-14" width="10" height="18" fill="#4a7050"/>
+      <rect x="582" y="-12" width="12" height="16" fill="#3a6040"/>
+      <rect x="598" y="-14" width="10" height="18" fill="#4a7050"/>
+      <rect x="615" y="-12" width="12" height="16" fill="#3a6040"/>
+      <rect x="632" y="-14" width="10" height="18" fill="#4a7050"/>
+      <rect x="530" y="40" width="22" height="18" rx="2" fill="#f0b040" opacity="0.9"/>
+      <rect x="562" y="40" width="22" height="18" rx="2" fill="#f0b040" opacity="0.6"/>
+      <rect x="594" y="40" width="22" height="18" rx="2" fill="#e8a030" opacity="0.8"/>
+      <rect x="626" y="40" width="22" height="18" rx="2" fill="#f0b040" opacity="0.7"/>
+      <rect x="530" y="74" width="22" height="18" rx="2" fill="#f0b040" opacity="0.7"/>
+      <rect x="562" y="74" width="22" height="18" rx="2" fill="#f0b040" opacity="0.9"/>
+      <rect x="594" y="74" width="22" height="18" rx="2" fill="#f0b040" opacity="0.5"/>
+      <rect x="626" y="74" width="22" height="18" rx="2" fill="#e8a030" opacity="0.8"/>
+      <rect x="530" y="108" width="22" height="18" rx="2" fill="#e8a030" opacity="0.6"/>
+      <rect x="562" y="108" width="22" height="18" rx="2" fill="#f0b040" opacity="0.8"/>
+      <rect x="594" y="108" width="22" height="18" rx="2" fill="#f0b040" opacity="0.9"/>
+      <rect x="626" y="108" width="22" height="18" rx="2" fill="#f0b040" opacity="0.7"/>
+      <rect x="530" y="142" width="22" height="18" rx="2" fill="#f0b040" opacity="0.8"/>
+      <rect x="594" y="142" width="22" height="18" rx="2" fill="#e8a030" opacity="0.6"/>
+      <rect x="626" y="142" width="22" height="18" rx="2" fill="#f0b040" opacity="0.9"/>
+      <rect x="520" y="20" width="5" height="180" fill="#c07830" opacity="0.5"/>
+      <rect x="675" y="20" width="5" height="180" fill="#c07830" opacity="0.5"/>
+      <!-- Side buildings -->
+      <rect x="60" y="80" width="100" height="120" fill="#0e3a47"/>
+      <rect x="70" y="90" width="18" height="14" rx="2" fill="#f0b040" opacity="0.7"/>
+      <rect x="100" y="90" width="18" height="14" rx="2" fill="#f0b040" opacity="0.5"/>
+      <rect x="130" y="90" width="18" height="14" rx="2" fill="#e8a030" opacity="0.8"/>
+      <rect x="70" y="118" width="18" height="14" rx="2" fill="#f0b040" opacity="0.6"/>
+      <rect x="100" y="118" width="18" height="14" rx="2" fill="#f0b040" opacity="0.9"/>
+      <rect x="130" y="118" width="18" height="14" rx="2" fill="#f0b040" opacity="0.7"/>
+      <rect x="70" y="146" width="18" height="14" rx="2" fill="#e8a030" opacity="0.8"/>
+      <rect x="130" y="146" width="18" height="14" rx="2" fill="#f0b040" opacity="0.6"/>
+      <rect x="900" y="60" width="140" height="140" fill="#0e3a47"/>
+      <rect x="910" y="75" width="22" height="16" rx="2" fill="#f0b040" opacity="0.8"/>
+      <rect x="942" y="75" width="22" height="16" rx="2" fill="#e8a030" opacity="0.6"/>
+      <rect x="974" y="75" width="22" height="16" rx="2" fill="#f0b040" opacity="0.9"/>
+      <rect x="1006" y="75" width="22" height="16" rx="2" fill="#f0b040" opacity="0.5"/>
+      <rect x="910" y="105" width="22" height="16" rx="2" fill="#f0b040" opacity="0.7"/>
+      <rect x="974" y="105" width="22" height="16" rx="2" fill="#f0b040" opacity="0.8"/>
+      <rect x="1006" y="105" width="22" height="16" rx="2" fill="#e8a030" opacity="0.9"/>
+      <rect x="910" y="135" width="22" height="16" rx="2" fill="#e8a030" opacity="0.6"/>
+      <rect x="942" y="135" width="22" height="16" rx="2" fill="#f0b040" opacity="0.8"/>
+      <rect x="1006" y="135" width="22" height="16" rx="2" fill="#f0b040" opacity="0.7"/>
+      <rect x="900" y="60" width="4" height="140" fill="#c07830" opacity="0.55"/>
+      <rect x="1036" y="60" width="4" height="140" fill="#c07830" opacity="0.55"/>
+      <!-- Ground line -->
+      <rect x="0" y="196" width="1200" height="4" fill="#1a6070"/>
+    </svg>
+  </div>
+</section>
+
+<!-- Open House Details -->
+<section class="section" id="details" style="background:linear-gradient(180deg,#0a1214 0%,#0e2a34 100%);">
+  <div class="section-title reveal">Open House <span class="teal">Details</span></div>
+  <div class="section-subtitle reveal">Everything you need to know</div>
+  <div class="details-card reveal">
+    <div class="details-card-title">🏠 You're Invited!</div>
+    <div class="open-house-note">🕐 Open House Hours: 11:00 AM – 8:00 PM — Come anytime, stay as long as you like!</div>
+    <div class="details-grid">
+      <div class="detail-row">
+        <div class="detail-icon">📅</div>
+        <div>
+          <div class="detail-label">Date</div>
+          <div class="detail-value" data-field="date">July 20, 2026</div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon">⏰</div>
+        <div>
+          <div class="detail-label">Time</div>
+          <div class="detail-value" data-field="time">11:00 AM</div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon">🎉</div>
+        <div>
+          <div class="detail-label">Occasion</div>
+          <div class="detail-value" data-field="ceremony">Housewarming &amp; Open House</div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon">👥</div>
+        <div>
+          <div class="detail-label">Hosted By</div>
+          <div class="detail-value" data-field="host">Anil &amp; Divya Mehta</div>
+        </div>
+      </div>
+      <div class="detail-row full">
+        <div class="detail-icon">💬</div>
+        <div>
+          <div class="detail-label">Message</div>
+          <div class="detail-value" data-field="message">Our home is your home — come celebrate with us!</div>
+        </div>
+      </div>
+    </div>
+    <div class="address-copy-box">
+      <div class="address-text-small" data-field="address">3B, Prestige Towers, Whitefield, Bangalore 560066</div>
+      <button class="copy-btn" id="copyBtn" onclick="copyAddress()">📋 Copy Address</button>
+    </div>
+  </div>
+</section>
+
+<!-- Neighborhood Highlights -->
+<section class="neighborhood-section" id="neighborhood">
+  <div class="section-title reveal" style="color:var(--warm-white)">Our Neighborhood</div>
+  <div class="section-subtitle reveal" style="color:rgba(255,252,248,0.55)">Everything you need, right at your doorstep</div>
+  <div class="neighborhood-grid">
+    <div class="neighbor-card reveal">
+      <div class="neighbor-icon">🏫</div>
+      <div class="neighbor-title">Top Schools</div>
+      <div class="neighbor-desc">Within 1km — Delhi Public School Whitefield, Cambridge International School, and more great options.</div>
+    </div>
+    <div class="neighbor-card reveal">
+      <div class="neighbor-icon">🏥</div>
+      <div class="neighbor-title">Healthcare</div>
+      <div class="neighbor-desc">Apollo Hospital — 2km away. Manipal Clinic — 800m. 24/7 pharmacy just around the corner.</div>
+    </div>
+    <div class="neighbor-card reveal">
+      <div class="neighbor-icon">🛒</div>
+      <div class="neighbor-title">Shopping</div>
+      <div class="neighbor-desc">Phoenix Marketcity — 3km. Reliance Fresh — 500m. Decathlon — 4km. Everything within easy reach.</div>
+    </div>
+    <div class="neighbor-card reveal">
+      <div class="neighbor-icon">🌳</div>
+      <div class="neighbor-title">Parks &amp; Nature</div>
+      <div class="neighbor-desc">Whitefield Nature Park — 5 min walk. ITPL Central Park — 1.5km. Perfect for morning runs and evening strolls.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Room Tour -->
+<section class="rooms-section" id="rooms">
+  <div class="section-title reveal">A Peek Inside 🏠</div>
+  <div class="section-subtitle reveal">Hover to explore each space</div>
+  <div class="rooms-grid-2x2">
+    <div class="room-card-modern reveal">
+      <div class="room-bg">
+        <div class="room-icon">🛋️</div>
+        <div class="room-name-modern">Living Room</div>
+      </div>
+      <div class="room-overlay">
+        <div class="room-overlay-text">"Where stories are made and memories are born"</div>
+      </div>
+    </div>
+    <div class="room-card-modern reveal">
+      <div class="room-bg">
+        <div class="room-icon">🍳</div>
+        <div class="room-name-modern">Kitchen</div>
+      </div>
+      <div class="room-overlay">
+        <div class="room-overlay-text">"Heart of the home — where love is cooked daily"</div>
+      </div>
+    </div>
+    <div class="room-card-modern reveal">
+      <div class="room-bg">
+        <div class="room-icon">🛏️</div>
+        <div class="room-name-modern">Master Bedroom</div>
+      </div>
+      <div class="room-overlay">
+        <div class="room-overlay-text">"Our sanctuary — where dreams begin and end"</div>
+      </div>
+    </div>
+    <div class="room-card-modern reveal">
+      <div class="room-bg">
+        <div class="room-icon">🌿</div>
+        <div class="room-name-modern">Garden / Balcony</div>
+      </div>
+      <div class="room-overlay">
+        <div class="room-overlay-text">"Our little paradise — mornings with chai and golden sunsets"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Potluck Signup -->
+<section class="potluck-section" id="potluck">
+  <div class="section-title reveal" style="color:var(--teal-dark)">Potluck Dinner — Join the Fun! 🍽️</div>
+  <div class="section-subtitle reveal">Sign up to bring a dish</div>
+  <div class="potluck-inner">
+    <div class="potluck-desc reveal">
+      We're doing a potluck dinner! <strong>Sign up below</strong> to bring your signature dish.<br>
+      Let's make it a feast to remember together 🎉
+    </div>
+    <ul class="potluck-list reveal" id="potluckList">
+      <li class="potluck-item">🍛 <span>Dal Makhani</span> <span class="taken-badge">Anil Uncle ✓</span></li>
+      <li class="potluck-item">🥗 <span>Caesar Salad</span> <span class="taken-badge">Priya ✓</span></li>
+      <li class="potluck-item">🍰 <span>Chocolate Cake</span> <span class="taken-badge">The Kids ✓</span></li>
+    </ul>
+    <div class="potluck-form reveal">
+      <div class="potluck-form-title">Sign Up to Bring a Dish</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="potluckName" placeholder="e.g. Kavita Sharma" />
+        </div>
+        <div class="form-group">
+          <label>What You'll Bring</label>
+          <input type="text" id="potluckDish" placeholder="e.g. Biryani 🍛" />
+        </div>
+      </div>
+      <button class="btn-submit-modern" onclick="addPotluck()">🍽️ Sign Me Up!</button>
+    </div>
+  </div>
+</section>
+
+<!-- Moving Timeline -->
+<section class="moving-timeline-section" id="timeline">
+  <div class="section-title reveal">Our Moving <span style="color:var(--teal-light)">Journey</span></div>
+  <div class="section-subtitle reveal">From search to housewarming</div>
+  <div class="moving-timeline">
+    <div class="mt-item reveal">
+      <div class="mt-dot"></div>
+      <div class="mt-content">
+        <span class="mt-emoji">📋</span>
+        <div class="mt-title">Found the Perfect Home</div>
+        <div class="mt-desc">After months of searching and visiting dozens of places, we walked into Prestige Towers and knew instantly — this was it. The light, the space, the neighborhood. Perfect.</div>
+      </div>
+    </div>
+    <div class="mt-item reveal">
+      <div class="mt-dot"></div>
+      <div class="mt-content">
+        <span class="mt-emoji">🔑</span>
+        <div class="mt-title">Got the Keys!</div>
+        <div class="mt-desc">The moment we held those keys, we couldn't stop smiling. Moving day was chaos, boxes everywhere — but filled with so much excitement and hope for what lay ahead.</div>
+      </div>
+    </div>
+    <div class="mt-item reveal">
+      <div class="mt-dot"></div>
+      <div class="mt-content">
+        <span class="mt-emoji">🖌️</span>
+        <div class="mt-title">Made It Ours</div>
+        <div class="mt-desc">Weeks of painting, decorating, and debating over furniture placement later — we've turned four walls into a home that truly feels like us. Every detail, chosen with love.</div>
+      </div>
+    </div>
+    <div class="mt-item reveal">
+      <div class="mt-dot" style="background:var(--copper);box-shadow:0 0 14px rgba(192,120,48,0.6)"></div>
+      <div class="mt-content" style="border-color:rgba(192,120,48,0.35)">
+        <span class="mt-emoji">🏠</span>
+        <div class="mt-title" style="color:var(--copper-light)">Welcoming You Today!</div>
+        <div class="mt-desc">And now we're ready to share it with you — our family and friends. Come, walk through our door, and make this house feel even more like a home.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Smart Home Features -->
+<section class="smart-section" id="smart">
+  <div class="section-title reveal">Smart Living ✨</div>
+  <div class="section-subtitle reveal">Our home, powered by technology</div>
+  <div class="smart-grid">
+    <div class="smart-card reveal">
+      <span class="smart-icon">💡</span>
+      <div class="smart-title">Smart Lighting</div>
+      <div class="smart-desc">Voice-controlled ambience throughout the house. Set the mood for dinner, movie night, or a quiet evening — instantly, with just your voice.</div>
+      <span class="smart-badge">Philips Hue</span>
+    </div>
+    <div class="smart-card reveal">
+      <span class="smart-icon">🌡️</span>
+      <div class="smart-title">Climate Control</div>
+      <div class="smart-desc">Automated comfort — our smart thermostat learns our daily schedule and maintains the perfect temperature without us lifting a finger.</div>
+      <span class="smart-badge">Google Nest</span>
+    </div>
+    <div class="smart-card reveal">
+      <span class="smart-icon">🔒</span>
+      <div class="smart-title">Smart Security</div>
+      <div class="smart-desc">Always protected. Smart locks, video doorbell, and motion sensors keep our home safe. We can monitor and control from anywhere in the world.</div>
+      <span class="smart-badge">Ring + Yale</span>
+    </div>
+    <div class="smart-card reveal">
+      <span class="smart-icon">📱</span>
+      <div class="smart-title">Home Hub</div>
+      <div class="smart-desc">Control everything from one app — lights, locks, cameras, music, and more. One tap on your phone and the whole home responds.</div>
+      <span class="smart-badge">Google Home</span>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp-section" id="rsvp">
+  <div class="section-title reveal" style="color:var(--teal-dark)">RSVP 🎉</div>
+  <div class="section-subtitle reveal">Let us know you're coming!</div>
+  <div class="rsvp-form reveal" id="rsvpFormWrap">
+    <div id="rsvpFormInner">
+      <div class="form-group-mb">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="rsvpName" placeholder="e.g. Priya Kapoor" />
+        </div>
+      </div>
+      <div class="form-group-mb">
+        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--teal);margin-bottom:8px;">Attending?</div>
+        <div class="rsvp-attending">
+          <button class="attending-btn" id="yesBtn" onclick="selectAttending('yes')">✅ Yes, I'll be there!</button>
+          <button class="attending-btn" id="noBtn" onclick="selectAttending('no')">❌ Can't make it</button>
+        </div>
+      </div>
+      <div class="form-group-mb">
+        <div class="form-group">
+          <label>Dietary Preferences</label>
+          <select id="rsvpDiet">
+            <option value="">No restrictions</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="jain">Jain</option>
+            <option value="gluten-free">Gluten Free</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group-mb">
+        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--teal);margin-bottom:8px;">How excited are you? ⭐</div>
+        <div class="star-rating" id="starRating">
+          <span class="star" data-val="1" onclick="setRating(1)">★</span>
+          <span class="star" data-val="2" onclick="setRating(2)">★</span>
+          <span class="star" data-val="3" onclick="setRating(3)">★</span>
+          <span class="star" data-val="4" onclick="setRating(4)">★</span>
+          <span class="star" data-val="5" onclick="setRating(5)">★</span>
+        </div>
+      </div>
+      <div class="form-group-mb">
+        <div class="form-group">
+          <label>Leave a Message (optional)</label>
+          <input type="text" id="rsvpMessage" placeholder="So excited to see the new place!" />
+        </div>
+      </div>
+      <button class="btn-submit-modern" onclick="submitRSVP()">🎉 Send RSVP</button>
+    </div>
+    <div class="rsvp-success" id="rsvpSuccess">
+      <div class="rsvp-success-emoji">🎉</div>
+      <div class="rsvp-success-msg" id="rsvpSuccessMsg">See you on July 20, 2026!</div>
+      <div class="rsvp-success-sub">We've noted your RSVP. Can't wait to see you!</div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-family-modern" data-field="family">The Mehta Family</div>
+  <div class="footer-date-modern" data-field="date">July 20, 2026</div>
+  <a href="../../marketplace.html" class="footer-link-modern">← Back to Marketplace</a>
+</footer>
+
+<script src="../../js/payment.js"></script>
+<script src="../../js/customize.js"></script>
+<script>
+  // ── Loading Screen ──
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loading-screen').classList.add('hidden');
+    }, 1800);
+  });
+
+  // ── Floating Copper Dots ──
+  (function spawnCopperDots() {
+    const container = document.getElementById('copperDots');
+    for (let i = 0; i < 25; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'copper-dot';
+      const size    = 3 + Math.random() * 8;
+      const left    = Math.random() * 100;
+      const delay   = Math.random() * 14;
+      const dur     = 8 + Math.random() * 14;
+      const opacity = 0.3 + Math.random() * 0.5;
+      dot.style.cssText = `
+        width:${size}px;height:${size}px;
+        left:${left}%;bottom:-5%;
+        opacity:${opacity};
+        animation-duration:${dur}s;
+        animation-delay:${delay}s;
+      `;
+      container.appendChild(dot);
+    }
+  })();
+
+  // ── Countdown Timer ──
+  function updateCountdown() {
+    const dateEl = document.querySelector('[data-field="date"]');
+    const timeEl = document.querySelector('[data-field="time"]');
+    const dateStr = (dateEl ? dateEl.textContent : 'July 20, 2026').trim();
+    const timeStr = (timeEl ? timeEl.textContent : '11:00 AM').trim();
+    const target  = new Date(dateStr + ' ' + timeStr);
+    const now     = new Date();
+    const diff    = target - now;
+
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => {
+        document.getElementById(id).textContent = '0';
+      });
+      return;
+    }
+    document.getElementById('cd-days').textContent  = String(Math.floor(diff / 86400000)).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ── Potluck Signup ──
+  function loadPotluck() {
+    const stored = JSON.parse(localStorage.getItem('modern_potluck') || '[]');
+    const list   = document.getElementById('potluckList');
+    stored.forEach(p => appendPotluckItem(list, p.name, p.dish));
+  }
+  function appendPotluckItem(list, name, dish) {
+    const li = document.createElement('li');
+    li.className = 'potluck-item';
+    li.innerHTML = `<span>${dish}</span><span class="taken-badge">${name} ✓</span>`;
+    list.appendChild(li);
+  }
+  function addPotluck() {
+    const name = document.getElementById('potluckName').value.trim();
+    const dish = document.getElementById('potluckDish').value.trim();
+    if (!name || !dish) { alert('Please enter your name and what you will bring.'); return; }
+    const stored = JSON.parse(localStorage.getItem('modern_potluck') || '[]');
+    stored.push({ name, dish });
+    localStorage.setItem('modern_potluck', JSON.stringify(stored));
+    appendPotluckItem(document.getElementById('potluckList'), name, dish);
+    document.getElementById('potluckName').value = '';
+    document.getElementById('potluckDish').value = '';
+  }
+  loadPotluck();
+
+  // ── Star Rating ──
+  let currentRating = 0;
+  function setRating(val) {
+    currentRating = val;
+    document.querySelectorAll('.star').forEach(s => {
+      s.classList.toggle('active', parseInt(s.dataset.val) <= val);
     });
-  </script>
+  }
+
+  // ── Attending toggle ──
+  let attending = '';
+  function selectAttending(val) {
+    attending = val;
+    document.getElementById('yesBtn').className = 'attending-btn' + (val === 'yes' ? ' selected-yes' : '');
+    document.getElementById('noBtn').className  = 'attending-btn' + (val === 'no'  ? ' selected-no'  : '');
+  }
+
+  // ── RSVP Submit ──
+  function submitRSVP() {
+    const name = document.getElementById('rsvpName').value.trim();
+    if (!name) { alert('Please enter your name.'); return; }
+    const rsvp = {
+      name, attending,
+      diet:      document.getElementById('rsvpDiet').value,
+      rating:    currentRating,
+      message:   document.getElementById('rsvpMessage').value.trim(),
+      timestamp: new Date().toISOString()
+    };
+    const stored = JSON.parse(localStorage.getItem('modern_rsvp') || '[]');
+    stored.push(rsvp);
+    localStorage.setItem('modern_rsvp', JSON.stringify(stored));
+
+    const dateEl  = document.querySelector('[data-field="date"]');
+    const dateStr = dateEl ? dateEl.textContent : 'July 20, 2026';
+    document.getElementById('rsvpFormInner').style.display = 'none';
+    document.getElementById('rsvpSuccess').classList.add('show');
+    if (attending === 'no') {
+      document.getElementById('rsvpSuccessMsg').textContent = "We'll miss you — maybe next time!";
+    } else {
+      document.getElementById('rsvpSuccessMsg').textContent = `🎉 See you on ${dateStr}!`;
+    }
+  }
+
+  // ── Address Copy ──
+  function copyAddress() {
+    const addr = document.querySelector('[data-field="address"]')?.textContent || '';
+    navigator.clipboard.writeText(addr).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = '✅ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '📋 Copy Address'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = addr; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+    });
+  }
+
+  // ── Scroll Reveal ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Parallax Hero ──
+  window.addEventListener('scroll', () => {
+    document.getElementById('hero').style.backgroundPositionY = `${window.scrollY * 0.3}px`;
+  });
+
+  // ── DOMContentLoaded: initPreview ──
+  document.addEventListener('DOMContentLoaded', () => {
+    InviteCustomize.initPreview({
+      family:   "The Mehta Family",
+      date:     "July 20, 2026",
+      time:     "11:00 AM",
+      address:  "3B, Prestige Towers, Whitefield, Bangalore 560066",
+      ceremony: "Housewarming & Open House",
+      message:  "Our home is your home — come celebrate with us!",
+      host:     "Anil & Divya Mehta"
+    });
+  });
+</script>
 </body>
 </html>

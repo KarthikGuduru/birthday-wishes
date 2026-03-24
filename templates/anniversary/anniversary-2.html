@@ -7,23 +7,96 @@
   <link rel="stylesheet" href="../../css/marketplace.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    /* ── Root Variables ── */
+    :root {
+      --slate: #1a1a3a;
+      --silver: #9090c0;
+      --silver-light: #b8b8d8;
+      --rose-gold: #c9607a;
+      --rose-gold-light: #e07a90;
+      --platinum: #d8d8e8;
+      --navy: #080820;
+      --navy-mid: #10103a;
+      --white: #ffffff;
+      --off-white: #f0f0f8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
     body {
-      background: #080820;
-      color: #e0e0f0;
+      background: var(--navy);
+      color: var(--platinum);
+      font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
+    }
+
+    /* ── Loading Screen ── */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #loading-screen.hidden { opacity: 0; visibility: hidden; }
+
+    .loading-diamond-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 0 20px rgba(144,144,192,0.6));
+    }
+    #diamond-svg-loader { width: 140px; height: 140px; }
+    #diamond-outline {
+      fill: none;
+      stroke: url(#diamondGrad);
+      stroke-width: 2.5;
+      stroke-dasharray: 340;
+      stroke-dashoffset: 340;
+      animation: drawDiamond 1.2s ease forwards;
+    }
+    @keyframes drawDiamond { to { stroke-dashoffset: 0; } }
+
+    .diamond-sparkle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0;
+      animation: sparkleOut var(--dur, 0.6s) var(--delay, 1.2s) ease-out forwards;
+    }
+    @keyframes sparkleOut {
+      0%   { transform: translate(0,0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--tx,20px), var(--ty,-20px)) scale(0); opacity: 0; }
+    }
+    .loading-tagline {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--silver);
+      font-weight: 300;
     }
 
     /* ── Preview Banner ── */
     .preview-banner {
-      background: linear-gradient(135deg, #080820, #12122e);
-      border-bottom: 1px solid rgba(144,144,192,0.3);
-      color: #e0e0f0;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      border-bottom: 1px solid rgba(144,144,192,0.25);
+      color: var(--platinum);
       text-align: center;
-      padding: 0.75rem 4rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
+      padding: 0.7rem 4rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.09em;
       position: relative;
       z-index: 50;
       display: flex;
@@ -31,601 +104,1747 @@
       justify-content: center;
       gap: 1.5rem;
       flex-wrap: wrap;
+      font-family: 'Poppins', sans-serif;
     }
     .preview-banner .buy-btn {
       display: inline-block;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #080820;
-      padding: 0.4rem 1.2rem;
+      background: linear-gradient(135deg, var(--rose-gold), var(--rose-gold-light));
+      color: white;
+      padding: 0.4rem 1.3rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+    }
+    .preview-banner .customize-btn {
+      display: inline-block;
+      border: 1px solid rgba(144,144,192,0.5);
+      color: var(--silver-light);
+      padding: 0.4rem 1.3rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      text-decoration: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ── Back Nav ── */
+    .back-nav {
+      position: fixed;
+      top: 1.2rem;
+      left: 1.5rem;
+      z-index: 300;
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      white-space: nowrap;
+      color: rgba(144,144,192,0.6);
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      transition: color 0.3s;
     }
-    .preview-banner .buy-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(201,148,42,0.4);
-    }
+    .back-nav:hover { color: var(--silver-light); }
 
-    /* ── Constellation canvas ── */
-    #constellation-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.5;
+    /* ── Navbar ── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(8,8,32,0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(144,144,192,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 2.5rem;
+    }
+    .nav-logo {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.7rem;
+      color: var(--silver-light);
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+    }
+    .nav-logo .years-badge {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--rose-gold);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--platinum);
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.65;
+      transition: opacity 0.3s, color 0.3s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--silver-light); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--silver-light); }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(8,8,32,0.98);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(144,144,192,0.15);
+      }
+      .nav-links.open { display: flex; }
     }
 
     /* ── Hero ── */
-    .a2-hero {
+    #hero {
+      position: relative;
       min-height: 100vh;
-      background: linear-gradient(160deg, #080820 0%, #0d0d28 40%, #1a1a3a 70%, #10102a 100%);
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #0c0c28 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #starfield-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    /* Diamond SVG */
+    .hero-diamond-wrap {
+      margin: 0 auto 1.5rem;
+      width: 130px;
+      height: 130px;
+      position: relative;
+      animation: diamondFlip 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(144,144,192,0.5));
+    }
+    @keyframes diamondFlip {
+      0%,100% { transform: scaleX(1); }
+      50%      { transform: scaleX(0.28); }
+    }
+
+    .hero-years {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 15vw, 10rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--platinum) 0%, var(--silver-light) 30%, #ffffff 50%, var(--silver) 70%, var(--platinum) 100%);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmerSlide 3s linear infinite;
+      line-height: 0.9;
+    }
+    @keyframes shimmerSlide {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 400% 50%; }
+    }
+    .hero-years-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      margin-top: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .hero-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 300;
+      color: var(--off-white);
+      letter-spacing: 0.08em;
+    }
+    .hero-names .ampersand {
+      font-style: italic;
+      color: var(--rose-gold);
+      font-size: 1.3em;
+      margin: 0 0.3em;
+    }
+    .rose-gold-divider {
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--rose-gold), transparent);
+      margin: 1.2rem auto;
+    }
+    .hero-date-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(144,144,192,0.25);
+      border-radius: 30px;
+      padding: 0.5rem 1.5rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--platinum);
+      margin-top: 1rem;
+    }
+    .hero-countdown {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .countdown-box {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(144,144,192,0.2);
+      border-radius: 6px;
+      padding: 0.8rem 1rem;
+      min-width: 70px;
+      text-align: center;
+    }
+    .cnt-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--silver-light);
+      line-height: 1;
+    }
+    .cnt-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(216,216,232,0.45);
+      margin-top: 0.2rem;
+    }
+
+    /* ── Section Base ── */
+    section { padding: 5rem 2rem; }
+    .section-title { text-align: center; margin-bottom: 3rem; }
+    .section-title h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 6vw, 3.8rem);
+      color: var(--silver-light);
+      line-height: 1;
+    }
+    .section-title .subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(216,216,232,0.4);
+      margin-top: 0.5rem;
+    }
+    .silver-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 0.8rem auto;
+    }
+    .silver-divider::before,
+    .silver-divider::after {
+      content: '';
+      height: 1px;
+      width: 70px;
+      background: linear-gradient(to right, transparent, var(--silver), transparent);
+    }
+    .silver-divider .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--rose-gold); }
+
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.revealed { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── Photo Carousel ── */
+    #photos { background: var(--slate); overflow: hidden; }
+    #photos .section-title h2 { color: var(--silver-light); }
+    .carousel-track-wrap {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .carousel-track-wrap::before,
+    .carousel-track-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .carousel-track-wrap::before { left: 0; background: linear-gradient(to right, var(--slate), transparent); }
+    .carousel-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--slate), transparent); }
+    .carousel-track {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      animation: carouselScroll 28s linear infinite;
+      padding: 1rem 0;
+    }
+    .carousel-track:hover { animation-play-state: paused; }
+    @keyframes carouselScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .carousel-card {
+      flex-shrink: 0;
+      width: 200px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(144,144,192,0.2);
+      border-radius: 3px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .carousel-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(144,144,192,0.15);
+      border-color: rgba(144,144,192,0.4);
+    }
+    .carousel-photo {
+      width: 100%;
+      aspect-ratio: 2/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+    .carousel-photo.c1 { background: linear-gradient(160deg, #1a1a5a, #3030a0); }
+    .carousel-photo.c2 { background: linear-gradient(160deg, #3a1530, #601040); }
+    .carousel-photo.c3 { background: linear-gradient(160deg, #1a3040, #104060); }
+    .carousel-photo.c4 { background: linear-gradient(160deg, #302010, #605030); }
+    .carousel-photo.c5 { background: linear-gradient(160deg, #1a3a2a, #30a060); }
+    .carousel-photo.c6 { background: linear-gradient(160deg, #3a1a2a, #c06080); }
+    .silver-frame-border {
+      padding: 4px;
+      background: linear-gradient(135deg, var(--silver), var(--platinum), var(--silver));
+    }
+    .carousel-caption {
+      padding: 0.7rem 0.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--platinum);
+      text-align: center;
+      border-top: 1px solid rgba(144,144,192,0.15);
+    }
+
+    /* ── Then & Now ── */
+    #then-now { background: linear-gradient(180deg, var(--slate) 0%, var(--navy-mid) 100%); }
+    #then-now .section-title h2 { color: var(--silver-light); }
+    .then-now-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 900px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .tn-card {
+      flex: 1;
+      min-width: 260px;
+      padding: 3rem 2rem;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+    .tn-card:hover { transform: scale(1.03); }
+    .tn-card.then {
+      background: linear-gradient(135deg, #2a1a0a, #4a3010, #3a2508);
+      border-radius: 4px 0 0 4px;
+    }
+    .tn-card.now {
+      background: linear-gradient(135deg, #1a1040, #2a1a5a, #1a0830);
+      border-radius: 0 4px 4px 0;
+    }
+    .tn-card.then:hover { box-shadow: -8px 0 40px rgba(180,140,60,0.15); }
+    .tn-card.now:hover  { box-shadow: 8px 0 40px rgba(144,144,192,0.15); }
+    .tn-year-badge {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .then .tn-year-badge { background: rgba(180,140,60,0.2); color: #d4b060; border: 1px solid rgba(180,140,60,0.3); }
+    .now  .tn-year-badge { background: rgba(144,144,192,0.15); color: var(--silver-light); border: 1px solid rgba(144,144,192,0.3); }
+    .tn-big-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 700;
+      opacity: 0.2;
+      line-height: 0.9;
+    }
+    .then .tn-big-year { color: #d4b060; }
+    .now  .tn-big-year { color: var(--silver-light); }
+    .tn-label {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      margin: 0.5rem 0;
+    }
+    .then .tn-label { color: #d4b060; }
+    .now  .tn-label { color: var(--silver-light); }
+    .tn-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      opacity: 0.65;
+      line-height: 1.7;
+    }
+    .tn-vs {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
-      overflow: hidden;
-      padding: 6rem 2rem 5rem;
-      text-align: center;
-      z-index: 1;
+      padding: 1.5rem 1rem;
+    }
+    .tn-vs-heart { font-size: 2.5rem; animation: heartPulse 1.5s ease-in-out infinite; }
+    @keyframes heartPulse {
+      0%,100% { transform: scale(1); }
+      50%      { transform: scale(1.25); }
+    }
+    .tn-vs-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--silver);
+      opacity: 0.5;
+      letter-spacing: 0.1em;
+      margin-top: 0.4rem;
     }
 
-    /* SVG Diamond shape */
-    .a2-diamond-svg {
+    /* ── Love Letters ── */
+    #letters { background: var(--navy); position: relative; overflow: hidden; }
+    #letters .section-title h2 { color: var(--silver-light); }
+    .string-lights {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: min(70vw, 560px);
-      height: min(70vw, 560px);
-      opacity: 0.06;
+      top: 0; left: 0; right: 0;
+      height: 60px;
       pointer-events: none;
-      animation: slowSpin 80s linear infinite;
     }
-
-    /* Gradient line dividers */
-    .a2-line-divider {
-      width: min(320px, 80vw);
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #9090c0, var(--gold), #9090c0, transparent);
-      margin: 1rem auto;
-      position: relative;
-    }
-
-    .a2-year-numeral {
-      font-family: var(--font-display);
-      font-size: clamp(6.5rem, 20vw, 13rem);
-      font-weight: 700;
-      line-height: 0.9;
-      background: linear-gradient(160deg, #d0d0e8 0%, #9090c0 30%, var(--gold) 60%, #e8b84b 80%, #c8c8e0 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      filter: drop-shadow(0 0 40px rgba(144,144,192,0.35));
-      margin-bottom: 0;
-      position: relative;
-    }
-
-    .a2-years-label {
-      font-family: var(--font-display);
-      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-      font-weight: 600;
-      letter-spacing: 0.6em;
-      text-transform: uppercase;
-      color: #9090c0;
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-
-    .a2-names {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 0.8rem;
-      position: relative;
-    }
-    .a2-name {
-      font-family: var(--font-display);
-      font-size: clamp(1.6rem, 4.5vw, 2.8rem);
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.05em;
-    }
-    .a2-ampersand {
-      font-family: var(--font-script);
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      background: linear-gradient(135deg, #9090c0, var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-    }
-
-    .a2-badge {
-      display: inline-block;
-      border: 1px solid rgba(144,144,192,0.4);
-      padding: 0.3rem 1.4rem;
-      font-family: var(--font-display);
-      font-size: 0.68rem;
-      letter-spacing: 0.45em;
-      color: #9090c0;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      position: relative;
-    }
-
-    .a2-scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.6rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: rgba(144,144,192,0.4);
-      animation: bobDown 2.5s ease-in-out infinite;
-    }
-
-    /* ── Details Card ── */
-    .a2-details {
-      padding: var(--section-pad);
-      background: linear-gradient(180deg, #080820 0%, #0d0d28 100%);
-      position: relative;
-      z-index: 1;
-    }
-    .a2-details-inner {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .a2-glass-card {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(144,144,192,0.25);
-      padding: 2.8rem 3rem;
-      text-align: center;
-      position: relative;
-    }
-    .a2-glass-card::before,
-    .a2-glass-card::after {
+    .string-lights::before {
       content: '';
       position: absolute;
-      width: 28px; height: 28px;
-      border-color: #9090c0;
-      border-style: solid;
-      opacity: 0.4;
+      top: 15px; left: 0; right: 0;
+      height: 1px;
+      background: rgba(144,144,192,0.2);
     }
-    .a2-glass-card::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
-    .a2-glass-card::after  { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
-    .a2-glass-card .corner-tr,
-    .a2-glass-card .corner-bl {
+    .bulb {
       position: absolute;
-      width: 28px; height: 28px;
-      border-color: #9090c0;
-      border-style: solid;
-      opacity: 0.4;
+      top: 8px;
+      width: 8px; height: 10px;
+      border-radius: 50% 50% 40% 40%;
+      animation: bulbGlow 2s var(--delay, 0s) ease-in-out infinite alternate;
     }
-    .a2-glass-card .corner-tr { top: 10px; right: 10px; border-width: 1px 1px 0 0; }
-    .a2-glass-card .corner-bl { bottom: 10px; left: 10px; border-width: 0 0 1px 1px; }
-
-    .a2-detail-row {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(144,144,192,0.1);
-      text-align: left;
+    @keyframes bulbGlow {
+      0%   { opacity: 0.3; box-shadow: 0 0 4px currentColor; }
+      100% { opacity: 1; box-shadow: 0 0 12px currentColor, 0 0 24px currentColor; }
     }
-    .a2-detail-row:last-child { border-bottom: none; }
-    .a2-detail-icon-wrap {
+    .letters-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (max-width: 600px) { .letters-grid { grid-template-columns: 1fr; } }
+    .letter-card {
+      background: #fdf8ee;
+      border-radius: 3px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      color: #2a2010;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .letter-card:hover { transform: translateY(-5px); }
+    .letter-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
       width: 36px; height: 36px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(144,144,192,0.15), rgba(201,148,42,0.1));
+      background: linear-gradient(225deg, #c8b870 50%, transparent 50%);
+    }
+    .letter-date {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #8a7040;
+      margin-bottom: 1rem;
+    }
+    .letter-salutation {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.8rem;
+      color: var(--rose-gold);
+      margin-bottom: 0.8rem;
+    }
+    .letter-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.9;
+      color: #3a2a10;
+    }
+    .letter-sign {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5rem;
+      color: #6a4a18;
+      margin-top: 1.2rem;
+      text-align: right;
+    }
+    .letters-tagline {
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      color: var(--silver);
+      margin-top: 2.5rem;
+      opacity: 0.6;
+    }
+
+    /* ── Decade Timeline ── */
+    #decades { background: linear-gradient(180deg, var(--platinum) 0%, var(--off-white) 100%); }
+    #decades .section-title h2 { color: var(--slate); }
+    #decades .section-title .subtitle { color: rgba(26,26,58,0.4); }
+    #decades .silver-divider::before,
+    #decades .silver-divider::after { background: linear-gradient(to right, transparent, var(--slate), transparent); }
+    .decades-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .decade-nav-btn {
+      background: var(--slate);
+      color: var(--silver-light);
+      border: 1px solid rgba(144,144,192,0.3);
+      border-radius: 3px;
+      padding: 0.5rem 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .decade-nav-btn:hover { background: var(--rose-gold); }
+    .decades-scroll {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      display: flex;
+      gap: 1.5rem;
+      padding: 0.5rem 1rem 1.5rem;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+    .decades-scroll::-webkit-scrollbar { height: 3px; }
+    .decades-scroll::-webkit-scrollbar-thumb { background: var(--silver); border-radius: 2px; }
+    .decade-panel {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      width: 200px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .decade-panel:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.2);
+    }
+    .decade-panel-header { padding: 1.5rem 1.2rem; text-align: center; }
+    .decade-panel:nth-child(1) .decade-panel-header { background: linear-gradient(135deg, #2a2050, #1a1040); }
+    .decade-panel:nth-child(2) .decade-panel-header { background: linear-gradient(135deg, #3a1530, #601040); }
+    .decade-panel:nth-child(3) .decade-panel-header { background: linear-gradient(135deg, #1a3040, #104060); }
+    .decade-panel:nth-child(4) .decade-panel-header { background: linear-gradient(135deg, #302010, #605030); }
+    .decade-panel:nth-child(5) .decade-panel-header { background: linear-gradient(135deg, #1a1040, #3030a0); }
+    .decade-panel-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      opacity: 0.3;
+      line-height: 1;
+    }
+    .decade-panel-icon { font-size: 2rem; margin: 0.3rem 0; }
+    .decade-panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: white;
+    }
+    .decade-panel-body { background: white; padding: 1.2rem; }
+    .decade-panel-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ── Family Tribute ── */
+    #tribute { background: var(--slate); }
+    #tribute .section-title h2 { color: var(--silver-light); }
+    .tribute-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 960px;
+      margin: 0 auto 2.5rem;
+    }
+    @media (max-width: 700px) { .tribute-grid { grid-template-columns: 1fr; } }
+    .tribute-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(144,144,192,0.15);
+      border-top: 2px solid var(--rose-gold);
+      border-radius: 3px;
+      padding: 1.8rem;
+      animation: fadeInUp 0.5s ease both;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .tribute-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(144,144,192,0.1);
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .tribute-quote-mark {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: var(--rose-gold);
+      opacity: 0.4;
+      line-height: 0.5;
+      margin-bottom: 0.5rem;
+    }
+    .tribute-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--platinum);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .tribute-author {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      font-weight: 500;
+    }
+    .tribute-form-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(144,144,192,0.15);
+      padding: 2rem;
+      border-radius: 3px;
+    }
+    .tribute-form-wrap h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--silver-light);
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .form-field label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(216,216,232,0.5);
+    }
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
       border: 1px solid rgba(144,144,192,0.2);
+      border-radius: 2px;
+      padding: 0.6rem 0.8rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--platinum);
+      background: rgba(255,255,255,0.05);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus { border-color: var(--silver); }
+    .form-field select option { background: var(--slate); color: var(--platinum); }
+    .btn-silver {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--rose-gold), var(--rose-gold-light));
+      color: white;
+      border: none;
+      padding: 0.9rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: opacity 0.3s, transform 0.2s;
+    }
+    .btn-silver:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── Party Details ── */
+    #party { background: linear-gradient(160deg, var(--navy-mid) 0%, var(--slate) 100%); position: relative; overflow: hidden; }
+    #party .section-title h2 { color: var(--silver-light); }
+    .party-blur-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(201,96,122,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(144,144,192,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .party-glass-card {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 3rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    }
+    .party-card-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: var(--silver-light);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .party-detail-row { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.2rem; }
+    .party-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .party-detail-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      opacity: 0.8;
+    }
+    .party-detail-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--platinum);
+    }
+    .dress-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(201,96,122,0.15);
+      border: 1px solid rgba(201,96,122,0.3);
+      border-radius: 20px;
+      padding: 0.4rem 1.2rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rose-gold-light);
+      margin-top: 1rem;
+    }
+    .map-placeholder {
+      margin-top: 1.5rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(144,144,192,0.2);
+      border-radius: 4px;
+      height: 120px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
-      flex-shrink: 0;
-    }
-    .a2-detail-label {
-      font-size: 0.55rem;
-      letter-spacing: 0.45em;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #9090c0;
+      color: rgba(216,216,232,0.3);
+    }
+
+    /* ── Playlist ── */
+    #playlist { background: var(--navy); }
+    #playlist .section-title h2 { color: var(--silver-light); }
+    .playlist-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    @media (max-width: 700px) { .playlist-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 420px) { .playlist-grid { grid-template-columns: 1fr; } }
+    .song-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(144,144,192,0.12);
+      border-radius: 4px;
+      padding: 1.3rem;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .song-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(201,96,122,0.15);
+      border-color: rgba(201,96,122,0.4);
+    }
+    .song-card.playing {
+      border-color: var(--rose-gold);
+      background: rgba(201,96,122,0.08);
+    }
+    .music-note {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      animation: noteBounce 1s ease-in-out infinite;
+    }
+    @keyframes noteBounce {
+      0%,100% { transform: rotate(-5deg); }
+      50%      { transform: rotate(5deg) translateY(-3px); }
+    }
+    .song-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--platinum);
       margin-bottom: 0.2rem;
     }
-    .a2-detail-value {
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      color: #e0e0f0;
-      line-height: 1.4;
+    .song-movie {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(216,216,232,0.4);
     }
+    .song-tooltip {
+      display: none;
+      margin-top: 0.8rem;
+      padding: 0.6rem;
+      background: rgba(201,96,122,0.15);
+      border-left: 2px solid var(--rose-gold);
+      border-radius: 2px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--silver-light);
+      line-height: 1.5;
+    }
+    .song-card.playing .song-tooltip { display: block; animation: fadeInUp 0.3s ease; }
 
-    /* ── Decade Highlights ── */
-    .a2-decade {
-      padding: var(--section-pad);
-      background: #080820;
-      position: relative;
-      z-index: 1;
-    }
-    .a2-decade-inner {
-      max-width: 1000px;
+    /* ── RSVP ── */
+    #rsvp { background: linear-gradient(180deg, var(--slate) 0%, var(--navy-mid) 100%); }
+    #rsvp .section-title h2 { color: var(--silver-light); }
+    .rsvp-container {
+      max-width: 560px;
       margin: 0 auto;
-    }
-    .a2-decade-strip {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      padding-bottom: 1rem;
-      margin-top: 2.5rem;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(144,144,192,0.3) transparent;
-    }
-    .a2-decade-strip::-webkit-scrollbar { height: 4px; }
-    .a2-decade-strip::-webkit-scrollbar-track { background: transparent; }
-    .a2-decade-strip::-webkit-scrollbar-thumb { background: rgba(144,144,192,0.3); border-radius: 2px; }
-
-    .a2-milestone-card {
-      flex: 0 0 180px;
       background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(144,144,192,0.18);
-      padding: 1.8rem 1.2rem;
-      text-align: center;
-      position: relative;
+      border: 1px solid rgba(144,144,192,0.15);
+      border-top: 2px solid var(--silver);
+      border-radius: 3px;
+      padding: 2.5rem;
     }
-    .a2-milestone-num {
-      width: 40px; height: 40px;
+    .guest-count-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .guest-count-row label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(216,216,232,0.5);
+      min-width: 60px;
+    }
+    .count-btn {
+      width: 34px; height: 34px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #080820;
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 700;
+      border: 1px solid rgba(144,144,192,0.3);
+      background: rgba(255,255,255,0.05);
+      color: var(--silver-light);
+      font-size: 1.2rem;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 0.8rem;
+      transition: background 0.2s;
     }
-    .a2-milestone-label {
-      font-size: 0.6rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: #9090c0;
-      margin-bottom: 0.4rem;
+    .count-btn:hover { background: rgba(201,96,122,0.2); }
+    #guest-count-display {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--silver-light);
+      min-width: 30px;
+      text-align: center;
     }
-    .a2-milestone-title {
-      font-family: var(--font-display);
-      font-size: 0.88rem;
-      color: #e0e0f0;
-      line-height: 1.4;
+    .rsvp-success { display: none; text-align: center; padding: 2rem; }
+    .rsvp-success.show { display: block; animation: fadeInUp 0.5s ease; }
+    .rsvp-success p {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem;
+      color: var(--rose-gold);
     }
 
-    /* ── Toast Section ── */
-    .a2-toast {
-      padding: var(--section-pad);
-      background: linear-gradient(180deg, #0d0d28, #080820);
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .a2-toast-inner {
-      max-width: 580px;
-      margin: 0 auto;
-    }
-    .a2-toast-emoji {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-    .a2-toast-headline {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 4vw, 2rem);
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 1.2rem;
-    }
-    .a2-toast-quote {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      color: rgba(224,224,240,0.8);
-      line-height: 1.75;
-      position: relative;
-    }
-    .a2-quote-mark {
-      font-family: var(--font-script);
-      font-size: 8rem;
-      color: rgba(144,144,192,0.08);
-      line-height: 0.6;
-      position: absolute;
-      top: -1.5rem;
-      left: -1rem;
+    /* ── Silver Sparkle ── */
+    .sparkle-particle {
+      position: fixed;
       pointer-events: none;
+      z-index: 9000;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      animation: sparkleRise var(--dur, 1s) var(--delay, 0s) ease-out forwards;
+    }
+    @keyframes sparkleRise {
+      0%   { transform: translate(0,0) scale(1) rotate(0deg); opacity: 1; }
+      100% { transform: translate(var(--tx,0), var(--ty,-80px)) scale(0) rotate(360deg); opacity: 0; }
     }
 
     /* ── Footer ── */
-    .a2-footer {
-      padding: 3rem 2rem 4.5rem;
-      background: linear-gradient(180deg, #0d0d28, #040410);
+    footer {
+      background: var(--navy);
       text-align: center;
+      padding: 4rem 2rem;
       border-top: 1px solid rgba(144,144,192,0.12);
-      position: relative;
-      z-index: 1;
     }
-    .a2-footer-names {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      color: #e0e0f0;
-      margin-bottom: 0.4rem;
-    }
-    .a2-footer-years {
-      font-family: var(--font-script);
-      font-size: 1.8rem;
-      background: linear-gradient(135deg, #9090c0, var(--gold));
+    .footer-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3rem, 9vw, 5.5rem);
+      background: linear-gradient(135deg, var(--platinum), var(--silver-light), var(--silver));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 0.5rem;
+      line-height: 1.1;
     }
-    .a2-footer-date {
+    .footer-subtitle {
+      font-family: 'Poppins', sans-serif;
       font-size: 0.68rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(144,144,192,0.45);
-      margin-bottom: 2rem;
-    }
-    .a2-footer-divider {
-      width: 60px; height: 1px;
-      background: linear-gradient(90deg, #9090c0, var(--gold));
-      margin: 0 auto 1.5rem;
-    }
-    .a2-footer-link {
-      font-size: 0.65rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: rgba(144,144,192,0.35);
-      transition: color 0.2s ease;
+      color: rgba(216,216,232,0.35);
+      margin-top: 0.8rem;
     }
-    .a2-footer-link:hover { color: #9090c0; }
-
-    @media (max-width: 600px) {
-      .a2-glass-card { padding: 2rem 1.5rem; }
-      .preview-banner { padding: 0.75rem 1rem; font-size: 0.72rem; }
+    .footer-back {
+      display: inline-block;
+      margin-top: 2rem;
+      color: rgba(144,144,192,0.5);
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
     }
+    .footer-back:hover { color: var(--silver-light); }
   </style>
 </head>
 <body>
 
-  <!-- Constellation Canvas -->
-  <canvas id="constellation-canvas" aria-hidden="true"></canvas>
+<!-- Back Nav -->
+<a href="../../index.html" class="back-nav">← Marketplace</a>
 
-  <!-- Preview Banner -->
-  <div class="preview-banner">
-    <span>✨ Live Preview — Buy for ₹500 to customize</span>
-    <button class="buy-btn" data-buy="anniversary-2" data-name="Silver Anniversary" data-customize="anniversary-2-customize.html">
-      Buy &amp; Customize →
-    </button>
-  </div>
-
-  <!-- Back Navigation -->
-  <a href="../../index.html" class="back-nav">← Marketplace</a>
-
-  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
-  <section class="a2-hero">
-
-    <!-- SVG Diamond/Star -->
-    <svg class="a2-diamond-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <!-- Large diamond outline -->
-      <polygon points="250,20 480,250 250,480 20,250" stroke="white" stroke-width="1.5" fill="none"/>
-      <!-- Inner diamond -->
-      <polygon points="250,100 400,250 250,400 100,250" stroke="white" stroke-width="1" fill="none"/>
-      <!-- Inner star -->
-      <polygon points="250,150 275,225 355,225 292,270 315,350 250,305 185,350 208,270 145,225 225,225" stroke="white" stroke-width="0.8" fill="none"/>
-      <!-- Facet lines -->
-      <line x1="250" y1="20"  x2="250" y2="480" stroke="white" stroke-width="0.5"/>
-      <line x1="20"  y1="250" x2="480" y2="250" stroke="white" stroke-width="0.5"/>
-      <line x1="250" y1="20"  x2="480" y2="250" stroke="white" stroke-width="0.4"/>
-      <line x1="480" y1="250" x2="250" y2="480" stroke="white" stroke-width="0.4"/>
-      <line x1="250" y1="480" x2="20"  y2="250" stroke="white" stroke-width="0.4"/>
-      <line x1="20"  y1="250" x2="250" y2="20"  stroke="white" stroke-width="0.4"/>
-      <!-- Outer ring -->
-      <circle cx="250" cy="250" r="240" stroke="white" stroke-width="0.5"/>
-      <!-- Center -->
-      <circle cx="250" cy="250" r="6" fill="white"/>
+<!-- Loading Screen -->
+<div id="loading-screen">
+  <div class="loading-diamond-wrap" id="loading-diamond-wrap">
+    <svg id="diamond-svg-loader" viewBox="0 0 140 140">
+      <defs>
+        <linearGradient id="diamondGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#d8d8e8"/>
+          <stop offset="50%" stop-color="#ffffff"/>
+          <stop offset="100%" stop-color="#9090c0"/>
+        </linearGradient>
+      </defs>
+      <polygon id="diamond-outline"
+        points="70,8 132,70 70,132 8,70"
+      />
+      <line x1="70" y1="8" x2="70" y2="132" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+      <line x1="8" y1="70" x2="132" y2="70" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+      <line x1="70" y1="8" x2="8" y2="70" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+      <line x1="70" y1="8" x2="132" y2="70" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+      <line x1="70" y1="132" x2="8" y2="70" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
+      <line x1="70" y1="132" x2="132" y2="70" stroke="rgba(255,255,255,0.05)" stroke-width="0.8"/>
     </svg>
+  </div>
+  <div class="loading-tagline">A Decade of Love...</div>
+</div>
 
-    <div class="a2-line-divider r" style="transition-delay:0s"></div>
+<!-- Purchase Banner -->
+<div class="preview-banner">
+  <span>✦ You are previewing <strong>Silver Anniversary</strong> — A decade of elegant love</span>
+  <a href="anniversary-2-customize.html" class="customize-btn" data-buy="anniversary-2" data-name="Silver Anniversary" data-customize="anniversary-2-customize.html">Customize</a>
+  <button class="buy-btn" onclick="PaymentFlow.start('anniversary-2','Silver Anniversary')">Use This Template</button>
+</div>
 
-    <div class="a2-year-numeral r" style="transition-delay:0.05s" data-field="years">10</div>
-    <div class="a2-years-label r" style="transition-delay:0.1s">Years Together</div>
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <span class="years-badge" data-field="years">10</span>
+    ✦ Anniversary
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#photos">Story</a></li>
+    <li><a href="#then-now">Photos</a></li>
+    <li><a href="#decades">Decades</a></li>
+    <li><a href="#party">Party</a></li>
+    <li><a href="#rsvp">RSVP</a></li>
+  </ul>
+</nav>
 
-    <div class="a2-line-divider r" style="transition-delay:0.12s"></div>
+<!-- Hero -->
+<section id="hero">
+  <canvas id="starfield-canvas"></canvas>
+  <div class="hero-content">
 
-    <div class="a2-names r" style="transition-delay:0.15s">
-      <span class="a2-name" data-field="name1">Arun</span>
-      <span class="a2-ampersand">&amp;</span>
-      <span class="a2-name" data-field="name2">Kavitha</span>
+    <!-- Diamond SVG in hero -->
+    <div class="hero-diamond-wrap">
+      <svg viewBox="0 0 130 130" width="130" height="130">
+        <defs>
+          <linearGradient id="heroGemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#d8d8e8" stop-opacity="0.9"/>
+            <stop offset="35%" stop-color="#ffffff"/>
+            <stop offset="65%" stop-color="#b8b8d8" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#9090c0" stop-opacity="0.8"/>
+          </linearGradient>
+          <linearGradient id="facetA" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
+            <stop offset="100%" stop-color="rgba(144,144,192,0.1)"/>
+          </linearGradient>
+          <linearGradient id="facetB" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.15)"/>
+            <stop offset="100%" stop-color="rgba(144,144,192,0.05)"/>
+          </linearGradient>
+        </defs>
+        <polygon points="65,5 125,65 65,125 5,65" fill="url(#heroGemGrad)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+        <polygon points="65,5 5,65 65,65" fill="url(#facetA)" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+        <polygon points="65,5 125,65 65,65" fill="url(#facetB)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+        <polygon points="5,65 65,65 65,125" fill="rgba(144,144,192,0.3)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+        <polygon points="125,65 65,65 65,125" fill="rgba(144,144,192,0.15)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+        <ellipse cx="52" cy="40" rx="10" ry="6" fill="rgba(255,255,255,0.25)" transform="rotate(-25 52 40)"/>
+      </svg>
     </div>
 
-    <div class="a2-badge r" style="transition-delay:0.2s" data-field="anniversary">Diamond Anniversary</div>
+    <div class="hero-years" id="hero-years">10</div>
+    <div class="hero-years-label">Years Together</div>
+    <div class="hero-names">
+      <span data-field="name1">Arun</span>
+      <span class="ampersand">&amp;</span>
+      <span data-field="name2">Kavitha</span>
+    </div>
+    <div class="rose-gold-divider"></div>
+    <div class="hero-date-badge"><span data-field="date">January 15, 2027</span></div>
+    <div class="hero-countdown">
+      <div class="countdown-box"><div class="cnt-num" id="cnt-days">--</div><div class="cnt-label">Days</div></div>
+      <div class="countdown-box"><div class="cnt-num" id="cnt-hours">--</div><div class="cnt-label">Hours</div></div>
+      <div class="countdown-box"><div class="cnt-num" id="cnt-mins">--</div><div class="cnt-label">Minutes</div></div>
+      <div class="countdown-box"><div class="cnt-num" id="cnt-secs">--</div><div class="cnt-label">Seconds</div></div>
+    </div>
+  </div>
+</section>
 
-    <div class="a2-scroll-hint">Scroll to explore ↓</div>
-  </section>
+<!-- Photo Carousel -->
+<section id="photos">
+  <div class="section-title reveal">
+    <h2>A Decade in Frames</h2>
+    <div class="silver-divider"><span class="dot"></span></div>
+    <p class="subtitle">Ten years of beautiful memories</p>
+  </div>
+  <div class="carousel-track-wrap">
+    <div class="carousel-track">
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c1">💍</div></div><div class="carousel-caption">The Wedding Day</div></div>
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c2">🏠</div></div><div class="carousel-caption">Our First Home</div></div>
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c3">✈️</div></div><div class="carousel-caption">Travels Together</div></div>
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c4">🌅</div></div><div class="carousel-caption">Sunsets &amp; Laughter</div></div>
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c5">🎉</div></div><div class="carousel-caption">Celebrations</div></div>
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c6">💎</div></div><div class="carousel-caption">A Decade of Love</div></div>
+      <!-- Duplicate set for infinite loop -->
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c1">💍</div></div><div class="carousel-caption">The Wedding Day</div></div>
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c2">🏠</div></div><div class="carousel-caption">Our First Home</div></div>
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c3">✈️</div></div><div class="carousel-caption">Travels Together</div></div>
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c4">🌅</div></div><div class="carousel-caption">Sunsets &amp; Laughter</div></div>
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c5">🎉</div></div><div class="carousel-caption">Celebrations</div></div>
+      <div class="carousel-card"><div class="silver-frame-border"><div class="carousel-photo c6">💎</div></div><div class="carousel-caption">A Decade of Love</div></div>
+    </div>
+  </div>
+</section>
 
-  <!-- ═══════════════════════════════ DETAILS CARD ════════════════════════ -->
-  <section class="a2-details">
-    <div class="a2-details-inner">
+<!-- Then & Now -->
+<section id="then-now">
+  <div class="section-title reveal">
+    <h2>Then &amp; Now</h2>
+    <div class="silver-divider"><span class="dot"></span></div>
+    <p class="subtitle">The same love, a deeper bond</p>
+  </div>
+  <div class="then-now-container">
+    <div class="tn-card then reveal">
+      <div class="tn-year-badge">Year 1</div>
+      <div class="tn-big-year">1</div>
+      <div class="tn-label">When it Began</div>
+      <p class="tn-text">Two people, one promise, and a lifetime of tomorrows stretching ahead — full of wonder and infinite possibility.</p>
+    </div>
+    <div class="tn-vs">
+      <div class="tn-vs-heart">💕</div>
+      <div class="tn-vs-text">VS</div>
+    </div>
+    <div class="tn-card now reveal">
+      <div class="tn-year-badge">Year <span data-field="years">10</span></div>
+      <div class="tn-big-year" data-field="years">10</div>
+      <div class="tn-label">Still Going Strong</div>
+      <p class="tn-text">A decade later — wiser, deeper, richer. The love hasn't dimmed; it has only grown more radiant with every passing year.</p>
+    </div>
+  </div>
+</section>
 
-      <div class="t-center r" style="margin-bottom:2rem;">
-        <div class="sec-tag" style="color:#9090c0; border-color:rgba(144,144,192,0.3);">The Celebration</div>
-        <h2 class="sec-title" style="color:#e0e0f0;">Join the Evening</h2>
+<!-- Love Letters -->
+<section id="letters">
+  <div class="string-lights" id="string-lights"></div>
+  <div class="section-title reveal" style="margin-top:2rem;">
+    <h2>Love Letters</h2>
+    <div class="silver-divider"><span class="dot"></span></div>
+    <p class="subtitle">Words that carry a heart</p>
+  </div>
+  <div class="letters-grid">
+    <div class="letter-card reveal">
+      <div class="letter-date">Year One — The Beginning</div>
+      <div class="letter-salutation">My Dearest,</div>
+      <p class="letter-body">Today I marry my best friend. I don't have words grand enough for what I feel — only this quiet certainty that wherever life takes us, I want every step to be beside you. You are my favourite person, my home, my great adventure.</p>
+      <div class="letter-sign">Forever yours</div>
+    </div>
+    <div class="letter-card reveal reveal-delay-1">
+      <div class="letter-date">Year <span data-field="years">Ten</span> — Today</div>
+      <div class="letter-salutation">Still, my love,</div>
+      <p class="letter-body">Ten years on and I find more reasons each morning to be grateful it is you. You have made ordinary days extraordinary. Every laugh, every quiet evening, every storm we weathered — I would choose it all again without hesitation.</p>
+      <div class="letter-sign">Always yours</div>
+    </div>
+  </div>
+  <div class="letters-tagline reveal">Still Writing New Chapters...</div>
+</section>
+
+<!-- Decade Timeline -->
+<section id="decades">
+  <div class="section-title reveal">
+    <h2>10 Beautiful Years</h2>
+    <div class="silver-divider"><span class="dot"></span></div>
+    <p class="subtitle">Every milestone, treasured forever</p>
+  </div>
+  <div class="decades-nav">
+    <button class="decade-nav-btn" onclick="scrollDecades(-1)">← Prev</button>
+    <button class="decade-nav-btn" onclick="scrollDecades(1)">Next →</button>
+  </div>
+  <div class="decades-scroll" id="decades-scroll">
+    <div class="decade-panel reveal">
+      <div class="decade-panel-header">
+        <div class="decade-panel-year">1</div>
+        <div class="decade-panel-icon">💍</div>
+        <div class="decade-panel-title">The Wedding Day</div>
       </div>
-
-      <div class="a2-glass-card r" style="transition-delay:0.1s">
-        <span class="corner-tr"></span>
-        <span class="corner-bl"></span>
-
-        <div class="a2-detail-row">
-          <div class="a2-detail-icon-wrap">📅</div>
-          <div>
-            <div class="a2-detail-label">Date</div>
-            <div class="a2-detail-value" data-field="date">January 15, 2027</div>
-          </div>
-        </div>
-        <div class="a2-detail-row">
-          <div class="a2-detail-icon-wrap">🕖</div>
-          <div>
-            <div class="a2-detail-label">Time</div>
-            <div class="a2-detail-value" data-field="time">7:30 PM</div>
-          </div>
-        </div>
-        <div class="a2-detail-row">
-          <div class="a2-detail-icon-wrap">📍</div>
-          <div>
-            <div class="a2-detail-label">Venue</div>
-            <div class="a2-detail-value" data-field="venue">ITC Grand Chola, Chennai</div>
-          </div>
-        </div>
-        <div class="a2-detail-row">
-          <div class="a2-detail-icon-wrap">💎</div>
-          <div>
-            <div class="a2-detail-label">Milestone</div>
-            <div class="a2-detail-value"><span data-field="years">10</span> Years of Love</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════ DECADE HIGHLIGHTS ══════════════════ -->
-  <section class="a2-decade">
-    <div class="a2-decade-inner">
-      <div class="t-center r" style="margin-bottom:0.5rem;">
-        <div class="sec-tag" style="color:#9090c0; border-color:rgba(144,144,192,0.3);">The Journey</div>
-        <h2 class="sec-title" style="color:#e0e0f0;">A Decade of Milestones</h2>
-      </div>
-
-      <div class="a2-decade-strip">
-        <div class="a2-milestone-card r">
-          <div class="a2-milestone-num">1</div>
-          <div class="a2-milestone-label">Year One</div>
-          <div class="a2-milestone-title">A New Beginning</div>
-        </div>
-        <div class="a2-milestone-card r" style="transition-delay:0.05s">
-          <div class="a2-milestone-num">3</div>
-          <div class="a2-milestone-label">Year Three</div>
-          <div class="a2-milestone-title">Growing Roots</div>
-        </div>
-        <div class="a2-milestone-card r" style="transition-delay:0.1s">
-          <div class="a2-milestone-num">5</div>
-          <div class="a2-milestone-label">Year Five</div>
-          <div class="a2-milestone-title">Halfway &amp; Thriving</div>
-        </div>
-        <div class="a2-milestone-card r" style="transition-delay:0.15s">
-          <div class="a2-milestone-num">7</div>
-          <div class="a2-milestone-label">Year Seven</div>
-          <div class="a2-milestone-title">Deeper Bonds</div>
-        </div>
-        <div class="a2-milestone-card r" style="transition-delay:0.2s">
-          <div class="a2-milestone-num">10</div>
-          <div class="a2-milestone-label">Year Ten</div>
-          <div class="a2-milestone-title">A Golden Decade</div>
-        </div>
+      <div class="decade-panel-body">
+        <p class="decade-panel-text">Two hearts became one. The beginning of the most beautiful journey, marked by vows, tears of joy, and the promise of forever.</p>
       </div>
     </div>
-  </section>
-
-  <!-- ═══════════════════════════════ TOAST ══════════════════════════════ -->
-  <section class="a2-toast">
-    <div class="a2-toast-inner r">
-      <span class="a2-toast-emoji">🥂</span>
-      <div class="a2-toast-headline">Here's to 10 More!</div>
-      <div class="a2-quote-mark">"</div>
-      <p class="a2-toast-quote" data-field="message">A decade of love, partnership, and beautiful memories. Celebrate with us!</p>
+    <div class="decade-panel reveal reveal-delay-1">
+      <div class="decade-panel-header">
+        <div class="decade-panel-year">3</div>
+        <div class="decade-panel-icon">🏠</div>
+        <div class="decade-panel-title">Our First Home</div>
+      </div>
+      <div class="decade-panel-body">
+        <p class="decade-panel-text">Four walls became a sanctuary. Every corner filled with laughter, warmth, and the quiet joy of building something entirely your own.</p>
+      </div>
     </div>
-  </section>
-
-  <!-- ═══════════════════════════════ FOOTER ════════════════════════════ -->
-  <footer class="a2-footer">
-    <div class="a2-footer-names r">
-      <span data-field="name1">Arun</span> &amp; <span data-field="name2">Kavitha</span>
+    <div class="decade-panel reveal reveal-delay-2">
+      <div class="decade-panel-header">
+        <div class="decade-panel-year">5</div>
+        <div class="decade-panel-icon">✈️</div>
+        <div class="decade-panel-title">Traveled Together</div>
+      </div>
+      <div class="decade-panel-body">
+        <p class="decade-panel-text">The world opened up. New cities, new horizons, new memories — discovering the best adventures are always ones you share.</p>
+      </div>
     </div>
-    <div class="a2-footer-years r"><span data-field="years">10</span> Years</div>
-    <div class="a2-footer-date r" data-field="date">January 15, 2027</div>
-    <div class="a2-footer-divider r"></div>
-    <a href="../../index.html" class="a2-footer-link r">invite.studio</a>
-  </footer>
+    <div class="decade-panel reveal">
+      <div class="decade-panel-header">
+        <div class="decade-panel-year">7</div>
+        <div class="decade-panel-icon">🌟</div>
+        <div class="decade-panel-title">Stronger Than Ever</div>
+      </div>
+      <div class="decade-panel-body">
+        <p class="decade-panel-text">Through every challenge faced and overcome, the bond only deepened. Seven years proved that love isn't fragile — it's forged.</p>
+      </div>
+    </div>
+    <div class="decade-panel reveal reveal-delay-1">
+      <div class="decade-panel-header">
+        <div class="decade-panel-year" data-field="years">10</div>
+        <div class="decade-panel-icon">💎</div>
+        <div class="decade-panel-title">A Decade of Love</div>
+      </div>
+      <div class="decade-panel-body">
+        <p class="decade-panel-text">Ten years of choosing each other every single day. Not the end of a chapter — the most luminous page of your forever story.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script src="../../js/payment.js"></script>
-  <script src="../../js/customize.js"></script>
-  <script>
-    // ── Constellation / Starfield ─────────────────────────────────────────
-    (function initConstellation() {
-      const canvas = document.getElementById('constellation-canvas');
-      const ctx = canvas.getContext('2d');
-      let stars = [];
+<!-- Family Tribute -->
+<section id="tribute">
+  <div class="section-title reveal">
+    <h2>A Family's Love</h2>
+    <div class="silver-divider"><span class="dot"></span></div>
+    <p class="subtitle">Words from those who love you most</p>
+  </div>
+  <div class="tribute-grid" id="tribute-grid">
+    <div class="tribute-card">
+      <div class="tribute-quote-mark">"</div>
+      <p class="tribute-text">You two are proof that a partnership built on kindness and laughter truly can stand the test of time.</p>
+      <div class="tribute-author">— Family</div>
+    </div>
+    <div class="tribute-card">
+      <div class="tribute-quote-mark">"</div>
+      <p class="tribute-text">Watching your love grow over these ten years has been one of life's most beautiful privileges.</p>
+      <div class="tribute-author">— Close Friends</div>
+    </div>
+    <div class="tribute-card">
+      <div class="tribute-quote-mark">"</div>
+      <p class="tribute-text">Here's to the decade behind you and all the extraordinary ones still to come. We celebrate you both.</p>
+      <div class="tribute-author">— The Krishnan Family</div>
+    </div>
+  </div>
+  <div class="tribute-form-wrap reveal">
+    <h3>Add Your Tribute</h3>
+    <div class="form-row">
+      <div class="form-field">
+        <label>Your Name</label>
+        <input type="text" id="tribute-name" placeholder="Name">
+      </div>
+      <div class="form-field">
+        <label>Relationship</label>
+        <input type="text" id="tribute-relation" placeholder="e.g. Cousin, Friend">
+      </div>
+    </div>
+    <div class="form-field" style="margin-bottom:1rem;">
+      <label>Your Message</label>
+      <textarea id="tribute-message" rows="3" placeholder="Share your love and wishes..."></textarea>
+    </div>
+    <button class="btn-silver" onclick="submitTribute()">✦ Add Tribute</button>
+  </div>
+</section>
 
-      function resize() {
-        canvas.width  = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
+<!-- Party Details -->
+<section id="party">
+  <div class="party-blur-bg"></div>
+  <div class="section-title reveal">
+    <h2>The Celebration</h2>
+    <div class="silver-divider"><span class="dot"></span></div>
+    <p class="subtitle" style="color:rgba(216,216,232,0.35);">An evening of elegance and joy</p>
+  </div>
+  <div class="party-glass-card reveal">
+    <div class="party-card-title" data-field="anniversary">Diamond Anniversary Celebration</div>
+    <div class="party-detail-row">
+      <div class="party-icon">📅</div>
+      <div>
+        <div class="party-detail-label">Date</div>
+        <div class="party-detail-value" data-field="date">January 15, 2027</div>
+      </div>
+    </div>
+    <div class="party-detail-row">
+      <div class="party-icon">🕖</div>
+      <div>
+        <div class="party-detail-label">Time</div>
+        <div class="party-detail-value" data-field="time">7:30 PM</div>
+      </div>
+    </div>
+    <div class="party-detail-row">
+      <div class="party-icon">📍</div>
+      <div>
+        <div class="party-detail-label">Venue</div>
+        <div class="party-detail-value" data-field="venue">ITC Grand Chola, Chennai</div>
+      </div>
+    </div>
+    <div class="party-detail-row">
+      <div class="party-icon">✉️</div>
+      <div>
+        <div class="party-detail-label">Hosted by</div>
+        <div class="party-detail-value" data-field="host">The Krishnan Family</div>
+      </div>
+    </div>
+    <div class="party-detail-row">
+      <div class="party-icon">💬</div>
+      <div>
+        <div class="party-detail-label">Message</div>
+        <div class="party-detail-value" style="font-style:italic;opacity:0.7;" data-field="message">A decade of love, partnership, and beautiful memories. Celebrate with us!</div>
+      </div>
+    </div>
+    <div class="dress-badge">👗 Dress Code: Silver &amp; Rose Gold</div>
+    <div class="map-placeholder">📍 Map Placeholder — Venue Location</div>
+  </div>
+</section>
 
-      // Create stars
-      for (let i = 0; i < 160; i++) {
-        stars.push({
-          x: Math.random(),
-          y: Math.random(),
-          r: 0.5 + Math.random() * 1.2,
-          alpha: 0.2 + Math.random() * 0.7,
-          speed: 0.0003 + Math.random() * 0.0006,
-          phase: Math.random() * Math.PI * 2
-        });
-      }
+<!-- Playlist -->
+<section id="playlist">
+  <div class="section-title reveal">
+    <h2>🎵 Songs of Their Era</h2>
+    <div class="silver-divider"><span class="dot"></span></div>
+    <p class="subtitle">The soundtrack of your love story</p>
+  </div>
+  <div class="playlist-grid">
+    <div class="song-card reveal" onclick="toggleSong(this,'Tum Hi Ho was playing on the radio the night they first danced together...')">
+      <div class="music-note">🎵</div>
+      <div class="song-title">Tum Hi Ho</div>
+      <div class="song-movie">Aashiqui 2 (2013)</div>
+      <div class="song-tooltip"></div>
+    </div>
+    <div class="song-card reveal reveal-delay-1" onclick="toggleSong(this,'Phir Le Aya Dil — the melody that played on their first road trip together...')">
+      <div class="music-note">🎶</div>
+      <div class="song-title">Phir Le Aya Dil</div>
+      <div class="song-movie">Barfi (2012)</div>
+      <div class="song-tooltip"></div>
+    </div>
+    <div class="song-card reveal reveal-delay-2" onclick="toggleSong(this,'Jeene Laga Hoon — their favourite song that year, played on repeat...')">
+      <div class="music-note">🎵</div>
+      <div class="song-title">Jeene Laga Hoon</div>
+      <div class="song-movie">Ramaiya Vastavaiya (2013)</div>
+      <div class="song-tooltip"></div>
+    </div>
+    <div class="song-card reveal" onclick="toggleSong(this,'Ilahi — the film they watched together on their anniversary every year...')">
+      <div class="music-note">🎶</div>
+      <div class="song-title">Ilahi</div>
+      <div class="song-movie">Yeh Jawaani Hai Deewani (2013)</div>
+      <div class="song-tooltip"></div>
+    </div>
+    <div class="song-card reveal reveal-delay-1" onclick="toggleSong(this,'Tera Yaar Hoon Main — their anthem, a reminder they are each other\'s best friend...')">
+      <div class="music-note">🎵</div>
+      <div class="song-title">Tera Yaar Hoon Main</div>
+      <div class="song-movie">Sonu Ke Titu Ki Sweety (2018)</div>
+      <div class="song-tooltip"></div>
+    </div>
+    <div class="song-card reveal reveal-delay-2" onclick="toggleSong(this,'Ae Dil Hai Mushkil — but theirs never was, because they always chose each other...')">
+      <div class="music-note">🎶</div>
+      <div class="song-title">Ae Dil Hai Mushkil</div>
+      <div class="song-movie">ADHM (2016)</div>
+      <div class="song-tooltip"></div>
+    </div>
+  </div>
+</section>
 
-      function draw(t) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        stars.forEach(s => {
-          const a = s.alpha * (0.6 + 0.4 * Math.sin(t * s.speed * 1000 + s.phase));
-          ctx.beginPath();
-          ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(200,200,240,${a})`;
-          ctx.fill();
-        });
-        requestAnimationFrame(draw);
-      }
-      requestAnimationFrame(draw);
-    })();
+<!-- RSVP -->
+<section id="rsvp">
+  <div class="section-title reveal">
+    <h2>RSVP</h2>
+    <div class="silver-divider"><span class="dot"></span></div>
+    <p class="subtitle">Join us for the celebration</p>
+  </div>
+  <div class="rsvp-container reveal">
+    <div id="rsvp-form-inner">
+      <div class="form-row">
+        <div class="form-field">
+          <label>Full Name</label>
+          <input type="text" id="rsvp-name" placeholder="Your name">
+        </div>
+        <div class="form-field">
+          <label>Will you attend?</label>
+          <select id="rsvp-attending">
+            <option value="">Select...</option>
+            <option>Joyfully Attending</option>
+            <option>Attending with Family</option>
+            <option>Unable to Attend</option>
+          </select>
+        </div>
+      </div>
+      <div class="guest-count-row">
+        <label>Guests</label>
+        <button class="count-btn" onclick="adjustCount(-1)">−</button>
+        <div id="guest-count-display">1</div>
+        <button class="count-btn" onclick="adjustCount(1)">+</button>
+      </div>
+      <div class="form-field" style="margin-bottom:1rem;">
+        <label>Message for the Couple</label>
+        <textarea id="rsvp-message" rows="3" placeholder="Your wishes..."></textarea>
+      </div>
+      <button class="btn-silver" onclick="submitRSVP()">✦ Confirm RSVP</button>
+    </div>
+    <div class="rsvp-success" id="rsvp-success">
+      <p>💕 We can't wait to celebrate with you!</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--platinum);opacity:0.7;margin-top:1rem;">See you on the day — it will be magical.</p>
+    </div>
+  </div>
+</section>
 
-    // ── initPreview ───────────────────────────────────────────────────────
-    document.addEventListener('DOMContentLoaded', () => {
-      InviteCustomize.initPreview({
-        name1:       "Arun",
-        name2:       "Kavitha",
-        years:       "10",
-        date:        "January 15, 2027",
-        time:        "7:30 PM",
-        venue:       "ITC Grand Chola, Chennai",
-        message:     "A decade of love, partnership, and beautiful memories. Celebrate with us!",
-        host:        "The Krishnan Family",
-        anniversary: "Diamond"
+<!-- Footer -->
+<footer>
+  <div class="footer-names">
+    <span data-field="name1">Arun</span> &amp; <span data-field="name2">Kavitha</span>
+  </div>
+  <div class="footer-subtitle"><span data-field="years">10</span> Years &amp; Counting ✦ Forever in Silver</div>
+  <a href="../../index.html" class="footer-back">← Back to Marketplace</a>
+</footer>
+
+<script src="../../js/payment.js"></script>
+<script src="../../js/customize.js"></script>
+<script>
+  /* ─── Loading Screen — Diamond Drawing ─── */
+  (function() {
+    const outline = document.getElementById('diamond-outline');
+    if (outline) {
+      const len = outline.getTotalLength ? outline.getTotalLength() : 340;
+      outline.style.cssText += `
+        fill: none;
+        stroke: url(#diamondGrad);
+        stroke-width: 2.5;
+        stroke-dasharray: ${len};
+        stroke-dashoffset: ${len};
+        animation: drawDiamond 1.2s ease forwards;
+      `;
+    }
+
+    /* Spawn sparkles after draw */
+    setTimeout(() => {
+      const wrap = document.getElementById('loading-diamond-wrap');
+      const offsets = [
+        ['30px','-35px'],['−30px','-35px'],['42px','-5px'],['−42px','-5px'],
+        ['25px','30px'],['−25px','30px'],['0px','-45px'],['0px','40px'],
+      ];
+      offsets.forEach(([tx, ty], i) => {
+        const s = document.createElement('div');
+        s.className = 'diamond-sparkle';
+        s.style.cssText = `left:calc(50% - 3px);top:calc(50% - 3px);--tx:${tx};--ty:${ty};--delay:${1.2 + i * 0.07}s;--dur:0.55s;background:${i % 2 === 0 ? '#fff' : '#b8b8d8'};`;
+        wrap.appendChild(s);
       });
-    });
-  </script>
+    }, 100);
 
+    setTimeout(() => {
+      document.getElementById('loading-screen').classList.add('hidden');
+    }, 1800);
+  })();
+
+  /* ─── Hamburger ─── */
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+
+  /* ─── Starfield Canvas ─── */
+  (function() {
+    const canvas = document.getElementById('starfield-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, stars = [];
+
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    resize();
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 200; i++) {
+        stars.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: 0.4 + Math.random() * 2,
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.15,
+          brightness: 0.3 + Math.random() * 0.7,
+          sparkle: Math.random() > 0.85,
+          phase: Math.random() * Math.PI * 2,
+          phaseSpeed: 0.02 + Math.random() * 0.04,
+        });
+      }
+    }
+    initStars();
+
+    function animate() {
+      ctx.clearRect(0, 0, W, H);
+
+      /* Constellation lines */
+      for (let i = 0; i < stars.length; i++) {
+        for (let j = i + 1; j < stars.length; j++) {
+          const dx = stars[i].x - stars[j].x;
+          const dy = stars[i].y - stars[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(144,144,192,${(1 - dist / 100) * 0.11})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(stars[i].x, stars[i].y);
+            ctx.lineTo(stars[j].x, stars[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      /* Stars */
+      stars.forEach(s => {
+        s.x += s.vx;
+        s.y += s.vy;
+        if (s.x < 0) s.x = W;
+        if (s.x > W) s.x = 0;
+        if (s.y < 0) s.y = H;
+        if (s.y > H) s.y = 0;
+
+        let r = s.r;
+        let alpha = s.brightness;
+        if (s.sparkle) {
+          s.phase += s.phaseSpeed;
+          const pulse = 0.5 + 0.5 * Math.sin(s.phase);
+          r = s.r * (1 + pulse * 0.8);
+          alpha = s.brightness * (0.5 + 0.5 * pulse);
+        }
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(216,216,232,${alpha})`;
+        ctx.fill();
+
+        if (s.sparkle && s.r > 1.2) {
+          const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, r * 3);
+          g.addColorStop(0, `rgba(255,255,255,${alpha * 0.3})`);
+          g.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, r * 3, 0, Math.PI * 2);
+          ctx.fillStyle = g;
+          ctx.fill();
+        }
+      });
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+
+  /* ─── Counter Animation ─── */
+  function animateCounter(el, target, duration) {
+    let start = null;
+    const step = ts => {
+      if (!start) start = ts;
+      const prog = Math.min((ts - start) / duration, 1);
+      el.textContent = Math.floor(prog * target);
+      if (prog < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  }
+
+  /* ─── Countdown ─── */
+  function updateCountdown() {
+    const dateEl = document.querySelector('[data-field="date"]');
+    if (!dateEl) return;
+    const target = new Date(dateEl.textContent);
+    if (isNaN(target)) return;
+    const diff = target - new Date();
+    if (diff <= 0) {
+      ['cnt-days','cnt-hours','cnt-mins','cnt-secs'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent='0'; });
+      return;
+    }
+    const d = document.getElementById('cnt-days');
+    const h = document.getElementById('cnt-hours');
+    const m = document.getElementById('cnt-mins');
+    const s = document.getElementById('cnt-secs');
+    if (d) d.textContent = String(Math.floor(diff / 86400000)).padStart(2,'0');
+    if (h) h.textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+    if (m) m.textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+    if (s) s.textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ─── Parallax ─── */
+  window.addEventListener('scroll', () => {
+    const hero = document.getElementById('hero');
+    const content = hero.querySelector('.hero-content');
+    const sy = window.scrollY;
+    if (sy < window.innerHeight) content.style.transform = `translateY(${sy * 0.3}px)`;
+  });
+
+  /* ─── String Lights ─── */
+  (function() {
+    const container = document.getElementById('string-lights');
+    const colors = ['#c9607a','#9090c0','#d8d8e8','#e07a90','#b8b8d8','#ffffff'];
+    for (let i = 0; i < 18; i++) {
+      const bulb = document.createElement('div');
+      bulb.className = 'bulb';
+      const color = colors[i % colors.length];
+      bulb.style.cssText = `left:${(i / 17) * 100}%;background:${color};color:${color};--delay:${(Math.random() * 2).toFixed(2)}s;`;
+      container.appendChild(bulb);
+    }
+  })();
+
+  /* ─── Decade Scroll Nav ─── */
+  function scrollDecades(dir) {
+    const el = document.getElementById('decades-scroll');
+    el.scrollBy({ left: dir * 230, behavior: 'smooth' });
+  }
+
+  /* ─── Song Tooltip Toggle ─── */
+  function toggleSong(card, message) {
+    const wasPlaying = card.classList.contains('playing');
+    document.querySelectorAll('.song-card').forEach(c => {
+      c.classList.remove('playing');
+      c.querySelector('.song-tooltip').textContent = '';
+    });
+    if (!wasPlaying) {
+      card.classList.add('playing');
+      card.querySelector('.song-tooltip').textContent = '\u266a ' + message;
+    }
+  }
+
+  /* ─── Tribute Form ─── */
+  function submitTribute() {
+    const name = document.getElementById('tribute-name').value.trim();
+    const relation = document.getElementById('tribute-relation').value.trim();
+    const message = document.getElementById('tribute-message').value.trim();
+    if (!name || !message) { alert('Please fill in your name and message.'); return; }
+    const card = document.createElement('div');
+    card.className = 'tribute-card';
+    card.innerHTML = `<div class="tribute-quote-mark">"</div><p class="tribute-text">${message}</p><div class="tribute-author">— ${name}${relation ? ', ' + relation : ''}</div>`;
+    document.getElementById('tribute-grid').appendChild(card);
+    const stored = JSON.parse(localStorage.getItem('ann2-tributes') || '[]');
+    stored.push({ name, relation, message });
+    localStorage.setItem('ann2-tributes', JSON.stringify(stored));
+    document.getElementById('tribute-name').value = '';
+    document.getElementById('tribute-relation').value = '';
+    document.getElementById('tribute-message').value = '';
+  }
+
+  /* ─── Guest Count ─── */
+  let guestCount = 1;
+  function adjustCount(delta) {
+    guestCount = Math.max(1, Math.min(20, guestCount + delta));
+    document.getElementById('guest-count-display').textContent = guestCount;
+  }
+
+  /* ─── RSVP + Sparkle ─── */
+  function launchSparkle() {
+    const colors = ['#9090c0','#d8d8e8','#c9607a','#ffffff','#b8b8d8'];
+    for (let i = 0; i < 50; i++) {
+      const el = document.createElement('div');
+      el.className = 'sparkle-particle';
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 60 + Math.random() * 100;
+      el.style.cssText = `
+        left:${30 + Math.random() * 40}%;
+        top:60%;
+        background:${colors[Math.floor(Math.random() * colors.length)]};
+        border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
+        --dur:${(0.8 + Math.random() * 0.8).toFixed(2)}s;
+        --delay:${(Math.random() * 0.3).toFixed(2)}s;
+        --tx:${(Math.cos(angle) * dist).toFixed(0)}px;
+        --ty:${(-60 - Math.random() * 80).toFixed(0)}px;
+      `;
+      document.body.appendChild(el);
+      el.addEventListener('animationend', () => el.remove());
+    }
+  }
+
+  function submitRSVP() {
+    const name = document.getElementById('rsvp-name').value.trim();
+    const attending = document.getElementById('rsvp-attending').value;
+    const message = document.getElementById('rsvp-message').value.trim();
+    if (!name || !attending) { alert('Please fill in your name and attendance.'); return; }
+    const stored = JSON.parse(localStorage.getItem('ann2-rsvps') || '[]');
+    stored.push({ name, attending, guests: guestCount, message });
+    localStorage.setItem('ann2-rsvps', JSON.stringify(stored));
+    launchSparkle();
+    document.getElementById('rsvp-form-inner').style.display = 'none';
+    document.getElementById('rsvp-success').classList.add('show');
+  }
+
+  /* ─── Scroll Reveal ─── */
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('revealed');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* ─── DOMContentLoaded ─── */
+  document.addEventListener('DOMContentLoaded', () => {
+    InviteCustomize.initPreview({
+      name1: "Arun",
+      name2: "Kavitha",
+      years: "10",
+      date: "January 15, 2027",
+      time: "7:30 PM",
+      venue: "ITC Grand Chola, Chennai",
+      message: "A decade of love, partnership, and beautiful memories. Celebrate with us!",
+      host: "The Krishnan Family",
+      anniversary: "Diamond"
+    });
+
+    /* Years counter */
+    setTimeout(() => {
+      const el = document.getElementById('hero-years');
+      const dataEl = document.querySelector('[data-field="years"]');
+      const target = dataEl ? parseInt(dataEl.textContent) || 10 : 10;
+      animateCounter(el, target, 2000);
+    }, 1950);
+
+    /* Load saved tributes */
+    const stored = JSON.parse(localStorage.getItem('ann2-tributes') || '[]');
+    stored.forEach(t => {
+      const card = document.createElement('div');
+      card.className = 'tribute-card';
+      card.innerHTML = `<div class="tribute-quote-mark">"</div><p class="tribute-text">${t.message}</p><div class="tribute-author">— ${t.name}${t.relation ? ', ' + t.relation : ''}</div>`;
+      document.getElementById('tribute-grid').appendChild(card);
+    });
+  });
+</script>
 </body>
 </html>
