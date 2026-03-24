@@ -1243,10 +1243,14 @@
   <section id="testimonials" style="padding:5rem 1.5rem;background:linear-gradient(160deg,#0d0500,#1a0800);overflow:hidden;">
     <p style="font-size:0.65rem;letter-spacing:0.5em;text-transform:uppercase;color:rgba(201,148,42,0.7);text-align:center;margin-bottom:0.5rem;">What families say</p>
     <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);color:#f5dfa0;text-align:center;margin-bottom:3rem;">Love from Our Customers</h2>
-    <div style="display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:1rem;scrollbar-width:none;max-width:1100px;margin:0 auto;">
-      <style>#testimonials ::-webkit-scrollbar{display:none;}</style>
+    <style>
+      #testimonials .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; max-width:1100px; margin:0 auto; }
+      @media (max-width:900px) { #testimonials .testi-grid { grid-template-columns:repeat(2,1fr); } }
+      @media (max-width:560px) { #testimonials .testi-grid { grid-template-columns:1fr; } }
+    </style>
+    <div class="testi-grid">
       <!-- Review cards -->
-      <div style="min-width:300px;scroll-snap-align:start;background:linear-gradient(145deg,rgba(255,253,245,0.06),rgba(201,148,42,0.08));border:1px solid rgba(201,148,42,0.25);padding:2rem;flex-shrink:0;">
+      <div style="background:linear-gradient(145deg,rgba(255,253,245,0.06),rgba(201,148,42,0.08));border:1px solid rgba(201,148,42,0.25);padding:2rem;">
         <div style="color:#c9942a;font-size:1rem;margin-bottom:0.8rem;">★★★★★</div>
         <p style="font-family:'Cormorant Garamond','Playfair Display',serif;font-style:italic;font-size:0.95rem;color:#f5dfa0;line-height:1.8;margin-bottom:1.2rem;">"The South Indian wedding template was breathtaking. All our guests were amazed — they thought we hired a professional designer!"</p>
         <div style="display:flex;align-items:center;gap:0.8rem;">
@@ -1254,7 +1258,7 @@
           <div><div style="font-size:0.78rem;font-weight:600;color:#e8b84b;">Priya & Arjun Reddy</div><div style="font-size:0.65rem;color:rgba(201,148,42,0.5);letter-spacing:0.1em;">Wedding · Hyderabad</div></div>
         </div>
       </div>
-      <div style="min-width:300px;scroll-snap-align:start;background:linear-gradient(145deg,rgba(255,253,245,0.06),rgba(201,148,42,0.08));border:1px solid rgba(201,148,42,0.25);padding:2rem;flex-shrink:0;">
+      <div style="background:linear-gradient(145deg,rgba(255,253,245,0.06),rgba(201,148,42,0.08));border:1px solid rgba(201,148,42,0.25);padding:2rem;">
         <div style="color:#c9942a;font-size:1rem;margin-bottom:0.8rem;">★★★★★</div>
         <p style="font-family:'Cormorant Garamond','Playfair Display',serif;font-style:italic;font-size:0.95rem;color:#f5dfa0;line-height:1.8;margin-bottom:1.2rem;">"Used the Griha Pravesham template for our housewarming. The kolam animation and marigold garland made it feel like a real invitation. Loved every bit!"</p>
         <div style="display:flex;align-items:center;gap:0.8rem;">
@@ -1262,7 +1266,7 @@
           <div><div style="font-size:0.78rem;font-weight:600;color:#e8b84b;">Meena Sharma</div><div style="font-size:0.65rem;color:rgba(201,148,42,0.5);letter-spacing:0.1em;">Housewarming · Bangalore</div></div>
         </div>
       </div>
-      <div style="min-width:300px;scroll-snap-align:start;background:linear-gradient(145deg,rgba(255,253,245,0.06),rgba(201,148,42,0.08));border:1px solid rgba(201,148,42,0.25);padding:2rem;flex-shrink:0;">
+      <div style="background:linear-gradient(145deg,rgba(255,253,245,0.06),rgba(201,148,42,0.08));border:1px solid rgba(201,148,42,0.25);padding:2rem;">
         <div style="color:#c9942a;font-size:1rem;margin-bottom:0.8rem;">★★★★★</div>
         <p style="font-family:'Cormorant Garamond','Playfair Display',serif;font-style:italic;font-size:0.95rem;color:#f5dfa0;line-height:1.8;margin-bottom:1.2rem;">"The Memory Vault feature is genius! All our guests uploaded photos automatically and we had a beautiful album the same day. Worth every rupee."</p>
         <div style="display:flex;align-items:center;gap:0.8rem;">
@@ -1270,7 +1274,7 @@
           <div><div style="font-size:0.78rem;font-weight:600;color:#e8b84b;">Rahul & Divya Kapoor</div><div style="font-size:0.65rem;color:rgba(201,148,42,0.5);letter-spacing:0.1em;">Anniversary · Mumbai</div></div>
         </div>
       </div>
-      <div style="min-width:300px;scroll-snap-align:start;background:linear-gradient(145deg,rgba(255,253,245,0.06),rgba(201,148,42,0.08));border:1px solid rgba(201,148,42,0.25);padding:2rem;flex-shrink:0;">
+      <div style="background:linear-gradient(145deg,rgba(255,253,245,0.06),rgba(201,148,42,0.08));border:1px solid rgba(201,148,42,0.25);padding:2rem;">
         <div style="color:#c9942a;font-size:1rem;margin-bottom:0.8rem;">★★★★★</div>
         <p style="font-family:'Cormorant Garamond','Playfair Display',serif;font-style:italic;font-size:0.95rem;color:#f5dfa0;line-height:1.8;margin-bottom:1.2rem;">"My daughter's Seemantham invitation was so beautiful — the banana leaf design and lullaby section had everyone emotional. Thank you invite.studio!"</p>
         <div style="display:flex;align-items:center;gap:0.8rem;">
@@ -1278,7 +1282,7 @@
           <div><div style="font-size:0.78rem;font-weight:600;color:#e8b84b;">Kamala Venkatesh</div><div style="font-size:0.65rem;color:rgba(201,148,42,0.5);letter-spacing:0.1em;">Baby Shower · Chennai</div></div>
         </div>
       </div>
-      <div style="min-width:300px;scroll-snap-align:start;background:linear-gradient(145deg,rgba(255,253,245,0.06),rgba(201,148,42,0.08));border:1px solid rgba(201,148,42,0.25);padding:2rem;flex-shrink:0;">
+      <div style="background:linear-gradient(145deg,rgba(255,253,245,0.06),rgba(201,148,42,0.08));border:1px solid rgba(201,148,42,0.25);padding:2rem;">
         <div style="color:#c9942a;font-size:1rem;margin-bottom:0.8rem;">★★★★★</div>
         <p style="font-family:'Cormorant Garamond','Playfair Display',serif;font-style:italic;font-size:0.95rem;color:#f5dfa0;line-height:1.8;margin-bottom:1.2rem;">"The RSVP dashboard is incredibly useful. I could track exactly how many guests confirmed and their dietary needs. Saved so much stress!"</p>
         <div style="display:flex;align-items:center;gap:0.8rem;">
@@ -1287,7 +1291,6 @@
         </div>
       </div>
     </div>
-    <p style="text-align:center;font-size:0.65rem;letter-spacing:0.2em;color:rgba(201,148,42,0.35);margin-top:1.5rem;">← Scroll for more →</p>
   </section>
 
   <!-- ── FAQ ───────────────────────────────────────────────────────────── -->

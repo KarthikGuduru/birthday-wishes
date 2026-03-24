@@ -319,6 +319,28 @@
             <input id="f-host" class="form-input" type="text" name="host" placeholder="e.g. The Kumar Family">
           </div>
 
+          <div class="form-section-title" style="margin-top:0.5rem;">Renewal of Vows</div>
+
+          <div class="form-group">
+            <label class="form-label" for="f-vows">Vows / Blessing Text</label>
+            <textarea id="f-vows" class="form-textarea" name="vows" placeholder="e.g. We renew our promise to love, cherish and honour each other for all the years to come..." rows="3"></textarea>
+            <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.3rem;">Optional — leave blank if no renewal of vows ceremony</p>
+          </div>
+
+          <div class="form-section-title" style="margin-top:0.5rem;">Photos</div>
+
+          <div class="form-group">
+            <label class="form-label" for="f-photo">Couple / Hero Photo</label>
+            <input id="f-photo" class="form-input" type="file" accept="image/*" style="padding:0.5rem 0.8rem;cursor:pointer;">
+            <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.3rem;">Couple photo shown in the invitation header</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="f-gallery">Memory Gallery Photos</label>
+            <input id="f-gallery" class="form-input" type="file" accept="image/*" multiple style="padding:0.5rem 0.8rem;cursor:pointer;">
+            <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.3rem;">Share treasured memories across the years</p>
+          </div>
+
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save Invitation</button>
             <button type="button" id="open-preview-btn" class="btn btn-gold">Open Full Preview</button>
@@ -372,6 +394,12 @@
           <div class="lp-message">"{{message}}"</div>
 
           <div class="lp-host">Hosted by <span>{{host}}</span></div>
+
+          <div style="margin-top:0.8rem;font-family:var(--font-display);font-style:italic;font-size:0.72rem;color:rgba(245,223,160,0.7);line-height:1.5;padding:0 0.5rem;">{{vows}}</div>
+
+          <div id="photo-preview-wrap" style="display:none;margin-top:0.8rem;">
+            <img id="preview-hero-img" src="" alt="" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(201,148,42,0.45);">
+          </div>
         </div>
       </div>
 
@@ -383,6 +411,19 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       InviteCustomize.init('anniversary-1', 'anniversary-1.html', '../../index.html');
+    });
+
+    // Photo preview
+    document.getElementById('f-photo')?.addEventListener('change', function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.getElementById('preview-hero-img');
+        const wrap = document.getElementById('photo-preview-wrap');
+        if (img && wrap) { img.src = e.target.result; wrap.style.display = 'block'; }
+      };
+      reader.readAsDataURL(file);
     });
   </script>
 

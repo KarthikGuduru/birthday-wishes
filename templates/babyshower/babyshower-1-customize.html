@@ -202,18 +202,34 @@
     <!-- ── FORM PANEL ── -->
     <div class="form-panel">
 
-      <p class="form-section-heading">Mother</p>
-      <div class="form-group">
-        <label class="form-label" for="f-motherName">Mother's Name</label>
-        <input class="form-input" id="f-motherName" type="text" data-preview="motherName" value="Priya Reddy" placeholder="e.g. Priya Reddy" />
+      <p class="form-section-heading">Parents</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-motherName">Mother's Name</label>
+          <input class="form-input" id="f-motherName" type="text" data-preview="motherName" value="Priya Reddy" placeholder="e.g. Priya Reddy" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-fatherName">Father's Name</label>
+          <input class="form-input" id="f-fatherName" type="text" data-preview="fatherName" value="Aditya Reddy" placeholder="e.g. Aditya Reddy" />
+        </div>
       </div>
       <div class="form-group">
-        <label class="form-label" for="f-babyGender">Baby Gender</label>
-        <select class="form-select" id="f-babyGender" data-preview="babyGender">
-          <option value="">Unknown / Surprise</option>
-          <option value="Boy">Boy</option>
-          <option value="Girl">Girl</option>
-        </select>
+        <label class="form-label" for="f-babyName">Baby Name (optional)</label>
+        <input class="form-input" id="f-babyName" type="text" data-preview="babyName" value="" placeholder="e.g. Aarav (leave blank if not yet decided)" />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-babyGender">Baby Gender</label>
+          <select class="form-select" id="f-babyGender" data-preview="babyGender">
+            <option value="">Unknown / Surprise</option>
+            <option value="Boy">Boy</option>
+            <option value="Girl">Girl</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-dueDate">Expected Due Date</label>
+          <input class="form-input" id="f-dueDate" type="date" data-preview="dueDate" />
+        </div>
       </div>
 
       <p class="form-section-heading">Ceremony</p>
@@ -250,6 +266,18 @@
         <textarea class="form-textarea" id="f-message" data-preview="message" placeholder="Your personal message" style="min-height:90px;">We invite you to bless the mother-to-be and the little one on this auspicious occasion</textarea>
       </div>
 
+      <p class="form-section-heading">Photos</p>
+      <div class="form-group">
+        <label class="form-label" for="f-photo">Mother / Parents Photo</label>
+        <input class="form-input" id="f-photo" type="file" accept="image/*" style="padding:0.5rem 0.8rem;cursor:pointer;">
+        <p style="font-size:0.72rem;color:rgba(245,224,128,0.5);margin-top:0.3rem;">Photo shown in the invitation header</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-gallery">Gallery / Event Photos</label>
+        <input class="form-input" id="f-gallery" type="file" accept="image/*" multiple style="padding:0.5rem 0.8rem;cursor:pointer;">
+        <p style="font-size:0.72rem;color:rgba(245,224,128,0.5);margin-top:0.3rem;">Maternity &amp; event photos for the guest gallery</p>
+      </div>
+
       <button class="btn-primary" id="previewBtn">Preview Full Invitation ↗</button>
       <button class="btn-gold" id="purchaseBtn">Purchase &amp; Download — ₹500</button>
 
@@ -268,6 +296,9 @@
         <p class="pv-intro">Sri Mahalakshmi Kataksham</p>
         <p class="pv-ceremony" id="pv-ceremony">Seemantham &amp; Valaikaapu</p>
         <p class="pv-name" id="pv-motherName">Priya Reddy</p>
+        <p style="font-size:0.65rem;color:#7a5020;margin-bottom:6px;">& <span id="pv-fatherName">Aditya Reddy</span></p>
+        <p id="pv-babyName" style="font-family:'Great Vibes',cursive;font-size:1rem;color:var(--forest-mid);margin-bottom:8px;display:none;"></p>
+        <p id="pv-dueDate" style="font-size:0.62rem;color:#7a5020;margin-bottom:8px;display:none;">Expected: <span></span></p>
 
         <p class="pv-detail"><strong>Date:</strong> <span id="pv-date">August 10, 2026</span></p>
         <p class="pv-detail"><strong>Time:</strong> <span id="pv-time">10:00 AM</span></p>
@@ -299,6 +330,7 @@
 
     const fieldMap = {
       'f-motherName': { id: 'pv-motherName', type: 'text' },
+      'f-fatherName': { id: 'pv-fatherName', type: 'text' },
       'f-ceremony':   { id: 'pv-ceremony',   type: 'text' },
       'f-host':       { id: 'pv-host',       type: 'text' },
       'f-date':       { id: 'pv-date',       type: 'date' },
@@ -306,6 +338,20 @@
       'f-venue':      { id: 'pv-venue',      type: 'text' },
       'f-message':    { id: 'pv-message',    type: 'text' },
     };
+
+    // Baby name & due date with show/hide logic
+    document.getElementById('f-babyName')?.addEventListener('input', function() {
+      const el = document.getElementById('pv-babyName');
+      if (el) { el.textContent = this.value; el.style.display = this.value ? 'block' : 'none'; }
+    });
+    document.getElementById('f-dueDate')?.addEventListener('input', function() {
+      const wrap = document.getElementById('pv-dueDate');
+      if (wrap) {
+        const span = wrap.querySelector('span');
+        if (span) span.textContent = this.value ? new Date(this.value + 'T12:00:00').toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'}) : '';
+        wrap.style.display = this.value ? 'block' : 'none';
+      }
+    });
 
     Object.entries(fieldMap).forEach(([inputId, { id, type }]) => {
       const input = document.getElementById(inputId);
@@ -333,6 +379,24 @@
     }
     document.getElementById('purchaseBtn').addEventListener('click', triggerPurchase);
     document.getElementById('topBuyBtn').addEventListener('click', triggerPurchase);
+
+    // Photo preview
+    document.getElementById('f-photo')?.addEventListener('change', function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        let img = document.getElementById('pv-photo-img');
+        if (!img) {
+          img = document.createElement('img');
+          img.id = 'pv-photo-img';
+          img.style.cssText = 'width:70px;height:70px;border-radius:50%;object-fit:cover;border:2px solid var(--turmeric);margin:8px auto 0;display:block;';
+          document.querySelector('.orn-card')?.appendChild(img);
+        }
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
 
     document.addEventListener('DOMContentLoaded', () => {
       if (window.InviteCustomize) {

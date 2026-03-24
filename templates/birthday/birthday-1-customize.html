@@ -289,6 +289,27 @@
             <input id="f-host" class="form-input" type="text" name="host" placeholder="e.g. The Kumar Family">
           </div>
 
+          <div class="form-section-title" style="margin-top:0.5rem;">Party Details</div>
+
+          <div class="form-group">
+            <label class="form-label" for="f-theme">Party Theme</label>
+            <input id="f-theme" class="form-input" type="text" name="theme" placeholder="e.g. Bollywood Night, Jungle Safari, Retro Party">
+          </div>
+
+          <div class="form-section-title" style="margin-top:0.5rem;">Photos</div>
+
+          <div class="form-group">
+            <label class="form-label" for="f-photo">Profile / Hero Photo</label>
+            <input id="f-photo" class="form-input" type="file" accept="image/*" style="padding:0.5rem 0.8rem;cursor:pointer;">
+            <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.3rem;">Profile photo shown in the invitation header</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="f-gallery">Gallery Photos</label>
+            <input id="f-gallery" class="form-input" type="file" accept="image/*" multiple style="padding:0.5rem 0.8rem;cursor:pointer;">
+            <p style="font-size:0.72rem;color:var(--text-dim);margin-top:0.3rem;">Select up to 10 photos for the guest gallery</p>
+          </div>
+
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save Invitation</button>
             <button type="button" id="open-preview-btn" class="btn btn-gold">Open Full Preview</button>
@@ -336,6 +357,12 @@
           <div class="lp-message">"{{message}}"</div>
 
           <div class="lp-host">Hosted by <span>{{host}}</span></div>
+
+          <div style="margin-top:0.6rem;font-size:0.6rem;letter-spacing:0.35em;text-transform:uppercase;color:rgba(201,148,42,0.65);">{{theme}}</div>
+
+          <div id="photo-preview-wrap" style="display:none;margin-top:0.8rem;">
+            <img id="preview-hero-img" src="" alt="" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid rgba(201,148,42,0.45);">
+          </div>
         </div>
       </div>
 
@@ -347,6 +374,19 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       InviteCustomize.init('birthday-1', 'birthday-1.html', '../../index.html');
+    });
+
+    // Photo preview handler
+    document.getElementById('f-photo')?.addEventListener('change', function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.getElementById('preview-hero-img');
+        const wrap = document.getElementById('photo-preview-wrap');
+        if (img && wrap) { img.src = e.target.result; wrap.style.display = 'block'; }
+      };
+      reader.readAsDataURL(file);
     });
   </script>
 

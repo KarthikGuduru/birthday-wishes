@@ -207,6 +207,10 @@
         <label class="form-label" for="f-host">Hosts (names)</label>
         <input class="form-input" id="f-host" type="text" data-preview="host" value="Anil &amp; Divya Mehta" placeholder="e.g. Anil &amp; Divya Mehta" />
       </div>
+      <div class="form-group">
+        <label class="form-label" for="f-houseName">House Name / Door Number</label>
+        <input class="form-input" id="f-houseName" type="text" data-preview="houseName" value="The Mehta House" placeholder="e.g. The Mehta House, Villa No. 7, Apt 3B" />
+      </div>
 
       <p class="form-section-heading">Event</p>
       <div class="form-group">
@@ -238,6 +242,18 @@
         <textarea class="form-textarea" id="f-message" data-preview="message" placeholder="Your personal message" style="min-height:90px;">Our home is your home — come celebrate with us!</textarea>
       </div>
 
+      <p class="form-section-heading">Photos</p>
+      <div class="form-group">
+        <label class="form-label" for="f-photo">Home / Family Photo</label>
+        <input class="form-input" id="f-photo" type="file" accept="image/*" style="padding:0.5rem 0.8rem;cursor:pointer;">
+        <p style="font-size:0.72rem;color:rgba(240,200,128,0.5);margin-top:0.3rem;">Photo of the new home or family for the invitation</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-gallery">Home / Event Photos</label>
+        <input class="form-input" id="f-gallery" type="file" accept="image/*" multiple style="padding:0.5rem 0.8rem;cursor:pointer;">
+        <p style="font-size:0.72rem;color:rgba(240,200,128,0.5);margin-top:0.3rem;">Home tour &amp; event photos for the guest gallery</p>
+      </div>
+
       <button class="btn-primary" id="previewBtn">Preview Full Invitation ↗</button>
       <button class="btn-copper" id="purchaseBtn">Purchase &amp; Download — ₹500</button>
 
@@ -249,6 +265,7 @@
       <div class="orn-card">
         <p class="preview-overline">OUR NEW HOME</p>
         <p class="preview-family" id="pv-family">The Mehta Family</p>
+        <p style="font-size:0.75rem;color:var(--teal);font-style:italic;margin-bottom:4px;" id="pv-houseName">The Mehta House</p>
         <div class="preview-bar"></div>
         <p class="preview-ceremony" id="pv-ceremony">Housewarming &amp; Open House</p>
 
@@ -282,13 +299,14 @@
     }
 
     const fieldMap = {
-      'f-family':   { id: 'pv-family',   type: 'text' },
-      'f-host':     { id: 'pv-host',     type: 'text' },
-      'f-ceremony': { id: 'pv-ceremony', type: 'text' },
-      'f-date':     { id: 'pv-date',     type: 'date' },
-      'f-time':     { id: 'pv-time',     type: 'time' },
-      'f-address':  { id: 'pv-address',  type: 'text' },
-      'f-message':  { id: 'pv-message',  type: 'text' },
+      'f-family':    { id: 'pv-family',    type: 'text' },
+      'f-houseName': { id: 'pv-houseName', type: 'text' },
+      'f-host':      { id: 'pv-host',      type: 'text' },
+      'f-ceremony':  { id: 'pv-ceremony',  type: 'text' },
+      'f-date':      { id: 'pv-date',      type: 'date' },
+      'f-time':      { id: 'pv-time',      type: 'time' },
+      'f-address':   { id: 'pv-address',   type: 'text' },
+      'f-message':   { id: 'pv-message',   type: 'text' },
     };
 
     Object.entries(fieldMap).forEach(([inputId, { id, type }]) => {
@@ -317,6 +335,24 @@
     }
     document.getElementById('purchaseBtn').addEventListener('click', triggerPurchase);
     document.getElementById('topBuyBtn').addEventListener('click', triggerPurchase);
+
+    // Photo preview
+    document.getElementById('f-photo')?.addEventListener('change', function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        let img = document.getElementById('pv-photo-img');
+        if (!img) {
+          img = document.createElement('img');
+          img.id = 'pv-photo-img';
+          img.style.cssText = 'width:70px;height:50px;object-fit:cover;border-left:3px solid var(--teal);margin:10px 0 0;display:block;';
+          document.querySelector('.orn-card')?.appendChild(img);
+        }
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
 
     document.addEventListener('DOMContentLoaded', () => {
       InviteCustomize.init('housewarming-2', 'housewarming-2.html', '../../index.html');

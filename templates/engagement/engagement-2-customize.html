@@ -239,8 +239,18 @@
           <input class="form-input" id="f-date" type="date" data-preview="date" value="2026-11-08" />
         </div>
         <div class="form-group">
-          <label class="form-label" for="f-time">Time</label>
+          <label class="form-label" for="f-time">Ceremony Time</label>
           <input class="form-input" id="f-time" type="time" data-preview="time" value="18:00" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-ringTime">Ring Exchange Time</label>
+          <input class="form-input" id="f-ringTime" type="time" data-preview="ringTime" value="18:30" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-receptionTime">Dinner / Reception Time</label>
+          <input class="form-input" id="f-receptionTime" type="time" data-preview="receptionTime" value="20:00" />
         </div>
       </div>
       <div class="form-group">
@@ -266,6 +276,18 @@
       <div class="form-group">
         <label class="form-label" for="f-message">Invitation Message</label>
         <textarea class="form-textarea" id="f-message" data-preview="message" style="min-height:90px;" placeholder="Your personal invitation message">Love is the beginning of everything — join us to celebrate ours</textarea>
+      </div>
+
+      <p class="form-section-heading">Photos</p>
+      <div class="form-group">
+        <label class="form-label" for="f-photo">Couple Photo</label>
+        <input class="form-input" id="f-photo" type="file" accept="image/*" style="padding:0.5rem 0.8rem;cursor:pointer;">
+        <p style="font-size:0.72rem;color:rgba(245,223,160,0.5);margin-top:0.3rem;">Couple photo shown in the invitation</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-gallery">Pre-function / Event Photos</label>
+        <input class="form-input" id="f-gallery" type="file" accept="image/*" multiple style="padding:0.5rem 0.8rem;cursor:pointer;">
+        <p style="font-size:0.72rem;color:rgba(245,223,160,0.5);margin-top:0.3rem;">Pre-engagement &amp; event photos for the gallery</p>
       </div>
 
       <button class="btn-primary" id="previewBtn">Preview Full Invitation ↗</button>
@@ -302,6 +324,14 @@
           <span class="preview-detail-label">Time</span>
           <span id="pv-time">6:00 PM</span>
         </div>
+        <div class="preview-detail-row">
+          <span class="preview-detail-label">Ring</span>
+          <span id="pv-ringTime">6:30 PM</span>
+        </div>
+        <div class="preview-detail-row">
+          <span class="preview-detail-label">Dinner</span>
+          <span id="pv-receptionTime">8:00 PM</span>
+        </div>
         <p class="preview-venue-text" id="pv-venue">The Taj Hotel, Colaba, Mumbai</p>
 
         <hr class="preview-divider" />
@@ -337,15 +367,17 @@
     }
 
     const fieldMap = {
-      'f-groomName':   { id: 'pv-groomName',   type: 'text' },
-      'f-brideName':   { id: 'pv-brideName',   type: 'text' },
-      'f-date':        { id: 'pv-date',        type: 'date' },
-      'f-time':        { id: 'pv-time',        type: 'time' },
-      'f-venue':       { id: 'pv-venue',       type: 'text' },
-      'f-groomFamily': { id: 'pv-groomFamily', type: 'text' },
-      'f-brideFamily': { id: 'pv-brideFamily', type: 'text' },
-      'f-host':        { id: 'pv-host',        type: 'text' },
-      'f-message':     { id: 'pv-message',     type: 'text' },
+      'f-groomName':     { id: 'pv-groomName',     type: 'text' },
+      'f-brideName':     { id: 'pv-brideName',     type: 'text' },
+      'f-date':          { id: 'pv-date',          type: 'date' },
+      'f-time':          { id: 'pv-time',          type: 'time' },
+      'f-ringTime':      { id: 'pv-ringTime',      type: 'time' },
+      'f-receptionTime': { id: 'pv-receptionTime', type: 'time' },
+      'f-venue':         { id: 'pv-venue',         type: 'text' },
+      'f-groomFamily':   { id: 'pv-groomFamily',   type: 'text' },
+      'f-brideFamily':   { id: 'pv-brideFamily',   type: 'text' },
+      'f-host':          { id: 'pv-host',          type: 'text' },
+      'f-message':       { id: 'pv-message',       type: 'text' },
     };
 
     Object.entries(fieldMap).forEach(([inputId, { id, type }]) => {
@@ -378,6 +410,24 @@
     }
     document.getElementById('purchaseBtn').addEventListener('click', triggerPurchase);
     document.getElementById('topBuyBtn').addEventListener('click', triggerPurchase);
+
+    // Photo preview
+    document.getElementById('f-photo')?.addEventListener('change', function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        let img = document.getElementById('pv-photo-img');
+        if (!img) {
+          img = document.createElement('img');
+          img.id = 'pv-photo-img';
+          img.style.cssText = 'width:70px;height:70px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);margin:8px auto 0;display:block;';
+          document.querySelector('.navy-card')?.appendChild(img);
+        }
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
 
     document.addEventListener('DOMContentLoaded', () => {
       InviteCustomize.init('engagement-2', 'engagement-2.html', '../../index.html');
