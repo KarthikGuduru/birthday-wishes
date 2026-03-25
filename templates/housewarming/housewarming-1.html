@@ -1683,5 +1683,26 @@
 </script>
 <script src="../../js/ux-polish.js" defer></script>
 <script src="../../js/features-bar.js" defer></script>
+<script>
+// ── Live preview mode (iframe from customize page) ──
+(function() {
+  if (new URLSearchParams(window.location.search).get('preview') === 'true') {
+    document.addEventListener('DOMContentLoaded', function() {
+      var el = document.querySelector('.purchase-banner');
+      if (el) el.style.display = 'none';
+      var backNav = document.querySelector('.back-nav');
+      if (backNav) backNav.style.display = 'none';
+      var ls = document.getElementById('loading-screen');
+      if (ls) ls.classList.add('hidden');
+    });
+  }
+  window.addEventListener('message', function(e) {
+    if (!e.data || e.data.type !== 'preview-update') return;
+    if (typeof InviteCustomize !== 'undefined' && InviteCustomize.initPreview) {
+      InviteCustomize.initPreview(e.data.data);
+    }
+  });
+})();
+</script>
 </body>
 </html>
