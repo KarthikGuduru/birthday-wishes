@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
   <style>
-    body { background: var(--cream); color: var(--text); }
+    body { background: #faf7f2; color: #1a1310; }
 
     /* ── Layout ── */
     .customize-wrap {
@@ -275,6 +275,11 @@
           <div class="form-group">
             <label class="form-label" for="f-venue">Venue</label>
             <input id="f-venue" class="form-input" type="text" name="venue" placeholder="e.g. The Grand Ballroom, Jubilee Hills">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-mapUrl">Google Maps Embed URL</label>
+            <input class="form-input" id="f-mapUrl" type="url" data-preview="mapUrl" value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1" placeholder="Paste Google Maps embed URL" />
+            <p style="font-size:0.72rem;color:rgba(90,74,58,0.6);margin-top:0.3rem;">Go to Google Maps → Share → Embed → Copy the src URL from the iframe</p>
           </div>
 
           <div class="form-section-title" style="margin-top:0.5rem;">Personal Touch</div>

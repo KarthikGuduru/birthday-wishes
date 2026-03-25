@@ -23,14 +23,20 @@
       --cream:        #fdf6e3;
       --cream-dark:   #f0e4c0;
       --near-black:   #080c00;
-      --gold:         #d4a010;
-      --gold-light:   #f0c848;
+      --gold:         #c9942a;
+      --gold-light:   #e8b84b;
+      --bg-primary:   #faf7f2;
+      --bg-white:     #ffffff;
+      --bg-alt:       #f5f0e8;
+      --text-dark:    #1a1310;
+      --text-body:    #2b2b2b;
+      --text-muted:   #444;
     }
 
     html { scroll-behavior: smooth; }
     body {
-      background: var(--near-black);
-      color: var(--cream);
+      background: var(--bg-primary);
+      color: var(--text-dark);
       font-family: 'Cormorant Garamond', serif;
       overflow-x: hidden;
     }
@@ -38,7 +44,7 @@
     /* ── Loading Screen ── */
     #loading-screen {
       position: fixed; inset: 0; z-index: 9999;
-      background: var(--green-dark);
+      background: #2c1a08;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       gap: 24px;
@@ -75,7 +81,7 @@
     /* ── Back Nav ── */
     .back-nav {
       position: fixed; top: 14px; left: 16px; z-index: 1100;
-      background: rgba(15,58,15,0.88);
+      background: rgba(250,247,242,0.92);
       border: 1px solid var(--gold);
       color: var(--gold);
       padding: 7px 16px;
@@ -85,22 +91,27 @@
       font-weight: 500;
       text-decoration: none;
       backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       transition: background 0.2s, color 0.2s;
     }
-    .back-nav:hover { background: var(--gold); color: var(--near-black); }
+    @media (hover: hover) and (pointer: fine) {
+      .back-nav:hover { background: var(--gold); color: #fff; }
+    }
+    .back-nav:active { transform: scale(0.97); }
 
     /* ── Purchase Banner ── */
     .purchase-banner {
       position: fixed; top: 0; right: 0; left: 0; z-index: 1050;
-      background: linear-gradient(90deg, var(--temple-green), var(--saffron-dark));
+      background: var(--bg-white);
       padding: 10px 20px;
       display: flex; align-items: center; justify-content: flex-end; gap: 12px;
-      border-bottom: 2px solid var(--gold);
+      border-bottom: 1px solid rgba(201,148,42,0.2);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
     }
     .purchase-banner .banner-label {
       font-family: 'Poppins', sans-serif;
       font-size: 0.8rem;
-      color: var(--cream);
+      color: var(--text-muted);
       margin-right: auto;
       padding-left: 120px;
     }
@@ -115,7 +126,10 @@
       text-decoration: none;
       transition: transform 0.15s, box-shadow 0.15s;
     }
-    .banner-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    @media (hover: hover) and (pointer: fine) {
+      .banner-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    }
+    .banner-btn:active { transform: scale(0.97); }
     .btn-customize {
       background: transparent;
       border: 1.5px solid var(--gold);
@@ -123,17 +137,17 @@
     }
     .btn-buy {
       background: var(--gold);
-      color: var(--near-black);
+      color: #fff;
     }
 
     /* ── Navbar ── */
     .navbar {
       position: sticky; top: 44px; z-index: 900;
-      background: linear-gradient(90deg, var(--green-dark) 0%, var(--temple-green) 60%, var(--saffron-dark) 100%);
+      background: var(--bg-white);
       padding: 0 24px;
       display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 2px solid var(--gold);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      border-bottom: 1px solid rgba(201,148,42,0.15);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
     }
     .navbar-logo {
       font-family: 'Great Vibes', cursive;
@@ -148,14 +162,16 @@
       font-family: 'Poppins', sans-serif;
       font-size: 0.78rem;
       font-weight: 500;
-      color: var(--cream);
+      color: var(--text-muted);
       text-decoration: none;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      transition: color 0.2s, background 0.2s;
+      transition: color 0.2s, border-color 0.2s;
       border-bottom: 3px solid transparent;
     }
-    .nav-links a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+    @media (hover: hover) and (pointer: fine) {
+      .nav-links a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+    }
 
     .hamburger {
       display: none;
@@ -165,7 +181,7 @@
       width: 24px; height: 2px;
       background: var(--gold);
       border-radius: 2px;
-      transition: all 0.3s;
+      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     @media (max-width: 768px) {
@@ -173,9 +189,10 @@
       .nav-links {
         display: none;
         position: absolute; top: 100%; left: 0; right: 0;
-        background: var(--green-dark);
+        background: var(--bg-white);
         flex-direction: column;
-        border-bottom: 2px solid var(--gold);
+        border-bottom: 1px solid rgba(201,148,42,0.15);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
       }
       .nav-links.open { display: flex; }
     }
@@ -184,7 +201,7 @@
     .hero {
       min-height: 100vh;
       padding-top: 44px;
-      background: linear-gradient(135deg, var(--green-dark) 0%, var(--temple-green) 40%, var(--saffron-dark) 80%, var(--saffron) 100%);
+      background: linear-gradient(135deg, #f5f0e8 0%, #faf7f2 40%, #fff8ee 80%, #faf7f2 100%);
       position: relative;
       overflow: hidden;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -194,7 +211,7 @@
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(212,160,16,0.18) 1px, transparent 1px);
+      background-image: radial-gradient(circle, rgba(201,148,42,0.12) 1px, transparent 1px);
       background-size: 28px 28px;
       pointer-events: none;
     }
@@ -279,7 +296,7 @@
       font-family: 'Great Vibes', cursive;
       font-size: clamp(3rem, 7vw, 5rem);
       color: var(--gold);
-      text-shadow: 0 2px 20px rgba(212,160,16,0.5), 0 0 60px rgba(212,160,16,0.2);
+      text-shadow: 0 2px 20px rgba(201,148,42,0.2);
       line-height: 1.1;
       margin-bottom: 12px;
     }
@@ -287,23 +304,25 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.4rem, 3vw, 2rem);
       font-style: italic;
-      color: var(--cream);
+      color: var(--text-body);
       margin-bottom: 24px;
     }
     .hero-date-box {
       display: inline-flex; gap: 32px; flex-wrap: wrap;
       justify-content: center;
-      background: rgba(15,58,15,0.6);
-      border: 2px solid var(--gold);
-      border-radius: 8px;
-      padding: 14px 32px;
+      background: var(--bg-white);
+      border: none;
+      border-top: 3px solid var(--gold);
+      border-radius: 16px;
+      padding: 16px 36px;
       margin-bottom: 24px;
       backdrop-filter: blur(6px);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .hero-date-item {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.1rem;
-      color: var(--cream);
+      color: var(--text-dark);
     }
     .hero-date-item span {
       display: block;
@@ -322,12 +341,13 @@
       margin-top: 16px;
     }
     .countdown-unit {
-      background: rgba(0,0,0,0.45);
-      border: 1px solid var(--gold);
-      border-radius: 8px;
-      padding: 12px 18px;
-      min-width: 72px;
+      background: var(--bg-white);
+      border: 1px solid rgba(201,148,42,0.15);
+      border-radius: 12px;
+      padding: 14px 20px;
+      min-width: 76px;
       text-align: center;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .countdown-unit .num {
       font-family: 'Playfair Display', serif;
@@ -340,7 +360,7 @@
     .countdown-unit .lbl {
       font-family: 'Poppins', sans-serif;
       font-size: 0.62rem;
-      color: var(--cream);
+      color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.08em;
       display: block;
@@ -361,7 +381,7 @@
     .section-subtitle {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.1rem;
-      color: var(--cream);
+      color: var(--text-muted);
       text-align: center;
       opacity: 0.7;
       margin-bottom: 48px;
@@ -372,12 +392,13 @@
       margin: 0 auto;
     }
     .invite-card {
-      background: var(--cream);
-      color: var(--near-black);
-      border-radius: 4px;
+      background: var(--bg-white);
+      color: var(--text-dark);
+      border-radius: 16px;
       padding: 48px;
       position: relative;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 2px var(--gold), 0 0 0 8px var(--cream), 0 0 0 10px var(--gold);
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .invite-card::before {
       content: '';
@@ -410,7 +431,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.6rem;
       font-weight: 600;
-      color: var(--near-black);
+      color: var(--text-dark);
       text-align: center;
       margin-bottom: 24px;
     }
@@ -436,10 +457,12 @@
     }
     @media (max-width: 500px) { .invite-details-grid { grid-template-columns: 1fr; } }
     .invite-detail {
-      background: rgba(212,160,16,0.08);
-      border: 1px solid rgba(212,160,16,0.3);
-      border-radius: 6px;
+      background: var(--bg-white);
+      border: none;
+      border-left: 3px solid var(--gold);
+      border-radius: 12px;
       padding: 14px 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.03);
     }
     .invite-detail .label {
       font-family: 'Poppins', sans-serif;
@@ -453,7 +476,7 @@
     .invite-detail .value {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.05rem;
-      color: var(--near-black);
+      color: var(--text-dark);
     }
     .invite-address {
       grid-column: 1 / -1;
@@ -478,19 +501,19 @@
 
     /* ── Pooja Timeline ── */
     .pooja-section {
-      background: linear-gradient(135deg, var(--saffron-dark) 0%, var(--saffron) 50%, var(--saffron-dark) 100%);
+      background: var(--bg-alt);
       padding: 80px 24px;
     }
     .pooja-title-wrap { text-align: center; margin-bottom: 12px; }
     .pooja-title {
       font-family: 'Great Vibes', cursive;
       font-size: clamp(2rem, 5vw, 3rem);
-      color: var(--cream);
+      color: var(--gold);
     }
     .pooja-title-telugu {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.3rem;
-      color: rgba(253,246,227,0.8);
+      color: var(--text-muted);
       margin-bottom: 48px;
       text-align: center;
     }
@@ -504,8 +527,9 @@
       position: absolute;
       left: 50%; top: 0; bottom: 0;
       width: 2px;
-      background: linear-gradient(to bottom, transparent, var(--cream) 10%, var(--cream) 90%, transparent);
+      background: linear-gradient(to bottom, transparent, var(--gold) 10%, var(--gold) 90%, transparent);
       transform: translateX(-50%);
+      opacity: 0.4;
     }
     @media (max-width: 600px) {
       .timeline::before { left: 20px; }
@@ -525,28 +549,31 @@
       left: 50%; top: 20px;
       width: 20px; height: 20px;
       background: var(--gold);
-      border: 3px solid var(--cream);
+      border: 3px solid var(--bg-alt);
       border-radius: 50%;
       transform: translateX(-50%);
       z-index: 1;
-      box-shadow: 0 0 12px var(--gold);
+      box-shadow: 0 0 12px rgba(201,148,42,0.3);
     }
     @media (max-width: 600px) {
       .timeline-dot { left: 20px; transform: translateX(-50%); }
     }
     .timeline-card {
       width: calc(50% - 40px);
-      background: rgba(253,246,227,0.12);
-      border: 1px solid rgba(253,246,227,0.3);
-      border-radius: 10px;
+      background: var(--bg-white);
+      border: none;
+      border-left: 3px solid var(--gold);
+      border-radius: 14px;
       padding: 18px 20px;
-      backdrop-filter: blur(4px);
-      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
     }
-    .timeline-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.2); }
+    @media (hover: hover) and (pointer: fine) {
+      .timeline-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    }
     @media (max-width: 600px) { .timeline-card { width: 100%; } }
     .timeline-card.highlight {
-      background: rgba(253,246,227,0.22);
+      background: var(--bg-white);
       border: 2px solid var(--gold);
       transform: scale(1.03);
     }
@@ -554,7 +581,7 @@
       font-family: 'Poppins', sans-serif;
       font-size: 0.72rem;
       font-weight: 600;
-      color: var(--turmeric-pale);
+      color: var(--gold);
       text-transform: uppercase;
       letter-spacing: 0.08em;
       margin-bottom: 4px;
@@ -563,19 +590,19 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.2rem;
       font-weight: 600;
-      color: var(--cream);
+      color: var(--text-dark);
       margin-bottom: 6px;
     }
     .timeline-desc {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1rem;
-      color: rgba(253,246,227,0.8);
+      color: var(--text-muted);
       font-style: italic;
     }
 
     /* ── New Home Showcase ── */
     .home-section {
-      background: linear-gradient(135deg, var(--temple-green) 0%, var(--green-dark) 100%);
+      background: var(--bg-white);
       padding: 80px 24px;
     }
     .rooms-grid {
@@ -587,13 +614,18 @@
     }
     @media (max-width: 640px) { .rooms-grid { grid-template-columns: 1fr; } }
     .room-card {
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(212,160,16,0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
+      border: none;
+      border-top: 3px solid var(--gold);
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
       cursor: default;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      background: var(--bg-white);
     }
-    .room-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
+    @media (hover: hover) and (pointer: fine) {
+      .room-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    }
     .room-card-inner {
       height: 180px;
       display: flex; flex-direction: column;
@@ -614,17 +646,19 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.3rem;
       font-weight: 600;
-      color: var(--cream);
+      color: var(--text-dark);
     }
 
     .blessing-box {
       max-width: 700px;
       margin: 0 auto;
-      background: rgba(253,246,227,0.08);
-      border: 2px solid var(--gold);
-      border-radius: 12px;
+      background: var(--bg-white);
+      border: none;
+      border-top: 3px solid var(--gold);
+      border-radius: 16px;
       padding: 32px 36px;
       text-align: center;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .blessing-box-title {
       font-family: 'Great Vibes', cursive;
@@ -636,14 +670,13 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.2rem;
       font-style: italic;
-      color: var(--cream);
+      color: var(--text-muted);
       line-height: 1.7;
-      opacity: 0.85;
     }
 
     /* ── Prasad Menu ── */
     .menu-section {
-      background: linear-gradient(180deg, var(--green-dark) 0%, #050800 100%);
+      background: var(--bg-alt);
       padding: 80px 24px;
     }
     .menu-grid {
@@ -655,33 +688,35 @@
     }
     @media (max-width: 600px) { .menu-grid { grid-template-columns: 1fr; } }
     .menu-col {
-      background: rgba(253,246,227,0.05);
-      border: 1px solid rgba(212,160,16,0.25);
-      border-radius: 12px;
+      background: var(--bg-white);
+      border: none;
+      border-top: 3px solid var(--gold);
+      border-radius: 16px;
       padding: 28px 24px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .menu-col-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.3rem;
       font-weight: 600;
       color: var(--gold);
-      border-bottom: 1px solid rgba(212,160,16,0.3);
+      border-bottom: 1px solid rgba(201,148,42,0.2);
       padding-bottom: 10px;
       margin-bottom: 16px;
     }
     .menu-item {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.05rem;
-      color: var(--cream);
+      color: var(--text-body);
       padding: 6px 0;
-      border-bottom: 1px dotted rgba(253,246,227,0.1);
+      border-bottom: 1px dotted rgba(201,148,42,0.12);
       display: flex; align-items: center; gap: 8px;
     }
     .menu-item:last-child { border-bottom: none; }
 
     /* ── Rangoli Section ── */
     .rangoli-section {
-      background: var(--near-black);
+      background: var(--bg-primary);
       padding: 80px 24px;
       text-align: center;
     }
@@ -709,7 +744,7 @@
 
     /* ── Guest Blessings ── */
     .blessings-section {
-      background: linear-gradient(135deg, var(--saffron-dark) 0%, var(--temple-green) 100%);
+      background: var(--bg-alt);
       padding: 80px 24px;
     }
     .blessings-grid {
@@ -721,15 +756,19 @@
     }
     @media (max-width: 600px) { .blessings-grid { grid-template-columns: 1fr; } }
     .blessing-card {
-      background: var(--cream);
-      color: var(--near-black);
-      border-radius: 10px;
+      background: var(--bg-white);
+      color: var(--text-dark);
+      border-radius: 16px;
       padding: 24px;
       position: relative;
-      border: 2px solid var(--gold);
-      transition: transform 0.3s;
+      border: none;
+      border-left: 3px solid var(--gold);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
     }
-    .blessing-card:hover { transform: translateY(-4px); }
+    @media (hover: hover) and (pointer: fine) {
+      .blessing-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+    }
     .blessing-quote-mark {
       font-family: 'Great Vibes', cursive;
       font-size: 4rem;
@@ -756,10 +795,12 @@
     .blessing-form {
       max-width: 500px;
       margin: 0 auto;
-      background: rgba(253,246,227,0.1);
-      border: 1px solid rgba(253,246,227,0.3);
-      border-radius: 12px;
+      background: var(--bg-white);
+      border: none;
+      border-top: 3px solid var(--gold);
+      border-radius: 16px;
       padding: 28px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .form-group { margin-bottom: 16px; }
     .form-group label {
@@ -775,11 +816,11 @@
     .form-group input,
     .form-group textarea {
       width: 100%;
-      background: rgba(253,246,227,0.08);
-      border: 1px solid rgba(212,160,16,0.4);
+      background: var(--bg-primary);
+      border: 1px solid rgba(201,148,42,0.25);
       border-radius: 6px;
       padding: 10px 14px;
-      color: var(--cream);
+      color: var(--text-dark);
       font-family: 'Cormorant Garamond', serif;
       font-size: 1rem;
       outline: none;
@@ -790,8 +831,8 @@
     .form-group textarea { resize: vertical; min-height: 80px; }
     .btn-submit {
       width: 100%;
-      background: linear-gradient(90deg, var(--saffron), var(--turmeric));
-      color: var(--near-black);
+      background: var(--gold);
+      color: #fff;
       border: none;
       border-radius: 8px;
       padding: 12px;
@@ -803,12 +844,15 @@
       text-transform: uppercase;
       transition: opacity 0.2s, transform 0.2s;
     }
-    .btn-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+    }
+    .btn-submit:active { transform: scale(0.97); }
 
     /* ── Directions ── */
     .directions-section {
-      background: var(--cream);
-      color: var(--near-black);
+      background: var(--bg-white);
+      color: var(--text-dark);
       padding: 80px 24px;
     }
     .directions-section .section-title { color: var(--saffron); }
@@ -819,11 +863,12 @@
       width: 100%;
       height: 260px;
       background: #f5e8c0;
-      border: 2px solid var(--gold);
-      border-radius: 12px;
+      border: none;
+      border-radius: 16px;
       position: relative;
       overflow: hidden;
       margin-bottom: 28px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .map-road-h {
       position: absolute;
@@ -887,12 +932,14 @@
     .directions-list li .dir-icon { font-size: 1.3rem; flex-shrink: 0; }
 
     .address-copy-box {
-      background: rgba(200,104,32,0.08);
-      border: 2px solid var(--saffron);
-      border-radius: 10px;
+      background: var(--bg-white);
+      border: none;
+      border-left: 3px solid var(--gold);
+      border-radius: 12px;
       padding: 18px 20px;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       flex-wrap: wrap;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .address-text {
       font-family: 'Cormorant Garamond', serif;
@@ -913,12 +960,13 @@
       white-space: nowrap;
     }
     .copy-btn:hover { background: var(--saffron-dark); }
+    .copy-btn:active { transform: scale(0.97); }
     .copy-btn.copied { background: var(--temple-green); }
 
     /* ── Footer ── */
     footer {
-      background: var(--green-dark);
-      border-top: 3px solid var(--gold);
+      background: var(--bg-alt);
+      border-top: 1px solid rgba(201,148,42,0.15);
       padding: 48px 24px;
       text-align: center;
     }
@@ -931,16 +979,14 @@
     .footer-family {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.2rem;
-      color: var(--cream);
+      color: var(--text-body);
       margin-bottom: 6px;
-      opacity: 0.85;
     }
     .footer-date {
       font-family: 'Poppins', sans-serif;
       font-size: 0.8rem;
-      color: var(--turmeric-pale);
+      color: var(--text-muted);
       margin-bottom: 24px;
-      opacity: 0.7;
     }
     .footer-link {
       font-family: 'Poppins', sans-serif;
@@ -952,14 +998,28 @@
       border-radius: 20px;
       transition: background 0.2s, color 0.2s;
     }
-    .footer-link:hover { background: var(--gold); color: var(--near-black); }
+    @media (hover: hover) and (pointer: fine) {
+      .footer-link:hover { background: var(--gold); color: #fff; }
+    }
+    .footer-link:active { transform: scale(0.97); }
 
-    /* ── Reveal animations ── */
+    /* ── Venue Map hover ── */
+    @media (hover: hover) and (pointer: fine) {
+      .venue-map:hover iframe { filter: grayscale(0) contrast(1.05) !important; }
+    }
+
+    /* ── Reveal animations (Emil Kowalski) ── */
     .reveal {
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      opacity: 0; transform: translateY(25px);
+      transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
     }
     .reveal.visible { opacity: 1; transform: none; }
+    /* Stagger children */
+    .reveal:nth-child(2) { transition-delay: 60ms; }
+    .reveal:nth-child(3) { transition-delay: 120ms; }
+    .reveal:nth-child(4) { transition-delay: 180ms; }
+    .reveal:nth-child(5) { transition-delay: 240ms; }
+    .reveal:nth-child(6) { transition-delay: 300ms; }
 
     /* ── Parallax ── */
     .hero { will-change: transform; }
@@ -1032,8 +1092,8 @@
 
 <!-- Hero -->
 <section class="hero" id="hero">
-    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80');opacity:0.15;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
-    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.07;z-index:0;pointer-events:none;" aria-hidden="true">
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1400&q=80');opacity:0.08;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
+    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.04;z-index:0;pointer-events:none;" aria-hidden="true">
       <source src="https://videos.pexels.com/video-files/4507714/4507714-uhd_2560_1440_25fps.mp4" type="video/mp4">
     </video>
   <!-- Vastu Mandala Watermark -->
@@ -1201,7 +1261,7 @@
 </section>
 
 <!-- Invitation Card -->
-<section class="section" id="invitation" style="background: linear-gradient(135deg, #2a1a05 0%, #1a0a00 100%);">
+<section class="section" id="invitation" style="background: var(--bg-white);">
   <div class="section-title reveal">Sacred Invitation</div>
   <div class="section-subtitle reveal">Join us for this auspicious occasion</div>
   <div class="invite-card-wrap reveal">
@@ -1326,7 +1386,7 @@
       <div style="width:calc(50% - 40px)"></div>
       <div class="timeline-card highlight">
         <div class="timeline-time">🏠 <span data-field="time">9:30 AM</span></div>
-        <div class="timeline-event" style="color:var(--gold-light); font-size:1.4rem;">Griha Pravesham</div>
+        <div class="timeline-event" style="color:var(--gold); font-size:1.4rem;">Griha Pravesham</div>
         <div class="timeline-desc">The sacred first entry into the new home — the most auspicious moment of the day</div>
       </div>
     </div>
@@ -1352,21 +1412,21 @@
         <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80" alt="Room" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(145deg,#c86820,#2a7020)';this.remove();">
       </div>
       <div class="room-name">Living Room</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,227,0.8);font-size:0.95rem;">Where family gathers</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text-muted);font-size:0.95rem;">Where family gathers</div>
     </div>
     <div class="room-card">
       <div class="room-card" style="overflow:hidden;height:180px;">
         <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Room" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(145deg,#c86820,#2a7020)';this.remove();">
       </div>
       <div class="room-name">Kitchen</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,227,0.8);font-size:0.95rem;">Heart of the home</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text-muted);font-size:0.95rem;">Heart of the home</div>
     </div>
     <div class="room-card">
       <div class="room-card" style="overflow:hidden;height:180px;">
         <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80" alt="Room" loading="lazy" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='linear-gradient(145deg,#c86820,#2a7020)';this.remove();">
       </div>
       <div class="room-name">Garden</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,227,0.8);font-size:0.95rem;">Our little paradise</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--text-muted);font-size:0.95rem;">Our little paradise</div>
     </div>
   </div>
   <div class="blessing-box reveal">
@@ -1382,7 +1442,7 @@
 <!-- Prasad Menu -->
 <section class="menu-section" id="menu">
   <div class="section-title reveal">Prasadam &amp; Lunch Menu</div>
-  <div class="section-subtitle reveal" style="color:rgba(212,160,16,0.7);">Sacred food blessed for all our guests</div>
+  <div class="section-subtitle reveal">Sacred food blessed for all our guests</div>
   <div class="menu-grid reveal">
     <div class="menu-col">
       <div class="menu-col-title">🙏 Sacred Prasadam</div>
@@ -1409,7 +1469,7 @@
 <!-- Rangoli Section -->
 <section class="rangoli-section">
   <div class="section-title reveal">Rangoli Welcome 🎨</div>
-  <div class="section-subtitle reveal" style="color:rgba(253,246,227,0.6);">Welcoming you with colors of joy</div>
+  <div class="section-subtitle reveal">Welcoming you with colors of joy</div>
   <div class="rangoli-container reveal">
     <svg class="rangoli-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -1462,7 +1522,7 @@
 <!-- Guest Blessings Wall -->
 <section class="blessings-section" id="blessings">
   <div class="section-title reveal">Blessings from Our Loved Ones</div>
-  <div class="section-subtitle reveal" style="color:rgba(253,246,227,0.7);">Your wishes are our greatest treasure</div>
+  <div class="section-subtitle reveal">Your wishes are our greatest treasure</div>
 
   <div class="blessings-grid" id="blessingsGrid">
     <div class="blessing-card reveal">
@@ -1532,6 +1592,10 @@
     <div class="address-copy-box reveal">
       <div class="address-text" data-field="address">Plot 42, Manikonda, Hyderabad 500089</div>
       <button class="copy-btn" id="copyBtn" onclick="copyAddress()">📋 Copy Address</button>
+    </div>
+
+    <div class="venue-map reveal" style="margin-top:1.5rem;border-radius:12px;overflow:hidden;border:1px solid rgba(201,148,42,0.2);">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1" width="100%" height="250" style="border:0;display:block;filter:grayscale(0.3) contrast(1.05);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </section>
