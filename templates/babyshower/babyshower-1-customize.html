@@ -24,8 +24,8 @@
     }
 
     body {
-      background: var(--green-dark);
-      color: var(--cream);
+      background: #faf7f2;
+      color: #1a1310;
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
     }
@@ -56,8 +56,8 @@
       padding: 28px 32px 20px;
       border-bottom: 1px solid rgba(232,192,32,.2);
     }
-    .page-header h1 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--turmeric); margin-bottom: 4px; }
-    .page-header p { font-size: 0.85rem; color: var(--turmeric-pale); opacity: .75; }
+    .page-header h1 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #1a1310; margin-bottom: 4px; }
+    .page-header p { font-size: 0.85rem; color: #5a4a3a; opacity: .75; }
 
     /* ── Layout ── */
     .customize-layout {
@@ -75,7 +75,7 @@
     .form-panel {
       padding: 28px 32px;
       overflow-y: auto;
-      background: var(--green-dark);
+      background: #faf7f2;
     }
 
     .form-section-heading {
@@ -89,22 +89,22 @@
     .form-group { margin-bottom: 16px; }
     .form-label {
       display: block; font-size: 0.78rem; letter-spacing: 1px;
-      color: var(--turmeric-pale); margin-bottom: 6px; text-transform: uppercase;
+      color: #5a4a3a; margin-bottom: 6px; text-transform: uppercase;
     }
     .form-input, .form-textarea, .form-select {
-      width: 100%; background: rgba(13,46,13,.7);
-      border: 1px solid rgba(232,192,32,.35);
-      color: var(--cream); padding: 10px 14px;
+      width: 100%; background: #ffffff;
+      border: 1px solid rgba(201,148,42,0.25);
+      color: #1a1310; padding: 10px 14px;
       font-family: 'Inter', sans-serif; font-size: 0.88rem;
       border-radius: 4px; outline: none;
       transition: border-color .2s, background .2s;
     }
     .form-input:focus, .form-textarea:focus, .form-select:focus {
       border-color: var(--turmeric);
-      background: rgba(13,46,13,.95);
+      background: #ffffff;
     }
     .form-textarea { resize: vertical; min-height: 72px; }
-    .form-select option { background: #0d2e0d; color: var(--cream); }
+    .form-select option { background: #ffffff; color: #1a1310; }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
@@ -133,7 +133,7 @@
     /* ── Preview panel ── */
     .preview-panel {
       border-left: 1px solid rgba(232,192,32,.2);
-      background: #0a1e0a;
+      background: #f5f0e8;
       padding: 28px 24px;
       position: sticky; top: 0; height: 100vh; overflow-y: auto;
       display: flex; flex-direction: column;
@@ -259,6 +259,11 @@
         <label class="form-label" for="f-venue">Venue</label>
         <textarea class="form-textarea" id="f-venue" data-preview="venue" placeholder="Full venue address">Sri Lakshmi Kalyana Mandapam, Kompally, Hyderabad</textarea>
       </div>
+      <div class="form-group">
+        <label class="form-label" for="f-mapUrl">Google Maps Embed URL</label>
+        <input class="form-input" id="f-mapUrl" type="url" data-preview="mapUrl" value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1" placeholder="Paste Google Maps embed URL" />
+        <p style="font-size:0.72rem;color:rgba(90,74,58,0.6);margin-top:0.3rem;">Go to Google Maps → Share → Embed → Copy the src URL from the iframe</p>
+      </div>
 
       <p class="form-section-heading">Message</p>
       <div class="form-group">
@@ -270,12 +275,12 @@
       <div class="form-group">
         <label class="form-label" for="f-photo">Mother / Parents Photo</label>
         <input class="form-input" id="f-photo" type="file" accept="image/*" style="padding:0.5rem 0.8rem;cursor:pointer;">
-        <p style="font-size:0.72rem;color:rgba(245,224,128,0.5);margin-top:0.3rem;">Photo shown in the invitation header</p>
+        <p style="font-size:0.72rem;color:rgba(90,74,58,0.6);margin-top:0.3rem;">Photo shown in the invitation header</p>
       </div>
       <div class="form-group">
         <label class="form-label" for="f-gallery">Gallery / Event Photos</label>
         <input class="form-input" id="f-gallery" type="file" accept="image/*" multiple style="padding:0.5rem 0.8rem;cursor:pointer;">
-        <p style="font-size:0.72rem;color:rgba(245,224,128,0.5);margin-top:0.3rem;">Maternity &amp; event photos for the guest gallery</p>
+        <p style="font-size:0.72rem;color:rgba(90,74,58,0.6);margin-top:0.3rem;">Maternity &amp; event photos for the guest gallery</p>
       </div>
 
       <button class="btn-primary" id="previewBtn">Preview Full Invitation ↗</button>

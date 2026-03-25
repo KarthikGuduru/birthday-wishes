@@ -24,16 +24,18 @@
       --green: #40e080;
       --yellow: #ffd700;
       --orange: #ff8c00;
-      --bg: #0d0025;
-      --bg2: #150035;
+      --bg: #faf7f2;
+      --bg2: #ffffff;
       --white: #ffffff;
+      --text: #1a1310;
+      --text-secondary: #444;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
-      color: var(--white);
+      color: var(--text);
       font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
       min-height: 100vh;
@@ -48,11 +50,11 @@
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,215,0,0.7);
+      color: rgba(201,148,42,0.7);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .back-nav:hover { color: var(--yellow); }
+    .back-nav:hover { color: var(--pink); }
 
     /* ── Purchase Banner ── */
     .purchase-banner {
@@ -61,8 +63,8 @@
       left: 0;
       right: 0;
       z-index: 150;
-      background: linear-gradient(90deg, #1a0035, #2a0055, #1a0035);
-      border-bottom: 2px solid rgba(255,215,0,0.3);
+      background: linear-gradient(90deg, #faf7f2, #f5f0e8, #faf7f2);
+      border-bottom: 2px solid rgba(232,64,144,0.2);
       padding: 0.6rem 5rem;
       display: flex;
       align-items: center;
@@ -71,7 +73,7 @@
       flex-wrap: wrap;
       font-size: 0.75rem;
       letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.9);
+      color: var(--text-secondary);
     }
     .purchase-banner .buy-btn {
       background: linear-gradient(135deg, var(--pink), var(--purple));
@@ -92,13 +94,14 @@
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 6px 20px rgba(232,64,144,0.5);
     }
+    .purchase-banner .buy-btn:active { transform: scale(0.97); }
 
     /* ── Loading Screen ── */
     #loading-screen {
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: var(--bg);
+      background: #2a1050;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -167,7 +170,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 3px 20px rgba(232,64,144,0.4);
+      box-shadow: 0 3px 20px rgba(232,64,144,0.2);
     }
     @keyframes rainbowShift {
       0%, 100% { background-position: 0% 50%; }
@@ -211,7 +214,7 @@
       display: block;
       width: 22px;
       height: 2px;
-      background: white;
+      background: rgba(255,255,255,0.95);
     }
     .mobile-menu {
       display: none;
@@ -219,15 +222,16 @@
       top: 104px;
       left: 0;
       right: 0;
-      background: rgba(13,0,37,0.98);
+      background: rgba(250,247,242,0.98);
       padding: 1.5rem;
       z-index: 99;
       border-bottom: 2px solid var(--pink);
+      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
     }
     .mobile-menu.open { display: block; }
     .mobile-menu a {
       display: block;
-      color: var(--white);
+      color: var(--text);
       text-decoration: none;
       padding: 0.8rem 0;
       font-size: 0.85rem;
@@ -247,7 +251,7 @@
       justify-content: center;
       padding: 8rem 2rem 5rem;
       overflow: hidden;
-      background: linear-gradient(135deg, #2d0060, #4a0080, #0040a0, #800060, #2d0060);
+      background: linear-gradient(135deg, #f0e8f8, #e8e0f5, #e0eaf8, #f5e0f0, #f0e8f8);
       background-size: 400% 400%;
       animation: heroGradientShift 8s ease-in-out infinite;
     }
@@ -280,7 +284,7 @@
       left: 50%;
       width: 1px;
       height: 14px;
-      background: rgba(255,255,255,0.5);
+      background: rgba(0,0,0,0.2);
       transform: translateX(-50%);
     }
     @keyframes floatUp {
@@ -344,8 +348,8 @@
       font-family: 'Poppins', sans-serif;
       font-size: clamp(2.5rem, 7vw, 4.5rem);
       font-weight: 600;
-      color: white;
-      text-shadow: 0 0 30px rgba(255,215,0,0.6), 0 4px 20px rgba(232,64,144,0.4);
+      color: var(--text);
+      text-shadow: 0 0 30px rgba(232,64,144,0.15), 0 2px 10px rgba(123,32,192,0.1);
       text-align: center;
       margin-bottom: 1.5rem;
     }
@@ -372,7 +376,7 @@
       font-family: 'Poppins', sans-serif;
       font-size: 3rem;
       font-weight: 600;
-      color: white;
+      color: #ffffff;
       text-shadow: 0 2px 8px rgba(0,0,0,0.3);
       line-height: 1;
     }
@@ -405,7 +409,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0.3rem;
-      color: rgba(255,255,255,0.7);
+      color: rgba(26,19,16,0.5);
       font-size: 0.75rem;
       font-weight: 500;
     }
@@ -435,7 +439,7 @@
       text-transform: uppercase;
       text-align: center;
       margin-bottom: 3rem;
-      opacity: 0.7;
+      color: var(--text-secondary);
     }
     .rainbow-divider {
       width: 150px;
@@ -464,7 +468,8 @@
     .details-card {
       max-width: 680px;
       margin: 0 auto;
-      background: linear-gradient(135deg, rgba(232,64,144,0.08), rgba(32,144,232,0.08));
+      background: #ffffff;
+      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
       border-radius: 16px;
       padding: 3rem 2.5rem;
       position: relative;
@@ -489,9 +494,9 @@
       position: absolute;
       inset: 0;
       background-image:
-        radial-gradient(circle, rgba(232,64,144,0.12) 1px, transparent 1px),
-        radial-gradient(circle, rgba(32,144,232,0.1) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,215,0,0.08) 1px, transparent 1px);
+        radial-gradient(circle, rgba(232,64,144,0.08) 1px, transparent 1px),
+        radial-gradient(circle, rgba(32,144,232,0.06) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,215,0,0.05) 1px, transparent 1px);
       background-size: 30px 30px, 45px 45px, 20px 20px;
       background-position: 0 0, 15px 15px, 8px 8px;
       pointer-events: none;
@@ -502,7 +507,7 @@
       align-items: center;
       gap: 1.2rem;
       padding: 1.2rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
       position: relative;
       z-index: 1;
     }
@@ -517,19 +522,19 @@
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--yellow);
+      color: var(--pink);
       margin-bottom: 0.3rem;
     }
     .detail-value {
       font-family: 'Poppins', sans-serif;
       font-size: 1.1rem;
       font-weight: 500;
-      color: white;
+      color: var(--text);
     }
 
     /* ── Countdown Section ── */
     #countdown-section {
-      background: var(--bg);
+      background: #f5f0e8;
       text-align: center;
       padding: 5rem 2rem;
     }
@@ -572,13 +577,13 @@
     .countdown-done {
       font-size: 1.8rem;
       font-weight: 600;
-      color: var(--yellow);
+      color: var(--pink);
       padding: 2rem;
     }
 
     /* ── Treasure Map Section ── */
     #venue-map {
-      background: linear-gradient(135deg, #0a001a, #001030, #0a001a);
+      background: linear-gradient(135deg, #faf7f2, #f5f0e8, #faf7f2);
       padding: 5rem 2rem;
       text-align: center;
       position: relative;
@@ -588,25 +593,25 @@
       margin: 0 auto;
       position: relative;
       height: 360px;
-      background: rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.6);
       border-radius: 16px;
-      border: 2px dashed rgba(255,215,0,0.3);
+      border: 2px dashed rgba(232,64,144,0.25);
       overflow: hidden;
     }
     .map-road-h {
       position: absolute;
       height: 12px;
-      background: rgba(255,255,255,0.12);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.08);
+      border-top: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
       border-radius: 2px;
     }
     .map-road-v {
       position: absolute;
       width: 12px;
-      background: rgba(255,255,255,0.12);
-      border-left: 1px solid rgba(255,255,255,0.08);
-      border-right: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.08);
+      border-left: 1px solid rgba(0,0,0,0.05);
+      border-right: 1px solid rgba(0,0,0,0.05);
       border-radius: 2px;
     }
     .map-landmark {
@@ -651,17 +656,17 @@
       font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--yellow);
+      color: var(--pink);
     }
     .legend-address {
       font-family: 'Poppins', sans-serif;
       font-size: 1rem;
-      color: rgba(255,255,255,0.85);
+      color: var(--text);
     }
 
     /* ── Games Section ── */
     #games {
-      background: var(--bg2);
+      background: #ffffff;
       padding: 5rem 2rem;
     }
     .games-grid {
@@ -708,7 +713,7 @@
 
     /* ── Polaroid Gallery ── */
     #gallery {
-      background: var(--bg);
+      background: #f5f0e8;
       padding: 5rem 2rem;
     }
     .polaroids-grid {
@@ -723,7 +728,7 @@
       background: white;
       padding: 1rem 1rem 2.5rem;
       width: 200px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       position: relative;
       transition: transform 0.3s, box-shadow 0.3s;
     }
@@ -749,7 +754,7 @@
     }
     .polaroid:hover {
       transform: rotate(0deg) translateY(-8px) scale(1.05) !important;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.6) !important;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15) !important;
       z-index: 10;
       animation-play-state: paused !important;
     }
@@ -767,7 +772,7 @@
 
     /* ── RSVP Section ── */
     #rsvp {
-      background: linear-gradient(135deg, var(--bg2), #001a30, var(--bg2));
+      background: linear-gradient(135deg, #faf7f2, #f0eee8, #faf7f2);
       text-align: center;
       padding: 5rem 2rem;
       position: relative;
@@ -777,7 +782,7 @@
       font-family: 'Poppins', sans-serif;
       font-size: clamp(1.5rem, 4vw, 2.2rem);
       font-weight: 600;
-      color: white;
+      color: var(--text);
       margin-bottom: 2.5rem;
     }
     .rsvp-buttons {
@@ -824,6 +829,7 @@
       color: rgba(255,255,255,0.8);
     }
     .rsvp-btn.no:hover { transform: translateY(-2px); }
+    .rsvp-btn:active { transform: scale(0.97); }
     .rsvp-response {
       font-size: 1.4rem;
       font-weight: 600;
@@ -845,9 +851,9 @@
       display: block;
     }
     .rsvp-response.no-resp {
-      background: linear-gradient(135deg, rgba(128,128,128,0.1), rgba(64,64,64,0.1));
+      background: linear-gradient(135deg, rgba(128,128,128,0.08), rgba(64,64,64,0.05));
       border: 1px solid rgba(128,128,128,0.2);
-      color: rgba(255,255,255,0.6);
+      color: var(--text-secondary);
       display: block;
     }
 
@@ -894,8 +900,14 @@
     .footer-copy {
       margin-top: 1.2rem;
       font-size: 0.65rem;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.75);
       letter-spacing: 0.1em;
+    }
+
+    /* ── Venue Map ── */
+    .venue-map iframe { transition: filter 0.3s ease-out; }
+    @media (hover: hover) and (pointer: fine) {
+      .venue-map:hover iframe { filter: grayscale(0) contrast(1) !important; }
     }
 
     /* ── Responsive ── */
@@ -1000,7 +1012,7 @@
 
   <!-- Hero Section -->
   <section id="hero">
-    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1513151233558-d860c5398176?w=1400&q=80');opacity:0.12;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1513151233558-d860c5398176?w=1400&q=80');opacity:0.08;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
     <div id="balloons-container"></div>
 
     <!-- Sparkle decorations -->
@@ -1134,7 +1146,10 @@
       <div class="map-legend" style="max-width:600px;margin:1.5rem auto 0;text-align:center;">
         <div class="legend-title">📍 Party Venue</div>
         <div class="legend-address" data-field="venue">Rainbow Garden, Banjara Hills</div>
-        <div style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:0.3rem;">Hosted by <span data-field="host" style="color:var(--yellow);">Priya &amp; Ravi</span></div>
+        <div style="font-size:0.8rem;color:var(--text-secondary);margin-top:0.3rem;">Hosted by <span data-field="host" style="color:var(--pink);">Priya &amp; Ravi</span></div>
+      </div>
+      <div class="venue-map" style="margin-top:1.5rem;border-radius:12px;overflow:hidden;border:1px solid rgba(201,148,42,0.2);max-width:600px;margin-left:auto;margin-right:auto;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1" width="100%" height="250" style="border:0;display:block;filter:grayscale(0.3) contrast(1.05);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </section>
@@ -1205,7 +1220,7 @@
     <div class="rainbow-divider r"></div>
     <div class="section-subtitle r">We hope to see you there!</div>
 
-    <div class="rsvp-question r">Will you join <span id="rsvp-name" style="color:var(--yellow);" data-field="name">Arya</span>'s party?</div>
+    <div class="rsvp-question r">Will you join <span id="rsvp-name" style="color:var(--pink);" data-field="name">Arya</span>'s party?</div>
 
     <div class="rsvp-buttons r" id="rsvp-buttons">
       <button class="rsvp-btn yes" id="rsvp-yes">🎉 Yes, I'll be there!</button>
