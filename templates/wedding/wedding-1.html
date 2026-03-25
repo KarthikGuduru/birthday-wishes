@@ -1207,8 +1207,11 @@
   }
   </style>
   <link rel="stylesheet" href="../../css/ux-polish.css">
+  <link rel="stylesheet" href="../../css/cinematic.css">
 </head>
 <body>
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress"></div>
 
 <!-- LOADING SCREEN -->
 <div id="loading-screen">
@@ -2102,6 +2105,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <script src="../../js/ux-polish.js" defer></script>
+<script src="../../js/cinematic.js" defer></script>
+<script>
+// Scroll progress bar
+(function() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', function() {
+    const scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    bar.style.transform = 'scaleX(' + Math.min(scrolled, 1) + ')';
+  }, { passive: true });
+})();
+</script>
 <script src="../../js/features-bar.js" defer></script>
 <script>
 // ── Live preview mode (iframe from customize page) ──
