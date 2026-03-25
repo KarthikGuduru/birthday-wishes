@@ -504,13 +504,24 @@
     .venue-card {
       background: white;
       border: 1px solid rgba(201,148,42,0.12);
-      border-top: 3px solid var(--gold);
       border-radius: 16px;
-      padding: 2rem; text-align: center;
-      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      padding: 0; text-align: center;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.06);
       position: relative; overflow: hidden;
       transition: transform 220ms ease-out, box-shadow 220ms ease-out;
     }
+    .venue-photo {
+      width: 100%; height: 220px; object-fit: cover;
+      display: block;
+      border-radius: 16px 16px 0 0;
+      filter: brightness(0.92) saturate(1.1);
+      transition: transform 600ms cubic-bezier(0.23,1,0.32,1), filter 400ms ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .venue-card:hover .venue-photo { transform: scale(1.04); filter: brightness(1) saturate(1.2); }
+    }
+    .venue-photo-wrap { overflow: hidden; border-radius: 16px 16px 0 0; }
+    .venue-card-body { padding: 1.6rem 1.8rem 2rem; }
     .venue-card::before {
       display: none;
     }
@@ -1259,7 +1270,7 @@
 
 <!-- NAVBAR -->
 <nav class="navbar">
-  <div class="nav-logo">🕉️ Arjun <span style="color:var(--gold)">♥</span> Meghana</div>
+  <div class="nav-logo" style="font-family:'Playfair Display',serif;"><span style="color:var(--gold);font-size:1em;margin-right:6px;">ॐ</span>Arjun <span style="color:var(--gold)">♥</span> Meghana</div>
   <ul class="nav-links">
     <li><a href="#invitation">Invitation</a></li>
     <li><a href="#ceremony">Ceremony</a></li>
@@ -1352,9 +1363,47 @@
     </svg>
   </div>
 
-  <!-- Diya corner decorations -->
-  <div class="hero-diya hero-diya-left" aria-hidden="true">🪔</div>
-  <div class="hero-diya hero-diya-right" aria-hidden="true">🪔</div>
+  <!-- Diya corner decorations — SVG oil lamp, no emoji -->
+  <div class="hero-diya hero-diya-left" aria-hidden="true">
+    <svg viewBox="0 0 48 64" width="48" height="64" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- Flame -->
+      <ellipse cx="24" cy="10" rx="5" ry="8" fill="#ffb347" opacity="0.95" class="diya-flame"/>
+      <ellipse cx="24" cy="12" rx="2.5" ry="4.5" fill="#fff5c0" opacity="0.9" class="diya-flame"/>
+      <!-- Wick -->
+      <rect x="23" y="17" width="2" height="5" rx="1" fill="#c9942a"/>
+      <!-- Oil bowl -->
+      <path d="M12,26 Q12,22 24,22 Q36,22 36,26 L34,38 Q34,42 24,42 Q14,42 14,38 Z" fill="#c9942a" opacity="0.95"/>
+      <path d="M14,28 Q14,25 24,25 Q34,25 34,28 L33,36 Q33,40 24,40 Q15,40 15,36 Z" fill="#e8a030"/>
+      <!-- Spout -->
+      <path d="M34,30 Q40,28 42,26 Q40,32 34,34 Z" fill="#c9942a"/>
+      <!-- Base tier 1 -->
+      <rect x="10" y="42" width="28" height="5" rx="3" fill="#a07820"/>
+      <!-- Base tier 2 -->
+      <rect x="6" y="47" width="36" height="6" rx="3" fill="#8b6510"/>
+      <!-- Base tier 3 -->
+      <rect x="4" y="53" width="40" height="5" rx="3" fill="#a07820"/>
+      <!-- Decorative dots -->
+      <circle cx="16" cy="34" r="1.5" fill="#fff5c0" opacity="0.6"/>
+      <circle cx="24" cy="32" r="1.5" fill="#fff5c0" opacity="0.6"/>
+      <circle cx="32" cy="34" r="1.5" fill="#fff5c0" opacity="0.6"/>
+    </svg>
+  </div>
+  <div class="hero-diya hero-diya-right" aria-hidden="true">
+    <svg viewBox="0 0 48 64" width="48" height="64" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <ellipse cx="24" cy="10" rx="5" ry="8" fill="#ffb347" opacity="0.95" class="diya-flame"/>
+      <ellipse cx="24" cy="12" rx="2.5" ry="4.5" fill="#fff5c0" opacity="0.9" class="diya-flame"/>
+      <rect x="23" y="17" width="2" height="5" rx="1" fill="#c9942a"/>
+      <path d="M12,26 Q12,22 24,22 Q36,22 36,26 L34,38 Q34,42 24,42 Q14,42 14,38 Z" fill="#c9942a" opacity="0.95"/>
+      <path d="M14,28 Q14,25 24,25 Q34,25 34,28 L33,36 Q33,40 24,40 Q15,40 15,36 Z" fill="#e8a030"/>
+      <path d="M14,30 Q8,28 6,26 Q8,32 14,34 Z" fill="#c9942a"/>
+      <rect x="10" y="42" width="28" height="5" rx="3" fill="#a07820"/>
+      <rect x="6" y="47" width="36" height="6" rx="3" fill="#8b6510"/>
+      <rect x="4" y="53" width="40" height="5" rx="3" fill="#a07820"/>
+      <circle cx="16" cy="34" r="1.5" fill="#fff5c0" opacity="0.6"/>
+      <circle cx="24" cy="32" r="1.5" fill="#fff5c0" opacity="0.6"/>
+      <circle cx="32" cy="34" r="1.5" fill="#fff5c0" opacity="0.6"/>
+    </svg>
+  </div>
 
   <!-- Floating petals container -->
   <div id="petals-container"></div>
@@ -1482,7 +1531,7 @@
 <section id="invitation">
   <div class="section-header reveal">
     <h2 class="section-title">Wedding Invitation</h2>
-    <div class="divider"><div class="divider-line"></div><span class="divider-icon">🕉️</span><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><span class="divider-icon" style="font-family:'Playfair Display',serif;font-size:1.1rem;letter-spacing:0;color:var(--gold);">ॐ</span><div class="divider-line"></div></div>
     <p class="section-subtitle">Sahasra Kritva Shubham Astu</p>
   </div>
   <div class="inv-card reveal">
@@ -1532,7 +1581,7 @@
       <circle cx="36" cy="14" r="3" fill="#d4a020" opacity="0.8"/>
     </svg>
 
-    <span class="inv-om">🕉️</span>
+    <span class="inv-om" style="font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--gold);line-height:1;">ॐ</span>
     <div class="inv-family">
       <strong data-field="groomFamily">Sri Ramamurthy &amp; Smt. Savitridevi</strong><br>
       request the honour of your presence at the wedding of their son
@@ -1560,7 +1609,7 @@
 <section id="ceremony">
   <div class="section-header reveal">
     <h2 class="section-title">Wedding Programme</h2>
-    <div class="divider"><div class="divider-line"></div><span class="divider-icon">🪔</span><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><span class="divider-icon" style="font-size:0.9rem;color:var(--gold);letter-spacing:0.1em;">✦◈✦</span><div class="divider-line"></div></div>
     <p class="section-subtitle">వివాహ కార్యక్రమాలు</p>
   </div>
   <div class="timeline">
@@ -1577,7 +1626,7 @@
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
-        <span class="tc-icon">🪔</span>
+        <span class="tc-icon" style="font-size:1.4rem;color:var(--gold);">◈</span>
         <div class="tc-event">Vara Puja</div>
         <div class="tc-telugu">వర పూజ</div>
         <div class="tc-time">April 18, 2026 &nbsp;•&nbsp; 8:00 AM</div>
@@ -1597,7 +1646,7 @@
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
-        <span class="tc-icon">💍</span>
+        <span class="tc-icon" style="font-size:1.4rem;color:var(--gold);">◈</span>
         <div class="tc-event">Mangalasutra Dharana</div>
         <div class="tc-telugu">మంగళసూత్ర ధారణ</div>
         <div class="tc-time">April 18, 2026 &nbsp;•&nbsp; 11:15 AM</div>
@@ -1607,7 +1656,7 @@
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
-        <span class="tc-icon">🌺</span>
+        <span class="tc-icon" style="font-size:1.4rem;color:var(--gold);">✿</span>
         <div class="tc-event">Grand Reception</div>
         <div class="tc-telugu">రిసెప్షన్</div>
         <div class="tc-time"><span data-field="receptionDate">April 18, 2026</span> &nbsp;•&nbsp; <span data-field="receptionTime">6:00 PM</span></div>
@@ -1621,35 +1670,45 @@
 <section id="venue">
   <div class="section-header reveal">
     <h2 class="section-title">Venue Details</h2>
-    <div class="divider"><div class="divider-line" style="background:var(--crimson);"></div><span class="divider-icon">📍</span><div class="divider-line" style="background:var(--crimson);"></div></div>
+    <div class="divider"><div class="divider-line" style="background:var(--crimson);"></div><span class="divider-icon" style="font-size:0.9rem;color:var(--gold);letter-spacing:0.1em;">✦◈✦</span><div class="divider-line" style="background:var(--crimson);"></div></div>
     <p class="section-subtitle">Where our story continues</p>
   </div>
   <div class="venue-grid">
     <div class="venue-card reveal">
+      <div class="venue-photo-wrap">
+        <img class="venue-photo" src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=800&q=85" alt="Wedding venue" loading="lazy">
+      </div>
+      <div class="venue-card-body">
       <div class="venue-badge">Wedding Ceremony</div>
       <div class="venue-name" data-field="venue">Sri Venkateswara Kalyana Mandapam</div>
       <div class="venue-address">Jubilee Hills, Hyderabad<br>Telangana — 500 033</div>
-      <div class="venue-time">🕙 <span data-field="weddingTime">10:30 AM</span> onwards</div>
+      <div class="venue-time"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;margin-right:4px;opacity:0.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-field="weddingTime">10:30 AM</span> onwards</div>
       <div class="venue-map">
-        <a href="https://maps.google.com" target="_blank" class="venue-pill-btn">📍 View on Maps</a>
-        <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')">📅 Add to Calendar</button>
+        <a href="https://maps.google.com" target="_blank" class="venue-pill-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;margin-right:5px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>View on Maps</a>
+        <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;margin-right:5px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Add to Calendar</button>
       </div>
       <div class="venue-map-embed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="250" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="220" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
+      </div><!-- /venue-card-body -->
     </div>
     <div class="venue-card reveal">
+      <div class="venue-photo-wrap">
+        <img class="venue-photo" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=85" alt="Reception venue" loading="lazy">
+      </div>
+      <div class="venue-card-body">
       <div class="venue-badge">Reception</div>
       <div class="venue-name" data-field="receptionVenue">The Grand Kakatiya Hall</div>
       <div class="venue-address">Begumpet, Hyderabad<br>Telangana — 500 016</div>
-      <div class="venue-time">🕕 <span data-field="receptionTime">6:00 PM</span> onwards</div>
+      <div class="venue-time"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;margin-right:4px;opacity:0.7"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-field="receptionTime">6:00 PM</span> onwards</div>
       <div class="venue-map">
-        <a href="https://maps.google.com" target="_blank" class="venue-pill-btn">📍 View on Maps</a>
-        <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')">📅 Add to Calendar</button>
+        <a href="https://maps.google.com" target="_blank" class="venue-pill-btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;margin-right:5px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>View on Maps</a>
+        <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;margin-right:5px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Add to Calendar</button>
       </div>
       <div class="venue-map-embed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="250" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="220" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
+      </div><!-- /venue-card-body -->
     </div>
   </div>
 </section>
@@ -1658,12 +1717,12 @@
 <section id="menu">
   <div class="section-header reveal">
     <h2 class="section-title">Grand Feast — Annadanam</h2>
-    <div class="divider"><div class="divider-line"></div><span class="divider-icon">🍛</span><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><span class="divider-icon" style="font-size:0.9rem;color:var(--gold);letter-spacing:0.1em;">✦◈✦</span><div class="divider-line"></div></div>
     <p class="section-subtitle">పండుగ భోజనం</p>
   </div>
   <div class="menu-grid">
     <div class="menu-category reveal">
-      <div class="menu-cat-title">🌅 Breakfast</div>
+      <div class="menu-cat-title">Breakfast</div>
       <ul class="menu-items">
         <li><span class="menu-bullet">✦</span>Idli &amp; Sambar</li>
         <li><span class="menu-bullet">✦</span>Medu Vada</li>
@@ -1674,7 +1733,7 @@
       </ul>
     </div>
     <div class="menu-category reveal">
-      <div class="menu-cat-title">🥤 Welcome Drinks</div>
+      <div class="menu-cat-title">Welcome Drinks</div>
       <ul class="menu-items">
         <li><span class="menu-bullet">✦</span>Panakam</li>
         <li><span class="menu-bullet">✦</span>Buttermilk / Majjiga</li>
@@ -1685,7 +1744,7 @@
       </ul>
     </div>
     <div class="menu-category reveal">
-      <div class="menu-cat-title">🍢 Starters</div>
+      <div class="menu-cat-title">Starters</div>
       <ul class="menu-items">
         <li><span class="menu-bullet">✦</span>Onion Pakoda</li>
         <li><span class="menu-bullet">✦</span>Punugulu</li>
@@ -1696,7 +1755,7 @@
       </ul>
     </div>
     <div class="menu-category reveal">
-      <div class="menu-cat-title">🍚 Rice &amp; Main Course</div>
+      <div class="menu-cat-title">Rice &amp; Main Course</div>
       <ul class="menu-items">
         <li><span class="menu-bullet">✦</span>White Rice</li>
         <li><span class="menu-bullet">✦</span>Pulihora (Tamarind Rice)</li>
@@ -1710,7 +1769,7 @@
       </ul>
     </div>
     <div class="menu-category reveal">
-      <div class="menu-cat-title">🍞 Breads &amp; Condiments</div>
+      <div class="menu-cat-title">Breads &amp; Condiments</div>
       <ul class="menu-items">
         <li><span class="menu-bullet">✦</span>Puri &amp; Bhaji</li>
         <li><span class="menu-bullet">✦</span>Paratha</li>
@@ -1722,7 +1781,7 @@
       </ul>
     </div>
     <div class="menu-category reveal">
-      <div class="menu-cat-title">🍮 Sweets &amp; Desserts</div>
+      <div class="menu-cat-title">Sweets &amp; Desserts</div>
       <ul class="menu-items">
         <li><span class="menu-bullet">✦</span>Bobbatlu / Puran Poli</li>
         <li><span class="menu-bullet">✦</span>Paramannam (Sweet Rice)</li>
@@ -1790,7 +1849,7 @@
   <div class="story-timeline">
     <div class="story-item reveal">
       <div class="story-card">
-        <span class="story-icon">💕</span>
+        <span class="story-icon" style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);">I</span>
         <div class="story-title">First Meeting</div>
         <div class="story-date">Summer 2021</div>
         <div class="story-text">Two souls crossed paths at a cousin's wedding in Hyderabad. A glance across the mandap changed everything.</div>
@@ -1798,7 +1857,7 @@
     </div>
     <div class="story-item reveal">
       <div class="story-card">
-        <span class="story-icon">🌹</span>
+        <span class="story-icon" style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);">II</span>
         <div class="story-title">First Date</div>
         <div class="story-date">September 2021</div>
         <div class="story-text">Coffee at Café de Arts, Jubilee Hills. Five hours felt like five minutes. They spoke of dreams, temples, and biryani.</div>
@@ -1806,7 +1865,7 @@
     </div>
     <div class="story-item reveal">
       <div class="story-card">
-        <span class="story-icon">💍</span>
+        <span class="story-icon" style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);">III</span>
         <div class="story-title">He Proposed</div>
         <div class="story-date">January 14, 2025</div>
         <div class="story-text">On Sankranti night, under a sky of kites and lanterns, Arjun went down on one knee. She said yes before he could finish.</div>
@@ -1814,7 +1873,7 @@
     </div>
     <div class="story-item">
       <div class="story-card" style="border-color:rgba(201,148,42,0.5);background:var(--bg-white);">
-        <span class="story-icon">🔔</span>
+        <span class="story-icon" style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);">IV</span>
         <div class="story-title">The Big Day</div>
         <div class="story-date" data-field="weddingDate">April 18, 2026</div>
         <div class="story-text">And now, surrounded by family and the blessings of Sri Venkateswara, our forever begins.</div>
@@ -1959,20 +2018,25 @@
     screen.addEventListener('touchstart', openInvite);
   })();
 
-  /* ── Floating Petals ── */
+  /* ── Floating Petals — CSS shapes, no emoji ── */
   (function createPetals() {
     const container = document.getElementById('petals-container');
-    const emojis = ['🌸','🌼','🌺','🌻','🌸','🌼'];
-    for (let i = 0; i < 25; i++) {
+    const colors = ['#e8630a','#c9942a','#d4520a','#f5a020','#e8a030','#b8401a'];
+    for (let i = 0; i < 22; i++) {
       const petal = document.createElement('div');
       petal.className = 'petal';
-      petal.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const size = 6 + Math.random() * 8;
       petal.style.cssText = `
         left: ${Math.random() * 100}%;
-        font-size: ${0.9 + Math.random() * 0.8}rem;
-        animation-duration: ${7 + Math.random() * 10}s;
-        animation-delay: ${Math.random() * 8}s;
-        opacity: ${0.4 + Math.random() * 0.5};
+        width: ${size}px;
+        height: ${size * 1.6}px;
+        background: ${color};
+        border-radius: 50% 0 50% 0;
+        transform: rotate(${Math.random() * 360}deg);
+        animation-duration: ${8 + Math.random() * 10}s;
+        animation-delay: ${Math.random() * 10}s;
+        opacity: ${0.55 + Math.random() * 0.35};
       `;
       container.appendChild(petal);
     }
