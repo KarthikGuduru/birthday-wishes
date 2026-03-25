@@ -378,7 +378,7 @@
     /* Thumbnail */
     .card-thumb {
       position: relative;
-      height: 240px;
+      height: 260px;
       overflow: hidden;
       background: linear-gradient(145deg, #f5ede0, #ede4d4);
     }
@@ -1002,6 +1002,27 @@
       .stats-grid { gap: 2rem 3rem; }
       .hero { padding: 6rem 1.2rem 4rem; }
     }
+    .card-thumb {
+      height: 0;
+      padding-bottom: 65%;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-thumb-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .card-thumb-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .template-card:hover .card-thumb-bg img {
+        transform: scale(1.06);
+      }
+    }
   </style>
   <link rel="stylesheet" href="css/ux-polish.css">
 </head>
@@ -1105,7 +1126,7 @@
       <!-- 1. Elegant Birthday -->
       <div class="template-card r" data-category="birthday">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80" alt="Elegant Birthday" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #c9942a, #7b1818)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=85" alt="Elegant Birthday" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg, #c9942a, #7b1818)';this.remove();"></div>
           <span class="category-badge">Birthday</span>
         </div>
         <div class="card-body">
@@ -1124,7 +1145,7 @@
       <!-- 2. Kids Party -->
       <div class="template-card r" data-category="birthday">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&q=80" alt="Kids Party" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #e84090, #7b20c0)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=85" alt="Kids Party" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg, #e84090, #7b20c0)';this.remove();"></div>
           <span class="category-badge">Birthday</span>
         </div>
         <div class="card-body">
@@ -1143,7 +1164,7 @@
       <!-- 3. South Indian Wedding -->
       <div class="template-card r" data-category="wedding">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="South Indian Wedding" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #6b1300, #c9942a)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=85" alt="South Indian Wedding" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg, #6b1300, #c9942a)';this.remove();"></div>
           <span class="category-badge">Wedding</span>
         </div>
         <div class="card-body">
@@ -1162,7 +1183,7 @@
       <!-- 4. Rajasthani Wedding -->
       <div class="template-card r" data-category="wedding">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&q=80" alt="Rajasthani Wedding" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #1a3a8b, #c9942a)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&q=85" alt="Rajasthani Wedding" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg, #1a3a8b, #c9942a)';this.remove();"></div>
           <span class="category-badge">Wedding</span>
         </div>
         <div class="card-body">
@@ -1181,7 +1202,7 @@
       <!-- 5. Griha Pravesham -->
       <div class="template-card r" data-category="housewarming">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=600&q=80" alt="Griha Pravesham" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #c86820, #2a7020)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=600&q=85" alt="Griha Pravesham" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #c86820, #2a7020)';this.remove();"></div>
           <span class="category-badge">Housewarming</span>
         </div>
         <div class="card-body">
@@ -1200,7 +1221,7 @@
       <!-- 6. Modern Housewarming -->
       <div class="template-card r" data-category="housewarming">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80" alt="Modern Housewarming" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #1a6070, #c07830)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1560185127-6a6a5f87371c?w=600&q=85" alt="Modern Housewarming" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #1a6070, #c07830)';this.remove();"></div>
           <span class="category-badge">Housewarming</span>
         </div>
         <div class="card-body">
@@ -1219,7 +1240,7 @@
       <!-- 7. Seemantham -->
       <div class="template-card r" data-category="babyshower">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=80" alt="Seemantham" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #b8860b, #228b22)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=85" alt="Seemantham" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #b8860b, #228b22)';this.remove();"></div>
           <span class="category-badge">Baby Shower</span>
         </div>
         <div class="card-body">
@@ -1238,7 +1259,7 @@
       <!-- 8. Modern Baby Shower -->
       <div class="template-card r" data-category="babyshower">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&q=80" alt="Modern Baby Shower" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #e870a0, #a040c0)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&q=85" alt="Modern Baby Shower" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #e870a0, #a040c0)';this.remove();"></div>
           <span class="category-badge">Baby Shower</span>
         </div>
         <div class="card-body">
@@ -1257,7 +1278,7 @@
       <!-- 9. Traditional Engagement -->
       <div class="template-card r" data-category="engagement">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80" alt="Traditional Engagement" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #9b1840, #c9942a)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=85" alt="Traditional Engagement" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #9b1840, #c9942a)';this.remove();"></div>
           <span class="category-badge">Engagement</span>
         </div>
         <div class="card-body">
@@ -1276,7 +1297,7 @@
       <!-- 10. Modern Engagement -->
       <div class="template-card r" data-category="engagement">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=80" alt="Modern Engagement" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #1a2a6b, #c9942a)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=85" alt="Modern Engagement" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #1a2a6b, #c9942a)';this.remove();"></div>
           <span class="category-badge">Engagement</span>
         </div>
         <div class="card-body">
@@ -1295,7 +1316,7 @@
       <!-- 11. Golden Anniversary -->
       <div class="template-card r" data-category="anniversary">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80" alt="Golden Anniversary" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #8b0000, #c9942a)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=85" alt="Golden Anniversary" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #8b0000, #c9942a)';this.remove();"></div>
           <span class="category-badge">Anniversary</span>
         </div>
         <div class="card-body">
@@ -1314,7 +1335,7 @@
       <!-- 12. Silver Anniversary -->
       <div class="template-card r" data-category="anniversary">
         <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&q=80" alt="Silver Anniversary" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #4a4a6a, #c9942a)';this.remove();"></div>
+          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&q=85" alt="Silver Anniversary" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #4a4a6a, #c9942a)';this.remove();"></div>
           <span class="category-badge">Anniversary</span>
         </div>
         <div class="card-body">
