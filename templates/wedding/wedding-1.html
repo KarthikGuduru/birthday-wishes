@@ -404,13 +404,17 @@
       text-align: center;
     }
     .inv-peacock {
-      position: absolute; width: 60px; height: 60px;
-      opacity: 0.7;
+      position: absolute; width: 70px; height: 70px;
+      opacity: 0.75;
+      object-fit: cover;
+      border-radius: 2px;
+      /* Mix-blend-mode to let the white background of the ornament blend away */
+      mix-blend-mode: multiply;
     }
-    .inv-peacock.tl { top: 8px; left: 8px; transform: rotate(0deg); }
-    .inv-peacock.tr { top: 8px; right: 8px; transform: scaleX(-1); }
-    .inv-peacock.bl { bottom: 8px; left: 8px; transform: scaleY(-1) rotate(0deg); }
-    .inv-peacock.br { bottom: 8px; right: 8px; transform: scale(-1,-1); }
+    .inv-peacock.tl { top: 6px; left: 6px;  transform: rotate(0deg); }
+    .inv-peacock.tr { top: 6px; right: 6px;  transform: scaleX(-1); }
+    .inv-peacock.bl { bottom: 6px; left: 6px;  transform: scaleY(-1); }
+    .inv-peacock.br { bottom: 6px; right: 6px; transform: scale(-1,-1); }
     .inv-om {
       font-size: 2.5rem; color: var(--gold); margin-bottom: 0.8rem; display: block;
     }
@@ -443,52 +447,84 @@
     #ceremony .section-title { color: var(--text-dark); }
     #ceremony .section-subtitle { color: var(--text-muted); }
     .timeline {
-      position: relative; max-width: 900px; margin: 0 auto;
+      position: relative; max-width: 860px; margin: 0 auto;
     }
-    .timeline::before {
+    /* The vertical line — hidden when JS draws it progressively */
+    .timeline:not(.js-timeline-draw)::before {
       content: ''; position: absolute;
       left: 50%; top: 0; bottom: 0; width: 2px;
       background: linear-gradient(180deg, transparent, var(--gold) 10%, var(--gold) 90%, transparent);
       transform: translateX(-50%);
     }
+    /* 3-column grid: [left-card] [dot] [right-card] — keeps everything aligned */
     .timeline-item {
-      display: flex; align-items: flex-start; gap: 1.5rem;
-      margin-bottom: 2.5rem; position: relative;
+      display: grid;
+      grid-template-columns: 1fr 58px 1fr;
+      gap: 0 1.2rem;
+      align-items: start;
+      margin-bottom: 2.8rem;
     }
-    .timeline-item:nth-child(odd)  { flex-direction: row-reverse; }
-    .timeline-item:nth-child(even) { flex-direction: row; }
     .timeline-dot {
-      position: absolute; left: 50%; top: 1.5rem;
+      grid-column: 2;
+      justify-self: center;
+      align-self: start;
+      margin-top: 1.2rem;
       width: 46px; height: 46px; border-radius: 50%;
       background: var(--bg-white); border: 1.5px solid var(--gold);
-      transform: translateX(-50%);
-      box-shadow: 0 2px 12px rgba(201,148,42,0.15); flex-shrink: 0; z-index: 2;
+      box-shadow: 0 2px 12px rgba(201,148,42,0.15);
+      z-index: 2;
       display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
+    /* Odd items: card on LEFT */
+    .timeline-item:nth-child(odd) .timeline-card  { grid-column: 1; grid-row: 1; text-align: right; }
+    .timeline-item:nth-child(odd) .timeline-dot   { grid-column: 2; grid-row: 1; }
+    /* Even items: card on RIGHT */
+    .timeline-item:nth-child(even) .timeline-dot  { grid-column: 2; grid-row: 1; }
+    .timeline-item:nth-child(even) .timeline-card { grid-column: 3; grid-row: 1; }
+
     .timeline-card {
-      flex: 0 0 calc(50% - 3rem);
       background: var(--bg-white);
-      border: 1px solid rgba(201,148,42,0.12);
-      border-left: 3px solid var(--gold);
-      border-top: none;
-      padding: 1.2rem 1.4rem; border-radius: 16px;
-      transition: transform 220ms ease-out, box-shadow 220ms ease-out;
+      border: 1px solid rgba(201,148,42,0.15);
+      border-radius: 16px;
+      padding: 1.4rem 1.6rem;
       box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      transition: transform 220ms ease-out, box-shadow 220ms ease-out;
     }
     .timeline-card.highlight {
-      background: var(--bg-white);
-      border: 1px solid rgba(201,148,42,0.2);
-      border-left: 3px solid var(--gold);
-      border-top: none;
-      padding: 1.5rem 1.8rem;
+      border: 1.5px solid rgba(201,148,42,0.35);
+      padding: 1.6rem 1.8rem;
       box-shadow: 0 6px 30px rgba(201,148,42,0.1);
-      border-radius: 16px;
     }
     @media (hover: hover) and (pointer: fine) {
-      .timeline-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 36px rgba(0,0,0,0.08);
+      .timeline-card:hover { transform: translateY(-3px); box-shadow: 0 8px 36px rgba(0,0,0,0.08); }
+    }
+    /* Left-side cards: right-align text and accent on right edge */
+    .timeline-item:nth-child(odd) .timeline-card  {
+      border-right: 3px solid var(--gold);
+    }
+    /* Right-side cards: left accent */
+    .timeline-item:nth-child(even) .timeline-card {
+      border-left: 3px solid var(--gold);
+    }
+    /* Mobile: collapse to single column */
+    @media (max-width: 640px) {
+      .timeline-item {
+        grid-template-columns: 40px 1fr;
+        gap: 0 1rem;
       }
+      .timeline-dot,
+      .timeline-item:nth-child(odd) .timeline-dot,
+      .timeline-item:nth-child(even) .timeline-dot { grid-column: 1; grid-row: 1; }
+      .timeline-card,
+      .timeline-item:nth-child(odd) .timeline-card,
+      .timeline-item:nth-child(even) .timeline-card {
+        grid-column: 2; grid-row: 1;
+        text-align: left;
+        border-right: none;
+        border-left: 3px solid var(--gold);
+      }
+      .timeline::before { left: 19px; }
     }
     .tc-icon { font-size: 1.6rem; margin-bottom: 0.4rem; display: block; }
     .tc-event {
@@ -1078,25 +1114,24 @@
     font-size: clamp(2rem, 5vw, 3.5rem) !important;
   }
 
-  /* ── Marigold garland ── */
+  /* ── Marigold garland — real photo strip ── */
   .hero-garland {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 110px;
+    height: 96px;
     z-index: 4;
     pointer-events: none;
     overflow: hidden;
+    /* Fade out bottom edge so it blends into hero */
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
   }
-  .hero-garland svg {
-    width: 100%; height: 110px;
+  .hero-garland img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
     display: block;
   }
-  @keyframes garlandSway {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(3px) rotate(0.5deg); }
-  }
-  .garland-flower { animation: garlandSway 4s ease-in-out infinite; }
-  .garland-flower:nth-child(odd) { animation-delay: -2s; }
 
   /* ── Diya corner decorations on hero ── */
   .hero-diya {
@@ -1271,8 +1306,6 @@
   <div class="splash-tap-label">Tap to open</div>
 </div>
 
-<!-- BACK NAV -->
-<a href="../../index.html" class="back-nav" style="position:fixed;top:1.2rem;left:1.5rem;z-index:300;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,148,42,0.7);text-decoration:none;">← Marketplace</a>
 
 <!-- PURCHASE BANNER -->
 <div class="purchase-banner">
@@ -1314,68 +1347,12 @@
       <source src="https://videos.pexels.com/video-files/4121278/4121278-uhd_2560_1440_30fps.mp4" type="video/mp4">
     </video>
 
-  <!-- Marigold garland top decoration -->
+  <!-- Marigold garland — AI-generated photo strip -->
   <div class="hero-garland" aria-hidden="true">
-    <svg viewBox="0 0 1200 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Vine/stem -->
-      <path d="M0,8 Q100,85 200,30 Q300,85 400,30 Q500,85 600,30 Q700,85 800,30 Q900,85 1000,30 Q1100,85 1200,8" stroke="#2d6a20" stroke-width="3.5" fill="none" opacity="0.9"/>
-      <!-- Leaf clusters along vine -->
-      <ellipse cx="100" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(-30,100,60)"/>
-      <ellipse cx="100" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(30,100,60)"/>
-      <ellipse cx="300" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(-30,300,60)"/>
-      <ellipse cx="300" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(30,300,60)"/>
-      <ellipse cx="500" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(-30,500,60)"/>
-      <ellipse cx="500" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(30,500,60)"/>
-      <ellipse cx="700" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(-30,700,60)"/>
-      <ellipse cx="700" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(30,700,60)"/>
-      <ellipse cx="900" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(-30,900,60)"/>
-      <ellipse cx="900" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(30,900,60)"/>
-      <ellipse cx="1100" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(-30,1100,60)"/>
-      <ellipse cx="1100" cy="60" rx="12" ry="6" fill="#3a8025" opacity="0.8" transform="rotate(30,1100,60)"/>
-      <!-- Marigold flowers at vine low points -->
-      <!-- Flower 1 @ x=100 -->
-      <g transform="translate(100,62)">
-        <circle cx="0" cy="0" r="9" fill="#e8630a" opacity="0.95"/>
-        <circle cx="0" cy="0" r="5" fill="#f5a020"/>
-        <circle cx="0" cy="0" r="3" fill="#ffd700"/>
-      </g>
-      <!-- Flower 2 @ x=300 -->
-      <g transform="translate(300,62)">
-        <circle cx="0" cy="0" r="9" fill="#d4520a" opacity="0.95"/>
-        <circle cx="0" cy="0" r="5" fill="#e89018"/>
-        <circle cx="0" cy="0" r="3" fill="#ffd700"/>
-      </g>
-      <!-- Flower 3 @ x=500 -->
-      <g transform="translate(500,62)">
-        <circle cx="0" cy="0" r="9" fill="#e8630a" opacity="0.95"/>
-        <circle cx="0" cy="0" r="5" fill="#f5a020"/>
-        <circle cx="0" cy="0" r="3" fill="#ffd700"/>
-      </g>
-      <!-- Flower 4 @ x=600 (center) -->
-      <g transform="translate(600,32)">
-        <circle cx="0" cy="0" r="11" fill="#c9400a" opacity="0.98"/>
-        <circle cx="0" cy="0" r="6" fill="#e88015"/>
-        <circle cx="0" cy="0" r="3.5" fill="#ffd700"/>
-      </g>
-      <!-- Flower 5 @ x=700 -->
-      <g transform="translate(700,62)">
-        <circle cx="0" cy="0" r="9" fill="#e8630a" opacity="0.95"/>
-        <circle cx="0" cy="0" r="5" fill="#f5a020"/>
-        <circle cx="0" cy="0" r="3" fill="#ffd700"/>
-      </g>
-      <!-- Flower 6 @ x=900 -->
-      <g transform="translate(900,62)">
-        <circle cx="0" cy="0" r="9" fill="#d4520a" opacity="0.95"/>
-        <circle cx="0" cy="0" r="5" fill="#e89018"/>
-        <circle cx="0" cy="0" r="3" fill="#ffd700"/>
-      </g>
-      <!-- Flower 7 @ x=1100 -->
-      <g transform="translate(1100,62)">
-        <circle cx="0" cy="0" r="9" fill="#e8630a" opacity="0.95"/>
-        <circle cx="0" cy="0" r="5" fill="#f5a020"/>
-        <circle cx="0" cy="0" r="3" fill="#ffd700"/>
-      </g>
-    </svg>
+    <img src="../../assets/generated/marigold-garland.jpeg"
+         alt=""
+         loading="eager"
+         onerror="this.parentElement.style.display='none'">
   </div>
 
   <!-- Diya corner decorations — SVG oil lamp, no emoji -->
@@ -1511,51 +1488,11 @@
     <p class="section-subtitle">Sahasra Kritva Shubham Astu</p>
   </div>
   <div class="inv-card reveal">
-    <!-- Peacock corner motifs -->
-    <svg class="inv-peacock tl" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="40" r="12" fill="none" stroke="#c9942a" stroke-width="1.5" opacity="0.7"/>
-      <ellipse cx="20" cy="28" rx="5" ry="14" fill="#1a5a20" opacity="0.7"/>
-      <circle cx="20" cy="26" r="4" fill="#c9942a" opacity="0.8"/>
-      <path d="M20,26 Q10,10 8,4" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <path d="M20,26 Q25,8 28,2" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <path d="M20,26 Q30,18 36,14" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <circle cx="8" cy="4" r="3" fill="#d4a020" opacity="0.8"/>
-      <circle cx="28" cy="2" r="3" fill="#d4a020" opacity="0.8"/>
-      <circle cx="36" cy="14" r="3" fill="#d4a020" opacity="0.8"/>
-    </svg>
-    <svg class="inv-peacock tr" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="40" r="12" fill="none" stroke="#c9942a" stroke-width="1.5" opacity="0.7"/>
-      <ellipse cx="20" cy="28" rx="5" ry="14" fill="#1a5a20" opacity="0.7"/>
-      <circle cx="20" cy="26" r="4" fill="#c9942a" opacity="0.8"/>
-      <path d="M20,26 Q10,10 8,4" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <path d="M20,26 Q25,8 28,2" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <path d="M20,26 Q30,18 36,14" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <circle cx="8" cy="4" r="3" fill="#d4a020" opacity="0.8"/>
-      <circle cx="28" cy="2" r="3" fill="#d4a020" opacity="0.8"/>
-      <circle cx="36" cy="14" r="3" fill="#d4a020" opacity="0.8"/>
-    </svg>
-    <svg class="inv-peacock bl" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="40" r="12" fill="none" stroke="#c9942a" stroke-width="1.5" opacity="0.7"/>
-      <ellipse cx="20" cy="28" rx="5" ry="14" fill="#1a5a20" opacity="0.7"/>
-      <circle cx="20" cy="26" r="4" fill="#c9942a" opacity="0.8"/>
-      <path d="M20,26 Q10,10 8,4" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <path d="M20,26 Q25,8 28,2" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <path d="M20,26 Q30,18 36,14" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <circle cx="8" cy="4" r="3" fill="#d4a020" opacity="0.8"/>
-      <circle cx="28" cy="2" r="3" fill="#d4a020" opacity="0.8"/>
-      <circle cx="36" cy="14" r="3" fill="#d4a020" opacity="0.8"/>
-    </svg>
-    <svg class="inv-peacock br" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="20" cy="40" r="12" fill="none" stroke="#c9942a" stroke-width="1.5" opacity="0.7"/>
-      <ellipse cx="20" cy="28" rx="5" ry="14" fill="#1a5a20" opacity="0.7"/>
-      <circle cx="20" cy="26" r="4" fill="#c9942a" opacity="0.8"/>
-      <path d="M20,26 Q10,10 8,4" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <path d="M20,26 Q25,8 28,2" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <path d="M20,26 Q30,18 36,14" stroke="#c9942a" stroke-width="1.5" fill="none" opacity="0.6"/>
-      <circle cx="8" cy="4" r="3" fill="#d4a020" opacity="0.8"/>
-      <circle cx="28" cy="2" r="3" fill="#d4a020" opacity="0.8"/>
-      <circle cx="36" cy="14" r="3" fill="#d4a020" opacity="0.8"/>
-    </svg>
+    <!-- Gold filigree corner ornaments — AI-generated -->
+    <img class="inv-peacock tl" src="../../assets/generated/corner-ornament.jpeg" alt="" aria-hidden="true">
+    <img class="inv-peacock tr" src="../../assets/generated/corner-ornament.jpeg" alt="" aria-hidden="true">
+    <img class="inv-peacock bl" src="../../assets/generated/corner-ornament.jpeg" alt="" aria-hidden="true">
+    <img class="inv-peacock br" src="../../assets/generated/corner-ornament.jpeg" alt="" aria-hidden="true">
 
     <span class="inv-om" style="font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--gold);line-height:1;">ॐ</span>
     <div class="inv-family">
@@ -1592,7 +1529,7 @@
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
-        <span class="tc-icon">🌅</span>
+        <span class="tc-icon" aria-hidden="true" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);letter-spacing:0.08em;font-weight:600;">I</span>
         <div class="tc-event">Pellikuthuru &amp; Pellikoduku</div>
         <div class="tc-telugu">పెళ్ళికూతురు &amp; పెళ్ళికొడుకు</div>
         <div class="tc-time">April 17, 2026 &nbsp;•&nbsp; 8:00 AM</div>
@@ -1602,7 +1539,7 @@
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
-        <span class="tc-icon" style="font-size:1.4rem;color:var(--gold);">◈</span>
+        <span class="tc-icon" aria-hidden="true" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);letter-spacing:0.08em;font-weight:600;">II</span>
         <div class="tc-event">Vara Puja</div>
         <div class="tc-telugu">వర పూజ</div>
         <div class="tc-time">April 18, 2026 &nbsp;•&nbsp; 8:00 AM</div>
@@ -1612,7 +1549,7 @@
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card highlight">
-        <span class="tc-icon">⭐</span>
+        <span class="tc-icon" aria-hidden="true" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);letter-spacing:0.08em;font-weight:600;">III</span>
         <div class="tc-event" style="font-size:1.2rem;">Subhamuhurtham</div>
         <div class="tc-telugu">శుభముహూర్తం &nbsp;—&nbsp; The Sacred Moment</div>
         <div class="tc-time">April 18, 2026 &nbsp;•&nbsp; <span data-field="weddingTime">10:30 AM</span></div>
@@ -1622,7 +1559,7 @@
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
-        <span class="tc-icon" style="font-size:1.4rem;color:var(--gold);">◈</span>
+        <span class="tc-icon" aria-hidden="true" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);letter-spacing:0.08em;font-weight:600;">IV</span>
         <div class="tc-event">Mangalasutra Dharana</div>
         <div class="tc-telugu">మంగళసూత్ర ధారణ</div>
         <div class="tc-time">April 18, 2026 &nbsp;•&nbsp; 11:15 AM</div>
@@ -1632,7 +1569,7 @@
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
-        <span class="tc-icon" style="font-size:1.4rem;color:var(--gold);">✿</span>
+        <span class="tc-icon" aria-hidden="true" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold);letter-spacing:0.08em;font-weight:600;">V</span>
         <div class="tc-event">Grand Reception</div>
         <div class="tc-telugu">రిసెప్షన్</div>
         <div class="tc-time"><span data-field="receptionDate">April 18, 2026</span> &nbsp;•&nbsp; <span data-field="receptionTime">6:00 PM</span></div>

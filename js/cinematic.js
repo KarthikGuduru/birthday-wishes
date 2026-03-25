@@ -279,35 +279,45 @@
   // Draws the vertical connecting line as you scroll through the ceremony timeline,
   // so events "connect" visually as you read down.
   function initTimelineDraw() {
+    const MOBILE_BREAK = 640;
+    const isMobile = () => window.innerWidth <= MOBILE_BREAK;
+
     document.querySelectorAll('.timeline').forEach(timeline => {
-      // Inject a real element to animate (can't JS-drive ::before)
       const line = document.createElement('div');
       line.setAttribute('aria-hidden', 'true');
+
+      function applyLinePosition() {
+        const mobile = isMobile();
+        // Desktop: center of 3-col grid at 50%; Mobile: center of 40px dot column at ~19px
+        line.style.left      = mobile ? '19px' : '50%';
+        line.style.transform = `translateX(${mobile ? '0' : '-50%'}) scaleY(0)`;
+      }
+
       line.style.cssText = [
-        'position:absolute', 'left:50%', 'top:0', 'bottom:0', 'width:2px',
+        'position:absolute', 'top:0', 'bottom:0', 'width:2px',
         'background:linear-gradient(180deg,transparent,var(--gold,#c9942a) 8%,var(--gold,#c9942a) 92%,transparent)',
-        'transform:translateX(-50%) scaleY(0)',
         'transform-origin:top center',
         'pointer-events:none', 'z-index:1',
         'will-change:transform',
       ].join(';');
+      applyLinePosition();
       timeline.appendChild(line);
-
-      // Hide the CSS ::before line
       timeline.classList.add('js-timeline-draw');
+
+      window.addEventListener('resize', applyLinePosition, { passive: true });
 
       let ticking = false;
       window.addEventListener('scroll', () => {
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(() => {
-          const rect   = timeline.getBoundingClientRect();
-          const viewH  = window.innerHeight;
-          // Progress: 0 when top of timeline reaches 80% down viewport → 1 when bottom clears 20%
+          const rect     = timeline.getBoundingClientRect();
+          const viewH    = window.innerHeight;
           const progress = Math.max(0, Math.min(1,
             (-rect.top + viewH * 0.75) / (rect.height + viewH * 0.3)
           ));
-          line.style.transform = `translateX(-50%) scaleY(${progress.toFixed(4)})`;
+          const tx = isMobile() ? '0' : '-50%';
+          line.style.transform = `translateX(${tx}) scaleY(${progress.toFixed(4)})`;
           ticking = false;
         });
       }, { passive: true });
