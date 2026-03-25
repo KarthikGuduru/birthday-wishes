@@ -163,11 +163,8 @@
      * @param {string} marketUrl   - URL to return to marketplace (default: /)
      */
     init(templateId, previewUrl, marketUrl = '/') {
-      // Guard: redirect to preview page if not purchased so user can pay
-      if (!isPurchased(templateId)) {
-        window.location.href = previewUrl;
-        return;
-      }
+      // No purchase gate — users can always customize and preview.
+      // Purchase is only required to get the shareable invite link.
 
       const form    = document.getElementById('customize-form');
       const preview = document.getElementById('live-preview');
@@ -261,6 +258,18 @@
       document.querySelectorAll('[data-field-bg]').forEach(el => {
         const key = el.dataset.fieldBg;
         if (data[key]) el.style.backgroundImage = `url(${data[key]})`;
+      });
+
+      // Update iframe src (for Google Maps embeds)
+      document.querySelectorAll('[data-field-src]').forEach(el => {
+        const key = el.dataset.fieldSrc;
+        if (data[key]) el.src = data[key];
+      });
+
+      // Update img src (for custom photo uploads stored as dataURL)
+      document.querySelectorAll('[data-field-img]').forEach(el => {
+        const key = el.dataset.fieldImg;
+        if (data[key]) { el.src = data[key]; el.style.display = ''; }
       });
 
       return data;

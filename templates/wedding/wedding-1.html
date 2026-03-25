@@ -243,18 +243,25 @@
       to { stroke-dashoffset: 0; }
     }
 
-    /* Gopuram SVG */
+    /* Gopuram photo */
     .gopuram-container {
       position: absolute; bottom: 0; left: 0; right: 0;
-      pointer-events: none;
-      clip-path: inset(100% 0 0 0);
-      animation: gopuramRise 1.6s cubic-bezier(0.23,1,0.32,1) 1.2s forwards;
+      pointer-events: none; overflow: hidden;
+      height: 62%; /* how much of the hero the temple occupies */
+      mask-image: linear-gradient(to top, black 40%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to top, black 40%, transparent 100%);
+      opacity: 0;
+      animation: gopuramFadeIn 1.8s cubic-bezier(0.23,1,0.32,1) 1.0s forwards;
     }
-    @keyframes gopuramRise {
-      to { clip-path: inset(0% 0 0 0); }
+    @keyframes gopuramFadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .gopuram-container svg {
-      display: block; width: 100%; height: auto;
+    .gopuram-container img {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: center bottom;
+      display: block;
+      filter: saturate(1.35) contrast(1.08) brightness(0.88);
     }
 
     /* Hero text */
@@ -1456,216 +1463,14 @@
     </svg>
   </div>
 
-  <!-- Gopuram — elegant South Indian temple silhouette, rises on load -->
+  <!-- Gopuram — colorful South Indian temple photo, fades up on load -->
   <div class="gopuram-container" aria-hidden="true">
-    <svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
-      <defs>
-        <linearGradient id="gGold" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#e8b84b" stop-opacity="0.95"/>
-          <stop offset="100%" stop-color="#8b5a10" stop-opacity="0.85"/>
-        </linearGradient>
-        <linearGradient id="gDark" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#3d0a00" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="#1a0400" stop-opacity="1"/>
-        </linearGradient>
-        <!-- Repeat pattern for tier texture -->
-        <pattern id="tierDots" x="0" y="0" width="16" height="12" patternUnits="userSpaceOnUse">
-          <circle cx="8" cy="6" r="1.5" fill="#e8b84b" opacity="0.5"/>
-        </pattern>
-      </defs>
-
-      <!-- ═══════════════════════════════════════════════ -->
-      <!-- GROUND PLATFORM -->
-      <!-- ═══════════════════════════════════════════════ -->
-      <rect x="0" y="295" width="1200" height="25" fill="url(#gDark)"/>
-      <rect x="0" y="290" width="1200" height="6" fill="#c9942a" opacity="0.6"/>
-
-      <!-- ═══════════════════════════════════════════════ -->
-      <!-- FAR BACKGROUND — distant small spires         -->
-      <!-- ═══════════════════════════════════════════════ -->
-      <g opacity="0.18">
-        <rect x="100" y="250" width="30" height="45" fill="#c9942a"/>
-        <rect x="105" y="238" width="20" height="14" fill="#c9942a"/>
-        <rect x="108" y="228" width="14" height="12" fill="#c9942a"/>
-        <ellipse cx="115" cy="225" rx="8" ry="5" fill="#c9942a"/>
-        <circle cx="115" cy="218" r="3" fill="#e8b84b"/>
-
-        <rect x="1070" y="250" width="30" height="45" fill="#c9942a"/>
-        <rect x="1075" y="238" width="20" height="14" fill="#c9942a"/>
-        <rect x="1078" y="228" width="14" height="12" fill="#c9942a"/>
-        <ellipse cx="1085" cy="225" rx="8" ry="5" fill="#c9942a"/>
-        <circle cx="1085" cy="218" r="3" fill="#e8b84b"/>
-      </g>
-
-      <!-- ═══════════════════════════════════════════════ -->
-      <!-- SIDE TOWERS (medium, flanking)                -->
-      <!-- ═══════════════════════════════════════════════ -->
-      <!-- LEFT side tower -->
-      <g opacity="0.55">
-        <rect x="220" y="240" width="90" height="55" fill="url(#gDark)"/>
-        <rect x="225" y="225" width="80" height="17" fill="#c9942a" opacity="0.7"/>
-        <rect x="230" y="210" width="70" height="17" fill="#c9942a" opacity="0.65"/>
-        <rect x="237" y="196" width="56" height="16" fill="#c9942a" opacity="0.6"/>
-        <rect x="244" y="183" width="42" height="15" fill="#c9942a" opacity="0.65"/>
-        <rect x="250" y="171" width="30" height="14" fill="#c9942a" opacity="0.6"/>
-        <rect x="255" y="160" width="20" height="13" fill="#c9942a" opacity="0.65"/>
-        <!-- kalasha -->
-        <ellipse cx="265" cy="156" rx="10" ry="6" fill="#c9942a" opacity="0.8"/>
-        <ellipse cx="265" cy="150" rx="6" ry="4" fill="#e8b84b" opacity="0.85"/>
-        <line x1="265" y1="142" x2="265" y2="148" stroke="#e8b84b" stroke-width="2.5"/>
-        <circle cx="265" cy="140" r="3.5" fill="#e8b84b"/>
-        <!-- niche details -->
-        <rect x="237" y="199" width="8" height="10" rx="4 4 0 0" fill="#5a0808" opacity="0.7"/>
-        <rect x="249" y="199" width="8" height="10" rx="4 4 0 0" fill="#5a0808" opacity="0.7"/>
-        <rect x="261" y="199" width="8" height="10" rx="4 4 0 0" fill="#5a0808" opacity="0.7"/>
-        <rect x="273" y="199" width="8" height="10" rx="4 4 0 0" fill="#5a0808" opacity="0.7"/>
-        <!-- tier lines -->
-        <line x1="225" y1="228" x2="305" y2="228" stroke="#e8b84b" stroke-width="0.8" opacity="0.6"/>
-        <line x1="230" y1="213" x2="300" y2="213" stroke="#e8b84b" stroke-width="0.8" opacity="0.5"/>
-        <line x1="237" y1="199" x2="293" y2="199" stroke="#e8b84b" stroke-width="0.8" opacity="0.5"/>
-      </g>
-
-      <!-- RIGHT side tower -->
-      <g opacity="0.55">
-        <rect x="890" y="240" width="90" height="55" fill="url(#gDark)"/>
-        <rect x="895" y="225" width="80" height="17" fill="#c9942a" opacity="0.7"/>
-        <rect x="900" y="210" width="70" height="17" fill="#c9942a" opacity="0.65"/>
-        <rect x="907" y="196" width="56" height="16" fill="#c9942a" opacity="0.6"/>
-        <rect x="914" y="183" width="42" height="15" fill="#c9942a" opacity="0.65"/>
-        <rect x="920" y="171" width="30" height="14" fill="#c9942a" opacity="0.6"/>
-        <rect x="925" y="160" width="20" height="13" fill="#c9942a" opacity="0.65"/>
-        <ellipse cx="935" cy="156" rx="10" ry="6" fill="#c9942a" opacity="0.8"/>
-        <ellipse cx="935" cy="150" rx="6" ry="4" fill="#e8b84b" opacity="0.85"/>
-        <line x1="935" y1="142" x2="935" y2="148" stroke="#e8b84b" stroke-width="2.5"/>
-        <circle cx="935" cy="140" r="3.5" fill="#e8b84b"/>
-        <rect x="907" y="199" width="8" height="10" rx="4 4 0 0" fill="#5a0808" opacity="0.7"/>
-        <rect x="919" y="199" width="8" height="10" rx="4 4 0 0" fill="#5a0808" opacity="0.7"/>
-        <rect x="931" y="199" width="8" height="10" rx="4 4 0 0" fill="#5a0808" opacity="0.7"/>
-        <rect x="943" y="199" width="8" height="10" rx="4 4 0 0" fill="#5a0808" opacity="0.7"/>
-        <line x1="895" y1="228" x2="975" y2="228" stroke="#e8b84b" stroke-width="0.8" opacity="0.6"/>
-        <line x1="900" y1="213" x2="970" y2="213" stroke="#e8b84b" stroke-width="0.8" opacity="0.5"/>
-        <line x1="907" y1="199" x2="963" y2="199" stroke="#e8b84b" stroke-width="0.8" opacity="0.5"/>
-      </g>
-
-      <!-- ═══════════════════════════════════════════════ -->
-      <!-- MAIN GOPURAM — central tower                  -->
-      <!-- ═══════════════════════════════════════════════ -->
-      <!-- Base body -->
-      <rect x="430" y="225" width="340" height="70" fill="url(#gDark)" opacity="0.95"/>
-      <rect x="430" y="225" width="340" height="70" fill="url(#tierDots)"/>
-
-      <!-- Tier 1 -->
-      <rect x="435" y="207" width="330" height="20" fill="#2a0600" opacity="0.9"/>
-      <rect x="435" y="207" width="330" height="20" fill="url(#tierDots)"/>
-      <line x1="435" y1="207" x2="765" y2="207" stroke="#c9942a" stroke-width="1.2" opacity="0.7"/>
-      <line x1="435" y1="225" x2="765" y2="225" stroke="#c9942a" stroke-width="1" opacity="0.5"/>
-      <!-- niches tier 1 -->
-      <rect x="450" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="468" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="486" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="504" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="522" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="540" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="558" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="576" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="594" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="612" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="630" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="648" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="666" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="684" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="702" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="720" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-      <rect x="738" y="210" width="10" height="13" rx="5 5 0 0" fill="#6b1010" opacity="0.8"/>
-
-      <!-- Tier 2 -->
-      <rect x="452" y="190" width="296" height="19" fill="#2a0600" opacity="0.88"/>
-      <line x1="452" y1="190" x2="748" y2="190" stroke="#c9942a" stroke-width="1.2" opacity="0.7"/>
-      <line x1="452" y1="207" x2="748" y2="207" stroke="#e8b84b" stroke-width="0.6" opacity="0.4"/>
-      <rect x="466" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="482" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="498" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="514" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="530" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="546" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="562" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="578" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="594" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="610" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="626" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="642" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="658" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="674" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="690" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="706" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-      <rect x="722" y="193" width="9" height="12" rx="4 4 0 0" fill="#6b1010" opacity="0.75"/>
-
-      <!-- Tiers 3-9: progressively narrower -->
-      <rect x="470" y="174" width="260" height="18" fill="#2a0600" opacity="0.86"/>
-      <line x1="470" y1="174" x2="730" y2="174" stroke="#c9942a" stroke-width="1" opacity="0.65"/>
-      <rect x="490" y="159" width="220" height="17" fill="#2a0600" opacity="0.84"/>
-      <line x1="490" y1="159" x2="710" y2="159" stroke="#c9942a" stroke-width="1" opacity="0.6"/>
-      <rect x="512" y="144" width="176" height="17" fill="#2a0600" opacity="0.82"/>
-      <line x1="512" y1="144" x2="688" y2="144" stroke="#c9942a" stroke-width="1" opacity="0.6"/>
-      <rect x="532" y="130" width="136" height="16" fill="#2a0600" opacity="0.82"/>
-      <line x1="532" y1="130" x2="668" y2="130" stroke="#c9942a" stroke-width="1" opacity="0.6"/>
-      <rect x="552" y="116" width="96" height="16" fill="#2a0600" opacity="0.84"/>
-      <line x1="552" y1="116" x2="648" y2="116" stroke="#c9942a" stroke-width="1" opacity="0.6"/>
-      <rect x="568" y="103" width="64" height="15" fill="#2a0600" opacity="0.84"/>
-      <line x1="568" y1="103" x2="632" y2="103" stroke="#c9942a" stroke-width="1" opacity="0.6"/>
-      <rect x="580" y="91" width="40" height="14" fill="#2a0600" opacity="0.86"/>
-      <line x1="580" y1="91" x2="620" y2="91" stroke="#c9942a" stroke-width="1" opacity="0.6"/>
-
-      <!-- Niche rows on mid tiers -->
-      <rect x="516" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="530" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="544" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="558" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="572" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="586" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="600" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="614" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="628" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="642" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="656" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-      <rect x="670" y="147" width="7" height="9" rx="3 3 0 0" fill="#6b1010" opacity="0.7"/>
-
-      <!-- Barrel vault top (shikhara) — wagon roof shape -->
-      <ellipse cx="600" cy="85" rx="22" ry="10" fill="#c9942a" opacity="0.9"/>
-      <rect x="578" y="81" width="44" height="10" fill="#c9942a" opacity="0.9"/>
-      <!-- Finial stack -->
-      <ellipse cx="600" cy="78" rx="14" ry="7" fill="#c9942a"/>
-      <ellipse cx="600" cy="72" rx="9" ry="5" fill="#e8b84b" opacity="0.95"/>
-      <ellipse cx="600" cy="66" rx="6" ry="4" fill="#e8b84b"/>
-      <!-- Kalasha pot -->
-      <ellipse cx="600" cy="61" rx="7" ry="5" fill="#e8b84b" opacity="0.9"/>
-      <rect x="597" y="51" width="6" height="10" rx="3" fill="#c9942a"/>
-      <circle cx="600" cy="49" r="5" fill="#e8b84b"/>
-      <line x1="600" y1="38" x2="600" y2="44" stroke="#e8b84b" stroke-width="2.5"/>
-      <circle cx="600" cy="36" r="4" fill="#e8b84b" opacity="0.9"/>
-      <!-- Flag -->
-      <line x1="600" y1="28" x2="600" y2="36" stroke="#c9942a" stroke-width="1.5"/>
-      <polygon points="600,28 614,31 600,34" fill="#c9942a" opacity="0.8"/>
-
-      <!-- ═══════════════════════════════════════════════ -->
-      <!-- GOPURA GATE ARCH at base                      -->
-      <!-- ═══════════════════════════════════════════════ -->
-      <path d="M543,295 L543,258 Q565,238 600,235 Q635,238 657,258 L657,295 Z" fill="#1a0400" opacity="0.95"/>
-      <path d="M550,295 L550,260 Q570,244 600,241 Q630,244 650,260 L650,295 Z" fill="#0d0200" opacity="1"/>
-      <!-- Arch decorative border -->
-      <path d="M543,258 Q565,238 600,235 Q635,238 657,258" fill="none" stroke="#c9942a" stroke-width="1.5" opacity="0.7"/>
-      <path d="M538,262 Q562,235 600,231 Q638,235 662,262" fill="none" stroke="#c9942a" stroke-width="0.8" opacity="0.35"/>
-      <!-- Arch step mouldings -->
-      <line x1="543" y1="258" x2="543" y2="295" stroke="#c9942a" stroke-width="1" opacity="0.4"/>
-      <line x1="657" y1="258" x2="657" y2="295" stroke="#c9942a" stroke-width="1" opacity="0.4"/>
-      <!-- Decorative dots on arch frame -->
-      <circle cx="543" cy="255" r="2.5" fill="#e8b84b" opacity="0.7"/>
-      <circle cx="657" cy="255" r="2.5" fill="#e8b84b" opacity="0.7"/>
-      <circle cx="600" cy="232" r="2.5" fill="#e8b84b" opacity="0.8"/>
-
-      <!-- Gold accent line at very top of SVG viewport -->
-      <line x1="0" y1="2" x2="1200" y2="2" stroke="#c9942a" stroke-width="0" opacity="0"/>
-    </svg>
+    <img
+      src="../../assets/generated/gopuram-golden-hour.jpeg"
+      alt="South Indian temple gopuram at golden hour"
+      loading="eager"
+      onerror="this.src='https://images.pexels.com/photos/12475522/pexels-photo-12475522.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750'"
+    >
   </div>
 
   <!-- Hero content -->
@@ -1847,7 +1652,7 @@
   <div class="venue-grid">
     <div class="venue-card reveal">
       <div class="venue-photo-wrap">
-        <img class="venue-photo" src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=800&q=85" alt="Wedding venue" loading="lazy">
+        <img class="venue-photo" src="../../assets/generated/mandap-interior.jpeg" alt="Wedding mandap interior" loading="lazy">
       </div>
       <div class="venue-card-body">
       <div class="venue-badge">Wedding Ceremony</div>
@@ -1859,7 +1664,7 @@
         <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;margin-right:5px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Add to Calendar</button>
       </div>
       <div class="venue-map-embed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="220" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe data-field-src="mapUrl" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="220" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       </div><!-- /venue-card-body -->
     </div>
@@ -1877,7 +1682,7 @@
         <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-2px;margin-right:5px"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Add to Calendar</button>
       </div>
       <div class="venue-map-embed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="220" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe data-field-src="receptionMapUrl" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="220" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       </div><!-- /venue-card-body -->
     </div>
@@ -1890,6 +1695,7 @@
     <h2 class="section-title">Grand Feast — Annadanam</h2>
     <div class="divider"><div class="divider-line"></div><span class="divider-icon" style="font-size:0.9rem;color:var(--gold);letter-spacing:0.1em;">✦◈✦</span><div class="divider-line"></div></div>
     <p class="section-subtitle">పండుగ భోజనం</p>
+    <p class="section-subtitle" data-field="menu" style="margin-top:0.4rem;font-size:0.9rem;color:var(--gold);font-style:italic;"></p>
   </div>
   <div class="menu-grid">
     <div class="menu-category reveal">
@@ -2288,7 +2094,23 @@
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  InviteCustomize.initPreview({groom:"Arjun Kumar",bride:"Meghana Reddy",weddingDate:"April 18, 2026",weddingTime:"10:30 AM",receptionDate:"April 18, 2026",receptionTime:"6:00 PM",venue:"Sri Venkateswara Kalyana Mandapam, Jubilee Hills, Hyderabad",receptionVenue:"The Grand Kakatiya Hall, Begumpet, Hyderabad",groomFamily:"Sri Ramamurthy & Smt. Savitridevi",brideFamily:"Sri Venkateshwara Rao & Smt. Lakshmi Devi",message:"With blessings of the Almighty, we invite you to celebrate this sacred union",starSign:"Rohini"});
+  InviteCustomize.initPreview({
+    groom:"Arjun Kumar",
+    bride:"Meghana Reddy",
+    weddingDate:"April 18, 2026",
+    weddingTime:"10:30 AM",
+    receptionDate:"April 18, 2026",
+    receptionTime:"6:00 PM",
+    venue:"Sri Venkateswara Kalyana Mandapam, Jubilee Hills, Hyderabad",
+    receptionVenue:"The Grand Kakatiya Hall, Begumpet, Hyderabad",
+    groomFamily:"Sri Ramamurthy & Smt. Savitridevi",
+    brideFamily:"Sri Venkateshwara Rao & Smt. Lakshmi Devi",
+    message:"With blessings of the Almighty, we invite you to celebrate this sacred union",
+    starSign:"Rohini",
+    menu:"Traditional South Indian Sadhya & Sweets",
+    mapUrl:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000",
+    receptionMapUrl:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000"
+  });
 });
 </script>
 <script src="../../js/ux-polish.js" defer></script>

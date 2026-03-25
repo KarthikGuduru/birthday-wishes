@@ -1,213 +1,267 @@
-// invite.studio — Cinematic Transitions
-// Framer-quality scroll-driven reveals: clip-path wipes, line-by-line text, parallax
+// invite.studio — Cinematic Transitions v2
+// Apple depth parallax + Framer 3D reveals + progressive draws
 // ============================================================
 (function () {
   'use strict';
 
-  const EASING = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  const EASE = 'cubic-bezier(0.23, 1, 0.32, 1)';
 
-  // ── 1. SPLIT TEXT INTO LINES for line-by-line reveal ────────
-  function splitLines(el) {
-    if (el.dataset.split === 'done') return;
-    el.dataset.split = 'done';
-    // Wrap each word in a span, then group by rendered line
-    const text = el.innerText;
-    el.innerHTML = '';
-    text.split(' ').forEach((word, i) => {
-      const span = document.createElement('span');
-      span.className = 'word-wrap';
-      span.style.cssText = 'display:inline-block; overflow:hidden; vertical-align:bottom;';
-      const inner = document.createElement('span');
-      inner.className = 'word-inner';
-      inner.textContent = word + (i < text.split(' ').length - 1 ? '\u00a0' : '');
-      inner.style.cssText = 'display:inline-block; transform:translateY(110%); opacity:0; will-change:transform,opacity;';
-      span.appendChild(inner);
-      el.appendChild(span);
-    });
-  }
-
-  function revealLines(el, delay) {
-    const words = el.querySelectorAll('.word-inner');
-    words.forEach((w, i) => {
-      const d = delay + i * 38;
-      w.style.transition = `transform 0.72s ${EASING} ${d}ms, opacity 0.72s ease-out ${d}ms`;
-      w.style.transform = 'translateY(0)';
-      w.style.opacity = '1';
-    });
-  }
-
-  // ── 2. CLIP-PATH SECTION REVEAL ──────────────────────────────
-  // Section enters from bottom: clip-path: inset(100% 0 0 0) → inset(0 0 0 0)
-  function initSectionClipReveal() {
-    const sections = document.querySelectorAll('section[id]:not(#hero)');
-    sections.forEach(sec => {
-      sec.style.clipPath = 'inset(6% 0 0 0)';
-      sec.style.opacity = '0';
-      sec.style.transition = `clip-path 0.9s ${EASING}, opacity 0.7s ease-out`;
-      sec.style.willChange = 'clip-path, opacity';
-    });
-
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.style.clipPath = 'inset(0 0 0 0)';
-          e.target.style.opacity = '1';
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-
-    sections.forEach(sec => obs.observe(sec));
-  }
-
-  // ── 3. PARALLAX on hero background ──────────────────────────
-  function initParallax() {
+  // ── 1. HERO DEPTH PARALLAX — Apple "exploded view" ──────────
+  // Each layer moves at its own speed, creating genuine Z-depth.
+  // Background (gopuram) moves slowly — feels far away.
+  // Text layers exit faster than scroll — feel close/foreground.
+  function initHeroDepthParallax() {
     const hero = document.getElementById('hero');
     if (!hero) return;
-    const layer = hero.querySelector('.hero-img-layer');
-    if (!layer) return;
 
+    // Define layers: selector → speed coefficient
+    //   speed > 0  : element translates DOWN relative to scroll → appears to move UP slowly (background / far away)
+    //   speed < 0  : element translates UP extra → exits viewport faster than scroll (foreground / close)
+    const layerDefs = [
+      { sel: '.gopuram-container img',  speed:  0.30, scaleStart: 1.0,  scaleEnd: 1.08 }, // zoom toward temple as you scroll
+      { sel: '.hero-garland',            speed:  0.14, fade: 3.2 },
+      { sel: '.hero-diya-left',          speed: -0.05, fade: 2.8 },
+      { sel: '.hero-diya-right',         speed: -0.05, fade: 2.8 },
+      { sel: '.hero-shubh',              speed: -0.10, fade: 2.0 },
+      { sel: '.hero-names',              speed: -0.18, fade: 1.8 },
+      { sel: '.thirukkural-box',         speed: -0.24, fade: 2.2 },
+      { sel: '.hero-date-box',           speed: -0.30, fade: 2.4 },
+      { sel: '#countdown',               speed: -0.38, fade: 2.6 },
+      { sel: '.kolam-container',         speed:  0.20, fade: 3.5 },
+    ];
+
+    const layers = layerDefs.map(def => {
+      const el = def.sel.startsWith('#')
+        ? document.getElementById(def.sel.slice(1))
+        : hero.querySelector(def.sel);
+      if (!el) return null;
+      el.style.willChange = 'transform, opacity';
+      return { el, ...def };
+    }).filter(Boolean);
+
+    // ── Load entrance animation ──
+    // Show all hero text with stagger after loading screen closes
+    const heroTextEls = [
+      hero.querySelector('.hero-shubh'),
+      hero.querySelector('.hero-names'),
+      hero.querySelector('.thirukkural-box'),
+      hero.querySelector('.hero-date-box'),
+      document.getElementById('countdown'),
+    ].filter(Boolean);
+
+    heroTextEls.forEach((el, i) => {
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateY(32px)';
+      el.style.transition = `opacity 0.85s ease-out ${280 + i * 110}ms, transform 0.85s ${EASE} ${280 + i * 110}ms`;
+    });
+
+    // Letter-spacing breathe on hero names
+    const names = hero.querySelector('.hero-names');
+    if (names) {
+      names.style.letterSpacing = '0.30em';
+      names.style.transition += `, letter-spacing 1.4s ${EASE} 200ms`;
+    }
+
+    let loadDone = false;
+    function fireHeroEntrance() {
+      if (loadDone) return;
+      loadDone = true;
+      heroTextEls.forEach(el => {
+        el.style.opacity   = '1';
+        el.style.transform = 'translateY(0)';
+      });
+      if (names) names.style.letterSpacing = '0.05em';
+    }
+
+    const loader = document.getElementById('loading-screen') || document.getElementById('loader');
+    if (loader) {
+      const mo = new MutationObserver(() => {
+        if (loader.style.display === 'none' || parseFloat(loader.style.opacity || '1') < 0.1) {
+          setTimeout(fireHeroEntrance, 180);
+          mo.disconnect();
+        }
+      });
+      mo.observe(loader, { attributes: true, attributeFilter: ['style', 'class'] });
+    } else {
+      setTimeout(fireHeroEntrance, 300);
+    }
+
+    // ── Scroll-driven depth ──
+    let scrollStarted = false;
     let ticking = false;
+
     window.addEventListener('scroll', () => {
+      if (!scrollStarted) {
+        // On first scroll: cut the load transitions so scroll feels instant
+        scrollStarted = true;
+        heroTextEls.forEach(el => { el.style.transition = 'none'; });
+        if (names) names.style.transition = 'none';
+      }
+
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
-        const y = window.scrollY;
-        const speed = 0.35;
-        layer.style.transform = `translateY(${y * speed}px)`;
+        const scrollY = window.scrollY;
+        const heroH   = hero.offsetHeight;
+        const t       = Math.min(scrollY / heroH, 1.0);
+
+        layers.forEach(({ el, speed, scaleStart, scaleEnd, fade }) => {
+          const ty = (scrollY * speed).toFixed(1);
+
+          if (scaleStart !== undefined) {
+            // Zoom: camera approaches temple as you scroll (scale grows)
+            const scale = (scaleStart + t * (scaleEnd - scaleStart)).toFixed(4);
+            el.style.transform = `scale(${scale}) translateY(${ty}px)`;
+          } else {
+            el.style.transform = `translateY(${ty}px)`;
+          }
+
+          if (fade !== undefined) {
+            el.style.opacity = Math.max(0, 1 - t * fade).toFixed(3);
+          }
+        });
+
         ticking = false;
       });
     }, { passive: true });
   }
 
-  // ── 4. HEADLINE LETTER-SPACING BREATHE on scroll enter ──────
-  // Hero names: compress letter-spacing → expand on reveal
-  function initNameReveal() {
-    const names = document.querySelector('.hero-names, .hero-title');
-    if (!names) return;
-    names.style.letterSpacing = '0.35em';
-    names.style.opacity = '0';
-    names.style.transform = 'translateY(32px)';
-    names.style.transition = `opacity 1.1s ${EASING} 0.3s, transform 1.1s ${EASING} 0.3s, letter-spacing 1.4s ${EASING} 0.2s`;
-
-    setTimeout(() => {
-      names.style.opacity = '1';
-      names.style.transform = 'translateY(0)';
-      names.style.letterSpacing = '0.06em';
-    }, 400);
-  }
-
-  // ── 5. CARD SCALE-IN stagger (image cards, event cards) ──────
-  function initCardReveal() {
-    const cards = document.querySelectorAll(
-      '.event-card, .venue-card, .gallery-item, .inv-card, .ceremony-card, .step-card'
-    );
-    cards.forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'scale(0.94) translateY(28px)';
-      card.style.transition = `opacity 0.65s ${EASING}, transform 0.65s ${EASING}`;
-      card.style.willChange = 'opacity, transform';
+  // ── 2. SECTION REVEAL — Framer-style lift + scale ───────────
+  // Replaces harsh clip-path with a smooth translateY + scale entrance.
+  // Sections feel like cards sliding up from depth, not wiping in.
+  function initSectionReveal() {
+    const sections = document.querySelectorAll('section[id]:not(#hero)');
+    sections.forEach(sec => {
+      sec.style.opacity       = '0';
+      sec.style.transform     = 'translateY(60px) scale(0.975)';
+      sec.style.transformOrigin = 'top center';
+      sec.style.transition    = `opacity 0.95s ${EASE}, transform 0.95s ${EASE}`;
+      sec.style.willChange    = 'opacity, transform';
     });
 
     const obs = new IntersectionObserver((entries) => {
-      // Batch stagger
-      const visible = entries.filter(e => e.isIntersecting);
-      visible.forEach((e, i) => {
-        const delay = i * 80;
-        e.target.style.transitionDelay = `${delay}ms`;
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'scale(1) translateY(0)';
-        setTimeout(() => { e.target.style.transitionDelay = ''; }, 800 + delay);
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.style.opacity   = '1';
+        e.target.style.transform = 'translateY(0) scale(1)';
         obs.unobserve(e.target);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -32px 0px' });
+    }, { threshold: 0.04 });
+
+    sections.forEach(s => obs.observe(s));
+  }
+
+  // ── 3. CARD REVEAL — 3D perspective tilt ────────────────────
+  // Cards enter with a subtle rotateX so they appear to flip up from
+  // the surface — the same micro-depth seen on Framer showcase sites.
+  function initCardReveal3D() {
+    const cards = document.querySelectorAll(
+      '.event-card, .venue-card, .gallery-item, .inv-card,' +
+      '.ceremony-card, .step-card, .timeline-card'
+    );
+    cards.forEach(card => {
+      card.style.opacity         = '0';
+      card.style.transform       = 'perspective(900px) rotateX(6deg) translateY(36px) scale(0.96)';
+      card.style.transformOrigin = 'top center';
+      card.style.transition      = `opacity 0.7s ${EASE}, transform 0.7s ${EASE}`;
+      card.style.willChange      = 'opacity, transform';
+    });
+
+    const obs = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting);
+      visible.forEach((e, i) => {
+        const delay = i * 85;
+        e.target.style.transitionDelay = `${delay}ms`;
+        e.target.style.opacity         = '1';
+        e.target.style.transform       = 'perspective(900px) rotateX(0deg) translateY(0) scale(1)';
+        setTimeout(() => { e.target.style.transitionDelay = ''; }, 900 + delay);
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
 
     cards.forEach(c => obs.observe(c));
   }
 
-  // ── 6. SECTION TITLE slide-up line reveal ───────────────────
+  // ── 4. SECTION TITLE — slide up reveal ──────────────────────
   function initTitleReveal() {
     const titles = document.querySelectorAll(
       '.section-title, .section-heading, h2.title, .sec-title, .inv-names-script'
     );
     titles.forEach(title => {
       title.style.overflow = 'hidden';
-      title.style.display = 'block';
+      title.style.display  = 'block';
     });
 
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
-        const el = e.target;
+        const el    = e.target;
         const delay = parseInt(el.dataset.delay || 0);
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(40px)';
-        el.style.transition = `opacity 0.8s ${EASING} ${delay}ms, transform 0.8s ${EASING} ${delay}ms`;
-        // Trigger
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-          });
-        });
+        el.style.opacity    = '0';
+        el.style.transform  = 'translateY(42px)';
+        el.style.transition = `opacity 0.82s ${EASE} ${delay}ms, transform 0.82s ${EASE} ${delay}ms`;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          el.style.opacity   = '1';
+          el.style.transform = 'translateY(0)';
+        }));
         obs.unobserve(el);
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.18 });
 
     titles.forEach(t => obs.observe(t));
   }
 
-  // ── 7. IMAGE ZOOM-IN on enter ────────────────────────────────
+  // ── 5. IMAGE ZOOM-IN on enter ────────────────────────────────
   function initImageReveal() {
     const imgs = document.querySelectorAll(
-      '.gallery-item img, .venue-img, .hero-photo, .couple-photo'
+      '.gallery-item img, .venue-img, .hero-photo, .couple-photo, .venue-photo'
     );
     imgs.forEach(img => {
-      img.style.transform = 'scale(1.08)';
-      img.style.opacity = '0';
-      img.style.transition = `transform 1.1s ${EASING}, opacity 0.8s ease-out`;
+      img.style.transform  = 'scale(1.09)';
+      img.style.opacity    = '0';
+      img.style.transition = `transform 1.15s ${EASE}, opacity 0.85s ease-out`;
     });
 
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
         e.target.style.transform = 'scale(1)';
-        e.target.style.opacity = '1';
+        e.target.style.opacity   = '1';
         obs.unobserve(e.target);
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.12 });
 
     imgs.forEach(i => obs.observe(i));
   }
 
-  // ── 8. SECTION EYEBROW fade + slide from left ───────────────
+  // ── 6. EYEBROW — slide from left ─────────────────────────────
   function initEyebrowReveal() {
     const eyebrows = document.querySelectorAll('.section-eyebrow, .section-label, .sec-tag');
     eyebrows.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateX(-24px)';
-      el.style.transition = `opacity 0.6s ease-out, transform 0.6s ${EASING}`;
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateX(-28px)';
+      el.style.transition = `opacity 0.65s ease-out, transform 0.65s ${EASE}`;
     });
 
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
-        e.target.style.opacity = '1';
+        e.target.style.opacity   = '1';
         e.target.style.transform = 'translateX(0)';
         obs.unobserve(e.target);
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.28 });
 
     eyebrows.forEach(e => obs.observe(e));
   }
 
-  // ── 9. HORIZONTAL DIVIDER draw animation ────────────────────
+  // ── 7. DIVIDER draw animation ─────────────────────────────────
   function initDividerDraw() {
     const dividers = document.querySelectorAll('.divider-line, .section-divider-line');
     dividers.forEach(el => {
       el.style.transformOrigin = 'left center';
-      el.style.transform = 'scaleX(0)';
-      el.style.transition = `transform 0.9s ${EASING}`;
+      el.style.transform       = 'scaleX(0)';
+      el.style.transition      = `transform 0.95s ${EASE}`;
     });
 
     const obs = new IntersectionObserver((entries) => {
@@ -221,52 +275,107 @@
     dividers.forEach(d => obs.observe(d));
   }
 
-  // ── 10. HERO SUBTITLE / DATE stagger ────────────────────────
-  function initHeroStagger() {
-    const items = document.querySelectorAll('.hero-content > *');
-    items.forEach((el, i) => {
-      if (el.classList.contains('hero-garland') || el.classList.contains('hero-diya')) return;
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(28px)';
-      el.style.transition = `opacity 0.8s ease-out ${300 + i * 120}ms, transform 0.8s ${EASING} ${300 + i * 120}ms`;
+  // ── 8. TIMELINE LINE — progressive draw on scroll ────────────
+  // Draws the vertical connecting line as you scroll through the ceremony timeline,
+  // so events "connect" visually as you read down.
+  function initTimelineDraw() {
+    document.querySelectorAll('.timeline').forEach(timeline => {
+      // Inject a real element to animate (can't JS-drive ::before)
+      const line = document.createElement('div');
+      line.setAttribute('aria-hidden', 'true');
+      line.style.cssText = [
+        'position:absolute', 'left:50%', 'top:0', 'bottom:0', 'width:2px',
+        'background:linear-gradient(180deg,transparent,var(--gold,#c9942a) 8%,var(--gold,#c9942a) 92%,transparent)',
+        'transform:translateX(-50%) scaleY(0)',
+        'transform-origin:top center',
+        'pointer-events:none', 'z-index:1',
+        'will-change:transform',
+      ].join(';');
+      timeline.appendChild(line);
+
+      // Hide the CSS ::before line
+      timeline.classList.add('js-timeline-draw');
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const rect   = timeline.getBoundingClientRect();
+          const viewH  = window.innerHeight;
+          // Progress: 0 when top of timeline reaches 80% down viewport → 1 when bottom clears 20%
+          const progress = Math.max(0, Math.min(1,
+            (-rect.top + viewH * 0.75) / (rect.height + viewH * 0.3)
+          ));
+          line.style.transform = `translateX(-50%) scaleY(${progress.toFixed(4)})`;
+          ticking = false;
+        });
+      }, { passive: true });
     });
-
-    // Trigger after loading screen
-    function triggerHero() {
-      items.forEach(el => {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-      });
-    }
-
-    const loader = document.getElementById('loading-screen') || document.getElementById('loader');
-    if (loader) {
-      const mo = new MutationObserver(() => {
-        if (loader.style.display === 'none' || loader.style.opacity === '0') {
-          setTimeout(triggerHero, 200);
-          mo.disconnect();
-        }
-      });
-      mo.observe(loader, { attributes: true, attributeFilter: ['style', 'class'] });
-    } else {
-      setTimeout(triggerHero, 300);
-    }
   }
 
-  // ── Init ────────────────────────────────────────────────────
+  // ── 9. SCROLL PROGRESS BAR ────────────────────────────────────
+  function initScrollProgress() {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.transform = `scaleX(${(window.scrollY / total).toFixed(4)})`;
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  // ── 10. GALLERY DEPTH PARALLAX ────────────────────────────────
+  // Gallery images subtly shift at different speeds as you scroll,
+  // giving the grid a living, layered feel.
+  function initGalleryDepth() {
+    const items = document.querySelectorAll('.gallery-item');
+    if (items.length < 2) return;
+
+    // Alternate odd/even rows move at slightly different speeds
+    items.forEach((item, i) => {
+      item.style.willChange = 'transform';
+      // Small offset based on column position
+    });
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        items.forEach((item, i) => {
+          const rect   = item.getBoundingClientRect();
+          const viewH  = window.innerHeight;
+          const center = rect.top + rect.height / 2 - viewH / 2;
+          // Items in different columns shift slightly
+          const shift  = (i % 3 === 0) ? -0.04 : (i % 3 === 1) ? 0.04 : -0.02;
+          const ty     = (center * shift).toFixed(1);
+          item.style.transform = `translateY(${ty}px)`;
+        });
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  // ── INIT ──────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function () {
-    // Skip clip reveals if reduced motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    initParallax();
-    initSectionClipReveal();
-    initNameReveal();
-    initCardReveal();
+    initHeroDepthParallax();
+    initSectionReveal();
+    initCardReveal3D();
     initTitleReveal();
     initImageReveal();
     initEyebrowReveal();
     initDividerDraw();
-    initHeroStagger();
+    initTimelineDraw();
+    initScrollProgress();
+    initGalleryDepth();
   });
 
 })();
