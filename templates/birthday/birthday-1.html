@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../../css/marketplace.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="../../js/payment.js" defer></script>
 
   <style>
@@ -32,8 +32,10 @@
 
     body {
       background: var(--bg);
-      color: var(--text);
-      font-family: 'Poppins', sans-serif;
+      color: #2b2b2b;
+      font-family: 'Inter', 'Poppins', sans-serif;
+      font-size: clamp(0.9rem, 1vw, 1rem);
+      line-height: 1.7;
       overflow-x: hidden;
       min-height: 100vh;
     }
@@ -437,19 +439,29 @@
 
     /* ── Section Common ── */
     section { padding: 5rem 2rem; }
-    .section-title {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
+    .section-eyebrow {
+      font-family: 'Inter', 'Poppins', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
       color: var(--royal-gold);
       text-align: center;
       margin-bottom: 0.5rem;
     }
+    .section-title {
+      font-family: 'Playfair Display', 'Great Vibes', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
     .section-subtitle {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Inter', 'Cormorant Garamond', serif;
       font-size: 0.85rem;
-      letter-spacing: 0.3em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--peacock-teal);
+      color: var(--text-secondary);
       text-align: center;
       margin-bottom: 3rem;
     }
@@ -478,11 +490,11 @@
       padding: 0 0.4rem;
     }
 
-    /* Scroll reveal */
+    /* Scroll reveal — Emil Kowalski */
     .r {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.55s cubic-bezier(0.23, 1, 0.32, 1), transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+      transform: translateY(25px);
+      transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
     }
     .r.from-left { transform: translateX(-35px); }
     .r.from-right { transform: translateX(35px); }
@@ -490,50 +502,38 @@
       opacity: 1;
       transform: translate(0);
     }
+    /* Stagger delays for sibling .r elements */
+    .r:nth-child(2) { transition-delay: 60ms; }
+    .r:nth-child(3) { transition-delay: 120ms; }
+    .r:nth-child(4) { transition-delay: 180ms; }
+    .r:nth-child(5) { transition-delay: 240ms; }
+    .r:nth-child(6) { transition-delay: 300ms; }
 
     /* ── Details Section ── */
     #details {
       background: var(--bg2);
       position: relative;
     }
-    #details::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,148,42,0.3), transparent);
-    }
     .details-card {
       max-width: 650px;
       margin: 0 auto;
-      border: 1px solid rgba(201,148,42,0.2);
+      border: none;
+      border-top: 3px solid var(--royal-gold);
+      border-radius: 16px;
       padding: 3rem;
       position: relative;
       background: #ffffff;
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      transition: transform 220ms ease-out, box-shadow 220ms ease-out;
     }
-    .details-card::before {
-      content: '';
-      position: absolute;
-      inset: 8px;
-      border: 1px solid rgba(201,148,42,0.1);
-      pointer-events: none;
-    }
-    /* Corner bracket decorations */
-    .details-card::after {
-      content: '';
-      position: absolute;
-      top: 16px; left: 16px;
-      width: 20px; height: 20px;
-      border-top: 1px solid rgba(201,148,42,0.5);
-      border-left: 1px solid rgba(201,148,42,0.5);
-    }
-    .card-corner-br {
-      position: absolute;
-      bottom: 16px; right: 16px;
-      width: 20px; height: 20px;
-      border-bottom: 1px solid rgba(201,148,42,0.5);
-      border-right: 1px solid rgba(201,148,42,0.5);
+    .details-card::before { display: none; }
+    .details-card::after { display: none; }
+    .card-corner-br { display: none; }
+    @media (hover: hover) and (pointer: fine) {
+      .details-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+      }
     }
     .detail-item {
       display: flex;
@@ -564,16 +564,9 @@
 
     /* ── Timeline Section ── */
     #timeline {
-      background: linear-gradient(135deg, #f5f0e8, #faf7f2, #f5f0e8);
+      background: #f5f0e8;
       position: relative;
       overflow: hidden;
-    }
-    #timeline::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(10,128,112,0.4), transparent);
     }
     .timeline-wrapper {
       max-width: 900px;
@@ -600,17 +593,21 @@
     .timeline-card {
       flex: 1;
       background: #ffffff;
-      border: 1px solid rgba(201,148,42,0.15);
+      border: none;
+      border-left: 3px solid var(--royal-gold);
+      border-radius: 16px;
       padding: 1.8rem;
       position: relative;
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
       max-width: calc(50% - 2rem);
+      transition: transform 220ms ease-out, box-shadow 220ms ease-out;
     }
-    .timeline-card::before {
-      content: '';
-      position: absolute;
-      inset: 5px;
-      border: 1px solid rgba(201,148,42,0.06);
+    .timeline-card::before { display: none; }
+    @media (hover: hover) and (pointer: fine) {
+      .timeline-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+      }
     }
     .timeline-year {
       font-family: 'Great Vibes', cursive;
@@ -635,19 +632,23 @@
     }
     .timeline-dot {
       flex-shrink: 0;
-      width: 16px;
-      height: 16px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      background: var(--royal-gold);
-      box-shadow: 0 0 0 4px rgba(201,148,42,0.2), 0 0 16px rgba(201,148,42,0.4);
+      background: #ffffff;
+      border: 1.5px solid var(--royal-gold);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       z-index: 2;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .timeline-spacer { flex: 1; max-width: calc(50% - 2rem); }
 
     /* ── Gallery Section ── */
     #gallery {
-      background: #ffffff;
+      background: #faf7f2;
       position: relative;
     }
     .gallery-wrapper {
@@ -670,10 +671,19 @@
       width: 260px;
       height: 320px;
       scroll-snap-align: start;
-      border: 1px solid rgba(201,148,42,0.25);
+      border-radius: 16px;
+      border: none;
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      transition: transform 220ms ease-out, box-shadow 220ms ease-out;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .gallery-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+      }
     }
     .gallery-bg {
       position: absolute;
@@ -703,9 +713,10 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(201,148,42,0.3);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(201,148,42,0.15);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      border-radius: 50%;
       color: var(--royal-gold);
       width: 40px;
       height: 40px;
@@ -715,7 +726,7 @@
       cursor: pointer;
       font-size: 1.2rem;
       z-index: 10;
-      transition: background 0.2s, border-color 0.2s;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
     .gallery-btn:hover { background: rgba(201,148,42,0.1); border-color: var(--royal-gold); }
     .gallery-btn.prev { left: -20px; }
@@ -723,7 +734,7 @@
 
     /* ── Wishes Section ── */
     #wishes {
-      background: #f5f0e8;
+      background: #ffffff;
       position: relative;
       overflow: hidden;
     }
@@ -748,11 +759,19 @@
     }
     .wish-card {
       background: #ffffff;
-      border: 1px solid rgba(201,148,42,0.15);
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
       padding: 2rem;
       position: relative;
       animation: wishIn 0.5s ease both;
+      transition: transform 220ms ease-out, box-shadow 220ms ease-out;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .wish-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+      }
     }
     @keyframes wishIn {
       from { opacity: 0; transform: translateY(20px) scale(0.97); }
@@ -787,9 +806,10 @@
       margin: 0 auto 2rem;
       background: transparent;
       border: 1px solid rgba(201,148,42,0.4);
+      border-radius: 12px;
       color: var(--royal-gold);
       padding: 0.8rem 2.5rem;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', 'Poppins', sans-serif;
       font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -806,19 +826,21 @@
       max-width: 550px;
       margin: 0 auto;
       background: #ffffff;
-      border: 1px solid rgba(201,148,42,0.2);
+      border: none;
+      border-radius: 16px;
       padding: 2rem;
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .wish-form.open { display: block; }
     .wish-form input,
     .wish-form textarea {
       width: 100%;
       background: #faf7f2;
-      border: 1px solid rgba(201,148,42,0.2);
+      border: 1px solid rgba(201,148,42,0.15);
+      border-radius: 12px;
       color: var(--text);
       padding: 0.8rem 1rem;
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Inter', 'Cormorant Garamond', serif;
       font-size: 1rem;
       margin-bottom: 1rem;
       outline: none;
@@ -831,8 +853,9 @@
       background: linear-gradient(135deg, var(--royal-gold), var(--gold-light));
       color: var(--bg);
       border: none;
+      border-radius: 12px;
       padding: 0.8rem 2rem;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Inter', 'Poppins', sans-serif;
       font-size: 0.75rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -845,7 +868,7 @@
 
     /* ── Message Section ── */
     #message-section {
-      background: #ffffff;
+      background: #f5f0e8;
       position: relative;
       text-align: center;
       padding: 5rem 2rem;
@@ -883,7 +906,7 @@
 
     /* ── Countdown Section ── */
     #countdown-section {
-      background: linear-gradient(135deg, #f5f0e8, #faf7f2);
+      background: #ffffff;
       padding: 5rem 2rem;
       text-align: center;
       position: relative;
@@ -897,20 +920,16 @@
     }
     .countdown-box {
       background: #ffffff;
-      border: 1px solid rgba(201,148,42,0.2);
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
       padding: 1.5rem 1.2rem;
       min-width: 90px;
       position: relative;
     }
-    .countdown-box::before {
-      content: '';
-      position: absolute;
-      inset: 4px;
-      border: 1px solid rgba(201,148,42,0.08);
-    }
+    .countdown-box::before { display: none; }
     .countdown-num {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Playfair Display', 'Cormorant Garamond', serif;
       font-size: 3rem;
       font-weight: 600;
       color: var(--royal-gold);
@@ -926,7 +945,7 @@
       display: block;
     }
     .countdown-done {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: 1.8rem;
       font-style: italic;
       color: var(--royal-gold);
@@ -934,8 +953,8 @@
 
     /* ── Footer ── */
     footer {
-      background: linear-gradient(135deg, #faf7f2, #f5f0e8);
-      border-top: 1px solid rgba(201,148,42,0.2);
+      background: #faf7f2;
+      border-top: 1px solid rgba(201,148,42,0.15);
       padding: 3rem 2rem;
       text-align: center;
     }
@@ -963,10 +982,38 @@
     }
 
     /* ── Venue Map ── */
-    .venue-map iframe { transition: filter 0.3s ease-out; }
+    .venue-map {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(201,148,42,0.15);
+    }
+    .venue-map iframe {
+      transition: filter 0.3s ease-out;
+      filter: grayscale(0.3);
+      border-radius: 12px;
+    }
     @media (hover: hover) and (pointer: fine) {
       .venue-map:hover iframe { filter: grayscale(0) contrast(1) !important; }
     }
+
+    /* ── Name shimmer animation ── */
+    @keyframes goldShimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .hero-name {
+      background: linear-gradient(90deg, var(--text) 0%, var(--text) 40%, var(--royal-gold) 50%, var(--text) 60%, var(--text) 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: goldShimmer 5s linear infinite;
+    }
+
+    /* ── Button active states ── */
+    .add-wish-btn:active,
+    .wish-submit:active,
+    .gallery-btn:active { transform: scale(0.97) !important; }
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
@@ -1168,7 +1215,7 @@
       </div>
 
       <div class="venue-map" style="margin-top:1.5rem;border-radius:12px;overflow:hidden;border:1px solid rgba(201,148,42,0.2);">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1" width="100%" height="250" style="border:0;display:block;filter:grayscale(0.3) contrast(1.05);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="250" style="border:0;display:block;filter:grayscale(0.3) contrast(1.05);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
     </div>

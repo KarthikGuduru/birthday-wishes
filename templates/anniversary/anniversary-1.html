@@ -336,12 +336,12 @@
     }
     .countdown-box {
       background: #ffffff;
-      border: 1px solid rgba(201,148,42,0.25);
-      border-radius: 4px;
+      border: 1px solid rgba(201,148,42,0.18);
+      border-radius: 12px;
       padding: 0.8rem 1.2rem;
       min-width: 70px;
       text-align: center;
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .countdown-box .cnt-num {
       font-family: 'Playfair Display', serif;
@@ -397,7 +397,7 @@
 
     /* ── Story / Timeline ── */
     #story {
-      background: #ffffff;
+      background: #faf7f2;
     }
     .timeline-scroll-container {
       overflow-x: auto;
@@ -418,15 +418,15 @@
       width: 280px;
       background: #ffffff;
       border-top: 3px solid var(--gold);
-      border-radius: 2px;
+      border-radius: 16px;
       padding: 2rem 1.5rem;
       position: relative;
-      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     @media (hover: hover) and (pointer: fine) {
       .timeline-card:hover {
-        transform: translateY(-6px);
+        transform: translateY(-3px);
         box-shadow: 0 12px 40px rgba(201,148,42,0.12);
       }
     }
@@ -466,7 +466,7 @@
 
     /* ── Photos Gallery ── */
     #photos {
-      background: var(--cream);
+      background: #ffffff;
     }
     .photo-grid {
       display: grid;
@@ -556,7 +556,7 @@
 
     /* ── Decade Cards ── */
     #memories {
-      background: var(--light-bg);
+      background: #f5f0e8;
     }
     #memories .section-title h2 { color: var(--crimson); }
     #memories .section-title .subtitle { color: rgba(106,0,0,0.4); }
@@ -568,21 +568,22 @@
       margin: 0 auto;
     }
     .decade-card {
-      border-radius: 3px;
+      border-radius: 16px;
       overflow: hidden;
       display: flex;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
     }
-    .decade-card:hover {
-      transform: translateX(6px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    @media (hover: hover) and (pointer: fine) {
+      .decade-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(201,148,42,0.1);
+      }
     }
     .decade-card:nth-child(even) {
       margin-left: 5%;
       flex-direction: row-reverse;
     }
-    .decade-card:nth-child(even):hover { transform: translateX(-6px); }
     .decade-badge {
       display: flex;
       align-items: center;
@@ -647,17 +648,15 @@
     .vows-border-frame {
       max-width: 800px;
       margin: 0 auto;
-      border: 1px solid rgba(201,148,42,0.3);
-      box-shadow:
-        0 0 0 8px rgba(201,148,42,0.04),
-        0 0 0 16px rgba(201,148,42,0.02),
-        0 3px 25px rgba(0,0,0,0.04);
+      border: 1px solid rgba(201,148,42,0.15);
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
       padding: 3.5rem 3rem;
       text-align: center;
       position: relative;
       z-index: 2;
-      background: var(--light-bg);
-      border-radius: 4px;
+      background: #ffffff;
+      border-radius: 16px;
     }
     .vows-title {
       font-family: 'Great Vibes', cursive;
@@ -697,7 +696,7 @@
 
     /* ── Milestones ── */
     #milestones {
-      background: var(--cream);
+      background: #faf7f2;
     }
     .milestones-grid {
       display: grid;
@@ -712,16 +711,16 @@
       text-align: center;
       padding: 2rem 1rem;
       background: #ffffff;
-      border: 1px solid rgba(201,148,42,0.15);
-      border-radius: 3px;
-      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      border: 1px solid rgba(201,148,42,0.12);
+      border-top: 3px solid var(--gold);
+      border-radius: 16px;
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     @media (hover: hover) and (pointer: fine) {
       .milestone-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(201,148,42,0.08);
-        border-color: rgba(201,148,42,0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(201,148,42,0.08);
       }
     }
     .milestone-badge {
@@ -758,7 +757,7 @@
 
     /* ── Tribute ── */
     #tribute {
-      background: var(--light-bg);
+      background: #ffffff;
     }
     #tribute .section-title h2 { color: var(--crimson); }
     #tribute .section-title .subtitle { color: rgba(106,0,0,0.4); }
@@ -772,9 +771,9 @@
     @media (max-width: 700px) { .tribute-grid { grid-template-columns: 1fr; } }
     .tribute-card {
       background: white;
-      border-radius: 3px;
+      border-radius: 16px;
       padding: 1.8rem;
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
       border-top: 3px solid var(--gold);
       position: relative;
       animation: fadeInUp 0.5s ease both;
@@ -812,8 +811,8 @@
       margin: 0 auto;
       background: white;
       padding: 2rem;
-      border-radius: 3px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .tribute-form-wrap h3 {
       font-family: 'Playfair Display', serif;
@@ -881,17 +880,18 @@
 
     /* ── Event Details ── */
     #event {
-      background: #ffffff;
+      background: #f5f0e8;
     }
     .event-card {
       max-width: 700px;
       margin: 0 auto;
-      border: 1px solid rgba(201,148,42,0.25);
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
-      border-radius: 4px;
+      border: 1px solid rgba(201,148,42,0.12);
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      border-radius: 16px;
       padding: 3rem;
       text-align: center;
-      background: var(--light-bg);
+      background: #ffffff;
     }
     .event-card-title {
       font-family: 'Great Vibes', cursive;
@@ -905,8 +905,22 @@
       gap: 1rem;
       margin-bottom: 1rem;
       text-align: left;
+      padding: 0.7rem 1rem;
+      background: #faf7f2;
+      border-radius: 12px;
+      border-left: 3px solid var(--gold);
     }
-    .event-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .event-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(201,148,42,0.08);
+      border-radius: 50%;
+    }
     .event-detail-label {
       font-family: 'Poppins', sans-serif;
       font-size: 0.6rem;
@@ -936,7 +950,7 @@
 
     /* ── RSVP ── */
     #rsvp {
-      background: var(--cream);
+      background: #faf7f2;
     }
     #rsvp .section-title h2 { color: var(--crimson); }
     #rsvp .section-title .subtitle { color: rgba(106,0,0,0.4); }
@@ -945,8 +959,8 @@
       margin: 0 auto;
       background: white;
       padding: 2.5rem;
-      border-radius: 3px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
       border-top: 3px solid var(--gold);
     }
     .rsvp-success {
@@ -1018,16 +1032,31 @@
     }
     .venue-map iframe { transition: filter 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
 
-    /* ── Scroll Reveal ── */
-    .reveal {
+    /* ── Scroll Reveal (Emil Kowalski) ── */
+    .reveal, .r {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(25px);
+      transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
     }
-    .reveal.revealed { opacity: 1; transform: none; }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal.revealed, .r.revealed { opacity: 1; transform: none; }
+    .reveal-delay-1, .r-d1 { transition-delay: 60ms; }
+    .reveal-delay-2, .r-d2 { transition-delay: 120ms; }
+    .reveal-delay-3, .r-d3 { transition-delay: 180ms; }
+    .r-d4 { transition-delay: 240ms; }
+    .r-d5 { transition-delay: 300ms; }
+
+    /* ── Button :active ── */
+    .btn-gold:active, .dress-code-badge:active { transform: scale(0.97); }
+
+    /* ── Alternating Section Backgrounds ── */
+    #story { background: #faf7f2; }
+    #photos { background: #ffffff; }
+    #memories { background: #f5f0e8; }
+    #vows { background: #ffffff; }
+    #milestones { background: #faf7f2; }
+    #tribute { background: #ffffff; }
+    #event { background: #f5f0e8; }
+    #rsvp { background: #faf7f2; }
   </style>
   <link rel="stylesheet" href="../../css/ux-polish.css">
 </head>

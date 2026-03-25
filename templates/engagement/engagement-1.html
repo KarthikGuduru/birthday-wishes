@@ -206,15 +206,14 @@
       margin-bottom: 0;
     }
     .countdown-box {
-      background: rgba(255,255,255,0.7); border: 1px solid rgba(201,148,42,0.25);
-      border-radius: 12px; padding: 14px 22px; min-width: 76px; text-align: center;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      background: #fff; border: none;
+      border-radius: 12px; padding: 16px 22px; min-width: 80px; text-align: center;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms;
     }
     .countdown-num {
-      display: block; font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700;
-      background: linear-gradient(135deg, var(--gold-light), var(--rose-light));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: block; font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700;
+      color: var(--text-dark);
       line-height: 1;
     }
     .countdown-label {
@@ -253,13 +252,13 @@
     .ornament-divider span { color: var(--gold); font-size: 1rem; }
 
     /* ── Invitation Card ── */
-    #invitation { background: var(--bg-white); }
+    #invitation { background: #ffffff; }
     .invite-card {
       max-width: 680px; margin: 0 auto;
       background: #fff; color: var(--text-dark);
-      border: 2px solid rgba(201,148,42,0.25);
-      border-radius: 4px; padding: 56px 52px;
-      position: relative; box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      border: none; border-top: 3px solid var(--gold);
+      border-radius: 16px; padding: 56px 52px;
+      position: relative; box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .invite-card::before {
       content: ''; position: absolute; inset: 8px;
@@ -308,13 +307,18 @@
     .floral-corner.br { bottom: 8px; right: 8px; transform: scale(-1,-1); }
 
     /* ── Venue Map ── */
-    .venue-map iframe { transition: filter 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+    .venue-map { border-radius: 12px; overflow: hidden; }
+    .venue-map iframe {
+      filter: grayscale(0.3);
+      transition: filter 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      border-radius: 12px;
+    }
     @media (hover: hover) and (pointer: fine) {
       .venue-map:hover iframe { filter: grayscale(0) contrast(1); }
     }
 
     /* ── Ceremony Timeline ── */
-    #ceremony { background: var(--bg-alt); }
+    #ceremony { background: #f5f0e8; }
     .ceremony-title-te {
       text-align: center; font-family: 'Poppins', sans-serif; font-size: 1rem;
       color: var(--gold); letter-spacing: 0.15em; margin-bottom: 56px;
@@ -346,7 +350,11 @@
       font-family: 'Poppins', sans-serif; font-size: 0.78rem; font-weight: 600;
       color: var(--gold-light); letter-spacing: 0.08em; margin-bottom: 4px;
     }
-    .tl-icon { font-size: 1.5rem; margin-bottom: 6px; }
+    .tl-icon {
+      font-size: 1.3rem; margin-bottom: 6px;
+      width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+      background: #fff; border-radius: 50%; box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
     .tl-event-name {
       font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600;
       color: var(--text-dark); margin-bottom: 4px;
@@ -356,14 +364,14 @@
       color: var(--text-light); font-size: 1rem; line-height: 1.5;
     }
     .timeline-event.highlighted .tl-event-card {
-      background: rgba(255,255,255,0.8);
-      border: 1px solid rgba(201,148,42,0.3); border-radius: 10px; padding: 16px;
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      background: #fff;
+      border: none; border-left: 3px solid var(--gold); border-radius: 16px; padding: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
     .timeline-event.highlighted .tl-event-name { color: var(--gold); font-size: 1.4rem; }
 
     /* ── Family Tree ── */
-    #family { background: var(--bg-primary); color: var(--text-dark); }
+    #family { background: #faf7f2; color: var(--text-dark); }
     #family .section-title { background: linear-gradient(135deg, var(--rose), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     #family .section-subtitle { color: var(--text-light); }
     #family .ornament-divider::before, #family .ornament-divider::after { background: linear-gradient(90deg, transparent, var(--rose), transparent); }
@@ -396,18 +404,17 @@
     }
     .ft-families { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 0; }
     .ft-family-card {
-      background: #fff; border: 1px solid rgba(201,148,42,0.2);
-      border-radius: 12px; padding: 28px 24px; text-align: center;
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
-      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s;
+      background: #fff; border: none; border-top: 3px solid var(--gold);
+      border-radius: 16px; padding: 28px 24px; text-align: center;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms;
       position: relative; overflow: hidden;
     }
-    .ft-family-card::before {
-      content: ''; position: absolute; inset: 3px;
-      border: 1px solid rgba(201,148,42,0.2); border-radius: 10px; pointer-events: none;
+    .ft-family-icon {
+      font-size: 1.5rem; margin-bottom: 10px;
+      width: 46px; height: 46px; display: inline-flex; align-items: center; justify-content: center;
+      background: var(--bg-primary); border-radius: 50%;
     }
-    .ft-family-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(201,80,122,0.25); }
-    .ft-family-icon { font-size: 2rem; margin-bottom: 10px; }
     .ft-family-label {
       font-family: 'Playfair Display', serif; font-size: 0.8rem; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase; color: var(--rose); margin-bottom: 8px;
@@ -422,12 +429,13 @@
     }
 
     /* ── Horoscope Section ── */
-    #horoscope { background: var(--bg-white); }
+    #horoscope { background: #ffffff; }
     .horoscope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 760px; margin: 0 auto 48px; }
     .horoscope-card {
-      background: var(--bg-primary); border: 1px solid rgba(201,148,42,0.2);
+      background: #fff; border: none; border-top: 3px solid var(--gold);
       border-radius: 16px; padding: 32px 28px; text-align: center;
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms;
     }
     .horoscope-card .hc-planet { font-size: 2.5rem; margin-bottom: 12px; }
     .hc-nakshatra {
@@ -461,21 +469,24 @@
 
     /* ── Love Story ── */
     #story {
-      background: var(--bg-alt); position: relative; overflow: hidden;
+      background: #f5f0e8; position: relative; overflow: hidden;
     }
     #starfield {
       position: absolute; inset: 0; pointer-events: none;
     }
     .story-grid { display: grid; grid-template-columns: 1fr; gap: 32px; max-width: 700px; margin: 0 auto; position: relative; z-index: 2; }
     .story-card {
-      background: #fff; border: 1px solid rgba(201,148,42,0.15);
-      border-radius: 14px; padding: 28px 32px;
+      background: #fff; border: none; border-left: 3px solid var(--gold);
+      border-radius: 16px; padding: 28px 32px;
       display: flex; gap: 20px; align-items: flex-start;
-      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s;
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
     }
-    .story-card:hover { transform: translateX(8px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-    .story-icon { font-size: 2.2rem; flex-shrink: 0; margin-top: 2px; }
+    .story-icon {
+      font-size: 1.6rem; flex-shrink: 0; margin-top: 2px;
+      width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+      background: var(--bg-primary); border-radius: 50%;
+    }
     .story-text {}
     .story-chapter {
       font-family: 'Playfair Display', serif; font-size: 0.78rem; font-weight: 600;
@@ -491,7 +502,7 @@
     }
 
     /* ── Gallery ── */
-    #gallery { background: var(--bg-white); color: var(--text-dark); }
+    #gallery { background: #ffffff; color: var(--text-dark); }
     #gallery .section-title { background: linear-gradient(135deg, var(--rose), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     #gallery .section-subtitle { color: var(--text-light); }
     #gallery .ornament-divider::before, #gallery .ornament-divider::after { background: linear-gradient(90deg, transparent, var(--rose), transparent); }
@@ -548,7 +559,7 @@
     }
 
     /* ── Blessings Scroll ── */
-    #blessings { background: var(--bg-alt); color: var(--text-dark); }
+    #blessings { background: #f5f0e8; color: var(--text-dark); }
     #blessings .section-title { background: linear-gradient(135deg, var(--rose), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     #blessings .section-subtitle { color: var(--text-light); }
     #blessings .ornament-divider span { color: var(--rose); }
@@ -594,7 +605,7 @@
     .blessing-success { display: none; color: var(--maroon); font-family: 'Great Vibes', cursive; font-size: 1.6rem; margin-top: 12px; text-align: center; }
 
     /* ── RSVP ── */
-    #rsvp { background: var(--bg-primary); }
+    #rsvp { background: #faf7f2; }
     #rsvp .section-title { background: linear-gradient(135deg, var(--rose), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     #rsvp .section-subtitle { color: var(--text-light); }
     #rsvp .ornament-divider span { color: var(--gold); }
@@ -640,7 +651,7 @@
 
     /* ── Footer ── */
     footer {
-      background: var(--bg-alt);
+      background: #f5f0e8;
       padding: 60px 24px 100px; text-align: center;
       border-top: 1px solid rgba(201,148,42,0.15);
     }
@@ -665,12 +676,43 @@
     }
     .footer-back:hover { color: var(--gold); }
 
-    /* ── Scroll Reveal ── */
-    .reveal {
-      opacity: 0; transform: translateY(36px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+    /* ── Scroll Reveal (Emil Kowalski) ── */
+    .reveal, .r {
+      opacity: 0; transform: translateY(25px);
+      transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
     }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.visible, .r.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Card Hover (Emil Kowalski) ── */
+    @media (hover: hover) and (pointer: fine) {
+      .story-card:hover, .ft-family-card:hover, .horoscope-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+        transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .countdown-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      }
+    }
+
+    /* ── Button :active ── */
+    .btn-gold:active, .btn-rose:active { transform: scale(0.97); }
+
+    /* ── Gold Shimmer on Couple Names ── */
+    @keyframes goldShimmer {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+    .hero-names, .invite-couple .couple-names, .ft-couple {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 25%, var(--rose-light) 50%, var(--gold-light) 75%, var(--gold) 100%);
+      background-size: 300% 100%;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: goldShimmer 5s linear infinite;
+    }
+    .hero-names .heart {
+      -webkit-text-fill-color: var(--rose);
+    }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
@@ -1441,8 +1483,8 @@
     document.getElementById('rsvp-success').style.display = 'block';
   }
 
-  // ── Scroll Reveal ──
-  const revealEls = document.querySelectorAll('.reveal');
+  // ── Scroll Reveal (Emil Kowalski stagger 60ms) ──
+  const revealEls = document.querySelectorAll('.reveal, .r');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
