@@ -1081,41 +1081,10 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
      LOADING SCREEN
      ============================================= -->
 <div id="loading-screen">
-  <div class="loading-svg-wrap">
-    <!-- Pregnant woman silhouette in sari — pure SVG -->
-    <svg class="loading-woman-svg" viewBox="0 0 120 210" width="120" height="210" xmlns="http://www.w3.org/2000/svg">
-      <!-- Hair bun -->
-      <ellipse cx="60" cy="11" rx="11" ry="9"  fill="#8b6520" opacity="0.9"/>
-      <circle  cx="70" cy="6"  r="7"           fill="#8b6520" opacity="0.9"/>
-      <!-- Head -->
-      <ellipse cx="60" cy="30" rx="18" ry="20" fill="#c9942a" opacity="0.88"/>
-      <!-- Neck -->
-      <rect x="54" y="48" width="12" height="12" rx="5" fill="#c9942a" opacity="0.82"/>
-      <!-- Body / sari -->
-      <ellipse cx="60" cy="97" rx="27" ry="42" fill="#1a6a1a" opacity="0.9"/>
-      <!-- Belly bump -->
-      <ellipse cx="63" cy="102" rx="24" ry="20" fill="#2d8a2d" opacity="0.85"/>
-      <!-- Sari pallu -->
-      <path d="M34 75 Q19 98 27 132 Q36 154 50 158" stroke="#d4a010" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.82"/>
-      <!-- Left arm -->
-      <path d="M34 72 Q18 90 20 112" stroke="#c9942a" stroke-width="8.5" fill="none" stroke-linecap="round" opacity="0.85"/>
-      <!-- Left hand -->
-      <circle cx="20" cy="114" r="5.5" fill="#c9942a" opacity="0.85"/>
-      <!-- Right arm -->
-      <path d="M86 72 Q102 90 100 112" stroke="#c9942a" stroke-width="8.5" fill="none" stroke-linecap="round" opacity="0.85"/>
-      <!-- Right hand -->
-      <circle cx="100" cy="114" r="5.5" fill="#c9942a" opacity="0.85"/>
-      <!-- Skirt/legs -->
-      <path d="M38 134 Q34 168 36 196" stroke="#1a6a1a" stroke-width="15" fill="none" stroke-linecap="round" opacity="0.9"/>
-      <path d="M82 134 Q86 168 84 196" stroke="#1a6a1a" stroke-width="15" fill="none" stroke-linecap="round" opacity="0.9"/>
-      <!-- Feet -->
-      <ellipse cx="36"  cy="198" rx="11" ry="5" fill="#c9942a" opacity="0.82"/>
-      <ellipse cx="84"  cy="198" rx="11" ry="5" fill="#c9942a" opacity="0.82"/>
-    </svg>
-    <!-- Bangle rings near left wrist -->
-    <div class="bangle-ring-anim b1"></div>
-    <div class="bangle-ring-anim b2"></div>
-  </div>
+  <svg style="animation:spin 1.2s linear infinite;display:block;margin:0 auto" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="22" cy="22" r="18" stroke="rgba(201,148,42,0.2)" stroke-width="1.5"/>
+    <path d="M22 4 A18 18 0 0 1 40 22" stroke="#c9942a" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
   <div class="loading-text">A New Life Begins...</div>
   <div class="loading-dots">
     <span></span><span></span><span></span>
@@ -1167,88 +1136,6 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <section class="hero" id="home">
     <div class="hero-img-layer" style="background-image:url('../../assets/generated/seemantham-hero.jpeg');opacity:0.0;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
 
-  <!-- Banana Leaf Canopy -->
-  <div class="banana-leaf-canopy" aria-hidden="true">
-    <svg viewBox="0 0 1200 190" width="100%" height="190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <!-- Center leaf -->
-      <path d="M600 0 Q560 65 520 92 Q478 122 458 155 Q500 124 542 92 Q582 64 612 18 Q620 8 600 0Z" fill="#1a6a1a" opacity="0.92"/>
-      <line x1="600" y1="0"  x2="478" y2="162" stroke="#0a3a0a" stroke-width="2"   opacity="0.7"/>
-      <line x1="588" y1="22" x2="528" y2="82"  stroke="#2d8a2d" stroke-width="0.9" opacity="0.55"/>
-      <line x1="572" y1="44" x2="512" y2="98"  stroke="#2d8a2d" stroke-width="0.9" opacity="0.55"/>
-      <!-- Right-of-center -->
-      <path d="M600 0 Q642 58 682 88 Q722 118 752 152 Q712 120 672 90 Q632 58 612 16Z" fill="#2d8a2d" opacity="0.87"/>
-      <line x1="600" y1="0"  x2="756" y2="158" stroke="#0a3a0a" stroke-width="1.8" opacity="0.62"/>
-      <!-- Far left -->
-      <path d="M600 0 Q518 52 448 77 Q378 102 328 132 Q392 100 452 74 Q522 48 592 6Z" fill="#1a6a1a" opacity="0.82"/>
-      <line x1="600" y1="0" x2="322" y2="140" stroke="#0a3a0a" stroke-width="1.8" opacity="0.58"/>
-      <!-- Far right -->
-      <path d="M600 0 Q682 50 752 74 Q822 100 872 130 Q812 99 752 72 Q682 46 612 6Z" fill="#2d8a2d" opacity="0.82"/>
-      <line x1="600" y1="0" x2="878" y2="137" stroke="#0a3a0a" stroke-width="1.8" opacity="0.58"/>
-      <!-- Extreme left -->
-      <path d="M600 0 Q478 44 378 64 Q278 84 198 110 Q294 77 390 58 Q490 38 592 4Z" fill="#1a6a1a" opacity="0.72"/>
-      <!-- Extreme right -->
-      <path d="M600 0 Q722 42 822 62 Q922 82 1002 108 Q906 76 810 58 Q710 39 610 4Z" fill="#2d8a2d" opacity="0.72"/>
-      <!-- Gold tips -->
-      <circle cx="456" cy="157" r="5.5" fill="#d4a010" opacity="0.72"/>
-      <circle cx="752" cy="154" r="5.5" fill="#d4a010" opacity="0.72"/>
-      <circle cx="326" cy="134" r="4.5" fill="#d4a010" opacity="0.62"/>
-      <circle cx="874" cy="132" r="4.5" fill="#d4a010" opacity="0.62"/>
-    </svg>
-  </div>
-
-  <!-- Jasmine Gajra -->
-  <div class="jasmine-gajra" aria-hidden="true">
-    <svg viewBox="0 0 820 62" width="820" height="62" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">
-      <path d="M20 20 Q200 57 410 47 Q610 37 800 18" stroke="#c8a060" stroke-width="1.5" fill="none" stroke-dasharray="4,3" opacity="0.8"/>
-      <g opacity="0.9">
-        <!-- Flower 1 -->
-        <ellipse cx="70"  cy="36" rx="5" ry="3" fill="white" transform="rotate(-15 70 36)"/>
-        <ellipse cx="70"  cy="36" rx="5" ry="3" fill="white" transform="rotate(30  70 36)"/>
-        <ellipse cx="70"  cy="36" rx="5" ry="3" fill="white" transform="rotate(75  70 36)"/>
-        <circle  cx="70"  cy="36" r="3"  fill="#fff8e0"/>
-        <!-- Flower 2 -->
-        <ellipse cx="180" cy="48" rx="5" ry="3" fill="white" transform="rotate(-10 180 48)"/>
-        <ellipse cx="180" cy="48" rx="5" ry="3" fill="white" transform="rotate(35  180 48)"/>
-        <ellipse cx="180" cy="48" rx="5" ry="3" fill="white" transform="rotate(80  180 48)"/>
-        <circle  cx="180" cy="48" r="3"  fill="#fff8e0"/>
-        <!-- Flower 3 -->
-        <ellipse cx="300" cy="51" rx="5" ry="3" fill="white" transform="rotate(-5  300 51)"/>
-        <ellipse cx="300" cy="51" rx="5" ry="3" fill="white" transform="rotate(40  300 51)"/>
-        <ellipse cx="300" cy="51" rx="5" ry="3" fill="white" transform="rotate(85  300 51)"/>
-        <circle  cx="300" cy="51" r="3"  fill="#fff8e0"/>
-        <!-- Flower 4 -->
-        <ellipse cx="410" cy="49" rx="5" ry="3" fill="white" transform="rotate(-20 410 49)"/>
-        <ellipse cx="410" cy="49" rx="5" ry="3" fill="white" transform="rotate(25  410 49)"/>
-        <ellipse cx="410" cy="49" rx="5" ry="3" fill="white" transform="rotate(70  410 49)"/>
-        <circle  cx="410" cy="49" r="3"  fill="#fff8e0"/>
-        <!-- Flower 5 -->
-        <ellipse cx="530" cy="44" rx="5" ry="3" fill="white" transform="rotate(-15 530 44)"/>
-        <ellipse cx="530" cy="44" rx="5" ry="3" fill="white" transform="rotate(30  530 44)"/>
-        <ellipse cx="530" cy="44" rx="5" ry="3" fill="white" transform="rotate(75  530 44)"/>
-        <circle  cx="530" cy="44" r="3"  fill="#fff8e0"/>
-        <!-- Flower 6 -->
-        <ellipse cx="650" cy="36" rx="5" ry="3" fill="white" transform="rotate(-10 650 36)"/>
-        <ellipse cx="650" cy="36" rx="5" ry="3" fill="white" transform="rotate(35  650 36)"/>
-        <ellipse cx="650" cy="36" rx="5" ry="3" fill="white" transform="rotate(80  650 36)"/>
-        <circle  cx="650" cy="36" r="3"  fill="#fff8e0"/>
-        <!-- Flower 7 -->
-        <ellipse cx="760" cy="24" rx="5" ry="3" fill="white" transform="rotate(-20 760 24)"/>
-        <ellipse cx="760" cy="24" rx="5" ry="3" fill="white" transform="rotate(25  760 24)"/>
-        <ellipse cx="760" cy="24" rx="5" ry="3" fill="white" transform="rotate(70  760 24)"/>
-        <circle  cx="760" cy="24" r="3"  fill="#fff8e0"/>
-      </g>
-    </svg>
-  </div>
-
-  <!-- Spinning Bangles Orbit -->
-  <div class="bangles-orbit" aria-hidden="true">
-    <div class="orbit-bangle"></div>
-    <div class="orbit-bangle"></div>
-    <div class="orbit-bangle"></div>
-    <div class="orbit-bangle"></div>
-    <div class="orbit-bangle"></div>
-    <div class="orbit-bangle"></div>
-  </div>
 
   <!-- Floating petals -->
   <div id="petals-container" aria-hidden="true"></div>

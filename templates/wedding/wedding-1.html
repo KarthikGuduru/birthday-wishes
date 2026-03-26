@@ -1242,31 +1242,9 @@
 
 <!-- LOADING SCREEN -->
 <div id="loading-screen">
-  <svg class="lamp-svg" viewBox="0 0 80 140" xmlns="http://www.w3.org/2000/svg">
-    <!-- Glow -->
-    <circle class="lamp-glow" cx="40" cy="52" r="22" fill="rgba(255,180,30,0.3)" />
-    <!-- Flame -->
-    <ellipse class="lamp-flame" cx="40" cy="36" rx="7" ry="11" fill="#ff9a00" opacity="0.9"/>
-    <ellipse class="lamp-flame" cx="40" cy="38" rx="4" ry="7" fill="#ffdd00" opacity="0.95"/>
-    <ellipse cx="40" cy="42" rx="2" ry="3" fill="white" opacity="0.8"/>
-    <!-- Oil cup / wick holder -->
-    <ellipse cx="40" cy="52" rx="18" ry="6" fill="none" stroke="#c9942a" stroke-width="2.5"/>
-    <ellipse cx="40" cy="52" rx="18" ry="6" fill="#8b5a10" opacity="0.6"/>
-    <!-- Lamp body - stem -->
-    <rect x="37" y="56" width="6" height="28" fill="#c9942a" rx="2"/>
-    <!-- Decorative bands -->
-    <rect x="35" y="62" width="10" height="3" fill="#a07020" rx="1"/>
-    <rect x="35" y="70" width="10" height="3" fill="#a07020" rx="1"/>
-    <!-- Base plate -->
-    <rect x="24" y="84" width="32" height="6" fill="#c9942a" rx="1"/>
-    <rect x="20" y="88" width="40" height="5" fill="#a07020" rx="1"/>
-    <!-- Wider base foot -->
-    <rect x="16" y="92" width="48" height="7" fill="#c9942a" rx="2"/>
-    <rect x="12" y="98" width="56" height="6" fill="#8b5a10" rx="2"/>
-    <!-- Decorative dots on base -->
-    <circle cx="30" cy="101" r="2" fill="#c9942a"/>
-    <circle cx="40" cy="101" r="2" fill="#c9942a"/>
-    <circle cx="50" cy="101" r="2" fill="#c9942a"/>
+  <svg style="animation:spin 1.2s linear infinite;display:block;margin:0 auto" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="22" cy="22" r="18" stroke="rgba(201,148,42,0.2)" stroke-width="1.5"/>
+    <path d="M22 4 A18 18 0 0 1 40 22" stroke="#c9942a" stroke-width="1.5" stroke-linecap="round"/>
   </svg>
   <div class="loading-text">Subhamasthu...</div>
   <div class="splash-tap-label">Tap to open</div>
@@ -1319,90 +1297,10 @@
          onerror="this.parentElement.style.display='none'">
   </div>
 
-  <!-- Diya corner decorations — SVG oil lamp, no emoji -->
-  <div class="hero-diya hero-diya-left" aria-hidden="true">
-    <svg viewBox="0 0 48 64" width="48" height="64" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <!-- Flame -->
-      <ellipse cx="24" cy="10" rx="5" ry="8" fill="#ffb347" opacity="0.95" class="diya-flame"/>
-      <ellipse cx="24" cy="12" rx="2.5" ry="4.5" fill="#fff5c0" opacity="0.9" class="diya-flame"/>
-      <!-- Wick -->
-      <rect x="23" y="17" width="2" height="5" rx="1" fill="#c9942a"/>
-      <!-- Oil bowl -->
-      <path d="M12,26 Q12,22 24,22 Q36,22 36,26 L34,38 Q34,42 24,42 Q14,42 14,38 Z" fill="#c9942a" opacity="0.95"/>
-      <path d="M14,28 Q14,25 24,25 Q34,25 34,28 L33,36 Q33,40 24,40 Q15,40 15,36 Z" fill="#e8a030"/>
-      <!-- Spout -->
-      <path d="M34,30 Q40,28 42,26 Q40,32 34,34 Z" fill="#c9942a"/>
-      <!-- Base tier 1 -->
-      <rect x="10" y="42" width="28" height="5" rx="3" fill="#a07820"/>
-      <!-- Base tier 2 -->
-      <rect x="6" y="47" width="36" height="6" rx="3" fill="#8b6510"/>
-      <!-- Base tier 3 -->
-      <rect x="4" y="53" width="40" height="5" rx="3" fill="#a07820"/>
-      <!-- Decorative dots -->
-      <circle cx="16" cy="34" r="1.5" fill="#fff5c0" opacity="0.6"/>
-      <circle cx="24" cy="32" r="1.5" fill="#fff5c0" opacity="0.6"/>
-      <circle cx="32" cy="34" r="1.5" fill="#fff5c0" opacity="0.6"/>
-    </svg>
-  </div>
-  <div class="hero-diya hero-diya-right" aria-hidden="true">
-    <svg viewBox="0 0 48 64" width="48" height="64" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <ellipse cx="24" cy="10" rx="5" ry="8" fill="#ffb347" opacity="0.95" class="diya-flame"/>
-      <ellipse cx="24" cy="12" rx="2.5" ry="4.5" fill="#fff5c0" opacity="0.9" class="diya-flame"/>
-      <rect x="23" y="17" width="2" height="5" rx="1" fill="#c9942a"/>
-      <path d="M12,26 Q12,22 24,22 Q36,22 36,26 L34,38 Q34,42 24,42 Q14,42 14,38 Z" fill="#c9942a" opacity="0.95"/>
-      <path d="M14,28 Q14,25 24,25 Q34,25 34,28 L33,36 Q33,40 24,40 Q15,40 15,36 Z" fill="#e8a030"/>
-      <path d="M14,30 Q8,28 6,26 Q8,32 14,34 Z" fill="#c9942a"/>
-      <rect x="10" y="42" width="28" height="5" rx="3" fill="#a07820"/>
-      <rect x="6" y="47" width="36" height="6" rx="3" fill="#8b6510"/>
-      <rect x="4" y="53" width="40" height="5" rx="3" fill="#a07820"/>
-      <circle cx="16" cy="34" r="1.5" fill="#fff5c0" opacity="0.6"/>
-      <circle cx="24" cy="32" r="1.5" fill="#fff5c0" opacity="0.6"/>
-      <circle cx="32" cy="34" r="1.5" fill="#fff5c0" opacity="0.6"/>
-    </svg>
-  </div>
 
   <!-- Floating petals container -->
   <div id="petals-container"></div>
 
-  <!-- Kolam SVG animation (bottom-right corner) -->
-  <div class="kolam-container">
-    <svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-      <!-- Dots grid -->
-      <g fill="#c9942a" opacity="0.6">
-        <circle cx="20" cy="20" r="2"/><circle cx="40" cy="20" r="2"/><circle cx="60" cy="20" r="2"/>
-        <circle cx="80" cy="20" r="2"/><circle cx="100" cy="20" r="2"/><circle cx="120" cy="20" r="2"/>
-        <circle cx="140" cy="20" r="2"/>
-        <circle cx="20" cy="40" r="2"/><circle cx="40" cy="40" r="2"/><circle cx="60" cy="40" r="2"/>
-        <circle cx="80" cy="40" r="2"/><circle cx="100" cy="40" r="2"/><circle cx="120" cy="40" r="2"/>
-        <circle cx="140" cy="40" r="2"/>
-        <circle cx="20" cy="60" r="2"/><circle cx="40" cy="60" r="2"/><circle cx="60" cy="60" r="2"/>
-        <circle cx="80" cy="60" r="2"/><circle cx="100" cy="60" r="2"/><circle cx="120" cy="60" r="2"/>
-        <circle cx="140" cy="60" r="2"/>
-        <circle cx="20" cy="80" r="2"/><circle cx="40" cy="80" r="2"/><circle cx="60" cy="80" r="2"/>
-        <circle cx="80" cy="80" r="2"/><circle cx="100" cy="80" r="2"/><circle cx="120" cy="80" r="2"/>
-        <circle cx="140" cy="80" r="2"/>
-        <circle cx="20" cy="100" r="2"/><circle cx="40" cy="100" r="2"/><circle cx="60" cy="100" r="2"/>
-        <circle cx="80" cy="100" r="2"/><circle cx="100" cy="100" r="2"/><circle cx="120" cy="100" r="2"/>
-        <circle cx="140" cy="100" r="2"/>
-        <circle cx="20" cy="120" r="2"/><circle cx="40" cy="120" r="2"/><circle cx="60" cy="120" r="2"/>
-        <circle cx="80" cy="120" r="2"/><circle cx="100" cy="120" r="2"/><circle cx="120" cy="120" r="2"/>
-        <circle cx="140" cy="120" r="2"/>
-        <circle cx="20" cy="140" r="2"/><circle cx="40" cy="140" r="2"/><circle cx="60" cy="140" r="2"/>
-        <circle cx="80" cy="140" r="2"/><circle cx="100" cy="140" r="2"/><circle cx="120" cy="140" r="2"/>
-        <circle cx="140" cy="140" r="2"/>
-      </g>
-      <!-- Kolam pattern paths -->
-      <path class="kolam-path" d="M80,20 L140,80 L80,140 L20,80 Z"/>
-      <path class="kolam-path" d="M80,20 L80,140 M20,80 L140,80"/>
-      <path class="kolam-path" d="M40,40 L120,40 L120,120 L40,120 Z"/>
-      <path class="kolam-path" d="M60,20 L140,100 M20,60 L100,140"/>
-      <path class="kolam-path" d="M100,20 L20,100 M140,60 L60,140"/>
-      <path class="kolam-path" d="M80,40 C100,40 120,60 120,80 C120,100 100,120 80,120 C60,120 40,100 40,80 C40,60 60,40 80,40 Z"/>
-      <path class="kolam-path" d="M80,50 L110,80 L80,110 L50,80 Z"/>
-      <path class="kolam-path" d="M80,60 C90,60 100,70 100,80 C100,90 90,100 80,100 C70,100 60,90 60,80 C60,70 70,60 80,60 Z"/>
-      <path class="kolam-path" style="stroke-dasharray:200;stroke-dashoffset:200;animation-delay:1s;" d="M80,65 L95,80 L80,95 L65,80 Z"/>
-    </svg>
-  </div>
 
   <!-- Gopuram — colorful South Indian temple photo, fades up on load -->
   <div class="gopuram-container" aria-hidden="true">

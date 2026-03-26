@@ -1087,31 +1087,9 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Loading Screen -->
 <div id="loading-screen">
-  <svg class="kalash-svg" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Mango leaves -->
-    <g class="leaf-l">
-      <ellipse cx="24" cy="18" rx="10" ry="22" fill="#1a5a1a" transform="rotate(-35 24 18)" />
-      <ellipse cx="14" cy="22" rx="8" ry="18" fill="#2a7a2a" transform="rotate(-55 14 22)" />
-    </g>
-    <g class="leaf-r">
-      <ellipse cx="76" cy="18" rx="10" ry="22" fill="#1a5a1a" transform="rotate(35 76 18)" />
-      <ellipse cx="86" cy="22" rx="8" ry="18" fill="#2a7a2a" transform="rotate(55 86 22)" />
-    </g>
-    <!-- Coconut -->
-    <ellipse cx="50" cy="12" rx="14" ry="12" fill="#8B6914" />
-    <ellipse cx="50" cy="12" rx="10" ry="8" fill="#a07820" />
-    <!-- Kalash body (trapezoid) -->
-    <path d="M30 28 Q26 90 32 110 Q50 118 68 110 Q74 90 70 28 Z" fill="#d4a010" />
-    <!-- Neck -->
-    <rect x="38" y="22" width="24" height="10" rx="4" fill="#c89010" />
-    <!-- Top rim -->
-    <rect x="34" y="19" width="32" height="7" rx="4" fill="#f0c848" />
-    <!-- Water lines on body -->
-    <path d="M34 55 Q50 60 66 55" stroke="#f0c848" stroke-width="1.2" fill="none" />
-    <path d="M33 70 Q50 76 67 70" stroke="#f0c848" stroke-width="1.2" fill="none" />
-    <path d="M34 85 Q50 91 66 85" stroke="#f0c848" stroke-width="1.2" fill="none" />
-    <!-- Leaf center lines -->
-    <line x1="50" y1="10" x2="50" y2="18" stroke="#f0c848" stroke-width="1" />
+  <svg style="animation:spin 1.2s linear infinite;display:block;margin:0 auto" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="22" cy="22" r="18" stroke="rgba(212,160,16,0.2)" stroke-width="1.5"/>
+    <path d="M22 4 A18 18 0 0 1 40 22" stroke="#d4a010" stroke-width="1.5" stroke-linecap="round"/>
   </svg>
   <div class="loading-text">Shubham...</div>
 </div>
@@ -1153,28 +1131,9 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.04;z-index:0;pointer-events:none;" aria-hidden="true">
       <source src="https://videos.pexels.com/video-files/4507714/4507714-uhd_2560_1440_25fps.mp4" type="video/mp4">
     </video>
-  <!-- Vastu Mandala Watermark -->
-  <svg class="vastu-mandala" viewBox="0 0 540 540" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-        <rect width="60" height="60" fill="none" stroke="#d4a010" stroke-width="0.5"/>
-      </pattern>
-    </defs>
-    <rect width="540" height="540" fill="url(#grid)" />
-    <!-- Inner cells shading -->
-    <rect x="120" y="120" width="300" height="300" fill="rgba(212,160,16,0.08)" stroke="#d4a010" stroke-width="0.5"/>
-    <rect x="180" y="180" width="180" height="180" fill="rgba(26,90,26,0.1)" stroke="#1a5a1a" stroke-width="0.5"/>
-    <rect x="210" y="210" width="120" height="120" fill="rgba(212,160,16,0.12)" stroke="#d4a010" stroke-width="0.5"/>
-    <!-- Diagonal lines -->
-    <line x1="120" y1="120" x2="420" y2="420" stroke="#d4a010" stroke-width="0.4"/>
-    <line x1="420" y1="120" x2="120" y2="420" stroke="#d4a010" stroke-width="0.4"/>
-    <!-- Circles -->
-    <circle cx="270" cy="270" r="90" fill="none" stroke="#d4a010" stroke-width="0.4"/>
-    <circle cx="270" cy="270" r="150" fill="none" stroke="#1a5a1a" stroke-width="0.4"/>
-  </svg>
 
-  <!-- Toran Garland -->
-  <div class="toran-container">
+  <!-- Toran Garland removed -->
+  <div class="toran-container" style="display:none">
     <svg class="toran-svg" viewBox="0 0 1200 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <filter id="glow">
@@ -1183,10 +1142,6 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
         </filter>
       </defs>
       <g class="toran-group">
-        <!-- Rope -->
-        <path d="M0,30 Q100,20 200,35 Q300,50 400,30 Q500,10 600,30 Q700,50 800,30 Q900,10 1000,30 Q1100,50 1200,30"
-              stroke="#8B6914" stroke-width="4" fill="none" />
-        <!-- Mango leaves hanging -->
         <g transform="translate(80,35)"><ellipse cx="0" cy="14" rx="8" ry="18" fill="#1a6a1a" /><line x1="0" y1="0" x2="0" y2="32" stroke="#0f4a0f" stroke-width="1.2"/></g>
         <g transform="translate(160,42)"><ellipse cx="0" cy="14" rx="8" ry="18" fill="#2a8a2a" /><line x1="0" y1="0" x2="0" y2="32" stroke="#0f4a0f" stroke-width="1.2"/></g>
         <g transform="translate(300,28)"><ellipse cx="0" cy="14" rx="8" ry="18" fill="#1a6a1a" /><line x1="0" y1="0" x2="0" y2="32" stroke="#0f4a0f" stroke-width="1.2"/></g>
@@ -1252,44 +1207,6 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   <div class="floating-leaves" id="floatingLeaves"></div>
 
   <div class="hero-content">
-    <!-- Kolam SVG -->
-    <div class="kolam-container">
-      <svg class="kolam-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
-        <!-- Kolam dots -->
-        <g class="kolam-dot">
-          <circle cx="130" cy="130" r="3"/>
-          <circle cx="90" cy="130" r="2.5"/><circle cx="170" cy="130" r="2.5"/>
-          <circle cx="130" cy="90" r="2.5"/><circle cx="130" cy="170" r="2.5"/>
-          <circle cx="90" cy="90" r="2"/><circle cx="170" cy="90" r="2"/>
-          <circle cx="90" cy="170" r="2"/><circle cx="170" cy="170" r="2"/>
-          <circle cx="50" cy="130" r="2"/><circle cx="210" cy="130" r="2"/>
-          <circle cx="130" cy="50" r="2"/><circle cx="130" cy="210" r="2"/>
-        </g>
-        <!-- Kolam paths (geometric curvy pattern) -->
-        <g class="kolam-path">
-          <!-- Outer square loop -->
-          <rect x="30" y="30" width="200" height="200" rx="8" stroke="#d4a010"/>
-          <!-- Rotated square -->
-          <rect x="60" y="60" width="140" height="140" rx="4" transform="rotate(45 130 130)" stroke="#d4a010"/>
-          <!-- Circle -->
-          <circle cx="130" cy="130" r="70" stroke="#d4a010"/>
-          <circle cx="130" cy="130" r="45" stroke="#d4a010"/>
-          <circle cx="130" cy="130" r="22" stroke="#d4a010"/>
-          <!-- Cross lines -->
-          <line x1="130" y1="30" x2="130" y2="230"/>
-          <line x1="30" y1="130" x2="230" y2="130"/>
-          <!-- Diagonals -->
-          <line x1="50" y1="50" x2="210" y2="210"/>
-          <line x1="210" y1="50" x2="50" y2="210"/>
-          <!-- Petal curves -->
-          <path d="M130,60 Q160,90 130,130 Q100,90 130,60"/>
-          <path d="M130,200 Q160,170 130,130 Q100,170 130,200"/>
-          <path d="M60,130 Q90,160 130,130 Q90,100 60,130"/>
-          <path d="M200,130 Q170,160 130,130 Q170,100 200,130"/>
-        </g>
-      </svg>
-    </div>
-
     <h1 class="hero-title">Griha Pravesham</h1>
     <p class="hero-family" data-field="family">The Sharma Family</p>
 
@@ -1348,22 +1265,6 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
         <path d="M6,6 Q12,2 18,8 Q12,14 6,8 Z" fill="#1a5a1a" opacity="0.7"/>
         <path d="M4,14 Q10,8 16,14 Q10,20 4,14 Z" fill="#1a5a1a" opacity="0.5"/>
       </svg>
-
-      <!-- Kalash symbol -->
-      <div class="invite-kalash">
-        <svg width="70" height="90" viewBox="0 0 100 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="50" cy="12" rx="14" ry="12" fill="#8B6914" />
-          <ellipse cx="50" cy="12" rx="10" ry="8" fill="#a07820" />
-          <path d="M30 28 Q26 90 32 110 Q50 118 68 110 Q74 90 70 28 Z" fill="#d4a010" />
-          <rect x="38" y="22" width="24" height="10" rx="4" fill="#c89010" />
-          <rect x="34" y="19" width="32" height="7" rx="4" fill="#f0c848" />
-          <path d="M34 55 Q50 60 66 55" stroke="#f0c848" stroke-width="1.5" fill="none" />
-          <path d="M33 75 Q50 81 67 75" stroke="#f0c848" stroke-width="1.5" fill="none" />
-          <!-- Leaf sprigs -->
-          <ellipse cx="36" cy="24" rx="7" ry="14" fill="#2a7a2a" transform="rotate(-30 36 24)"/>
-          <ellipse cx="64" cy="24" rx="7" ry="14" fill="#2a7a2a" transform="rotate(30 64 24)"/>
-        </svg>
-      </div>
 
       <div class="invite-om">ॐ</div>
       <div class="invite-title">Griha Pravesham</div>
@@ -1497,11 +1398,9 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   </div>
 </section>
 
-<!-- Rangoli Section -->
-<section class="rangoli-section">
-  <div class="section-title reveal">Rangoli Welcome</div>
-  <div class="section-subtitle reveal">Welcoming you with colors of joy</div>
-  <div class="rangoli-container reveal">
+<!-- Rangoli Section removed -->
+<section class="rangoli-section" style="display:none">
+  <div class="rangoli-container">
     <svg class="rangoli-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id="rg1" cx="50%" cy="50%" r="50%">
