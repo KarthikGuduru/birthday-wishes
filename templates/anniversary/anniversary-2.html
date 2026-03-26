@@ -230,7 +230,8 @@
     #hero {
       position: relative;
       min-height: 100vh;
-      background: linear-gradient(160deg, #f5f0e8 0%, #faf7f2 60%, #ffffff 100%);
+      background: linear-gradient(160deg, rgba(60,70,80,0.5), rgba(80,90,100,0.4)),
+                  url('../../assets/generated/silver-anniversary-hero.jpeg') center/cover no-repeat !important;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -293,8 +294,9 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.8rem, 5vw, 3rem);
       font-weight: 300;
-      color: #1a1310;
+      color: rgba(255,255,255,0.92);
       letter-spacing: 0.08em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
     }
     .hero-names .ampersand {
       font-style: italic;
@@ -873,8 +875,13 @@
     .btn-silver:active { transform: scale(0.97); }
 
     /* ── Party Details ── */
-    #party { background: #f5f0e8; position: relative; overflow: hidden; }
+    #party {
+      background: linear-gradient(160deg, rgba(60,70,80,0.5), rgba(80,90,100,0.4)),
+                  url('../../assets/generated/silver-anniversary-bg.jpeg') center/cover no-repeat !important;
+      position: relative; overflow: hidden;
+    }
     #party .section-title h2 { color: var(--rose-gold); }
+    #party .section-title .subtitle { color: rgba(255,255,255,0.7); }
     .party-blur-bg {
       position: absolute;
       inset: 0;
@@ -2026,15 +2033,12 @@
 <script>
 // ── Live preview mode (iframe from customize page) ──
 (function() {
-  if (new URLSearchParams(window.location.search).get('preview') === 'true') {
-    document.addEventListener('DOMContentLoaded', function() {
-      var el = document.querySelector('.purchase-banner');
-      if (el) el.style.display = 'none';
-      var backNav = document.querySelector('.back-nav');
-      if (backNav) backNav.style.display = 'none';
-      var ls = document.getElementById('loading-screen');
-      if (ls) ls.classList.add('hidden');
-    });
+  var inIframe = (function() { try { return window.self !== window.top; } catch(e) { return true; } })();
+  if (inIframe) {
+    var ls = document.getElementById('loading-screen');
+    if (ls) { ls.style.opacity = '0'; ls.style.pointerEvents = 'none'; ls.style.display = 'none'; }
+    var el = document.querySelector('.purchase-banner');
+    if (el) el.style.display = 'none';
   }
   window.addEventListener('message', function(e) {
     if (!e.data || e.data.type !== 'preview-update') return;

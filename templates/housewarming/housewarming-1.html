@@ -201,7 +201,8 @@
     .hero {
       min-height: 100vh;
       padding-top: 44px;
-      background: linear-gradient(135deg, #f5f0e8 0%, #faf7f2 40%, #fff8ee 80%, #faf7f2 100%);
+      background: linear-gradient(160deg, rgba(180,90,20,0.72), rgba(120,60,10,0.60)),
+                  url('../../assets/generated/griha-pravesham-hero.jpeg') center/cover no-repeat;
       position: relative;
       overflow: hidden;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -295,8 +296,8 @@
     .hero-title {
       font-family: 'Great Vibes', cursive;
       font-size: clamp(3rem, 7vw, 5rem);
-      color: var(--gold);
-      text-shadow: 0 2px 20px rgba(201,148,42,0.2);
+      color: var(--turmeric-pale);
+      text-shadow: 0 2px 20px rgba(201,148,42,0.5), 0 0 60px rgba(240,200,72,0.3);
       line-height: 1.1;
       margin-bottom: 12px;
     }
@@ -304,7 +305,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.4rem, 3vw, 2rem);
       font-style: italic;
-      color: var(--text-body);
+      color: rgba(255,240,210,0.92);
       margin-bottom: 24px;
     }
     .hero-date-box {
@@ -501,7 +502,8 @@
 
     /* ── Pooja Timeline ── */
     .pooja-section {
-      background: var(--bg-alt);
+      background: linear-gradient(rgba(250,245,235,0.92), rgba(250,245,235,0.92)),
+                  url('../../assets/generated/griha-pravesham-bg.jpeg') center/cover no-repeat;
       padding: 80px 24px;
     }
     .pooja-title-wrap { text-align: center; margin-bottom: 12px; }
@@ -673,46 +675,6 @@
       color: var(--text-muted);
       line-height: 1.7;
     }
-
-    /* ── Prasad Menu ── */
-    .menu-section {
-      background: var(--bg-alt);
-      padding: 80px 24px;
-    }
-    .menu-grid {
-      max-width: 800px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-    }
-    @media (max-width: 600px) { .menu-grid { grid-template-columns: 1fr; } }
-    .menu-col {
-      background: var(--bg-white);
-      border: none;
-      border-top: 3px solid var(--gold);
-      border-radius: 16px;
-      padding: 28px 24px;
-      box-shadow: 0 4px 32px rgba(0,0,0,0.04);
-    }
-    .menu-col-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--gold);
-      border-bottom: 1px solid rgba(201,148,42,0.2);
-      padding-bottom: 10px;
-      margin-bottom: 16px;
-    }
-    .menu-item {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
-      color: var(--text-body);
-      padding: 6px 0;
-      border-bottom: 1px dotted rgba(201,148,42,0.12);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .menu-item:last-child { border-bottom: none; }
 
     /* ── Rangoli Section ── */
     .rangoli-section {
@@ -1403,6 +1365,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="invite-om">🕉</div>
       <div class="invite-title">Griha Pravesham</div>
       <div class="invite-family" data-field="family">The Sharma Family</div>
+      <div data-field="houseName" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--saffron);margin-bottom:8px;">Sri Lakshmi Nivas</div>
       <div class="invite-divider"></div>
       <div class="invite-message" data-field="message">
         We are blessed to move into our new home and seek your blessings on this auspicious occasion
@@ -1527,33 +1490,6 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       "May this home be a temple of joy, a fortress of peace, and a garden of love.<br>
       May the light of good fortune always shine through these doors.<br>
       — Blessing from our Elders"
-    </div>
-  </div>
-</section>
-
-<!-- Prasad Menu -->
-<section class="menu-section" id="menu">
-  <div class="section-title reveal">Prasadam &amp; Lunch Menu</div>
-  <div class="section-subtitle reveal">Sacred food blessed for all our guests</div>
-  <div class="menu-grid reveal">
-    <div class="menu-col">
-      <div class="menu-col-title">🙏 Sacred Prasadam</div>
-      <div class="menu-item"><span>🍃</span> Pulihora (Tamarind Rice)</div>
-      <div class="menu-item"><span>🍃</span> Chakara Pongali (Sweet Pongal)</div>
-      <div class="menu-item"><span>🍃</span> Vada (Lentil Fritters)</div>
-      <div class="menu-item"><span>🍃</span> Payasam (Sweet Kheer)</div>
-      <div class="menu-item"><span>🍃</span> Ladoo</div>
-      <div class="menu-item"><span>🍃</span> Panchamrutam</div>
-    </div>
-    <div class="menu-col">
-      <div class="menu-col-title">🍽️ Grand Lunch</div>
-      <div class="menu-item"><span>🍃</span> White Rice &amp; Ghee</div>
-      <div class="menu-item"><span>🍃</span> Sambar &amp; Rasam</div>
-      <div class="menu-item"><span>🍃</span> Pesara Pappu (Moong Dal)</div>
-      <div class="menu-item"><span>🍃</span> Avial &amp; Beans Fry</div>
-      <div class="menu-item"><span>🍃</span> Putnala Chutney</div>
-      <div class="menu-item"><span>🍃</span> Curd, Papad, Pickle</div>
-      <div class="menu-item"><span>🍃</span> Gulab Jamun &amp; Kheer</div>
     </div>
   </div>
 </section>
@@ -1827,6 +1763,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   document.addEventListener('DOMContentLoaded', () => {
     InviteCustomize.initPreview({
       family:    "The Sharma Family",
+      houseName: "Sri Lakshmi Nivas",
       date:      "June 15, 2026",
       time:      "9:30 AM",
       address:   "Plot 42, Manikonda, Hyderabad 500089",
@@ -1842,15 +1779,12 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <script>
 // ── Live preview mode (iframe from customize page) ──
 (function() {
-  if (new URLSearchParams(window.location.search).get('preview') === 'true') {
-    document.addEventListener('DOMContentLoaded', function() {
-      var el = document.querySelector('.purchase-banner');
-      if (el) el.style.display = 'none';
-      var backNav = document.querySelector('.back-nav');
-      if (backNav) backNav.style.display = 'none';
-      var ls = document.getElementById('loading-screen');
-      if (ls) ls.classList.add('hidden');
-    });
+  var inIframe = (function() { try { return window.self !== window.top; } catch(e) { return true; } })();
+  if (inIframe) {
+    var ls = document.getElementById('loading-screen');
+    if (ls) { ls.style.opacity = '0'; ls.style.pointerEvents = 'none'; ls.style.display = 'none'; }
+    var el = document.querySelector('.purchase-banner');
+    if (el) el.style.display = 'none';
   }
   window.addEventListener('message', function(e) {
     if (!e.data || e.data.type !== 'preview-update') return;

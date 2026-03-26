@@ -139,7 +139,8 @@
     /* ── Hero Section ── */
     #hero {
       min-height: 100vh; position: relative; overflow: hidden;
-      background: linear-gradient(160deg, #faf7f2 0%, #f5f0e8 50%, #f0e8dc 100%);
+      background: linear-gradient(160deg, rgba(20,20,30,0.6), rgba(40,30,50,0.5)),
+                  url('../../assets/generated/modern-engagement-hero.jpeg') center/cover no-repeat !important;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 80px 24px 120px;
     }
@@ -170,7 +171,8 @@
     @keyframes shimmerText { 0%{background-position:0% 50%} 100%{background-position:300% 50%} }
     .hero-names {
       font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3.2rem);
-      color: var(--text-dark); font-weight: 300; margin-bottom: 20px; letter-spacing: 0.03em;
+      color: rgba(255,255,255,0.92); font-weight: 300; margin-bottom: 20px; letter-spacing: 0.03em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
     .hero-names .amp { color: var(--rose-gold); font-family: 'Great Vibes', cursive; font-size: 1.2em; }
     .hero-divider {
@@ -292,7 +294,13 @@
     @media (max-width: 640px) { .bento-grid { grid-template-columns: 1fr 1fr; } .bento-card.wide { grid-column: span 2; } }
 
     /* ── Event Details ── */
-    #details { background: #f5f0e8; }
+    #details {
+      background: linear-gradient(160deg, rgba(20,20,30,0.6), rgba(40,30,50,0.5)),
+                  url('../../assets/generated/modern-engagement-bg.jpeg') center/cover no-repeat !important;
+    }
+    #details .section-title { color: rgba(255,255,255,0.95); text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+    #details .section-title .accent { color: var(--rose-gold); }
+    #details .section-subtitle { color: rgba(255,255,255,0.75); }
     .details-card {
       max-width: 680px; margin: 0 auto;
       background: #fff; border: none; border-top: 3px solid var(--rose-gold);
@@ -1283,15 +1291,12 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <script>
 // ── Live preview mode (iframe from customize page) ──
 (function() {
-  if (new URLSearchParams(window.location.search).get('preview') === 'true') {
-    document.addEventListener('DOMContentLoaded', function() {
-      var el = document.querySelector('.purchase-banner');
-      if (el) el.style.display = 'none';
-      var backNav = document.querySelector('.back-nav');
-      if (backNav) backNav.style.display = 'none';
-      var ls = document.getElementById('loading-screen');
-      if (ls) ls.classList.add('hidden');
-    });
+  var inIframe = (function() { try { return window.self !== window.top; } catch(e) { return true; } })();
+  if (inIframe) {
+    var ls = document.getElementById('loading-screen');
+    if (ls) { ls.style.opacity = '0'; ls.style.pointerEvents = 'none'; ls.style.display = 'none'; }
+    var el = document.querySelector('.purchase-banner');
+    if (el) el.style.display = 'none';
   }
   window.addEventListener('message', function(e) {
     if (!e.data || e.data.type !== 'preview-update') return;

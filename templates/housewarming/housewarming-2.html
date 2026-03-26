@@ -183,11 +183,9 @@
     .hero {
       min-height: 100vh;
       padding-top: 44px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.15), rgba(200,180,150,0.25)),
+                  url('../../assets/generated/modern-home-hero.jpeg') center/cover no-repeat;
       background-color: var(--bg-primary);
-      background-image:
-        repeating-linear-gradient(60deg,  transparent, transparent 28px, rgba(201,148,42,0.04) 28px, rgba(201,148,42,0.04) 30px),
-        repeating-linear-gradient(-60deg, transparent, transparent 28px, rgba(201,148,42,0.04) 28px, rgba(201,148,42,0.04) 30px),
-        repeating-linear-gradient(0deg,   transparent, transparent 28px, rgba(201,148,42,0.02) 28px, rgba(201,148,42,0.02) 30px);
       position: relative;
       overflow: hidden;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -367,7 +365,10 @@
 
     /* ── Neighborhood ── */
     .neighborhood-section {
-      background: var(--bg-alt);
+      background:
+        linear-gradient(rgba(250,247,242,0.88), rgba(245,240,232,0.92)),
+        url('../../assets/generated/modern-home-bg.jpeg') center/cover no-repeat;
+      background-color: var(--bg-alt);
       padding: 80px 24px;
     }
     .neighborhood-section .section-title { color: var(--text-dark); }
@@ -779,7 +780,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Hero -->
 <section class="hero" id="hero">
-    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&q=80');opacity:0.06;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
+    <div class="hero-img-layer" style="background-image:url('../../assets/generated/modern-home-hero.jpeg');opacity:0.0;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
   <!-- Copper Dots -->
   <div class="copper-dots-container" id="copperDots"></div>
 
@@ -928,7 +929,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   <div class="section-title reveal">Open House <span class="teal">Details</span></div>
   <div class="section-subtitle reveal">Everything you need to know</div>
   <div class="details-card reveal">
-    <div class="details-card-title">🏠 You're Invited!</div>
+    <div class="details-card-title">🏠 <span data-field="houseName">The Mehta House</span></div>
     <div class="open-house-note">🕐 Open House Hours: 11:00 AM – 8:00 PM — Come anytime, stay as long as you like!</div>
     <div class="details-grid">
       <div class="detail-row">
@@ -1375,13 +1376,14 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   // ── DOMContentLoaded: initPreview ──
   document.addEventListener('DOMContentLoaded', () => {
     InviteCustomize.initPreview({
-      family:   "The Mehta Family",
-      date:     "July 20, 2026",
-      time:     "11:00 AM",
-      address:  "3B, Prestige Towers, Whitefield, Bangalore 560066",
-      ceremony: "Housewarming & Open House",
-      message:  "Our home is your home — come celebrate with us!",
-      host:     "Anil & Divya Mehta"
+      family:    "The Mehta Family",
+      houseName: "The Mehta House",
+      date:      "July 20, 2026",
+      time:      "11:00 AM",
+      address:   "3B, Prestige Towers, Whitefield, Bangalore 560066",
+      ceremony:  "Housewarming & Open House",
+      message:   "Our home is your home — come celebrate with us!",
+      host:      "Anil & Divya Mehta"
     });
   });
 </script>
@@ -1390,15 +1392,12 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <script>
 // ── Live preview mode (iframe from customize page) ──
 (function() {
-  if (new URLSearchParams(window.location.search).get('preview') === 'true') {
-    document.addEventListener('DOMContentLoaded', function() {
-      var el = document.querySelector('.purchase-banner');
-      if (el) el.style.display = 'none';
-      var backNav = document.querySelector('.back-nav');
-      if (backNav) backNav.style.display = 'none';
-      var ls = document.getElementById('loading-screen');
-      if (ls) ls.classList.add('hidden');
-    });
+  var inIframe = (function() { try { return window.self !== window.top; } catch(e) { return true; } })();
+  if (inIframe) {
+    var ls = document.getElementById('loading-screen');
+    if (ls) { ls.style.opacity = '0'; ls.style.pointerEvents = 'none'; ls.style.display = 'none'; }
+    var el = document.querySelector('.purchase-banner');
+    if (el) el.style.display = 'none';
   }
   window.addEventListener('message', function(e) {
     if (!e.data || e.data.type !== 'preview-update') return;

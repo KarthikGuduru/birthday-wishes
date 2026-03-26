@@ -243,10 +243,8 @@
       padding: 8rem 2rem 4rem;
       overflow: hidden;
       background:
-        radial-gradient(ellipse at 30% 50%, rgba(10,128,112,0.06), transparent 60%),
-        radial-gradient(ellipse at 70% 30%, rgba(201,148,42,0.08), transparent 50%),
-        radial-gradient(ellipse at 50% 80%, rgba(245,240,232,0.6), transparent 70%),
-        #f5f0e8;
+        linear-gradient(160deg, rgba(10,10,30,0.75) 0%, rgba(20,10,50,0.7) 50%, rgba(10,10,30,0.8) 100%),
+        url('../../assets/generated/birthday-elegant-hero.jpeg') center/cover no-repeat;
     }
     .hero-bg-parallax {
       position: absolute;
@@ -284,7 +282,7 @@
       transform: translateX(-50%);
       color: var(--royal-gold);
       font-size: 1rem;
-      background: #f5f0e8;
+      background: transparent;
       padding: 0 0.5rem;
     }
     .corner-ornament {
@@ -320,7 +318,7 @@
       font-size: 0.9rem;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: var(--peacock-teal);
+      color: var(--gold-pale);
       margin-bottom: 0.5rem;
     }
     .hero-title {
@@ -338,7 +336,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 600;
-      color: var(--text);
+      color: #f5dfa0;
       letter-spacing: 0.1em;
       text-align: center;
       margin-bottom: 1.5rem;
@@ -350,8 +348,8 @@
       height: 100px;
       border-radius: 50%;
       border: 2px solid var(--royal-gold);
-      background: linear-gradient(135deg, rgba(201,148,42,0.1), rgba(250,247,242,0.9));
-      box-shadow: 0 0 0 6px rgba(201,148,42,0.08), 0 0 30px rgba(201,148,42,0.2);
+      background: linear-gradient(135deg, rgba(10,10,30,0.7), rgba(30,15,60,0.75));
+      box-shadow: 0 0 0 6px rgba(201,148,42,0.15), 0 0 30px rgba(201,148,42,0.35);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -360,14 +358,14 @@
       animation: badgePulse 3s ease-in-out infinite;
     }
     @keyframes badgePulse {
-      0%, 100% { box-shadow: 0 0 0 6px rgba(201,148,42,0.08), 0 0 30px rgba(201,148,42,0.2); }
-      50% { box-shadow: 0 0 0 10px rgba(201,148,42,0.04), 0 0 50px rgba(201,148,42,0.35); }
+      0%, 100% { box-shadow: 0 0 0 6px rgba(201,148,42,0.15), 0 0 30px rgba(201,148,42,0.35); }
+      50% { box-shadow: 0 0 0 10px rgba(201,148,42,0.08), 0 0 55px rgba(201,148,42,0.55); }
     }
     .age-number {
       font-family: 'Cormorant Garamond', serif;
       font-size: 2.8rem;
       font-weight: 600;
-      color: var(--royal-gold);
+      color: var(--gold-light);
       line-height: 1;
     }
     .age-label {
@@ -375,7 +373,7 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold-pale);
-      opacity: 0.7;
+      opacity: 0.85;
     }
 
     /* Scroll hint */
@@ -511,7 +509,9 @@
 
     /* ── Details Section ── */
     #details {
-      background: var(--bg2);
+      background:
+        linear-gradient(180deg, rgba(250,247,242,0.96) 0%, rgba(245,240,232,0.93) 100%),
+        url('../../assets/generated/birthday-elegant-bg.jpeg') center/cover no-repeat;
       position: relative;
     }
     .details-card {
@@ -1773,15 +1773,12 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <script>
 // ── Live preview mode (iframe from customize page) ──
 (function() {
-  if (new URLSearchParams(window.location.search).get('preview') === 'true') {
-    document.addEventListener('DOMContentLoaded', function() {
-      var el = document.querySelector('.purchase-banner');
-      if (el) el.style.display = 'none';
-      var backNav = document.querySelector('.back-nav');
-      if (backNav) backNav.style.display = 'none';
-      var ls = document.getElementById('loading-screen');
-      if (ls) ls.classList.add('hidden');
-    });
+  var inIframe = (function() { try { return window.self !== window.top; } catch(e) { return true; } })();
+  if (inIframe) {
+    var ls = document.getElementById('loading-screen');
+    if (ls) { ls.style.opacity = '0'; ls.style.pointerEvents = 'none'; ls.style.display = 'none'; }
+    var el = document.querySelector('.purchase-banner');
+    if (el) el.style.display = 'none';
   }
   window.addEventListener('message', function(e) {
     if (!e.data || e.data.type !== 'preview-update') return;

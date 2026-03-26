@@ -207,7 +207,9 @@
     /* ── HERO ── */
     #hero {
       position: relative; min-height: 100vh;
-      background: linear-gradient(135deg, #faf7f2 0%, #f5f0e8 35%, #efe8d8 70%, #f5f0e8 100%);
+      background:
+        linear-gradient(160deg, rgba(120,40,0,0.72), rgba(80,20,0,0.82)),
+        url('../../assets/generated/rajasthani-palace.jpeg') center/cover no-repeat;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       overflow: hidden; padding: 5rem 2rem 12rem;
     }
@@ -279,7 +281,7 @@
       text-align: center;
       line-height: 1.2; letter-spacing: 0.02em;
       position: relative; z-index: 2; margin-bottom: 1.5rem;
-      background: linear-gradient(90deg, var(--text-dark) 0%, var(--text-dark) 35%, var(--gold) 50%, var(--text-dark) 65%, var(--text-dark) 100%);
+      background: linear-gradient(90deg, #f8e0a0 0%, #f8e0a0 30%, #f0c050 50%, #f8e0a0 70%, #f8e0a0 100%);
       background-size: 300% auto;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -296,31 +298,32 @@
 
     .hero-date-box {
       position: relative; z-index: 2;
-      border: 2px solid var(--saffron); padding: 0.9rem 2.5rem;
+      border: 2px solid rgba(240,176,48,0.7); padding: 0.9rem 2.5rem;
       text-align: center; margin-bottom: 2rem;
-      background: rgba(255,255,255,0.7);
-      box-shadow: 0 3px 25px rgba(0,0,0,0.04);
+      background: rgba(0,0,0,0.35);
+      box-shadow: 0 3px 25px rgba(0,0,0,0.25);
     }
     .hero-date-box::before, .hero-date-box::after {
       content: '❖'; position: absolute; top: 50%; transform: translateY(-50%);
-      color: var(--saffron); font-size: 0.8rem;
+      color: var(--marigold); font-size: 0.8rem;
     }
     .hero-date-box::before { left: 0.8rem; }
     .hero-date-box::after  { right: 0.8rem; }
     .hero-date-label {
       font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--saffron);
+      color: var(--gold-pale);
     }
     .hero-date-value {
       font-family: 'Playfair Display', serif;
-      font-size: 1.45rem; color: var(--text-dark);
+      font-size: 1.45rem; color: var(--ivory);
     }
 
     /* Countdown */
     .countdown { display: flex; gap: 1.5rem; justify-content: center; position: relative; z-index: 2; }
     .countdown-unit {
-      text-align: center; background: var(--bg-white); border-radius: 12px;
-      padding: 0.8rem 1.2rem; box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+      text-align: center; background: rgba(0,0,0,0.45); border-radius: 12px;
+      border: 1px solid rgba(240,176,48,0.35);
+      padding: 0.8rem 1.2rem; box-shadow: 0 4px 24px rgba(0,0,0,0.3);
       min-width: 64px;
     }
     .countdown-num {
@@ -329,9 +332,9 @@
     }
     .countdown-label {
       font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--text-muted); margin-top: 0.3rem;
+      color: var(--gold-pale); margin-top: 0.3rem;
     }
-    .countdown-sep { font-size: 2rem; color: var(--saffron); align-self: flex-start; padding-top: 0.8rem; }
+    .countdown-sep { font-size: 2rem; color: var(--marigold); align-self: flex-start; padding-top: 0.8rem; }
 
     /* ── SECTION UTILITY ── */
     .section-header { text-align: center; margin-bottom: 3rem; }
@@ -411,7 +414,9 @@
 
     /* ── EVENTS SECTION ── */
     #events {
-      background: var(--bg-primary);
+      background:
+        linear-gradient(180deg, rgba(250,247,242,0.92) 0%, rgba(245,240,232,0.88) 100%),
+        url('../../assets/generated/rajasthani-ceremony-bg.jpeg') center/cover no-repeat;
       padding: 5rem 2rem;
     }
     #events .section-title { color: var(--text-dark); }
@@ -1865,15 +1870,12 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 // ── Live preview mode (iframe from customize page) ──
 (function() {
-  if (new URLSearchParams(window.location.search).get('preview') === 'true') {
-    document.addEventListener('DOMContentLoaded', function() {
-      var el = document.querySelector('.purchase-banner');
-      if (el) el.style.display = 'none';
-      var backNav = document.querySelector('.back-nav');
-      if (backNav) backNav.style.display = 'none';
-      var ls = document.getElementById('loading-screen');
-      if (ls) ls.classList.add('hidden');
-    });
+  var inIframe = (function() { try { return window.self !== window.top; } catch(e) { return true; } })();
+  if (inIframe) {
+    var ls = document.getElementById('loading-screen');
+    if (ls) { ls.style.opacity = '0'; ls.style.pointerEvents = 'none'; ls.style.display = 'none'; }
+    var el = document.querySelector('.purchase-banner');
+    if (el) el.style.display = 'none';
   }
   window.addEventListener('message', function(e) {
     if (!e.data || e.data.type !== 'preview-update') return;

@@ -244,7 +244,8 @@
     #hero {
       position: relative;
       min-height: 100vh;
-      background: var(--cream);
+      background: linear-gradient(160deg, rgba(80,50,0,0.65), rgba(120,80,20,0.55)),
+                  url('../../assets/generated/golden-anniversary-hero.jpeg') center/cover no-repeat !important;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -309,9 +310,10 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.8rem, 5vw, 3rem);
       font-weight: 300;
-      color: var(--near-black);
+      color: rgba(255,245,210,0.95);
       letter-spacing: 0.06em;
       margin: 0.5rem 0;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.45);
     }
     .hero-names .ampersand {
       font-style: italic;
@@ -324,7 +326,7 @@
       font-size: 0.8rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #444;
+      color: rgba(245,232,192,0.85);
       margin-top: 1rem;
     }
     .hero-countdown {
@@ -880,7 +882,8 @@
 
     /* ── Event Details ── */
     #event {
-      background: #f5f0e8;
+      background: linear-gradient(160deg, rgba(80,50,0,0.65), rgba(120,80,20,0.55)),
+                  url('../../assets/generated/golden-anniversary-bg.jpeg') center/cover no-repeat !important;
     }
     .event-card {
       max-width: 700px;
@@ -1055,7 +1058,8 @@
     #vows { background: #ffffff; }
     #milestones { background: #faf7f2; }
     #tribute { background: #ffffff; }
-    #event { background: #f5f0e8; }
+    #event { background: linear-gradient(160deg, rgba(80,50,0,0.65), rgba(120,80,20,0.55)), url('../../assets/generated/golden-anniversary-bg.jpeg') center/cover no-repeat !important; }
+    #event .section-title .subtitle { color: rgba(245,232,192,0.75); }
     #rsvp { background: #faf7f2; }
 
   /* ── Grandeur Elegance Pass ── */
@@ -1965,15 +1969,12 @@
 <script>
 // ── Live preview mode (iframe from customize page) ──
 (function() {
-  if (new URLSearchParams(window.location.search).get('preview') === 'true') {
-    document.addEventListener('DOMContentLoaded', function() {
-      var el = document.querySelector('.purchase-banner');
-      if (el) el.style.display = 'none';
-      var backNav = document.querySelector('.back-nav');
-      if (backNav) backNav.style.display = 'none';
-      var ls = document.getElementById('loading-screen');
-      if (ls) ls.classList.add('hidden');
-    });
+  var inIframe = (function() { try { return window.self !== window.top; } catch(e) { return true; } })();
+  if (inIframe) {
+    var ls = document.getElementById('loading-screen');
+    if (ls) { ls.style.opacity = '0'; ls.style.pointerEvents = 'none'; ls.style.display = 'none'; }
+    var el = document.querySelector('.purchase-banner');
+    if (el) el.style.display = 'none';
   }
   window.addEventListener('message', function(e) {
     if (!e.data || e.data.type !== 'preview-update') return;
