@@ -17,10 +17,9 @@
       --rose-light:  #e8809a;
       --charcoal:    #1a1a2a;
       --charcoal-mid:#24243a;
-      --champagne:   #f5e8c0;
-      --silver:      #b0b0c0;
-      --navy:        #080818;
-      --navy-mid:    #10102a;
+      --gold:        #c9942a;
+      --gold-light:  #e8b84a;
+      --dark:        #1e1e2e;
       --bg-primary:  #faf7f2;
       --bg-white:    #ffffff;
       --bg-alt:      #f5f0e8;
@@ -37,16 +36,43 @@
       position: fixed; inset: 0; z-index: 9999;
       background: linear-gradient(160deg, #5a2040 0%, #3a1028 50%, #7a2050 100%);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      transition: opacity 0.7s ease, visibility 0.7s ease;
+      gap: 24px; cursor: pointer;
+      transition: opacity 0.5s cubic-bezier(0.23,1,0.32,1), transform 0.5s cubic-bezier(0.23,1,0.32,1);
     }
-    #loading-screen.hidden { opacity: 0; visibility: hidden; }
-    #heart-canvas { width: 160px; height: 160px; display: block; margin-bottom: 20px; }
-    .loading-text {
-      font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 300;
-      color: var(--rose-light); letter-spacing: 0.2em; text-transform: uppercase;
-      animation: fadeInUp 0.6s ease both 0.3s;
+    #loading-screen.hidden { opacity: 0; transform: scale(1.05); visibility: hidden; pointer-events: none; }
+    #loading-screen::after {
+      content: ''; position: absolute; inset: 20px;
+      border: 1px solid rgba(201,96,122,0.25); pointer-events: none;
     }
-    .loading-dots { display: inline-flex; gap: 6px; margin-left: 6px; }
+
+    /* Interlocking rings draw-on */
+    .splash-rings-svg { width: 180px; height: 90px; display: block; }
+    .splash-ring-a {
+      fill: none; stroke: var(--rose-gold); stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-dasharray: 250; stroke-dashoffset: 250;
+      animation: ringDrawA 1.5s cubic-bezier(0.23,1,0.32,1) 0.3s forwards;
+    }
+    .splash-ring-b {
+      fill: none; stroke: #c9942a; stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-dasharray: 250; stroke-dashoffset: -250;
+      animation: ringDrawB 1.5s cubic-bezier(0.23,1,0.32,1) 0.3s forwards;
+    }
+    @keyframes ringDrawA { to { stroke-dashoffset: 0; } }
+    @keyframes ringDrawB { to { stroke-dashoffset: 0; } }
+
+    .splash-title-e2 {
+      font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 300;
+      color: var(--rose-light); letter-spacing: 0.25em; text-transform: uppercase;
+      opacity: 0; animation: fadeInUp 0.6s ease 1.6s forwards;
+    }
+    .splash-tap-e2 {
+      font-family: 'Poppins', sans-serif; font-size: 0.7rem; font-weight: 300;
+      color: rgba(255,255,255,0.45); letter-spacing: 0.15em; text-transform: uppercase;
+      opacity: 0; animation: tapPulse 1.8s ease-in-out 2s infinite;
+    }
+    .loading-dots { display: inline-flex; gap: 6px; }
     .loading-dots span {
       width: 5px; height: 5px; background: var(--rose-gold); border-radius: 50%;
       animation: dotPulse 1.2s ease-in-out infinite;
@@ -54,7 +80,8 @@
     .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
     .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
     @keyframes dotPulse { 0%,100%{opacity:0.3;transform:scale(0.8)} 50%{opacity:1;transform:scale(1.2)} }
-    @keyframes fadeInUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeInUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes tapPulse { 0%,100%{opacity:0.3} 50%{opacity:0.7} }
 
     /* ── Back Nav ── */
     .back-nav {
@@ -144,16 +171,7 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       padding: 80px 24px 120px;
     }
-    #constellation-canvas {
-      position: absolute; inset: 0; pointer-events: none;
-    }
-    .hero-geo-pattern {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        repeating-linear-gradient(60deg, rgba(201,148,42,0.06) 0px, rgba(201,148,42,0.06) 1px, transparent 1px, transparent 40px),
-        repeating-linear-gradient(-60deg, rgba(201,148,42,0.06) 0px, rgba(201,148,42,0.06) 1px, transparent 1px, transparent 40px),
-        repeating-linear-gradient(0deg, rgba(201,148,42,0.04) 0px, rgba(201,148,42,0.04) 1px, transparent 1px, transparent 40px);
-    }
+    /* constellation-canvas and hero-geo-pattern removed */
     .hero-content { position: relative; z-index: 2; text-align: center; max-width: 800px; }
     .hero-ring-svg { width: 140px; height: 80px; display: block; margin: 0 auto 28px; }
     .hero-headline {
@@ -177,7 +195,7 @@
     .hero-names .amp { color: var(--rose-gold); font-family: 'Great Vibes', cursive; font-size: 1.2em; }
     .hero-divider {
       width: 200px; height: 1px; margin: 0 auto 24px;
-      background: linear-gradient(90deg, transparent, var(--rose-gold), var(--champagne), var(--rose-gold), transparent);
+      background: linear-gradient(90deg, transparent, var(--rose-gold), #c9942a, var(--rose-gold), transparent);
     }
     .hero-badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
     .hero-badge {
@@ -677,11 +695,14 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Loading Screen -->
 <div id="loading-screen">
-  <canvas id="heart-canvas" width="160" height="160"></canvas>
-  <div class="loading-text">
-    Celebrating Love
-    <span class="loading-dots"><span></span><span></span><span></span></span>
-  </div>
+  <!-- Two interlocking rings drawing on simultaneously from opposite sides -->
+  <svg class="splash-rings-svg" viewBox="0 0 180 90" xmlns="http://www.w3.org/2000/svg">
+    <circle class="splash-ring-a" cx="70" cy="45" r="36"/>
+    <circle class="splash-ring-b" cx="110" cy="45" r="36"/>
+  </svg>
+  <div class="splash-title-e2">Together Forever</div>
+  <div class="loading-dots"><span></span><span></span><span></span></div>
+  <div class="splash-tap-e2">Tap to open</div>
 </div>
 
 <!-- Back Nav -->
@@ -711,9 +732,8 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Hero Section -->
 <section id="hero">
-    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=1400&q=80');opacity:0.08;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
-  <canvas id="constellation-canvas"></canvas>
-  <div class="hero-geo-pattern"></div>
+  <!-- Grain texture overlay -->
+  <div style="position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0.025;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22 opacity=%221%22/></svg>');background-repeat:repeat;"></div>
 
   <div class="hero-content">
     <!-- Ring SVG -->
@@ -1017,45 +1037,15 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <script src="../../js/payment.js"></script>
 <script src="../../js/customize.js"></script>
 <script>
-  // ── Loading Screen: Heart drawing animation ──
+  // ── Loading Screen: tap to open ──
   (function() {
-    const canvas = document.getElementById('heart-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const W = canvas.width, H = canvas.height;
-    let progress = 0;
-    const totalPoints = 200;
-    const pts = [];
-
-    for (let i = 0; i <= totalPoints; i++) {
-      const t = (i / totalPoints) * Math.PI * 2;
-      const x = 16 * Math.pow(Math.sin(t), 3);
-      const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-      pts.push({ x: W/2 + x * 5.5, y: H/2 + y * 5.5 });
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      const count = Math.floor(progress * totalPoints);
-      if (count < 2) { progress += 0.008; requestAnimationFrame(draw); return; }
-      ctx.beginPath();
-      ctx.moveTo(pts[0].x, pts[0].y);
-      for (let i = 1; i < count; i++) ctx.lineTo(pts[i].x, pts[i].y);
-      ctx.strokeStyle = '#c9607a';
-      ctx.lineWidth = 3;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.shadowColor = 'rgba(201,96,122,0.7)';
-      ctx.shadowBlur = 12;
-      ctx.stroke();
-      if (progress < 1) { progress += 0.012; requestAnimationFrame(draw); }
-    }
-    draw();
-
-    setTimeout(() => {
-      const ls = document.getElementById('loading-screen');
-      if (ls) ls.classList.add('hidden');
-    }, 1800);
+    const ls = document.getElementById('loading-screen');
+    if (!ls) return;
+    function dismiss() { ls.classList.add('hidden'); }
+    ls.addEventListener('click', dismiss);
+    ls.addEventListener('touchstart', dismiss, { passive: true });
+    // Auto-dismiss after 4s as fallback
+    setTimeout(dismiss, 4000);
   })();
 
   // ── Hamburger ──
@@ -1080,74 +1070,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     document.head.appendChild(style);
   })();
 
-  // ── Constellation Canvas ──
-  (function() {
-    const canvas = document.getElementById('constellation-canvas');
-    const section = document.getElementById('hero');
-    if (!canvas || !section) return;
-    let stars = [], rafId;
-
-    function resize() {
-      canvas.width = section.offsetWidth;
-      canvas.height = section.offsetHeight;
-      initStars();
-    }
-
-    function initStars() {
-      stars = [];
-      for (let i = 0; i < 200; i++) {
-        stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: Math.random() * 1.6 + 0.2,
-          opacity: Math.random() * 0.7 + 0.2,
-          vx: (Math.random() - 0.5) * 0.15,
-          vy: (Math.random() - 0.5) * 0.15
-        });
-      }
-    }
-
-    function drawFrame() {
-      const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Connections
-      for (let i = 0; i < stars.length; i++) {
-        for (let j = i + 1; j < stars.length; j++) {
-          const dx = stars[i].x - stars[j].x;
-          const dy = stars[i].y - stars[j].y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(stars[i].x, stars[i].y);
-            ctx.lineTo(stars[j].x, stars[j].y);
-            ctx.strokeStyle = `rgba(201,148,42,${(1 - dist/120) * 0.12})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Stars + drift
-      stars.forEach(s => {
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(201,148,42,${s.opacity * 0.25})`;
-        ctx.fill();
-        s.x += s.vx; s.y += s.vy;
-        if (s.x < 0) s.x = canvas.width;
-        if (s.x > canvas.width) s.x = 0;
-        if (s.y < 0) s.y = canvas.height;
-        if (s.y > canvas.height) s.y = 0;
-      });
-
-      rafId = requestAnimationFrame(drawFrame);
-    }
-
-    resize();
-    drawFrame();
-    window.addEventListener('resize', resize);
-  })();
+  // Constellation canvas removed — grain texture overlay used instead
 
   // ── Countdown Timer ──
   function updateCountdown() {

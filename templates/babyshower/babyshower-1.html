@@ -41,75 +41,63 @@
     #loading-screen {
       position: fixed;
       inset: 0;
-      background: var(--deep-green);
+      background: #0a3a0a;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
+      gap: 1.4rem;
+      z-index: 9999; cursor: pointer;
+      transition: opacity 0.4s cubic-bezier(0.23,1,0.32,1), transform 0.4s cubic-bezier(0.23,1,0.32,1);
     }
-    #loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-
-    .loading-svg-wrap {
-      position: relative;
-      width: 180px;
-      height: 230px;
-      margin-bottom: 28px;
-    }
-
-    .loading-woman-svg {
-      filter: drop-shadow(0 0 20px rgba(201,148,42,0.6));
-      animation: gentleBreathe 2s ease-in-out infinite;
+    #loading-screen.hidden { opacity: 0; transform: scale(1.06); visibility: hidden; pointer-events: none; }
+    #loading-screen::after {
+      content: '';
+      position: absolute; inset: 20px;
+      border: 1px solid rgba(201,148,42,0.2);
+      pointer-events: none;
     }
 
-    @keyframes gentleBreathe {
-      0%, 100% { transform: scale(1) translateY(0); }
-      50% { transform: scale(1.03) translateY(-5px); }
+    /* Kalash SVG draw-on */
+    .splash-kalash-svg { width: 100px; height: 120px; }
+    .splash-kalash-path {
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      animation: kalashDrawOn 2s cubic-bezier(0.77,0,0.175,1) 0.2s forwards;
+    }
+    @keyframes kalashDrawOn {
+      to { stroke-dashoffset: 0; }
+    }
+    .splash-kalash-fill {
+      opacity: 0;
+      animation: kalashFill 0.6s ease-out 2s forwards;
+    }
+    @keyframes kalashFill {
+      to { opacity: 0.1; }
     }
 
-    .bangle-ring-anim {
-      position: absolute;
-      border-radius: 50%;
-      border: 3.5px solid;
-      animation: bangleJingle 0.55s ease-in-out infinite alternate;
-    }
-    .bangle-ring-anim.b1 { width: 30px; height: 30px; border-color: var(--gold-light); bottom: 72px; left: 18px; }
-    .bangle-ring-anim.b2 { width: 25px; height: 25px; border-color: #e05050; bottom: 68px; left: 22px; animation-delay: 0.18s; }
-
-    @keyframes bangleJingle {
-      0%   { transform: translateX(-3px) rotate(-6deg); }
-      100% { transform: translateX(3px)  rotate(6deg);  }
-    }
-
-    .loading-text {
+    .splash-title-bs1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 2.8rem;
+      font-size: clamp(2rem, 6vw, 3rem);
       color: var(--gold-light);
-      text-shadow: 0 0 30px rgba(201,148,42,0.8);
-      animation: fadeGlow 1.5s ease-in-out infinite alternate;
+      text-shadow: 0 0 30px rgba(201,148,42,0.6);
+      opacity: 0;
+      animation: fadeInGold 0.8s ease-out 1.2s forwards;
+    }
+    @keyframes fadeInGold {
+      to { opacity: 1; }
     }
 
-    @keyframes fadeGlow {
-      0%   { opacity: 0.7; text-shadow: 0 0 20px rgba(201,148,42,0.4); }
-      100% { opacity: 1;   text-shadow: 0 0 44px rgba(201,148,42,1);   }
+    .splash-tap-bs1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.58rem; letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(201,148,42,0.5);
+      animation: tapGlowBS1 2s ease-in-out infinite;
     }
-
-    .loading-dots { margin-top: 18px; }
-    .loading-dots span {
-      display: inline-block;
-      width: 9px; height: 9px;
-      background: var(--gold);
-      border-radius: 50%;
-      margin: 0 4px;
-      animation: loadDot 1s infinite;
-    }
-    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes loadDot {
-      0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
-      40%           { transform: scale(1.5); opacity: 1;   }
+    @keyframes tapGlowBS1 {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
     }
 
     /* =============================================
@@ -1081,14 +1069,31 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
      LOADING SCREEN
      ============================================= -->
 <div id="loading-screen">
-  <svg style="animation:spin 1.2s linear infinite;display:block;margin:0 auto" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="22" cy="22" r="18" stroke="rgba(201,148,42,0.2)" stroke-width="1.5"/>
-    <path d="M22 4 A18 18 0 0 1 40 22" stroke="#c9942a" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Kalash (sacred pot) SVG draw-on -->
+  <svg class="splash-kalash-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Kalash pot body -->
+    <path class="splash-kalash-path"
+      d="M38,90 C28,90 22,82 20,70 C18,58 22,46 28,38 L26,30 L74,30 L72,38 C78,46 82,58 80,70 C78,82 72,90 62,90 Z
+         M26,30 L30,22 L70,22 L74,30
+         M30,22 C30,16 34,12 42,10 L58,10 C66,12 70,16 70,22
+         M35,10 C35,6 42,4 50,4 C58,4 65,6 65,10
+         M20,70 L80,70"
+      stroke="#c9942a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Mango leaf motif on top -->
+    <path class="splash-kalash-path"
+      d="M44,8 C40,2 36,-2 38,4 M50,6 C50,0 50,-2 50,4 M56,8 C60,2 64,-2 62,4"
+      stroke="#c9942a" stroke-width="1" stroke-linecap="round"/>
+    <!-- Decorative horizontal band -->
+    <path class="splash-kalash-path"
+      d="M25,55 C35,52 45,58 50,55 C55,52 65,58 75,55"
+      stroke="#c9942a" stroke-width="1" stroke-linecap="round"/>
+    <!-- Fill hint -->
+    <path class="splash-kalash-fill"
+      d="M38,90 C28,90 22,82 20,70 L80,70 C78,82 72,90 62,90 Z"
+      fill="#c9942a"/>
   </svg>
-  <div class="loading-text">A New Life Begins...</div>
-  <div class="loading-dots">
-    <span></span><span></span><span></span>
-  </div>
+  <div class="splash-title-bs1">Seemantham</div>
+  <div class="splash-tap-bs1">Tap to open</div>
 </div>
 
 <!-- Back Nav -->
@@ -1110,7 +1115,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Navbar -->
 <nav class="navbar">
-  <a href="#" class="nav-logo">&#127865; Seemantham</a>
+  <a href="#" class="nav-logo"> Seemantham</a>
   <ul class="nav-links">
     <li><a href="#invitation">Invitation</a></li>
     <li><a href="#ceremony">Ceremony</a></li>
@@ -1144,7 +1149,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   <div class="hero-content reveal">
     <h1 class="hero-title">Seemantham</h1>
     <p class="hero-mother" data-field="motherName">Priya Reddy</p>
-    <p class="hero-tagline">Blessed with New Life &#127865;</p>
+    <p class="hero-tagline">Blessed with New Life </p>
     <div class="hero-date-box">
       <div class="date-label">Auspicious Occasion</div>
       <div class="date-value" data-field="date">August 10, 2026</div>
@@ -1195,7 +1200,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
         <circle cx="10" cy="62" r="3.5" fill="#d4a010" opacity="0.72"/>
       </svg>
 
-      <div class="invite-invocation">&#128591;</div>
+      <div class="invite-invocation"></div>
       <div class="invite-subtitle">&#3128;&#3149;&#3120;&#3135; &#3121;&#3144;&#3125;&#3134; &#3095;&#3120;&#3149;&#3114;&#3108;&#3111;&#3142; &#3116;&#3121;&#3143;&#3111;</div>
       <div class="invite-divider"></div>
       <div class="invite-message" data-field="message">
@@ -1205,21 +1210,21 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="invite-divider"></div>
       <div class="invite-details">
         <div class="invite-detail-row">
-          <span class="detail-icon">&#128197;</span>
+          <span class="detail-icon" style="font-size:0.7rem;letter-spacing:0.1em;color:var(--gold)">Date</span>
           <div>
             <span class="detail-label">Date</span>
             <span class="detail-value" data-field="date">August 10, 2026</span>
           </div>
         </div>
         <div class="invite-detail-row">
-          <span class="detail-icon">&#128336;</span>
+          <span class="detail-icon" style="font-size:0.7rem;letter-spacing:0.1em;color:var(--gold)">Time</span>
           <div>
             <span class="detail-label">Time</span>
             <span class="detail-value" data-field="time">10:00 AM</span>
           </div>
         </div>
         <div class="invite-detail-row">
-          <span class="detail-icon">&#128205;</span>
+          <span class="detail-icon" style="font-size:0.7rem;letter-spacing:0.1em;color:var(--gold)">Venue</span>
           <div>
             <span class="detail-label">Venue</span>
             <span class="detail-value" data-field="venue">Sri Lakshmi Kalyana Mandapam, Kompally, Hyderabad</span>
@@ -1249,7 +1254,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="timeline-item reveal">
         <div class="timeline-dot"></div>
         <div class="timeline-card">
-          <span class="timeline-emoji">&#128591;</span>
+          <span class="timeline-emoji"></span>
           <div class="timeline-time">8:30 AM</div>
           <div class="timeline-event-name">Ganapathi Pooja</div>
           <div class="timeline-description">Seek blessings for a smooth and auspicious ceremony</div>
@@ -1258,7 +1263,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="timeline-item reveal">
         <div class="timeline-dot"></div>
         <div class="timeline-card">
-          <span class="timeline-emoji">&#128155;</span>
+          <span class="timeline-emoji">✦</span>
           <div class="timeline-time">9:00 AM</div>
           <div class="timeline-event-name">Haldi / Turmeric Ceremony</div>
           <div class="timeline-description">Applying turmeric for glow, health, and positive energy for mother and baby</div>
@@ -1267,7 +1272,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="timeline-item reveal">
         <div class="timeline-dot"></div>
         <div class="timeline-card">
-          <span class="timeline-emoji">&#127865;</span>
+          <span class="timeline-emoji"></span>
           <div class="timeline-time">9:30 AM</div>
           <div class="timeline-event-name">Valaikaapu</div>
           <div class="timeline-description">The sacred bangle ceremony — adorning the mother-to-be with colorful bangles</div>
@@ -1276,16 +1281,16 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="timeline-item reveal">
         <div class="timeline-dot" style="background:#f0c060;box-shadow:0 0 18px rgba(240,192,96,0.85)"></div>
         <div class="timeline-card highlighted">
-          <span class="timeline-emoji">&#11088;</span>
+          <span class="timeline-emoji">✦</span>
           <div class="timeline-time" data-field="time">10:00 AM</div>
-          <div class="timeline-event-name">&#10024; Seemantham &#10024;</div>
+          <div class="timeline-event-name">Seemantham</div>
           <div class="timeline-description">The main ceremony — reading sacred texts, receiving blessings from elders for the mother and baby</div>
         </div>
       </div>
       <div class="timeline-item reveal">
         <div class="timeline-dot"></div>
         <div class="timeline-card">
-          <span class="timeline-emoji">&#127869;</span>
+          <span class="timeline-emoji">✦</span>
           <div class="timeline-time">12:00 PM</div>
           <div class="timeline-event-name">Prasadam &amp; Feast</div>
           <div class="timeline-description">Sharing traditional food, sweets, and blessings with family and friends</div>
@@ -1300,7 +1305,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
      ============================================= -->
 <section id="bangles-section" class="section">
   <div class="container">
-    <h2 class="section-title reveal">&#128155; Valaikaapu &#8212; Bangle Ceremony</h2>
+    <h2 class="section-title reveal">Valaikaapu &#8212; Bangle Ceremony</h2>
     <p class="section-subtitle reveal" style="color:#5a3a00">An ancient and beautiful tradition of love</p>
 
     <div class="bangles-display reveal" aria-label="Colorful bangle display — hover each to see it jingle">
@@ -1331,7 +1336,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
      ============================================= -->
 <section id="lullaby" class="section">
   <div class="container">
-    <h2 class="section-title reveal" style="color:var(--gold-light)">&#127925; A Lullaby for the Little One</h2>
+    <h2 class="section-title reveal" style="color:var(--gold-light)">A Lullaby for the Little One</h2>
     <div class="lullaby-card reveal">
       <div class="music-note">&#9834;</div>
       <div class="music-note">&#9835;</div>
@@ -1362,20 +1367,20 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
      ============================================= -->
 <section id="names" class="section">
   <div class="container">
-    <h2 class="section-title reveal" style="color:var(--deep-green)">Baby Name Ideas &#128149;</h2>
-    <p class="section-subtitle reveal" style="color:#5a3a00">Mark your favorites with &#11088; and suggest your own!</p>
+    <h2 class="section-title reveal" style="color:var(--deep-green)">Baby Name Ideas</h2>
+    <p class="section-subtitle reveal" style="color:#5a3a00">Mark your favorites and suggest your own!</p>
     <div class="names-grid reveal">
       <div class="names-column">
-        <h3>&#129490; Boy Names</h3>
+        <h3>Boy Names</h3>
         <div class="names-list" id="boy-names"></div>
       </div>
       <div class="names-column">
-        <h3>&#128104; Girl Names</h3>
+        <h3>Girl Names</h3>
         <div class="names-list" id="girl-names"></div>
       </div>
     </div>
     <div class="name-suggest-area reveal">
-      <button class="suggest-btn" onclick="toggleSuggestForm()">&#128161; Suggest a Name</button>
+      <button class="suggest-btn" onclick="toggleSuggestForm()">Suggest a Name</button>
       <div class="suggest-form" id="suggest-form">
         <input type="text" id="suggest-name-input" placeholder="Enter a beautiful name..." />
         <select id="suggest-gender">
@@ -1394,39 +1399,39 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
      ============================================= -->
 <section id="gifts" class="section">
   <div class="container">
-    <h2 class="section-title reveal" style="color:var(--gold-light)">Blessings &amp; Gifts &#127873;</h2>
+    <h2 class="section-title reveal" style="color:var(--gold-light)">Blessings &amp; Gifts</h2>
     <p class="section-subtitle reveal" style="color:rgba(200,230,200,0.68)">Thoughtful gifts for the mother and little one</p>
     <div style="margin-bottom:2rem;border-radius:2px;overflow:hidden;">
   <img src="https://images.unsplash.com/photo-1515488764276-beab7607c1e6?w=800&q=80" alt="Baby shower gifts" loading="lazy" style="width:100%;height:200px;object-fit:cover;filter:brightness(0.7) saturate(1.2);" onerror="this.remove();">
 </div>
     <div class="gifts-grid reveal">
       <div class="gift-card">
-        <div class="gift-emoji">&#128118;</div>
+        <div class="gift-emoji">✦</div>
         <div class="gift-name">Baby Cradle</div>
         <div class="gift-desc">Traditional Indian wooden cradle — a timeless symbol of love and gentle comfort</div>
       </div>
       <div class="gift-card">
-        <div class="gift-emoji">&#129535;</div>
+        <div class="gift-emoji">◆</div>
         <div class="gift-name">Silk Pavadai</div>
         <div class="gift-desc">Traditional South Indian baby silk dress — a cherished cultural treasure</div>
       </div>
       <div class="gift-card">
-        <div class="gift-emoji">&#128155;</div>
+        <div class="gift-emoji">✦</div>
         <div class="gift-name">Gold Jewelry</div>
         <div class="gift-desc">Traditional ornaments for baby — anklets, bangles, and necklaces of pure gold</div>
       </div>
       <div class="gift-card">
-        <div class="gift-emoji">&#128218;</div>
+        <div class="gift-emoji">◆</div>
         <div class="gift-name">Children's Books</div>
         <div class="gift-desc">Beautifully illustrated storybooks and lullaby collections in Telugu &amp; English</div>
       </div>
       <div class="gift-card">
-        <div class="gift-emoji">&#128705;</div>
+        <div class="gift-emoji">✦</div>
         <div class="gift-name">Baby Care Set</div>
         <div class="gift-desc">Organic oils, herbal soaps, and gentle skincare crafted for newborns</div>
       </div>
       <div class="gift-card">
-        <div class="gift-emoji">&#127925;</div>
+        <div class="gift-emoji">♪</div>
         <div class="gift-name">Musical Toys</div>
         <div class="gift-desc">Soft rattles, bells, and musical instruments to delight the little one's senses</div>
       </div>
@@ -1460,7 +1465,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     </div>
 
     <div class="blessing-form-wrap reveal">
-      <h3>&#128221; Share Your Blessing</h3>
+      <h3>Share Your Blessing</h3>
       <div id="bless-form">
         <div class="form-group">
           <label>Your Name / Relation</label>
@@ -1470,9 +1475,9 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
           <label>Your Blessing or Message</label>
           <textarea id="bless-message" rows="4" placeholder="Share a blessing, wisdom, or heartfelt message..."></textarea>
         </div>
-        <button class="submit-btn" onclick="submitBlessing()">&#128591; Share Blessing</button>
+        <button class="submit-btn" onclick="submitBlessing()"> Share Blessing</button>
       </div>
-      <div class="form-success" id="bless-success">&#128591; Your blessing has been received with deep gratitude!</div>
+      <div class="form-success" id="bless-success"> Your blessing has been received with deep gratitude!</div>
       <div class="user-blessings-display" id="user-blessings"></div>
     </div>
   </div>
@@ -1483,7 +1488,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
      ============================================= -->
 <section id="rsvp" class="section">
   <div class="container">
-    <h2 class="section-title reveal">RSVP &#127865;</h2>
+    <h2 class="section-title reveal">RSVP </h2>
     <p class="section-subtitle reveal">Your presence will be our greatest gift</p>
     <div class="rsvp-form-wrap reveal">
       <div id="rsvp-form">
@@ -1500,7 +1505,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
             </label>
             <label class="rsvp-radio-label">
               <input type="radio" name="attend" value="no" onchange="selectAttend(this)">
-              &#128591; Regrettably, No
+               Regrettably, No
             </label>
           </div>
         </div>
@@ -1515,11 +1520,11 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
           </select>
         </div>
         <div class="form-group">
-          <label>Would You Like Mehendi? &#127807;</label>
+          <label>Would You Like Mehendi?</label>
           <div class="rsvp-radio-group">
             <label class="rsvp-radio-label">
               <input type="radio" name="mehendi" value="yes" onchange="selectMehendi(this)">
-              &#127807; Yes, Please!
+              Yes, Please!
             </label>
             <label class="rsvp-radio-label">
               <input type="radio" name="mehendi" value="no" onchange="selectMehendi(this)">
@@ -1531,10 +1536,10 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
           <label>Message for the Family</label>
           <textarea id="rsvp-message" rows="3" placeholder="Your warm wishes for the family..."></textarea>
         </div>
-        <button class="submit-btn" onclick="submitRSVP()">&#127865; Confirm RSVP</button>
+        <button class="submit-btn" onclick="submitRSVP()"> Confirm RSVP</button>
       </div>
       <div class="form-success" id="rsvp-success" style="font-size:1.25rem;padding:32px">
-        &#128591; Thank you! Your presence will be cherished.<br>
+         Thank you! Your presence will be cherished.<br>
         See you on <strong data-field="date">August 10, 2026</strong>!
       </div>
     </div>
@@ -1559,13 +1564,18 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
      SEEMANTHAM — MAIN JAVASCRIPT
      ============================================= */
 
-  // Loading screen — 2s timeout
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const ls = document.getElementById('loading-screen');
-      if (ls) ls.classList.add('hidden');
-    }, 2000);
-  });
+  // Loading screen — tap to open
+  (function() {
+    const ls = document.getElementById('loading-screen');
+    if (!ls) return;
+    function openInvite() {
+      ls.removeEventListener('click', openInvite);
+      ls.removeEventListener('touchstart', openInvite);
+      ls.classList.add('hidden');
+    }
+    ls.addEventListener('click', openInvite);
+    ls.addEventListener('touchstart', openInvite);
+  })();
 
   // Mobile hamburger
   const hamburger = document.getElementById('hamburger');

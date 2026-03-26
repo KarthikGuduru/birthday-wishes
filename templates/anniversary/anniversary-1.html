@@ -50,6 +50,12 @@
       transition: opacity 0.8s ease, visibility 0.8s ease;
     }
     #loading-screen.hidden { opacity: 0; visibility: hidden; }
+    #loading-screen::after {
+      content: '';
+      position: absolute; inset: 20px;
+      border: 1px solid rgba(201,148,42,0.2);
+      pointer-events: none;
+    }
 
     .loading-particles {
       position: absolute;

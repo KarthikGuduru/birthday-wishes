@@ -12,26 +12,25 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:       #050818;
+      --navy:       #0C1445;
       --navy2:      #0d1440;
-      --royal:      #1a2a8b;
-      --saffron:    #c86820;
-      --saffron2:   #e07830;
-      --saffron3:   #f09040;
-      --hot-pink:   #d4185a;
-      --marigold:   #f0b030;
+      --royal:      #0C1445;
+      --saffron:    #B8651E;
+      --saffron2:   #c87030;
+      --saffron3:   #d88040;
+      --marigold:   #E5A820;
       --ivory:      #fffbf0;
       --ivory2:     #fff5d8;
-      --near-black: #050818;
-      --gold:       #e8a020;
+      --near-black: #0C1445;
+      --gold:       #E5A820;
       --gold-light: #f0c050;
       --gold-pale:  #f8e0a0;
-      --bg-primary:   #faf7f2;
+      --bg-primary:   #FFF8EC;
       --bg-alt:       #f5f0e8;
       --bg-white:     #ffffff;
-      --text-dark:    #1a1310;
+      --text-dark:    #1a1a2a;
       --text-body:    #2b2b2b;
-      --text-muted:   #444;
+      --text-muted:   #5a5a6a;
     }
 
     html { scroll-behavior: smooth; }
@@ -45,74 +44,74 @@
     /* ── LOADING SCREEN ── */
     #loading-screen {
       position: fixed; inset: 0; z-index: 9999;
-      background: #3d0a00;
+      background: #0C1445;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
+      gap: 1.2rem;
       cursor: pointer;
       overflow: hidden;
-      transition: opacity 0.9s cubic-bezier(0.23, 1, 0.32, 1), transform 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
     #loading-screen.hidden { opacity: 0; transform: scale(1.06); pointer-events: none; }
     #loading-screen::after {
       content: '';
       position: absolute;
       inset: 20px;
-      border: 1px solid rgba(255,160,30,0.15);
+      border: 1px solid rgba(229,168,32,0.25);
       pointer-events: none;
+    }
+    .splash-dome-svg {
+      width: 120px;
+      height: 120px;
+    }
+    .splash-dome-path {
+      stroke-dasharray: 800;
+      stroke-dashoffset: 800;
+      animation: domeDrawOn 1.8s cubic-bezier(0.77,0,0.175,1) 0.2s forwards;
+    }
+    @keyframes domeDrawOn {
+      to { stroke-dashoffset: 0; }
+    }
+    .splash-title-w2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      background: linear-gradient(90deg, #B8651E, #E5A820, #f8e0a0, #E5A820, #B8651E);
+      background-size: 300% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: saffronShimmer 3s linear infinite;
+      text-align: center;
+    }
+    @keyframes saffronShimmer {
+      from { background-position: 0% center; }
+      to { background-position: 300% center; }
     }
     .splash-tap-label {
       font-size: 0.58rem;
       letter-spacing: 0.45em;
       text-transform: uppercase;
-      color: rgba(255,160,30,0.55);
+      color: rgba(229,168,32,0.55);
       font-family: 'Poppins', sans-serif;
-      margin-top: 1.5rem;
       animation: tapGlowW2 2s ease-in-out infinite;
     }
     @keyframes tapGlowW2 {
       0%, 100% { opacity: 0.55; }
       50% { opacity: 1; }
     }
-
-    .diya-svg { width: 90px; height: 100px; }
-
-    .diya-flame {
-      transform-origin: 50% 100%;
-      animation: diya-flicker 0.5s ease-in-out infinite alternate;
+    /* Gold dust particles */
+    .gold-dust {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--gold);
+      pointer-events: none;
+      animation: goldRise linear infinite;
+      opacity: 0;
     }
-    @keyframes diya-flicker {
-      0%   { transform: scaleY(1) scaleX(1) rotate(-3deg); opacity: 1; }
-      50%  { transform: scaleY(1.2) scaleX(0.8) rotate(2deg); opacity: 0.85; }
-      100% { transform: scaleY(0.9) scaleX(1.1) rotate(-1deg); opacity: 0.95; }
-    }
-
-    .diya-glow {
-      animation: diya-glow 1s ease-in-out infinite alternate;
-    }
-    @keyframes diya-glow {
-      from { opacity: 0.25; r: 20; }
-      to   { opacity: 0.55; r: 30; }
-    }
-
-    .loading-petals { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-    .load-petal {
-      position: absolute; bottom: -30px;
-      animation: load-float linear infinite;
-    }
-    @keyframes load-float {
-      0%   { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-      100% { transform: translateY(-110vh) rotate(540deg); opacity: 0; }
-    }
-
-    .loading-text {
-      font-family: 'Poppins', sans-serif; font-weight: 600;
-      font-size: 1.1rem; letter-spacing: 0.4em; text-transform: uppercase;
-      color: var(--marigold); margin-top: 1.2rem;
-      animation: loading-pulse 1.5s ease-in-out infinite;
-    }
-    @keyframes loading-pulse {
-      0%, 100% { opacity: 0.5; }
-      50%       { opacity: 1; }
+    @keyframes goldRise {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: var(--gd-opacity, 0.3); }
+      90% { opacity: var(--gd-opacity, 0.3); }
+      100% { transform: translateY(-100vh) translateX(var(--gd-x, 20px)); opacity: 0; }
     }
 
     /* ── BACK NAV ── */
@@ -210,26 +209,25 @@
     #hero {
       position: relative; min-height: 100vh;
       background:
-        linear-gradient(160deg, rgba(120,40,0,0.72), rgba(80,20,0,0.82)),
+        linear-gradient(160deg, rgba(12,20,69,0.78), rgba(12,20,69,0.55)),
         url('../../assets/generated/rajasthani-palace.jpeg') center/cover no-repeat;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       overflow: hidden; padding: 5rem 2rem 12rem;
     }
 
-    /* Mehendi border overlay */
+    /* Jali (geometric lattice) overlay — thin gold at 4% */
     #hero::before {
       content: '';
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        radial-gradient(ellipse 8px 8px at 2% 5%, rgba(200,104,32,0.3) 0%, transparent 70%),
-        radial-gradient(ellipse 6px 10px at 5% 12%, rgba(200,104,32,0.2) 0%, transparent 70%),
-        radial-gradient(ellipse 8px 8px at 98% 5%, rgba(200,104,32,0.3) 0%, transparent 70%),
-        radial-gradient(ellipse 6px 10px at 95% 12%, rgba(200,104,32,0.2) 0%, transparent 70%),
-        radial-gradient(ellipse 8px 8px at 2% 95%, rgba(200,104,32,0.3) 0%, transparent 70%),
-        radial-gradient(ellipse 8px 8px at 98% 95%, rgba(200,104,32,0.3) 0%, transparent 70%);
-      border: 3px solid rgba(200,104,32,0.2);
-      border-image: none;
-      z-index: 0;
+      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+      background-image: repeating-conic-gradient(rgba(229,168,32,0.04) 0deg 25%, transparent 25% 50%);
+      background-size: 40px 40px;
+    }
+
+    /* Gold inset border */
+    #hero::after {
+      content: '';
+      position: absolute; inset: 24px; pointer-events: none; z-index: 1;
+      border: 1px solid rgba(229,168,32,0.2);
     }
 
     /* Floating elements */
@@ -242,18 +240,8 @@
       100% { transform: translateY(-110vh) rotate(720deg); opacity: 0; }
     }
 
-    /* Shehnai music notes */
-    .music-note {
-      position: absolute; pointer-events: none;
-      font-size: 1.5rem; color: rgba(240,176,48,0.6);
-      animation: drift-across linear infinite;
-    }
-    @keyframes drift-across {
-      0%   { transform: translateX(-80px) translateY(0px); opacity: 0; }
-      10%  { opacity: 0.8; }
-      90%  { opacity: 0.8; }
-      100% { transform: translateX(calc(100vw + 80px)) translateY(-40px); opacity: 0; }
-    }
+    /* Music notes — removed drift animation */
+    .music-note { display: none; }
 
     /* Haveli SVG */
     .haveli-container {
@@ -278,7 +266,7 @@
     }
 
     .hero-names {
-      font-family: 'Cormorant Garamond', serif;
+      font-family: 'Playfair Display', serif;
       font-size: clamp(3.5rem, 9vw, 7.5rem);
       text-align: center;
       line-height: 0.95; letter-spacing: -0.03em;
@@ -350,9 +338,9 @@
       color: var(--text-dark); margin-bottom: 0.4rem; letter-spacing: -0.04em;
     }
     .section-subtitle {
-      font-size: 1rem; color: var(--text-muted);
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-      line-height: 1.7;
+      font-size: 0.9rem; color: var(--text-muted);
+      font-family: 'Poppins', sans-serif; font-weight: 300;
+      line-height: 1.7; letter-spacing: 0.05em;
     }
     .divider {
       display: flex; align-items: center; gap: 1rem;
@@ -707,7 +695,7 @@
       display: flex; align-items: center; justify-content: center; font-size: 3rem;
     }
     .miniature-photo.m1 { background: linear-gradient(135deg, #c86820 0%, #8b4010 50%, #5a2800 100%); }
-    .miniature-photo.m2 { background: linear-gradient(135deg, #d4185a 0%, #8b0030 50%, #3a0010 100%); }
+    .miniature-photo.m2 { background: linear-gradient(135deg, #0C1445 0%, #0d1440 50%, #050818 100%); }
     .miniature-photo.m3 { background: linear-gradient(135deg, #1a2a8b 0%, #0d1440 50%, #050818 100%); }
     .miniature-photo.m4 { background: linear-gradient(135deg, #f0b030 0%, #c86820 50%, #8b4010 100%); }
     .miniature-photo.m5 { background: linear-gradient(135deg, #1a5a20 0%, #0a3010 50%, #050a00 100%); }
@@ -997,12 +985,23 @@
 
 <!-- LOADING SCREEN -->
 <div id="loading-screen">
-  <div class="loading-petals" id="loading-petals"></div>
-  <svg style="animation:spin 1.2s linear infinite;display:block;margin:0 auto" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="22" cy="22" r="18" stroke="rgba(200,104,32,0.2)" stroke-width="1.5"/>
-    <path d="M22 4 A18 18 0 0 1 40 22" stroke="#c86820" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Palace dome SVG draw-on -->
+  <svg class="splash-dome-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Palace chhatri/dome outline -->
+    <path class="splash-dome-path"
+      d="M60,20 C60,20 50,30 48,44 L40,44 L40,50 L80,50 L80,44 L72,44 C70,30 60,20 60,20 Z
+         M44,50 L44,80 M76,50 L76,80
+         M38,80 L82,80
+         M50,80 L50,90 M70,80 L70,90
+         M46,90 L74,90
+         M55,20 L55,14 M65,20 L65,14 M60,20 L60,10
+         M54,44 L54,50 M60,44 L60,50 M66,44 L66,50"
+      stroke="#E5A820" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Dome fill hint -->
+    <path d="M48,44 C48,32 52,24 60,20 C68,24 72,32 72,44 Z"
+      fill="rgba(229,168,32,0.08)" stroke="none"/>
   </svg>
-  <div class="loading-text">Loading...</div>
+  <div class="splash-title-w2">Padharo Mhare Desh</div>
   <div class="splash-tap-label">Tap to open</div>
 </div>
 
@@ -1175,7 +1174,7 @@
       <ellipse cx="35" cy="30" rx="12" ry="18" fill="none" stroke="#c86820" stroke-width="1.5" opacity="0.6" transform="rotate(-30 35 30)"/>
       <circle cx="35" cy="20" r="4" fill="#f0b030" opacity="0.7"/>
       <circle cx="18" cy="45" r="3" fill="#c86820" opacity="0.6"/>
-      <circle cx="50" cy="55" r="3" fill="#d4185a" opacity="0.5"/>
+      <circle cx="50" cy="55" r="3" fill="#E5A820" opacity="0.4"/>
       <path d="M25,55 Q30,40 45,35" fill="none" stroke="#c86820" stroke-width="1" opacity="0.5"/>
     </svg>
     <svg class="inv-corner-svg tr" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
@@ -1184,7 +1183,7 @@
       <ellipse cx="35" cy="30" rx="12" ry="18" fill="none" stroke="#c86820" stroke-width="1.5" opacity="0.6" transform="rotate(-30 35 30)"/>
       <circle cx="35" cy="20" r="4" fill="#f0b030" opacity="0.7"/>
       <circle cx="18" cy="45" r="3" fill="#c86820" opacity="0.6"/>
-      <circle cx="50" cy="55" r="3" fill="#d4185a" opacity="0.5"/>
+      <circle cx="50" cy="55" r="3" fill="#E5A820" opacity="0.4"/>
       <path d="M25,55 Q30,40 45,35" fill="none" stroke="#c86820" stroke-width="1" opacity="0.5"/>
     </svg>
     <svg class="inv-corner-svg bl" viewBox="0 0 70 70" xmlns="http://www.w3.org/2000/svg">
@@ -1285,64 +1284,6 @@
   </div>
 </section>
 
-<!-- BARAAT PROCESSION -->
-<section id="baraat">
-  <div class="section-header reveal">
-    <h2 class="section-title">The Royal Baraat</h2>
-    <div class="divider"><div class="divider-line"></div><span class="divider-icon">🎺</span><div class="divider-line"></div></div>
-    <p class="section-subtitle">The groom arrives in royal style</p>
-  </div>
-  <div class="procession-track">
-    <div class="procession-road"></div>
-    <div class="procession-inner" id="procession">
-      <div class="proc-elem">
-        <div class="proc-emoji">🐘</div>
-        <div class="proc-label">Royal Elephant</div>
-      </div>
-      <div class="proc-separator">·····</div>
-      <div class="proc-elem" style="animation-delay:0.1s;">
-        <div class="proc-emoji">🎺</div>
-        <div class="proc-label">Brass Band</div>
-      </div>
-      <div class="proc-elem" style="animation-delay:0.2s;">
-        <div class="proc-emoji">🥁</div>
-        <div class="proc-label">Dhol Beats</div>
-      </div>
-      <div class="proc-separator">·····</div>
-      <div class="proc-elem" style="animation-delay:0.15s;">
-        <div class="proc-emoji">🪘</div>
-        <div class="proc-label">Shehnai</div>
-      </div>
-      <div class="proc-separator">·····</div>
-      <div class="proc-elem">
-        <div class="proc-emoji" style="font-size:3.5rem;">🐎</div>
-        <div class="proc-label">The Groom</div>
-      </div>
-      <div class="proc-separator">·····</div>
-      <div class="proc-elem" style="animation-delay:0.05s;">
-        <div class="proc-emoji">✦</div>
-        <div class="proc-label">Torch Bearers</div>
-      </div>
-      <div class="proc-elem" style="animation-delay:0.1s;">
-        <div class="proc-emoji">✦</div>
-        <div class="proc-label">Diya Procession</div>
-      </div>
-      <div class="proc-separator">·····</div>
-      <div class="proc-elem">
-        <div class="proc-emoji">✦</div>
-        <div class="proc-label">Flower Palanquin</div>
-      </div>
-      <div class="proc-elem" style="animation-delay:0.2s;">
-        <div class="proc-emoji">✿</div>
-        <div class="proc-label">Petals</div>
-      </div>
-      <div class="proc-elem" style="animation-delay:0.1s;">
-        <div class="proc-emoji">✦</div>
-        <div class="proc-label">Confetti</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- VENUE -->
 <section id="venue">
@@ -1399,7 +1340,7 @@
         <div class="dress-gender">Ladies</div>
         <div class="dress-desc">
           Saree &nbsp;/&nbsp; Lehenga Choli &nbsp;/&nbsp; Anarkali<br><br>
-          Vibrant colours are warmly encouraged — especially <strong style="color:var(--marigold)">yellow</strong>, <strong style="color:#d4185a">pink</strong>, and <strong style="color:var(--saffron)">saffron</strong>. Heavy embroidery and mirror work are perfect for the occasion.
+          Vibrant colours are warmly encouraged — especially <strong style="color:var(--marigold)">yellow</strong>, <strong style="color:var(--saffron)">saffron</strong>, and <strong style="color:var(--gold)">gold</strong>. Heavy embroidery and mirror work are perfect for the occasion.
         </div>
       </div>
       <div class="dress-card reveal">
@@ -1416,7 +1357,7 @@
       <div class="color-swatches">
         <div class="swatch" style="background:#1a2a8b;color:rgba(255,255,255,0.9);">Royal Blue</div>
         <div class="swatch" style="background:#c86820;color:rgba(255,255,255,0.9);">Saffron</div>
-        <div class="swatch" style="background:#d4185a;color:rgba(255,255,255,0.9);">Hot Pink</div>
+        <div class="swatch" style="background:#E5A820;color:rgba(0,0,0,0.8);">Gold</div>
         <div class="swatch" style="background:#f0b030;color:rgba(0,0,0,0.8);">Marigold</div>
         <div class="swatch" style="background:#fffbf0;color:rgba(0,0,0,0.7);">Ivory</div>
         <div class="swatch" style="background:#1a5a20;color:rgba(255,255,255,0.9);">Forest</div>
@@ -1653,22 +1594,24 @@
     }
   })();
 
-  /* ── Shehnai music notes ── */
-  (function createNotes() {
-    const container = document.getElementById('notes-container');
-    const notes = ['♪', '♫', '♩', '♬'];
-    for (let i = 0; i < 8; i++) {
-      const note = document.createElement('div');
-      note.className = 'music-note';
-      note.textContent = notes[Math.floor(Math.random() * notes.length)];
-      note.style.cssText = `
-        top: ${10 + Math.random() * 70}%;
-        animation-duration: ${10 + Math.random() * 12}s;
-        animation-delay: ${Math.random() * 12}s;
-        font-size: ${1.2 + Math.random() * 0.8}rem;
-        position: absolute;
+  /* Music notes removed — gold dust particles instead */
+  (function createGoldDust() {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+    for (let i = 0; i < 12; i++) {
+      const d = document.createElement('div');
+      d.className = 'gold-dust';
+      const size = 2 + Math.random() * 3;
+      d.style.cssText = `
+        width:${size}px;height:${size}px;
+        left:${Math.random() * 100}%;
+        bottom:${Math.random() * 30}%;
+        animation-duration:${15 + Math.random() * 12}s;
+        animation-delay:${Math.random() * 10}s;
+        --gd-opacity:${0.2 + Math.random() * 0.3};
+        --gd-x:${(Math.random() - 0.5) * 60}px;
       `;
-      container.appendChild(note);
+      hero.appendChild(d);
     }
   })();
 
@@ -1747,7 +1690,7 @@
   /* ── Gallery Lightbox ── */
   const lbData = [
     { emoji: '✿', caption: 'Mehendi Night', bg: 'linear-gradient(135deg,#c86820,#8b4010)' },
-    { emoji: '✦', caption: 'Sangeet',       bg: 'linear-gradient(135deg,#d4185a,#8b0030)' },
+    { emoji: '✦', caption: 'Sangeet',       bg: 'linear-gradient(135deg,#0C1445,#1a2a8b)' },
     { emoji: '◆', caption: 'Baraat',        bg: 'linear-gradient(135deg,#1a2a8b,#0d1440)' },
     { emoji: '✦', caption: 'Pheras',        bg: 'linear-gradient(135deg,#f0b030,#c86820)' },
     { emoji: '✧', caption: 'Reception',     bg: 'linear-gradient(135deg,#1a5a20,#0a3010)' },

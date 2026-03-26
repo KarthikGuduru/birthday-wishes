@@ -17,11 +17,8 @@
       --teal-light:   #2a8090;
       --copper:       #c07830;
       --copper-light: #e09848;
-      --terracotta:   #b05828;
       --warm-white:   #fffcf8;
       --off-black:    #0a1214;
-      --sage:         #5a8060;
-      --sage-light:   #7aaa80;
       --gold:         #c9942a;
       --gold-light:   #e8b84a;
       --bg-primary:   #faf7f2;
@@ -47,9 +44,16 @@
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       gap: 28px;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
+      cursor: pointer;
+    transition: opacity 0.4s cubic-bezier(0.23,1,0.32,1), transform 0.4s cubic-bezier(0.23,1,0.32,1);
     }
-    #loading-screen.hidden { opacity: 0; visibility: hidden; }
+    #loading-screen.hidden { opacity: 0; transform: scale(1.06); visibility: hidden; pointer-events: none; }
+    #loading-screen::after {
+      content: '';
+      position: absolute; inset: 20px;
+      border: 1px solid rgba(192,120,48,0.2);
+      pointer-events: none;
+    }
 
     .house-draw-svg { width: 100px; height: 90px; }
     .house-outline {
@@ -103,13 +107,13 @@
 
     /* ── Purchase Banner ── */
     .purchase-banner {
-      position: fixed; top: 0; right: 0; left: 0; z-index: 1050;
+      position: fixed; bottom: 0; top: auto; right: 0; left: 0; z-index: 1050;
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       padding: 10px 20px;
       display: flex; align-items: center; justify-content: flex-end; gap: 12px;
-      border-bottom: 1px solid rgba(201,148,42,0.2);
+      border-top: 1px solid rgba(201,148,42,0.2);
       box-shadow: 0 2px 12px rgba(0,0,0,0.04);
     }
     .purchase-banner .banner-label {
@@ -139,7 +143,7 @@
 
     /* ── Navbar ── */
     .navbar {
-      position: sticky; top: 44px; z-index: 900;
+      position: sticky; top: 0; z-index: 900;
       background: var(--bg-white);
       padding: 0 32px;
       display: flex; align-items: center; justify-content: space-between;
@@ -193,30 +197,29 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
 
-    /* Copper floating dots */
-    .copper-dots-container { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-    .copper-dot {
-      position: absolute;
-      border-radius: 50%;
-      background: var(--copper);
-      animation: floatDot linear infinite;
-    }
-    @keyframes floatDot {
-      0%   { transform: translateY(0) scale(1); opacity: 0.6; }
-      50%  { opacity: 0.9; transform: translateY(-40vh) scale(1.1); }
-      100% { transform: translateY(-110vh) scale(0.6); opacity: 0; }
+    /* Building silhouette + plant motifs removed */
+
+    /* ── Section number markers ── */
+    .section-num {
+      position: absolute; top: 32px; left: 40px;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(4rem, 10vw, 7rem);
+      font-weight: 700;
+      color: rgba(192,120,48,0.07);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
     }
 
-    /* Building silhouette */
-    .building-silhouette {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 200px; pointer-events: none;
+    /* ── Gold hairline dividers ── */
+    .section-divider {
+      width: calc(100% - 160px);
+      max-width: 900px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,148,42,0.3) 20%, rgba(201,148,42,0.3) 80%, transparent);
+      margin: 0 auto;
     }
-    .building-svg { width: 100%; height: 100%; }
-
-    /* Plant motifs */
-    .plant-motif { position: absolute; pointer-events: none; opacity: 0.55; }
-    .plant-svg { width: 80px; height: 100px; }
 
     .hero-content {
       position: relative; z-index: 10;
@@ -783,46 +786,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Hero -->
 <section class="hero" id="hero">
-    <div class="hero-img-layer" style="background-image:url('../../assets/generated/modern-home-hero.jpeg');opacity:0.0;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
-  <!-- Copper Dots -->
-  <div class="copper-dots-container" id="copperDots"></div>
-
-  <!-- Plant motifs -->
-  <div class="plant-motif" style="left:-10px;top:15%;transform:rotate(-20deg)">
-    <svg class="plant-svg" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="40" cy="50" rx="32" ry="42" fill="#5a8060" opacity="0.7"/>
-      <path d="M40,50 Q55,30 60,10" stroke="#3a5a40" stroke-width="1.5" fill="none"/>
-      <path d="M40,50 Q25,35 15,20" stroke="#3a5a40" stroke-width="1.5" fill="none"/>
-      <path d="M40,50 Q58,45 72,38" stroke="#3a5a40" stroke-width="1.5" fill="none"/>
-      <path d="M40,50 Q22,45 8,38" stroke="#3a5a40" stroke-width="1.5" fill="none"/>
-      <line x1="40" y1="90" x2="40" y2="50" stroke="#3a5a40" stroke-width="2"/>
-      <path d="M40,20 Q32,30 28,40 Q40,36 48,28 Q46,24 40,20Z" fill="#3a6040" opacity="0.5"/>
-      <path d="M40,20 Q48,30 52,40 Q40,36 32,28 Q34,24 40,20Z" fill="#3a6040" opacity="0.5"/>
-    </svg>
-  </div>
-  <div class="plant-motif" style="right:-10px;top:20%;transform:rotate(15deg)">
-    <svg class="plant-svg" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="40" cy="50" rx="30" ry="38" fill="#4a7050" opacity="0.65"/>
-      <path d="M40,50 Q55,28 58,8" stroke="#2a4a30" stroke-width="1.5" fill="none"/>
-      <path d="M40,50 Q22,32 18,14" stroke="#2a4a30" stroke-width="1.5" fill="none"/>
-      <path d="M40,50 Q60,42 70,35" stroke="#2a4a30" stroke-width="1.5" fill="none"/>
-      <line x1="40" y1="88" x2="40" y2="50" stroke="#2a4a30" stroke-width="2"/>
-      <path d="M40,18 Q30,28 26,40 Q40,35 50,26 Q48,22 40,18Z" fill="#2a5030" opacity="0.5"/>
-      <path d="M40,18 Q50,28 54,40 Q40,35 30,26 Q32,22 40,18Z" fill="#2a5030" opacity="0.5"/>
-    </svg>
-  </div>
-  <div class="plant-motif" style="left:5%;bottom:220px">
-    <svg viewBox="0 0 80 100" style="width:60px;height:75px" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="40" cy="50" rx="28" ry="36" fill="#5a8060" opacity="0.5"/>
-      <line x1="40" y1="85" x2="40" y2="45" stroke="#3a5a40" stroke-width="2"/>
-    </svg>
-  </div>
-  <div class="plant-motif" style="right:5%;bottom:220px">
-    <svg viewBox="0 0 80 100" style="width:60px;height:75px" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="40" cy="50" rx="28" ry="36" fill="#4a7050" opacity="0.5"/>
-      <line x1="40" y1="85" x2="40" y2="45" stroke="#2a4a30" stroke-width="2"/>
-    </svg>
-  </div>
+    <div class="hero-img-layer" style="background-image:url('../../assets/generated/modern-home-hero.jpeg');opacity:0.4;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
 
   <div class="hero-content">
     <!-- Hero house icon -->
@@ -849,7 +813,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   </div>
 
   <!-- Building Silhouette removed -->
-  <div class="building-silhouette" style="display:none">
+  <div class="building-silhouette" style="display:none;visibility:hidden;pointer-events:none;position:absolute;overflow:hidden;max-height:0">
     <svg class="building-svg" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
       <!-- Tower 1 -->
       <rect x="200" y="30" width="120" height="170" fill="#0e3a47"/>
@@ -927,8 +891,10 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   </div>
 </section>
 
+<div class="section-divider"></div>
 <!-- Open House Details -->
-<section class="section" id="details" style="background:var(--bg-white);">
+<section class="section" id="details" style="background:var(--bg-white);position:relative;">
+  <span class="section-num">01</span>
   <div class="section-title reveal">Open House <span class="teal">Details</span></div>
   <div class="section-subtitle reveal">Everything you need to know</div>
   <div class="details-card reveal">
@@ -982,8 +948,10 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   </div>
 </section>
 
+<div class="section-divider"></div>
 <!-- Neighborhood Highlights -->
-<section class="neighborhood-section" id="neighborhood">
+<section class="neighborhood-section" id="neighborhood" style="position:relative;">
+  <span class="section-num">02</span>
   <div class="section-title reveal">Our Neighborhood</div>
   <div class="section-subtitle reveal">Everything you need, right at your doorstep</div>
   <div class="neighborhood-grid">
@@ -1010,8 +978,10 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   </div>
 </section>
 
+<div class="section-divider"></div>
 <!-- Room Tour -->
-<section class="rooms-section" id="rooms">
+<section class="rooms-section" id="rooms" style="position:relative;">
+  <span class="section-num">03</span>
   <div class="section-title reveal">A Peek Inside</div>
   <div class="section-subtitle reveal">Hover to explore each space</div>
   <div class="rooms-grid-2x2">
@@ -1059,7 +1029,9 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 </section>
 
 <!-- Potluck Signup -->
-<section class="potluck-section" id="potluck">
+<div class="section-divider"></div>
+<section class="potluck-section" id="potluck" style="position:relative;">
+  <span class="section-num">04</span>
   <div class="section-title reveal">Potluck Dinner — Join the Fun</div>
   <div class="section-subtitle reveal">Sign up to bring a dish</div>
   <div class="potluck-inner">
@@ -1089,8 +1061,10 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   </div>
 </section>
 
+<div class="section-divider"></div>
 <!-- Moving Timeline -->
-<section class="moving-timeline-section" id="timeline">
+<section class="moving-timeline-section" id="timeline" style="position:relative;">
+  <span class="section-num">05</span>
   <div class="section-title reveal">Our Moving <span style="color:var(--gold)">Journey</span></div>
   <div class="section-subtitle reveal">From search to housewarming</div>
   <div class="moving-timeline">
@@ -1161,8 +1135,10 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   </div>
 </section>
 
+<div class="section-divider"></div>
 <!-- RSVP -->
-<section class="rsvp-section" id="rsvp">
+<section class="rsvp-section" id="rsvp" style="position:relative;">
+  <span class="section-num">06</span>
   <div class="section-title reveal">RSVP</div>
   <div class="section-subtitle reveal">Let us know you're coming!</div>
   <div class="rsvp-form reveal" id="rsvpFormWrap">
@@ -1235,27 +1211,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     }, 1800);
   });
 
-  // ── Floating Copper Dots ──
-  (function spawnCopperDots() {
-    const container = document.getElementById('copperDots');
-    for (let i = 0; i < 25; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'copper-dot';
-      const size    = 3 + Math.random() * 8;
-      const left    = Math.random() * 100;
-      const delay   = Math.random() * 14;
-      const dur     = 8 + Math.random() * 14;
-      const opacity = 0.3 + Math.random() * 0.5;
-      dot.style.cssText = `
-        width:${size}px;height:${size}px;
-        left:${left}%;bottom:-5%;
-        opacity:${opacity};
-        animation-duration:${dur}s;
-        animation-delay:${delay}s;
-      `;
-      container.appendChild(dot);
-    }
-  })();
+  // Copper dots removed — whitespace is the decoration
 
   // ── Countdown Timer ──
   function updateCountdown() {
