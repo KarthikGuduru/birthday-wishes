@@ -136,11 +136,13 @@
     /* ── PURCHASE BANNER ── */
     .purchase-banner {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
-      background: var(--bg-white);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-top: 3px solid var(--gold);
       padding: 0.75rem 1.5rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      box-shadow: 0 -3px 25px rgba(0,0,0,0.04);
+      box-shadow: 0 -1px 0 rgba(0,0,0,0.06), 0 -8px 32px rgba(0,0,0,0.04);
     }
     .purchase-banner p { font-size: 0.8rem; color: var(--text-body); letter-spacing: 0.05em; }
     .purchase-banner strong { color: var(--gold); }
@@ -160,10 +162,10 @@
       background: linear-gradient(135deg, var(--gold) 0%, var(--turmeric) 100%);
       color: var(--bg-white); font-weight: 600;
     }
-    .btn-customize:active, .btn-buy:active { transform: scale(0.97); }
+    .btn-customize:active, .btn-buy:active { transform: scale(0.95); }
     @media (hover: hover) and (pointer: fine) {
-      .btn-customize:hover { background: var(--gold); color: var(--bg-white); }
-      .btn-buy:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,148,42,0.5); }
+      .btn-customize:hover { background: var(--gold); color: var(--bg-white); transform: scale(1.05); }
+      .btn-buy:hover { transform: scale(1.05) translateY(-1px); box-shadow: 0 4px 16px rgba(201,148,42,0.5); }
     }
 
     /* ── NAVBAR ── */
@@ -214,8 +216,11 @@
     #hero {
       position: relative; min-height: 100vh;
       background: linear-gradient(160deg, #faf7f2 0%, #f5f0e8 40%, #efe8d8 70%, #f5f0e8 100%);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      overflow: hidden; padding: 5rem 2rem 10rem;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      overflow: hidden; padding: 10rem 3rem 6rem;
+    }
+    @media (min-width: 900px) {
+      #hero { padding: 14rem 4rem 6rem; }
     }
 
     /* Floating petals */
@@ -267,7 +272,7 @@
     /* Hero text */
     .hero-shubh {
       font-family: 'Great Vibes', cursive;
-      font-size: 5rem; line-height: 1;
+      font-size: clamp(2rem, 5vw, 4rem); line-height: 1;
       background: linear-gradient(90deg, #c9942a, #f5dfa0, #c9942a, #e8b84b, #c9942a);
       background-size: 300% auto;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -282,10 +287,11 @@
 
     .hero-names {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
       text-align: center;
-      line-height: 1.15; letter-spacing: 0.03em;
+      line-height: 0.95; letter-spacing: -0.03em;
       position: relative; z-index: 2; margin-bottom: 1.5rem;
+      text-shadow: 0 4px 40px rgba(0,0,0,0.3);
       background: linear-gradient(90deg, var(--text-dark) 0%, var(--text-dark) 35%, var(--gold) 50%, var(--text-dark) 65%, var(--text-dark) 100%);
       background-size: 300% auto;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -362,7 +368,7 @@
     .section-title {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2rem, 4vw, 3rem); color: var(--text-dark);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.4rem; letter-spacing: -0.04em;
     }
     .section-subtitle {
       font-size: 1rem; color: var(--text-muted);
@@ -784,7 +790,7 @@
       border: 1px solid rgba(201,148,42,0.3); border-radius: 12px;
       font-family: 'Poppins', sans-serif; font-size: 0.85rem;
       color: #333; background: #fdfaf5;
-      transition: border-color 0.3s;
+      transition: border-color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     }
     .form-input:focus, .form-textarea:focus {
       outline: none; border-color: var(--gold);
@@ -900,8 +906,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .hero-shubh { font-size: 3rem; }
-      .hero-names { font-size: 2.2rem; }
+      .hero-shubh { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+      .hero-names { font-size: clamp(2.6rem, 8vw, 3.5rem); }
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .timeline::before { left: 20px; }
@@ -917,7 +923,7 @@
     @media (max-width: 480px) {
       .menu-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-shubh { font-size: 2.4rem; }
+      .hero-shubh { font-size: 1.8rem; }
     }
 
   /* ── Grandeur Elegance Pass ── */
@@ -1300,8 +1306,8 @@
 
 <!-- HERO -->
 <section id="hero">
-    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=80');opacity:0.10;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
-    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.06;z-index:0;pointer-events:none;" aria-hidden="true">
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=80');opacity:0.55;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
+    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35;z-index:0;pointer-events:none;" aria-hidden="true">
       <source src="https://videos.pexels.com/video-files/4121278/4121278-uhd_2560_1440_30fps.mp4" type="video/mp4">
     </video>
 
@@ -1587,7 +1593,7 @@
 <section id="gallery">
   <div class="section-header reveal">
     <h2 class="section-title">Precious Moments</h2>
-    <div class="divider"><div class="divider-line"></div><span class="divider-icon">📸</span><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><span class="divider-icon">✦</span><div class="divider-line"></div></div>
     <p class="section-subtitle">Memories to last a lifetime</p>
   </div>
   <div class="gallery-grid">
@@ -1674,7 +1680,7 @@
 <section id="rsvp">
   <div class="section-header reveal">
     <h2 class="section-title">RSVP</h2>
-    <div class="divider"><div class="divider-line" style="background:var(--crimson);"></div><span class="divider-icon">💌</span><div class="divider-line" style="background:var(--crimson);"></div></div>
+    <div class="divider"><div class="divider-line" style="background:var(--crimson);"></div><span class="divider-icon">✦</span><div class="divider-line" style="background:var(--crimson);"></div></div>
     <p class="section-subtitle" style="color:rgba(74,8,8,0.5);">Kindly respond by April 10, 2026</p>
   </div>
   <div class="rsvp-card reveal">
@@ -1686,7 +1692,7 @@
       <div class="form-group">
         <label class="form-label">Will You Attend?</label>
         <div class="radio-group" id="attending-group">
-          <button type="button" class="radio-btn" data-val="yes" onclick="selectRadio('attending', 'yes')">Yes, I will attend 🙏</button>
+          <button type="button" class="radio-btn" data-val="yes" onclick="selectRadio('attending', 'yes')">Yes, I will attend</button>
           <button type="button" class="radio-btn" data-val="no" onclick="selectRadio('attending', 'no')">Regretfully unable</button>
         </div>
       </div>
@@ -1703,10 +1709,10 @@
         <label class="form-label">Message for the Couple</label>
         <textarea class="form-textarea" id="rsvp-message" placeholder="Share your wishes and blessings..."></textarea>
       </div>
-      <button type="submit" class="submit-btn">Send My RSVP &nbsp;🙏</button>
+      <button type="submit" class="submit-btn">Send My RSVP</button>
     </form>
     <div class="rsvp-success" id="rsvp-success">
-      🙏 Namaste! Your RSVP has been received.<br>
+      Namaste! Your RSVP has been received.<br>
       <span style="font-size:0.9rem;color:#888;">We look forward to celebrating with you!</span>
     </div>
   </div>
@@ -1857,12 +1863,12 @@
 
   /* ── Gallery Lightbox ── */
   const lbData = [
-    { emoji: '🌺', caption: 'Haldi Morning' },
-    { emoji: '🎊', caption: 'Mehendi Night' },
-    { emoji: '🕉️', caption: 'Sacred Vows' },
-    { emoji: '💍', caption: 'Mangalsutra' },
-    { emoji: '🌸', caption: 'Flower Shower' },
-    { emoji: '✨', caption: 'The Couple' },
+    { emoji: '✿', caption: 'Haldi Morning' },
+    { emoji: '✦', caption: 'Mehendi Night' },
+    { emoji: 'ॐ', caption: 'Sacred Vows' },
+    { emoji: '◆', caption: 'Mangalsutra' },
+    { emoji: '✿', caption: 'Flower Shower' },
+    { emoji: '✧', caption: 'The Couple' },
   ];
   function openLightbox(i) {
     const lb = document.getElementById('lightbox');

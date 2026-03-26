@@ -108,7 +108,9 @@
 
     /* ── Purchase / Preview Banner ── */
     .preview-banner {
-      background: linear-gradient(135deg, #faf7f2, #f5f0e8);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(201,148,42,0.25);
       color: #2b2b2b;
       text-align: center;
@@ -138,7 +140,10 @@
       cursor: pointer;
       border: none;
       font-family: 'Poppins', sans-serif;
+      transition: opacity 0.3s, transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
     }
+    .preview-banner .buy-btn:hover { opacity: 0.9; transform: scale(1.02) translateY(-1px); }
+    .preview-banner .buy-btn:active { transform: scale(0.97); }
     .preview-banner .customize-btn {
       display: inline-block;
       border: 1px solid rgba(201,148,42,0.6);
@@ -247,9 +252,14 @@
       background: linear-gradient(160deg, rgba(80,50,0,0.65), rgba(120,80,20,0.55)),
                   url('../../assets/generated/golden-anniversary-hero.jpeg') center/cover no-repeat !important;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       overflow: hidden;
+      padding: 10rem 3rem 5rem;
+    }
+    @media (min-width: 900px) {
+      #hero { padding: 14rem 4rem 5rem; }
     }
     #hero-canvas {
       position: absolute;
@@ -280,7 +290,7 @@
       position: relative;
       z-index: 10;
       text-align: center;
-      padding: 3rem 2rem;
+      padding: 0 2rem;
     }
     .hero-years-numeral {
       font-family: 'Playfair Display', serif;
@@ -308,7 +318,7 @@
     }
     .hero-names {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
       font-weight: 300;
       color: rgba(255,245,210,0.95);
       letter-spacing: 0.06em;
@@ -372,6 +382,7 @@
       font-size: clamp(2.5rem, 6vw, 4rem);
       color: var(--gold);
       line-height: 1;
+      letter-spacing: -0.04em;
     }
     .section-title .subtitle {
       font-family: 'Poppins', sans-serif;
@@ -876,9 +887,9 @@
       transition: opacity 0.3s, transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
     }
     @media (hover: hover) and (pointer: fine) {
-      .btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+      .btn-gold:hover { opacity: 0.9; transform: scale(1.05); }
     }
-    .btn-gold:active { transform: scale(0.97); }
+    .btn-gold:active { transform: scale(0.95); }
 
     /* ── Event Details ── */
     #event {
@@ -1049,7 +1060,7 @@
     .r-d5 { transition-delay: 300ms; }
 
     /* ── Button :active ── */
-    .btn-gold:active, .dress-code-badge:active { transform: scale(0.97); }
+    .btn-gold:active, .dress-code-badge:active { transform: scale(0.95); }
 
     /* ── Alternating Section Backgrounds ── */
     #story { background: #faf7f2; }
@@ -1204,14 +1215,14 @@
 
 <!-- Purchase Banner -->
 <div class="preview-banner">
-  <span>✨ You are previewing <strong>Golden Anniversary</strong> — Customize it for your special occasion</span>
+  <span>You are previewing <strong>Golden Anniversary</strong> — Customize it for your special occasion</span>
   <button class="customize-btn" data-buy="anniversary-1" data-name="Golden Anniversary" data-customize="anniversary-1-customize.html">Customize</button>
   <button class="buy-btn" data-buy="anniversary-1" data-name="Golden Anniversary" data-customize="anniversary-1-customize.html">Buy ₹500</button>
 </div>
 
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
-  <div class="nav-logo">✨ Golden Anniversary ✨</div>
+  <div class="nav-logo">Golden Anniversary</div>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -1281,42 +1292,42 @@
   <div class="timeline-scroll-container" id="timeline-scroll">
     <div class="timeline-card reveal">
       <div class="timeline-year">1</div>
-      <div class="timeline-icon">💍</div>
+      <div class="timeline-icon">◆</div>
       <div class="timeline-title">The Wedding</div>
       <div class="timeline-text">It all began with a promise, a ring, and a lifetime of tomorrows...</div>
       <div class="timeline-deco"></div>
     </div>
     <div class="timeline-card reveal reveal-delay-1">
       <div class="timeline-year">5</div>
-      <div class="timeline-icon">🌱</div>
+      <div class="timeline-icon">✦</div>
       <div class="timeline-title">Growing Together</div>
       <div class="timeline-text">Building our home, our life, and the foundations of something beautiful.</div>
       <div class="timeline-deco"></div>
     </div>
     <div class="timeline-card reveal reveal-delay-2">
       <div class="timeline-year">10</div>
-      <div class="timeline-icon">🎉</div>
+      <div class="timeline-icon">✦</div>
       <div class="timeline-title">A Decade Strong</div>
       <div class="timeline-text">Ten beautiful years — and every single one more precious than the last.</div>
       <div class="timeline-deco"></div>
     </div>
     <div class="timeline-card reveal">
       <div class="timeline-year">15</div>
-      <div class="timeline-icon">🌳</div>
+      <div class="timeline-icon">✦</div>
       <div class="timeline-title">Deepening Roots</div>
       <div class="timeline-text">Watching the family grow, the love deepen, the laughter multiply.</div>
       <div class="timeline-deco"></div>
     </div>
     <div class="timeline-card reveal reveal-delay-1">
       <div class="timeline-year">20</div>
-      <div class="timeline-icon">⭐</div>
+      <div class="timeline-icon">✦</div>
       <div class="timeline-title">Two Decades</div>
       <div class="timeline-text">Twenty years of adventures, challenges overcome, and joy rediscovered.</div>
       <div class="timeline-deco"></div>
     </div>
     <div class="timeline-card reveal reveal-delay-2">
       <div class="timeline-year" data-field="years">25</div>
-      <div class="timeline-icon">🌟</div>
+      <div class="timeline-icon">✦</div>
       <div class="timeline-title">Today</div>
       <div class="timeline-text">Celebrating <span data-field="years">25</span> golden years — and so many more to come!</div>
       <div class="timeline-deco"></div>
@@ -1391,7 +1402,7 @@
         <div class="decade-year-label">1990–2000</div>
         <div class="decade-title">The Beginning</div>
         <div class="decade-text">Two hearts found each other and chose forever. The wedding, the vows, and the first home — the decade that started it all with joy and wonder.</div>
-        <div class="decade-deco">💍 ❤️</div>
+        <div class="decade-deco">◆ ♥</div>
       </div>
     </div>
     <div class="decade-card d-gold reveal">
@@ -1400,7 +1411,7 @@
         <div class="decade-year-label">2000–2010</div>
         <div class="decade-title">New Millennium, New Family</div>
         <div class="decade-text">A new century brought new beginnings — the family grew, roots deepened, and every milestone became a shared treasure of love and belonging.</div>
-        <div class="decade-deco">🌱 👶</div>
+        <div class="decade-deco">✦ ◆</div>
       </div>
     </div>
     <div class="decade-card d-champagne reveal">
@@ -1409,7 +1420,7 @@
         <div class="decade-year-label">2010–2020</div>
         <div class="decade-title">Our Golden Years</div>
         <div class="decade-text">Adventures around the world, children coming into their own, and a love that had grown richer and more radiant with every passing season.</div>
-        <div class="decade-deco">✈️ 🌍</div>
+        <div class="decade-deco">✦ ◆</div>
       </div>
     </div>
     <div class="decade-card d-dark reveal">
@@ -1418,7 +1429,7 @@
         <div class="decade-year-label">2020–Present</div>
         <div class="decade-title">Stronger Than Ever</div>
         <div class="decade-text">Through every storm and every sunrise, you stood side by side. Each challenge only proved what the world already knew — this love is unbreakable.</div>
-        <div class="decade-deco">⭐ 🛡️</div>
+        <div class="decade-deco">✦ ◆</div>
       </div>
     </div>
     <div class="decade-card d-special reveal">
@@ -1427,7 +1438,7 @@
         <div class="decade-year-label">The Golden Milestone</div>
         <div class="decade-title">The Celebration</div>
         <div class="decade-text">Today we gather to honour <span data-field="years">25</span> extraordinary years. Not the end of any chapter — simply the most radiant page yet in your forever story.</div>
-        <div class="decade-deco">🌟 ✨</div>
+        <div class="decade-deco">✦ ◆</div>
       </div>
     </div>
   </div>
@@ -1437,7 +1448,7 @@
 <section id="vows">
   <div class="floating-hearts-container" id="hearts-container"></div>
   <div class="vows-border-frame reveal">
-    <div class="vows-title">💍 Renewal of Vows</div>
+    <div class="vows-title">Renewal of Vows</div>
     <div class="gold-divider"><span class="diamond">✦</span></div>
     <p class="vows-text">
       "I take you again, as I did <span data-field="years">25</span> years ago, with the same love and greater wisdom. In your eyes I have found my home; in your heart, my belonging; in your arms, my peace. You are my home, my adventure, my forever."
@@ -1457,37 +1468,37 @@
   </div>
   <div class="milestones-grid">
     <div class="milestone-card reveal">
-      <div class="milestone-icon">💍</div>
+      <div class="milestone-icon">◆</div>
       <div class="milestone-badge">1</div>
       <div class="milestone-name">Married</div>
       <div class="milestone-year-label">Year One</div>
     </div>
     <div class="milestone-card reveal reveal-delay-1">
-      <div class="milestone-icon">🏠</div>
+      <div class="milestone-icon">◆</div>
       <div class="milestone-badge">3</div>
       <div class="milestone-name">First Home</div>
       <div class="milestone-year-label">Year Three</div>
     </div>
     <div class="milestone-card reveal reveal-delay-2">
-      <div class="milestone-icon">👶</div>
+      <div class="milestone-icon">◆</div>
       <div class="milestone-badge">5</div>
       <div class="milestone-name">Family Grew</div>
       <div class="milestone-year-label">Year Five</div>
     </div>
     <div class="milestone-card reveal">
-      <div class="milestone-icon">🌍</div>
+      <div class="milestone-icon">◆</div>
       <div class="milestone-badge">10</div>
       <div class="milestone-name">Adventures</div>
       <div class="milestone-year-label">Year Ten</div>
     </div>
     <div class="milestone-card reveal reveal-delay-1">
-      <div class="milestone-icon">🎓</div>
+      <div class="milestone-icon">◆</div>
       <div class="milestone-badge">20</div>
       <div class="milestone-name">Children Grown</div>
       <div class="milestone-year-label">Year Twenty</div>
     </div>
     <div class="milestone-card reveal reveal-delay-2">
-      <div class="milestone-icon">✨</div>
+      <div class="milestone-icon">✦</div>
       <div class="milestone-badge" data-field="years">25</div>
       <div class="milestone-name">Golden Day</div>
       <div class="milestone-year-label">Today</div>
@@ -1549,28 +1560,28 @@
   <div class="event-card reveal">
     <div class="event-card-title" data-field="anniversary">Silver Anniversary Celebration</div>
     <div class="event-detail-row">
-      <div class="event-icon">📅</div>
+      <div class="event-icon">✦</div>
       <div>
         <div class="event-detail-label">Date</div>
         <div class="event-detail-value" data-field="date">December 20, 2026</div>
       </div>
     </div>
     <div class="event-detail-row">
-      <div class="event-icon">🕖</div>
+      <div class="event-icon">✦</div>
       <div>
         <div class="event-detail-label">Time</div>
         <div class="event-detail-value" data-field="time">7:00 PM</div>
       </div>
     </div>
     <div class="event-detail-row">
-      <div class="event-icon">📍</div>
+      <div class="event-icon">✦</div>
       <div>
         <div class="event-detail-label">Venue</div>
         <div class="event-detail-value" data-field="venue">The Leela Palace, Bengaluru</div>
       </div>
     </div>
     <div class="event-detail-row">
-      <div class="event-icon">✉️</div>
+      <div class="event-icon">✦</div>
       <div>
         <div class="event-detail-label">Hosted by</div>
         <div class="event-detail-value" data-field="host">The Kumar Family</div>
@@ -1627,7 +1638,7 @@
       <button class="btn-gold" onclick="submitRSVP()">✦ Confirm RSVP</button>
     </div>
     <div class="rsvp-success" id="rsvp-success">
-      <p>💕 Thank you for celebrating with us!</p>
+      <p>Thank you for celebrating with us!</p>
       <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#555;margin-top:1rem;">We look forward to seeing you on the day!</p>
     </div>
   </div>
@@ -1815,7 +1826,7 @@
   /* ─── Floating Hearts ─── */
   (function() {
     const container = document.getElementById('hearts-container');
-    const emojis = ['❤️', '💛', '✨', '💝', '💖'];
+    const emojis = ['♥', '✦', '◆', '✿', '◆'];
     for (let i = 0; i < 15; i++) {
       const el = document.createElement('div');
       el.className = 'floating-heart';
@@ -1833,7 +1844,7 @@
 
   /* ─── Gallery Lightbox ─── */
   const lightboxCaptions = ['Wedding Day','Our First Home','Family Grew','Adventures Together','Still in Love','Our Golden Day'];
-  const lightboxIcons = ['💍','🏠','👶','✈️','❤️','✨'];
+  const lightboxIcons = ['◆','◆','◆','◆','♥','✦'];
   function openLightbox(idx) {
     const lb = document.getElementById('lightbox');
     const inner = document.getElementById('lightbox-inner');

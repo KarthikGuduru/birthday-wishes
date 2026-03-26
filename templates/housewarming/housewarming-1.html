@@ -102,7 +102,9 @@
     /* ── Purchase Banner ── */
     .purchase-banner {
       position: fixed; top: 0; right: 0; left: 0; z-index: 1050;
-      background: var(--bg-white);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       padding: 10px 20px;
       display: flex; align-items: center; justify-content: flex-end; gap: 12px;
       border-bottom: 1px solid rgba(201,148,42,0.2);
@@ -378,6 +380,7 @@
       color: var(--gold);
       text-align: center;
       margin-bottom: 8px;
+      letter-spacing: -0.03em;
     }
     .section-subtitle {
       font-family: 'Cormorant Garamond', serif;
@@ -872,7 +875,7 @@
       z-index: 5;
     }
     .map-home-pin::before {
-      content: '🏠';
+      content: '◆';
       font-size: 2rem;
       position: absolute;
       left: 50%; top: 50%;
@@ -1110,7 +1113,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <!-- Leaf center lines -->
     <line x1="50" y1="10" x2="50" y2="18" stroke="#f0c848" stroke-width="1" />
   </svg>
-  <div class="loading-text">🕉 Shubham...</div>
+  <div class="loading-text">Shubham...</div>
 </div>
 
 <!-- Back Nav -->
@@ -1132,7 +1135,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Navbar -->
 <nav class="navbar">
-  <div class="navbar-logo">🏠 Griha Pravesham</div>
+  <div class="navbar-logo">Griha Pravesham</div>
   <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
     <span></span><span></span><span></span>
   </div>
@@ -1362,7 +1365,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
         </svg>
       </div>
 
-      <div class="invite-om">🕉</div>
+      <div class="invite-om">ॐ</div>
       <div class="invite-title">Griha Pravesham</div>
       <div class="invite-family" data-field="family">The Sharma Family</div>
       <div data-field="houseName" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--saffron);margin-bottom:8px;">Sri Lakshmi Nivas</div>
@@ -1412,7 +1415,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
-        <div class="timeline-time">🌅 7:00 AM</div>
+        <div class="timeline-time">7:00 AM</div>
         <div class="timeline-event">Mangala Snanam</div>
         <div class="timeline-desc">Auspicious morning bath for the family — cleansing body and spirit for the sacred day</div>
       </div>
@@ -1422,7 +1425,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="timeline-dot"></div>
       <div style="width:calc(50% - 40px)"></div>
       <div class="timeline-card">
-        <div class="timeline-time">🕉️ 8:00 AM</div>
+        <div class="timeline-time">8:00 AM</div>
         <div class="timeline-event">Ganapathi Pooja</div>
         <div class="timeline-desc">Seeking Lord Ganesha's blessings for new beginnings, removal of obstacles</div>
       </div>
@@ -1430,7 +1433,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
-        <div class="timeline-time">🌟 8:30 AM</div>
+        <div class="timeline-time">8:30 AM</div>
         <div class="timeline-event">Navagraha Pooja</div>
         <div class="timeline-desc">Appeasing the nine celestial bodies for harmony and prosperity</div>
       </div>
@@ -1440,7 +1443,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="timeline-dot" style="background:#f0c848; box-shadow: 0 0 20px #f0c848;"></div>
       <div style="width:calc(50% - 40px)"></div>
       <div class="timeline-card highlight">
-        <div class="timeline-time">🏠 <span data-field="time">9:30 AM</span></div>
+        <div class="timeline-time"><span data-field="time">9:30 AM</span></div>
         <div class="timeline-event" style="color:var(--gold); font-size:1.4rem;">Griha Pravesham</div>
         <div class="timeline-desc">The sacred first entry into the new home — the most auspicious moment of the day</div>
       </div>
@@ -1448,7 +1451,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="timeline-item reveal">
       <div class="timeline-dot"></div>
       <div class="timeline-card">
-        <div class="timeline-time">🍽️ 12:00 PM</div>
+        <div class="timeline-time">12:00 PM</div>
         <div class="timeline-event">Prasadam &amp; Grand Lunch</div>
         <div class="timeline-desc">Blessing and sharing food with all beloved guests — a celebration of love</div>
       </div>
@@ -1496,7 +1499,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Rangoli Section -->
 <section class="rangoli-section">
-  <div class="section-title reveal">Rangoli Welcome 🎨</div>
+  <div class="section-title reveal">Rangoli Welcome</div>
   <div class="section-subtitle reveal">Welcoming you with colors of joy</div>
   <div class="rangoli-container reveal">
     <svg class="rangoli-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
@@ -1585,7 +1588,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <label>Your Blessing</label>
       <textarea id="blessingText" placeholder="Write your heartfelt blessing..."></textarea>
     </div>
-    <button class="btn-submit" onclick="addBlessing()">🙏 Add My Blessing</button>
+    <button class="btn-submit" onclick="addBlessing()">Add My Blessing</button>
   </div>
 </section>
 
@@ -1598,28 +1601,28 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="css-map reveal">
       <div class="map-road-h"></div>
       <div class="map-road-v"></div>
-      <span class="map-landmark" style="left:18%;top:35%">🕌</span>
+      <span class="map-landmark" style="left:18%;top:35%">◆</span>
       <span class="map-label" style="left:18%;top:45%">Mosque</span>
-      <span class="map-landmark" style="left:75%;top:25%">🌳</span>
+      <span class="map-landmark" style="left:75%;top:25%">◆</span>
       <span class="map-label" style="left:75%;top:35%">Park</span>
-      <span class="map-landmark" style="left:30%;top:70%">🏪</span>
+      <span class="map-landmark" style="left:30%;top:70%">◆</span>
       <span class="map-label" style="left:30%;top:80%">Reliance Fresh</span>
-      <span class="map-landmark" style="left:80%;top:70%">🏦</span>
+      <span class="map-landmark" style="left:80%;top:70%">◆</span>
       <span class="map-label" style="left:80%;top:80%">HDFC Bank</span>
       <div class="map-home-pin" style="left:55%;top:50%"></div>
-      <span class="map-label" style="left:55%;top:68%;font-weight:700;font-size:0.7rem;background:#c86820;color:white;padding:3px 7px;">Our New Home 🏠</span>
+      <span class="map-label" style="left:55%;top:68%;font-weight:700;font-size:0.7rem;background:#c86820;color:white;padding:3px 7px;">Our New Home</span>
     </div>
 
     <ul class="directions-list reveal">
-      <li><span class="dir-icon">🚗</span><span><strong>From Hitec City:</strong> Take the outer ring road towards Gachibowli, exit at Manikonda. Continue straight for 2km, turn left after the Reliance Fresh.</span></li>
-      <li><span class="dir-icon">🚌</span><span><strong>By Bus:</strong> Board TSRTC bus Route 216 from Mehdipatnam, get off at Manikonda Main Road stop.</span></li>
-      <li><span class="dir-icon">🏦</span><span><strong>Landmark:</strong> Opposite HDFC Bank, beside the large banyan tree near the mosque.</span></li>
-      <li><span class="dir-icon">📍</span><span><strong>Full Address:</strong> Plot 42, Manikonda, Hyderabad 500089, Telangana</span></li>
+      <li><span class="dir-icon">◆</span><span><strong>From Hitec City:</strong> Take the outer ring road towards Gachibowli, exit at Manikonda. Continue straight for 2km, turn left after the Reliance Fresh.</span></li>
+      <li><span class="dir-icon">◆</span><span><strong>By Bus:</strong> Board TSRTC bus Route 216 from Mehdipatnam, get off at Manikonda Main Road stop.</span></li>
+      <li><span class="dir-icon">◆</span><span><strong>Landmark:</strong> Opposite HDFC Bank, beside the large banyan tree near the mosque.</span></li>
+      <li><span class="dir-icon">◆</span><span><strong>Full Address:</strong> Plot 42, Manikonda, Hyderabad 500089, Telangana</span></li>
     </ul>
 
     <div class="address-copy-box reveal">
       <div class="address-text" data-field="address">Plot 42, Manikonda, Hyderabad 500089</div>
-      <button class="copy-btn" id="copyBtn" onclick="copyAddress()">📋 Copy Address</button>
+      <button class="copy-btn" id="copyBtn" onclick="copyAddress()">Copy Address</button>
     </div>
 
     <div class="venue-map reveal" style="margin-top:1.5rem;border-radius:12px;overflow:hidden;border:1px solid rgba(201,148,42,0.2);">
@@ -1630,7 +1633,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Footer -->
 <footer>
-  <div class="footer-title">🏠 Welcome to Our Home 🏠</div>
+  <div class="footer-title">Welcome to Our Home</div>
   <div class="footer-family" data-field="family">The Sharma Family</div>
   <div class="footer-date" data-field="date">June 15, 2026</div>
   <a href="../../marketplace.html" class="footer-link">← Back to Marketplace</a>
@@ -1649,7 +1652,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   // ── Floating Leaves ──
   (function spawnFloatingLeaves() {
     const container = document.getElementById('floatingLeaves');
-    const items = ['🍃','🍃','🌸','🍃','🌸','🍃','🍃','🌸'];
+    const items = ['✿','✿','✦','✿','✦','✿','✿','✦'];
     for (let i = 0; i < 20; i++) {
       const el = document.createElement('span');
       el.className = 'float-item';
@@ -1735,9 +1738,9 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     const addr = document.querySelector('[data-field="address"]')?.textContent || '';
     navigator.clipboard.writeText(addr).then(() => {
       const btn = document.getElementById('copyBtn');
-      btn.textContent = '✅ Copied!';
+      btn.textContent = 'Copied!';
       btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = '📋 Copy Address'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(() => { btn.textContent = 'Copy Address'; btn.classList.remove('copied'); }, 2000);
     }).catch(() => {
       const ta = document.createElement('textarea');
       ta.value = addr; ta.style.position='fixed'; ta.style.opacity='0';

@@ -71,7 +71,7 @@
     /* ── Purchase Banner ── */
     .purchase-banner {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-      background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-top: 1px solid rgba(201,96,122,0.15);
       display: flex; align-items: center; justify-content: space-between;
       padding: 12px 24px; gap: 16px;
@@ -85,7 +85,7 @@
       padding: 8px 20px; border-radius: 24px;
       background: transparent; border: 1.5px solid var(--rose-gold); color: var(--rose-gold);
       cursor: pointer; text-decoration: none; display: inline-block;
-      transition: background 0.2s, transform 0.2s;
+      transition: background 220ms cubic-bezier(0.23, 1, 0.32, 1), transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
     }
     .btn-customize:hover { background: rgba(201,96,122,0.08); transform: translateY(-1px); }
     .btn-buy {
@@ -93,7 +93,7 @@
       padding: 8px 20px; border-radius: 24px; border: none;
       background: linear-gradient(135deg, var(--rose-gold), #a84060);
       color: white; cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
     }
     .btn-buy:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(201,96,122,0.35); }
     @media (hover: hover) and (pointer: fine) {
@@ -209,7 +209,7 @@
     section { padding: 90px 24px; }
     .section-title {
       font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3rem);
-      text-align: center; margin-bottom: 12px; color: var(--text-dark); font-weight: 600;
+      text-align: center; margin-bottom: 12px; color: var(--text-dark); font-weight: 600; letter-spacing: -0.04em;
     }
     .section-title .accent { color: var(--rose-gold); font-style: italic; }
     .section-subtitle {
@@ -744,8 +744,8 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="hero-divider"></div>
 
     <div class="hero-badges">
-      <span class="hero-badge">📅 <span data-field="date">November 8, 2026</span></span>
-      <span class="hero-badge">⏰ <span data-field="time">6:00 PM</span></span>
+      <span class="hero-badge"><span data-field="date">November 8, 2026</span></span>
+      <span class="hero-badge"><span data-field="time">6:00 PM</span></span>
     </div>
 
     <div class="countdown-grid">
@@ -764,25 +764,25 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
   <div class="story-chapters">
     <div class="chapter-card" data-delay="0">
-      <div class="chapter-icon">📖</div>
+      <div class="chapter-icon">◆</div>
       <div class="chapter-num">Chapter 1</div>
       <div class="chapter-title">The Meeting</div>
       <div class="chapter-desc">A chance encounter that changed everything — the universe conspired to bring these two souls together at just the right moment.</div>
     </div>
     <div class="chapter-card" data-delay="120">
-      <div class="chapter-icon">💬</div>
+      <div class="chapter-icon">◆</div>
       <div class="chapter-num">Chapter 2</div>
       <div class="chapter-title">Falling</div>
       <div class="chapter-desc">Messages, calls, and stolen moments. Late nights talking about everything and nothing — realizing this was something beautifully real.</div>
     </div>
     <div class="chapter-card" data-delay="240">
-      <div class="chapter-icon">🌍</div>
+      <div class="chapter-icon">◆</div>
       <div class="chapter-num">Chapter 3</div>
       <div class="chapter-title">Adventures</div>
       <div class="chapter-desc">Exploring the world together, making memories in every city, finding that every adventure was better with the other by their side.</div>
     </div>
     <div class="chapter-card" data-delay="360">
-      <div class="chapter-icon">💍</div>
+      <div class="chapter-icon">◆</div>
       <div class="chapter-num">Chapter 4</div>
       <div class="chapter-title">Forever</div>
       <div class="chapter-desc">And on <span data-field="date">November 8, 2026</span>, they make it official — the beginning of the greatest adventure of all.</div>
@@ -797,34 +797,34 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
   <div class="bento-grid">
     <div class="bento-card wide reveal">
-      <div class="bento-icon">🎬</div>
+      <div class="bento-icon">◆</div>
       <div class="bento-label">Favorite Movies</div>
       <div class="bento-value">Dilwale Dulhania Le Jayenge &nbsp;•&nbsp; Tamasha &nbsp;•&nbsp; Jab We Met</div>
     </div>
     <div class="bento-card reveal">
-      <div class="bento-icon">☕</div>
+      <div class="bento-icon">◆</div>
       <div class="bento-label">Coffee Orders</div>
-      <div class="bento-value">Him: Americano ☕<br/>Her: Hazelnut Latte 🌰</div>
+      <div class="bento-value">Him: Americano<br/>Her: Hazelnut Latte</div>
     </div>
     <div class="bento-card reveal">
-      <div class="bento-icon">🍽️</div>
+      <div class="bento-icon">◆</div>
       <div class="bento-label">Favorite Food</div>
       <div class="bento-value">Butter Chicken &amp; Dal Baati<br/>Biryani &amp; Chole Bhature</div>
     </div>
     <div class="bento-card reveal">
-      <div class="bento-icon">🌍</div>
+      <div class="bento-icon">◆</div>
       <div class="bento-label">Travel Wishlist</div>
-      <div class="bento-value">Manali • Goa • Santorini ✈️</div>
+      <div class="bento-value">Manali • Goa • Santorini</div>
     </div>
     <div class="bento-card reveal">
-      <div class="bento-icon">🎵</div>
+      <div class="bento-icon">♪</div>
       <div class="bento-label">Their Songs</div>
       <div class="bento-value">Tum Hi Ho &nbsp;•&nbsp; Kabira &nbsp;•&nbsp; Perfect</div>
     </div>
     <div class="bento-card reveal">
-      <div class="bento-icon">🐕</div>
+      <div class="bento-icon">◆</div>
       <div class="bento-label">Their Family</div>
-      <div class="bento-value">Adopted a golden retriever together ❤️ His name is Biscuit.</div>
+      <div class="bento-value">Adopted a golden retriever together. His name is Biscuit.</div>
     </div>
   </div>
 </section>
@@ -832,28 +832,28 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <!-- Event Details -->
 <section id="details">
   <h2 class="section-title reveal">Event <span class="accent">Details</span></h2>
-  <div class="rg-divider reveal"><span>📍</span></div>
+  <div class="rg-divider reveal"><span>◆</span></div>
 
   <div class="details-card reveal">
     <div class="details-event-name">Engagement Celebration Party</div>
     <div class="details-grid">
       <div class="details-item">
-        <div class="details-item-icon">📅</div>
+        <div class="details-item-icon">◆</div>
         <div class="details-item-label">Date</div>
         <div class="details-item-value" data-field="date">November 8, 2026</div>
       </div>
       <div class="details-item">
-        <div class="details-item-icon">⏰</div>
+        <div class="details-item-icon">◆</div>
         <div class="details-item-label">Time</div>
         <div class="details-item-value" data-field="time">6:00 PM</div>
       </div>
       <div class="details-item" style="grid-column:span 2;">
-        <div class="details-item-icon">📍</div>
+        <div class="details-item-icon">◆</div>
         <div class="details-item-label">Venue</div>
         <div class="details-item-value" data-field="venue">The Taj Hotel, Colaba, Mumbai</div>
       </div>
     </div>
-    <div class="dresscode-badge">👗 Dress Code: Smart Formal — Rose Gold &amp; Navy preferred</div>
+    <div class="dresscode-badge">Dress Code: Smart Formal — Rose Gold &amp; Navy preferred</div>
     <div class="venue-map" style="margin-top:1.5rem;border-radius:12px;overflow:hidden;border:1px solid rgba(201,148,42,0.2);">
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1" width="100%" height="250" style="border:0;display:block;filter:grayscale(0.3) contrast(1.05);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
@@ -862,20 +862,20 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Save the Date -->
 <section id="savedate">
-  <span class="savedate-cal">📅</span>
+  <span class="savedate-cal">◆</span>
   <h2 class="section-title reveal" style="color:white;">Save the Date!</h2>
   <div class="savedate-text reveal">Wedding to follow in 2027 — Stay tuned for all the details</div>
   <div class="savedate-form reveal">
     <input class="savedate-input" id="savedate-contact" type="text" placeholder="Your email or WhatsApp" />
-    <button class="btn-white" onclick="saveDateSubscribe()">Notify Me 🔔</button>
+    <button class="btn-white" onclick="saveDateSubscribe()">Notify Me</button>
   </div>
-  <div class="savedate-success" id="savedate-success">You're on the list! 🎉</div>
+  <div class="savedate-success" id="savedate-success">You're on the list</div>
 </section>
 
 <!-- Photo Booth Gallery -->
 <section id="photobooth">
-  <h2 class="section-title reveal">Photo Booth <span class="accent">Memories</span> 📸</h2>
-  <div class="rg-divider reveal"><span>🎞</span></div>
+  <h2 class="section-title reveal">Photo Booth <span class="accent">Memories</span></h2>
+  <div class="rg-divider reveal"><span>✦</span></div>
 
   <div class="photo-booth-grid">
     <div class="photo-strip reveal" style="transition-delay:0s">
@@ -907,17 +907,17 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- RSVP -->
 <section id="rsvp">
-  <h2 class="section-title reveal">Join Us <span class="accent">🥂</span></h2>
+  <h2 class="section-title reveal">Join Us</h2>
   <p class="section-subtitle reveal">We'd love to celebrate with you</p>
-  <div class="rg-divider reveal"><span>💌</span></div>
+  <div class="rg-divider reveal"><span>✦</span></div>
 
   <div class="rsvp-form-wrap">
     <div id="rsvp-form-container" class="rsvp-form reveal">
       <input class="rsvp-input" id="rsvp-name" type="text" placeholder="Your Full Name" />
       <input class="rsvp-input" id="rsvp-email" type="email" placeholder="Your Email Address" />
       <div class="rsvp-yn-row">
-        <button class="rsvp-yn-btn" id="btn-yes" onclick="setAttend('yes')">✅ Yes, Attending!</button>
-        <button class="rsvp-yn-btn" id="btn-no" onclick="setAttend('no')">🙏 Can't Make It</button>
+        <button class="rsvp-yn-btn" id="btn-yes" onclick="setAttend('yes')">Yes, Attending!</button>
+        <button class="rsvp-yn-btn" id="btn-no" onclick="setAttend('no')">Can't Make It</button>
       </div>
       <div class="guest-count-row">
         <span class="guest-count-label">Number of Guests</span>
@@ -926,12 +926,12 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
         <button class="guest-btn" onclick="changeGuests(1)">+</button>
       </div>
       <input class="rsvp-input" id="rsvp-diet" type="text" placeholder="Dietary requirements (if any)" />
-      <textarea class="rsvp-input" id="rsvp-excited" rows="3" placeholder="What are you most excited about? 🥂" style="resize:vertical;"></textarea>
-      <button class="btn-rose-solid" onclick="submitRSVP()">Send RSVP 💌</button>
+      <textarea class="rsvp-input" id="rsvp-excited" rows="3" placeholder="What are you most excited about?" style="resize:vertical;"></textarea>
+      <button class="btn-rose-solid" onclick="submitRSVP()">Send RSVP</button>
     </div>
 
     <div class="rsvp-success" id="rsvp-success">
-      <div class="rsvp-confetti-row">🥂 🎊 💕</div>
+      <div class="rsvp-confetti-row">✦ ◆ ♥</div>
       <div class="rsvp-success-msg">We can't wait to see you!</div>
       <p>Thank you, <strong id="rsvp-success-name"></strong>! Your RSVP has been received.</p>
       <p style="margin-top:8px;">See you on <span data-field="date">November 8, 2026</span>!</p>
@@ -955,7 +955,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   </svg>
 
   <h2 class="section-title reveal">The <span class="accent">Proposal</span></h2>
-  <div class="rg-divider reveal"><span>💍</span></div>
+  <div class="rg-divider reveal"><span>◆</span></div>
 
   <div class="proposal-quote-wrap reveal">
     <div class="proposal-quote">
@@ -1231,7 +1231,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   }
 
   function launchConfetti() {
-    const pieces = ['🥂','🎊','💕','✨','🎉','💫','🌟','🎈','❤️','🌸'];
+    const pieces = ['✦','◆','♥','✧','◆','✦','✦','◆','♥','✿'];
     for (let i = 0; i < 32; i++) {
       const el = document.createElement('div');
       el.className = 'confetti-piece';

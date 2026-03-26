@@ -62,7 +62,9 @@
       left: 0;
       right: 0;
       z-index: 150;
-      background: linear-gradient(90deg, #faf7f2, #f5f0e8, #faf7f2);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(201,148,42,0.25);
       padding: 0.6rem 5rem;
       display: flex;
@@ -85,13 +87,13 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       cursor: pointer;
-      border-radius: 2px;
+      border-radius: 8px;
       font-family: 'Poppins', sans-serif;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
       white-space: nowrap;
     }
     .purchase-banner .buy-btn:hover {
-      transform: translateY(-1px);
+      transform: translateY(-1px) scale(1.02);
       box-shadow: 0 4px 16px rgba(201,148,42,0.4);
     }
     .purchase-banner .buy-btn:active { transform: scale(0.97); }
@@ -1128,7 +1130,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
   <!-- Purchase Banner -->
   <div class="purchase-banner">
-    <span>✨ Live Preview — ₹500 to customize with your details</span>
+    <span>Live Preview — ₹500 to customize with your details</span>
     <button
       class="buy-btn"
       data-buy="birthday-1"
@@ -1362,7 +1364,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
         <div class="gallery-item r">
           <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80" alt="Birthday memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" onerror="this.style.background='linear-gradient(145deg,#c9942a,#7b1818)';this.src='';">
-          <div class="gallery-peacock-corner">🦚</div>
+          <div class="gallery-peacock-corner">✦</div>
           <div class="gallery-caption">The Beginning of Magic</div>
         </div>
 
@@ -1374,7 +1376,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
         <div class="gallery-item r">
           <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&q=80" alt="Birthday memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" onerror="this.style.background='linear-gradient(145deg,#c9942a,#7b1818)';this.src='';">
-          <div class="gallery-peacock-corner">🦚</div>
+          <div class="gallery-peacock-corner">✦</div>
           <div class="gallery-caption">Royal Celebrations</div>
         </div>
 
@@ -1386,7 +1388,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
         <div class="gallery-item r">
           <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&q=80" alt="Birthday memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" onerror="this.style.background='linear-gradient(145deg,#c9942a,#7b1818)';this.src='';">
-          <div class="gallery-peacock-corner">🦚</div>
+          <div class="gallery-peacock-corner">✦</div>
           <div class="gallery-caption">Memories to Treasure</div>
         </div>
 
@@ -1605,7 +1607,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   function createParticles() {
     const container = document.getElementById('particles-container');
     if (!container) return;
-    const symbols = ['🦚','✦','◆','✧','❋'];
+    const symbols = ['✦','◆','✧','❋','✿'];
     for (let i = 0; i < 15; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
@@ -1731,7 +1733,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       const diff = target - now;
       if (diff <= 0) {
         const display = document.getElementById('countdown-display');
-        if (display) display.innerHTML = '<div class="countdown-done">The celebration was epic! 🎉</div>';
+        if (display) display.innerHTML = '<div class="countdown-done">The celebration was epic!</div>';
         return;
       }
       const days = Math.floor(diff / 86400000);

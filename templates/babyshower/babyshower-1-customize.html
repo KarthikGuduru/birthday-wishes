@@ -23,6 +23,7 @@
       --text:          #2a1200;
     }
 
+    html { scroll-behavior: smooth; }
     body {
       background: #faf7f2;
       color: #1a1310;
@@ -37,6 +38,8 @@
       padding: 14px 24px;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       flex-wrap: wrap;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .purchase-banner .banner-text { color: var(--turmeric-pale); font-size: 0.9rem; }
     .purchase-banner .banner-text span { color: var(--turmeric); font-weight: 600; }
@@ -115,9 +118,9 @@
       border: 1px solid var(--turmeric); color: var(--turmeric-pale);
       font-family: 'Playfair Display', serif; font-size: 1rem;
       cursor: pointer; margin-top: 24px; letter-spacing: 1px;
-      transition: background .2s, transform .15s;
+      transition: background .25s cubic-bezier(.4,0,.2,1), transform .2s cubic-bezier(.4,0,.2,1), box-shadow .2s cubic-bezier(.4,0,.2,1);
     }
-    .btn-primary:hover { background: linear-gradient(135deg, #1a4a1a, #228b22); transform: translateY(-1px); }
+    .btn-primary:hover { background: linear-gradient(135deg, #1a4a1a, #228b22); transform: translateY(-2px) scale(1.01); box-shadow: 0 6px 20px rgba(13,46,13,.4); }
 
     .btn-gold {
       width: 100%; padding: 14px;
@@ -186,7 +189,7 @@
 
   <!-- Purchase banner -->
   <div class="purchase-banner">
-    <p class="banner-text">✨ Customizing: <span>Seemantham</span> — ₹500</p>
+    <p class="banner-text">Customizing: <span>Seemantham</span> — ₹500</p>
     <button class="btn-buy" id="topBuyBtn">Complete Purchase →</button>
   </div>
 
@@ -298,7 +301,7 @@
         <div class="orn-corner bl"></div>
         <div class="orn-corner br"></div>
 
-        <span class="pv-deity">🙏</span>
+        <span class="pv-deity">✦</span>
         <p class="pv-intro">Sri Mahalakshmi Kataksham</p>
         <p class="pv-ceremony" id="pv-ceremony">Seemantham &amp; Valaikaapu</p>
         <p class="pv-name" id="pv-motherName">Priya Reddy</p>
@@ -308,7 +311,7 @@
 
         <p class="pv-detail"><strong>Date:</strong> <span id="pv-date">August 10, 2026</span></p>
         <p class="pv-detail"><strong>Time:</strong> <span id="pv-time">10:00 AM</span></p>
-        <p class="pv-detail"><strong>📍</strong> <span id="pv-venue">Sri Lakshmi Kalyana Mandapam, Kompally, Hyderabad</span></p>
+        <p class="pv-detail"><strong>Venue:</strong> <span id="pv-venue">Sri Lakshmi Kalyana Mandapam, Kompally, Hyderabad</span></p>
         <p class="pv-message" id="pv-message">We invite you to bless the mother-to-be and the little one on this auspicious occasion</p>
         <p class="pv-host">Hosted by <span id="pv-host">The Reddy &amp; Sharma Families</span></p>
       </div>

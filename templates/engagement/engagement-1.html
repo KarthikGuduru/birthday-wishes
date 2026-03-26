@@ -79,7 +79,7 @@
     /* ── Purchase Banner ── */
     .purchase-banner {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 999;
-      background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-top: 1px solid rgba(201,148,42,0.25);
       display: flex; align-items: center; justify-content: space-between;
       padding: 12px 24px; gap: 16px;
@@ -91,7 +91,7 @@
     .btn-customize, .btn-buy {
       font-family: 'Poppins', sans-serif; font-size: 0.82rem; font-weight: 600;
       padding: 8px 20px; border-radius: 24px; border: none; cursor: pointer;
-      text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none; display: inline-block; transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
     }
     .btn-customize {
       background: transparent; border: 1.5px solid var(--gold);
@@ -155,8 +155,11 @@
     #hero {
       min-height: 100vh; position: relative; overflow: hidden;
       background: linear-gradient(160deg, #faf7f2 0%, #f5f0e8 50%, #f0e8dc 100%);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 80px 24px 120px;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+      padding: 10rem 3rem 5rem;
+    }
+    @media (min-width: 900px) {
+      #hero { padding: 14rem 4rem 5rem; }
     }
     .hero-mandala-bg {
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
@@ -183,12 +186,12 @@
       font-family: 'Great Vibes', cursive; font-size: clamp(3.5rem, 8vw, 6rem);
       background: linear-gradient(135deg, var(--rose-light) 0%, var(--gold-light) 50%, var(--rose) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 8px; line-height: 1.1;
+      margin-bottom: 8px; line-height: 0.93;
     }
     .hero-rings-svg { width: 160px; height: 80px; display: block; margin: 0 auto 24px; }
     .hero-names {
-      font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.5rem);
-      color: var(--text-dark); font-weight: 300; letter-spacing: 0.04em;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(3.2rem, 8vw, 7rem);
+      color: var(--text-dark); font-weight: 300; line-height: 0.93; letter-spacing: -0.03em;
       margin-bottom: 16px;
     }
     .hero-names .heart { color: var(--rose); margin: 0 14px; }
@@ -233,7 +236,7 @@
     section { padding: 90px 24px; }
     .section-title {
       font-family: 'Great Vibes', cursive; font-size: clamp(2.4rem, 5vw, 3.6rem);
-      text-align: center; margin-bottom: 8px;
+      text-align: center; margin-bottom: 8px; letter-spacing: -0.04em;
       background: linear-gradient(135deg, var(--rose), var(--gold));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
@@ -601,7 +604,7 @@
       font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 500;
       cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
     }
-    .btn-rose:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(201,80,122,0.4); }
+    .btn-rose:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(201,80,122,0.4); }
     .blessing-success { display: none; color: var(--maroon); font-family: 'Great Vibes', cursive; font-size: 1.6rem; margin-top: 12px; text-align: center; }
 
     /* ── RSVP ── */
@@ -640,9 +643,9 @@
       cursor: pointer; transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.2s;
     }
     @media (hover: hover) and (pointer: fine) {
-      .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,148,42,0.35); }
+      .btn-gold:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(201,148,42,0.35); }
     }
-    .btn-gold:active { transform: scale(0.97); }
+    .btn-gold:active { transform: scale(0.95); }
     .rsvp-success { display: none; text-align: center; padding: 32px; }
     .rsvp-success .success-msg {
       font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--gold); margin-bottom: 10px;
@@ -697,7 +700,7 @@
     }
 
     /* ── Button :active ── */
-    .btn-gold:active, .btn-rose:active { transform: scale(0.97); }
+    .btn-gold:active, .btn-rose:active { transform: scale(0.95); }
 
     /* ── Gold Shimmer on Couple Names ── */
     @keyframes goldShimmer {
@@ -857,7 +860,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Navbar -->
 <nav class="navbar">
-  <a href="#hero" class="navbar-logo">💍 Nischitartham</a>
+  <a href="#hero" class="navbar-logo">Nischitartham</a>
   <ul class="nav-links">
     <li><a href="#invitation">Invitation</a></li>
     <li><a href="#ceremony">Ceremony</a></li>
@@ -1035,13 +1038,13 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     </svg>
 
     <div class="invite-om">ॐ</div>
-    <div class="invite-ganesha">🪔 ✦ 🪔</div>
+    <div class="invite-ganesha">✦ ◆ ✦</div>
     <div style="text-align:center;margin:1rem 0;">
   <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80" alt="Engagement rings" loading="lazy" style="max-width:320px;height:200px;object-fit:cover;border:2px solid rgba(201,148,42,0.3);display:inline-block;" onerror="this.remove();">
 </div>
     <div class="invite-families">
       <div class="invite-family-name" data-field="groomFamily">Shri Krishnan Nair &amp; Smt. Sumathi Nair</div>
-      <div class="invite-divider">💍</div>
+      <div class="invite-divider">◆</div>
       <div class="invite-family-name" data-field="brideFamily">Shri Rajan Pillai &amp; Smt. Radha Pillai</div>
     </div>
     <div class="invite-couple">
@@ -1051,9 +1054,9 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       </div>
     </div>
     <div class="invite-details">
-      <strong>📅 <span data-field="date">October 12, 2026</span></strong> &nbsp;at&nbsp;
-      <strong>⏰ <span data-field="time">11:00 AM</span></strong><br/>
-      <strong>📍 <span data-field="venue">Sri Padmanabha Swamy Temple Hall, Thiruvananthapuram</span></strong><br/><br/>
+      <strong><span data-field="date">October 12, 2026</span></strong> &nbsp;at&nbsp;
+      <strong><span data-field="time">11:00 AM</span></strong><br/>
+      <strong><span data-field="venue">Sri Padmanabha Swamy Temple Hall, Thiruvananthapuram</span></strong><br/><br/>
       <em>Hosted by: <span data-field="host">The Nair &amp; Pillai Families</span></em>
     </div>
     <div class="venue-map" style="margin-top:1.5rem;border-radius:12px;overflow:hidden;border:1px solid rgba(201,148,42,0.2);">
@@ -1066,13 +1069,13 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <section id="ceremony">
   <h2 class="section-title reveal">Nischitartham Ceremony</h2>
   <p class="ceremony-title-te reveal">నిశ్చయతార్థం</p>
-  <div class="ornament-divider reveal"><span>💍</span></div>
+  <div class="ornament-divider reveal"><span>◆</span></div>
 
   <div class="timeline">
     <div class="timeline-event reveal">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-icon">🌅</div>
+        <div class="tl-icon">◎</div>
         <div class="tl-time">10:00 AM</div>
         <div class="tl-event-name">Ganapathi Pooja</div>
         <div class="tl-desc">Seeking Ganesha's blessings to begin this auspicious occasion</div>
@@ -1083,7 +1086,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="tl-dot"></div>
       <div class="tl-content"></div>
       <div class="tl-content">
-        <div class="tl-icon">🌸</div>
+        <div class="tl-icon">✿</div>
         <div class="tl-time">10:30 AM</div>
         <div class="tl-event-name">Flower Exchange (Malaadharana)</div>
         <div class="tl-desc">The sacred garland exchange — a symbol of acceptance and love</div>
@@ -1093,7 +1096,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="tl-dot"></div>
       <div class="tl-content">
         <div class="tl-event-card">
-          <div class="tl-icon">💍</div>
+          <div class="tl-icon">◆</div>
           <div class="tl-time" data-field="time">11:00 AM</div>
           <div class="tl-event-name">Ring Ceremony</div>
           <div class="tl-desc">The moment of the sacred promise — when two souls become one</div>
@@ -1105,7 +1108,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="tl-dot"></div>
       <div class="tl-content"></div>
       <div class="tl-content">
-        <div class="tl-icon">🙏</div>
+        <div class="tl-icon">✦</div>
         <div class="tl-time">11:30 AM</div>
         <div class="tl-event-name">Elder Blessings</div>
         <div class="tl-desc">Receiving the sacred blessings from all family elders</div>
@@ -1114,7 +1117,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="timeline-event reveal">
       <div class="tl-dot"></div>
       <div class="tl-content">
-        <div class="tl-icon">🍽️</div>
+        <div class="tl-icon">◆</div>
         <div class="tl-time">12:00 PM</div>
         <div class="tl-event-name">Grand Feast (Sadhya)</div>
         <div class="tl-desc">Celebrating with traditional food, music, and togetherness</div>
@@ -1127,11 +1130,11 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <!-- Family Tree -->
 <section id="family">
   <h2 class="section-title reveal">Our Families</h2>
-  <div class="ornament-divider reveal"><span>🌸</span></div>
+  <div class="ornament-divider reveal"><span>✿</span></div>
 
   <div class="family-tree reveal">
     <div style="display:flex; justify-content:center; margin-bottom:0;">
-      <div class="ft-couple">💍 The Couple 💍</div>
+      <div class="ft-couple">The Couple</div>
     </div>
     <div class="ft-connector-row">
       <div class="ft-branch-left"></div>
@@ -1139,13 +1142,13 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     </div>
     <div class="ft-families">
       <div class="ft-family-card">
-        <div class="ft-family-icon">🕌</div>
+        <div class="ft-family-icon">◆</div>
         <div class="ft-family-label">Groom's Family</div>
         <div class="ft-family-name" data-field="groomFamily">Shri Krishnan Nair &amp; Smt. Sumathi Nair</div>
         <div class="ft-family-parents">Parents of <span data-field="groomName">Vikram Nair</span></div>
       </div>
       <div class="ft-family-card">
-        <div class="ft-family-icon">🌺</div>
+        <div class="ft-family-icon">✿</div>
         <div class="ft-family-label">Bride's Family</div>
         <div class="ft-family-name" data-field="brideFamily">Shri Rajan Pillai &amp; Smt. Radha Pillai</div>
         <div class="ft-family-parents">Parents of <span data-field="brideName">Divya Pillai</span></div>
@@ -1156,19 +1159,19 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Horoscope Compatibility -->
 <section id="horoscope">
-  <h2 class="section-title reveal">⭐ Stars Align</h2>
+  <h2 class="section-title reveal">Stars Align</h2>
   <p class="section-subtitle reveal">As per family tradition, the couple's stars have been consulted</p>
   <div class="ornament-divider reveal"><span>✦</span></div>
 
   <div class="horoscope-grid reveal">
     <div class="horoscope-card">
-      <div class="hc-planet">☀️</div>
+      <div class="hc-planet">◎</div>
       <div class="hc-nakshatra">Karthika Nakshatra</div>
       <div class="hc-ruler">Ruled by Sun — <span data-field="groomName">Vikram</span></div>
       <div class="hc-trait">Strength and prosperity • Leadership • Warmth</div>
     </div>
     <div class="horoscope-card">
-      <div class="hc-planet">🌙</div>
+      <div class="hc-planet">◑</div>
       <div class="hc-nakshatra">Rohini Nakshatra</div>
       <div class="hc-ruler">Ruled by Moon — <span data-field="brideName">Divya</span></div>
       <div class="hc-trait">Nurturing and artistic • Beauty • Devotion</div>
@@ -1180,8 +1183,8 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="compat-bar-bg">
       <div class="compat-bar-fill"></div>
     </div>
-    <div class="compat-pct">98% Compatible 💕</div>
-    <div class="compat-note">✨ Auspicious match blessed by the family astrologer</div>
+    <div class="compat-pct">98% Compatible</div>
+    <div class="compat-note">Auspicious match blessed by the family astrologer</div>
   </div>
 </section>
 
@@ -1189,11 +1192,11 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <section id="story">
   <canvas id="starfield"></canvas>
   <h2 class="section-title reveal" style="position:relative;z-index:2;">How It All Began</h2>
-  <div class="ornament-divider reveal" style="position:relative;z-index:2;"><span>💫</span></div>
+  <div class="ornament-divider reveal" style="position:relative;z-index:2;"><span>✦</span></div>
 
   <div class="story-grid">
     <div class="story-card reveal">
-      <div class="story-icon">👀</div>
+      <div class="story-icon">◆</div>
       <div class="story-text">
         <div class="story-chapter">Chapter 1</div>
         <div class="story-title">The First Meeting</div>
@@ -1201,7 +1204,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       </div>
     </div>
     <div class="story-card reveal">
-      <div class="story-icon">💬</div>
+      <div class="story-icon">◆</div>
       <div class="story-text">
         <div class="story-chapter">Chapter 2</div>
         <div class="story-title">Getting to Know Each Other</div>
@@ -1209,7 +1212,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       </div>
     </div>
     <div class="story-card reveal">
-      <div class="story-icon">🏠</div>
+      <div class="story-icon">◆</div>
       <div class="story-text">
         <div class="story-chapter">Chapter 3</div>
         <div class="story-title">Families Meet</div>
@@ -1217,7 +1220,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       </div>
     </div>
     <div class="story-card reveal">
-      <div class="story-icon">💍</div>
+      <div class="story-icon">◆</div>
       <div class="story-text">
         <div class="story-chapter">Chapter 4</div>
         <div class="story-title">The Promise</div>
@@ -1230,7 +1233,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <!-- Photo Gallery -->
 <section id="gallery">
   <h2 class="section-title reveal">Cherished Moments</h2>
-  <div class="ornament-divider reveal"><span>📸</span></div>
+  <div class="ornament-divider reveal"><span>✦</span></div>
 
   <div class="gallery-grid">
     <div class="gallery-item reveal" data-caption="A Beautiful Beginning" data-gradient="linear-gradient(160deg,#c9507a,#5a0828)">
@@ -1271,7 +1274,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Blessings Scroll -->
 <section id="blessings">
-  <h2 class="section-title reveal">🙏 Blessings &amp; Wishes</h2>
+  <h2 class="section-title reveal">Blessings &amp; Wishes</h2>
   <div class="ornament-divider reveal"><span>✦</span></div>
 
   <div class="scroll-container reveal">
@@ -1299,8 +1302,8 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
         <h3>Add Your Blessing</h3>
         <div class="form-row"><input type="text" id="blessing-name" placeholder="Your name" /></div>
         <div class="form-row"><textarea id="blessing-text" placeholder="Write your blessing or wish..."></textarea></div>
-        <button class="btn-rose" onclick="addBlessing()">Send Blessing 🙏</button>
-        <div class="blessing-success" id="blessing-success">Your blessing has been added! 🙏</div>
+        <button class="btn-rose" onclick="addBlessing()">Send Blessing</button>
+        <div class="blessing-success" id="blessing-success">Your blessing has been added</div>
       </div>
     </div>
     <div class="scroll-roll-bottom"></div>
@@ -1311,14 +1314,14 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 <section id="rsvp">
   <h2 class="section-title reveal">RSVP</h2>
   <p class="section-subtitle reveal" data-field="host">The Nair &amp; Pillai Families</p>
-  <div class="ornament-divider reveal"><span>💌</span></div>
+  <div class="ornament-divider reveal"><span>✦</span></div>
 
   <div class="rsvp-form-wrap">
     <div class="rsvp-form reveal" id="rsvp-form-container">
       <input type="text" id="rsvp-name" placeholder="Your Full Name" />
       <div class="rsvp-attend-row">
-        <button class="rsvp-attend-btn" id="btn-yes" onclick="setAttend('yes')">✅ Yes, I'll be there!</button>
-        <button class="rsvp-attend-btn" id="btn-no" onclick="setAttend('no')">❌ Regretfully No</button>
+        <button class="rsvp-attend-btn" id="btn-yes" onclick="setAttend('yes')">Yes, I'll be there!</button>
+        <button class="rsvp-attend-btn" id="btn-no" onclick="setAttend('no')">Regretfully No</button>
       </div>
       <select id="rsvp-relation">
         <option value="">Relationship to Couple</option>
@@ -1334,12 +1337,12 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
         <option>Surprise!</option>
       </select>
       <textarea id="rsvp-message" placeholder="A special message for the couple..."></textarea>
-      <button class="btn-gold" onclick="submitRSVP()">Send RSVP 💌</button>
+      <button class="btn-gold" onclick="submitRSVP()">Send RSVP</button>
     </div>
     <div class="rsvp-success" id="rsvp-success">
-      <div class="success-msg">💕 We're overjoyed!</div>
+      <div class="success-msg">We're overjoyed!</div>
       <p>See you on the big day, <strong id="rsvp-success-name"></strong>!</p>
-      <p style="margin-top:8px;font-style:italic;opacity:0.8;">Your RSVP has been received with much joy 🙏</p>
+      <p style="margin-top:8px;font-style:italic;opacity:0.8;">Your RSVP has been received with much joy</p>
     </div>
   </div>
 </section>
@@ -1425,7 +1428,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   // ── Rose Petal Rain ──
   (function() {
     const container = document.getElementById('petal-container');
-    const petals = ['🌹', '🌸', '🌺', '🏵️'];
+    const petals = ['✿', '✦', '✿', '◆'];
     const count = 40;
     for (let i = 0; i < count; i++) {
       const p = document.createElement('div');

@@ -25,6 +25,7 @@
       --bg-panel:     #120618;
     }
 
+    html { scroll-behavior: smooth; }
     body {
       background: #faf7f2;
       color: #1a1310;
@@ -39,6 +40,8 @@
       padding: 14px 24px;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       flex-wrap: wrap;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .purchase-banner .banner-text { color: var(--lav-light); font-size: 0.9rem; }
     .purchase-banner .banner-text span { color: var(--pink-light); font-weight: 600; }
@@ -117,9 +120,9 @@
       border: 1px solid var(--lavender); color: var(--lav-light);
       font-family: 'Playfair Display', serif; font-size: 1rem;
       cursor: pointer; margin-top: 24px; letter-spacing: 1px;
-      transition: background .2s, transform .15s;
+      transition: background .25s cubic-bezier(.4,0,.2,1), transform .2s cubic-bezier(.4,0,.2,1), box-shadow .2s cubic-bezier(.4,0,.2,1);
     }
-    .btn-primary:hover { background: linear-gradient(135deg, #3a1050, #4a1868); transform: translateY(-1px); }
+    .btn-primary:hover { background: linear-gradient(135deg, #3a1050, #4a1868); transform: translateY(-2px) scale(1.01); box-shadow: 0 6px 20px rgba(26,8,32,.4); }
 
     .btn-pink {
       width: 100%; padding: 14px;
@@ -189,7 +192,7 @@
 
   <!-- Purchase banner -->
   <div class="purchase-banner">
-    <p class="banner-text">✨ Customizing: <span>Modern Baby Shower</span> — ₹500</p>
+    <p class="banner-text">Customizing: <span>Modern Baby Shower</span> — ₹500</p>
     <button class="btn-buy" id="topBuyBtn">Complete Purchase →</button>
   </div>
 
@@ -296,7 +299,7 @@
     <div class="preview-panel">
       <p class="preview-label">Live Preview</p>
       <div class="soft-card">
-        <span class="pv-baby">👶</span>
+        <span class="pv-baby">◆</span>
         <p class="pv-intro">A Celebration of New Life</p>
         <p class="pv-title">Baby Shower</p>
         <p class="pv-name" id="pv-motherName">Ananya Mehta</p>
@@ -306,12 +309,12 @@
         <p class="pv-theme" id="pv-theme">Twinkle Little Star</p>
 
         <div class="pv-pills">
-          <span class="pv-pill pv-pill-pink">📅 <span id="pv-date">September 5, 2026</span></span>
-          <span class="pv-pill pv-pill-lav">🕑 <span id="pv-time">2:00 PM</span></span>
+          <span class="pv-pill pv-pill-pink">Date: <span id="pv-date">September 5, 2026</span></span>
+          <span class="pv-pill pv-pill-lav">Time: <span id="pv-time">2:00 PM</span></span>
         </div>
         <p class="pv-venue" id="pv-venue">The Bloom Garden, Indiranagar, Bangalore</p>
         <p class="pv-message" id="pv-message">Join us to celebrate the upcoming arrival of our little one!</p>
-        <span class="pv-gender" id="pv-babyGender">It's a Girl! 🩷</span>
+        <span class="pv-gender" id="pv-babyGender">It's a Girl!</span>
       </div>
     </div>
 
@@ -335,9 +338,9 @@
       return `${hr}:${String(m).padStart(2,'0')} ${ampm}`;
     }
     function formatGender(val) {
-      if (!val) return 'Surprise! 🎉';
-      if (val === 'Girl') return "It's a Girl! 🩷";
-      if (val === 'Boy')  return "It's a Boy! 💙";
+      if (!val) return 'Surprise!';
+      if (val === 'Girl') return "It's a Girl!";
+      if (val === 'Boy')  return "It's a Boy!";
       return val;
     }
 

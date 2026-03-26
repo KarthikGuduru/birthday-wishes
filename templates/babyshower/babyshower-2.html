@@ -26,6 +26,8 @@
       --gold-star: #f5d060;
     }
 
+    html { scroll-behavior: smooth; }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -101,7 +103,9 @@
        ============================================= */
     .purchase-banner {
       position: fixed; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(135deg, var(--indigo) 0%, var(--deep-purple) 100%);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-top: 2px solid var(--lavender);
       padding: 12px 24px;
       display: flex; align-items: center; justify-content: space-between;
@@ -296,6 +300,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem; font-weight: 700;
       text-align: center; margin-bottom: 8px;
+      letter-spacing: -0.03em;
     }
     .section-subtitle {
       text-align: center; font-family: 'Cormorant Garamond', serif;
@@ -686,7 +691,8 @@
       border-radius: 9px; cursor: pointer; font-size: 0.9rem;
       font-weight: 700; width: 100%; transition: all 0.3s;
     }
-    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(144,112,192,0.38); }
+    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(144,112,192,0.38); }
+    .submit-btn:active { transform: scale(0.97); }
     .form-success {
       text-align: center; padding: 22px;
       font-family: 'Cormorant Garamond', serif;

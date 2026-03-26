@@ -22,6 +22,7 @@
       --text:       #2a1200;
     }
 
+    html { scroll-behavior: smooth; }
     body {
       background: #faf7f2;
       color: #1a1310;
@@ -36,6 +37,8 @@
       padding: 14px 24px;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       flex-wrap: wrap;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .purchase-banner .banner-text { color: var(--gold-pale); font-size: 0.9rem; }
     .purchase-banner .banner-text span { color: var(--gold-light); font-weight: 600; }
@@ -112,9 +115,9 @@
       border: 1px solid var(--gold); color: var(--gold-pale);
       font-family: 'Playfair Display', serif; font-size: 1rem;
       cursor: pointer; margin-top: 24px; letter-spacing: 1px;
-      transition: background .2s, transform .15s;
+      transition: background .25s cubic-bezier(.4,0,.2,1), transform .2s cubic-bezier(.4,0,.2,1), box-shadow .2s cubic-bezier(.4,0,.2,1);
     }
-    .btn-primary:hover { background: linear-gradient(135deg, var(--rose-mid), #a02050); transform: translateY(-1px); }
+    .btn-primary:hover { background: linear-gradient(135deg, var(--rose-mid), #a02050); transform: translateY(-2px) scale(1.01); box-shadow: 0 6px 20px rgba(74,8,32,.35); }
 
     .btn-gold {
       width: 100%; padding: 14px;
@@ -176,7 +179,7 @@
 
   <!-- Purchase banner -->
   <div class="purchase-banner">
-    <p class="banner-text">✨ Customizing: <span>Traditional Engagement</span> — ₹500</p>
+    <p class="banner-text">Customizing: <span>Traditional Engagement</span> — ₹500</p>
     <button class="btn-buy" id="topBuyBtn">Complete Purchase →</button>
   </div>
 
@@ -282,7 +285,7 @@
         <div class="orn-card-corner bl"></div>
         <div class="orn-card-corner br"></div>
 
-        <span class="preview-ring">💍</span>
+        <span class="preview-ring">◆</span>
 
         <p class="preview-family" id="pv-groomFamily">Shri Krishnan Nair &amp; Smt. Sumathi Nair</p>
         <p class="preview-and">— AND —</p>

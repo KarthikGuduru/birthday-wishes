@@ -23,6 +23,7 @@
       --warm-white:  #fafaf6;
     }
 
+    html { scroll-behavior: smooth; }
     body {
       background: #faf7f2;
       color: #1a1310;
@@ -37,6 +38,8 @@
       padding: 14px 24px;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       flex-wrap: wrap;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .purchase-banner .banner-text { color: var(--copper-pale); font-size: 0.9rem; }
     .purchase-banner .banner-text span { color: var(--copper-light); font-weight: 600; }
@@ -113,9 +116,9 @@
       border: 1px solid var(--copper); color: var(--copper-pale);
       font-family: 'Playfair Display', serif; font-size: 1rem;
       cursor: pointer; margin-top: 24px; letter-spacing: 1px;
-      transition: background .2s, transform .15s;
+      transition: background .25s cubic-bezier(.4,0,.2,1), transform .2s cubic-bezier(.4,0,.2,1), box-shadow .2s cubic-bezier(.4,0,.2,1);
     }
-    .btn-primary:hover { background: linear-gradient(135deg, var(--teal-mid), var(--teal)); transform: translateY(-1px); }
+    .btn-primary:hover { background: linear-gradient(135deg, var(--teal-mid), var(--teal)); transform: translateY(-2px) scale(1.01); box-shadow: 0 6px 20px rgba(10,26,28,.4); }
 
     .btn-copper {
       width: 100%; padding: 14px;
@@ -182,7 +185,7 @@
 
   <!-- Purchase banner -->
   <div class="purchase-banner">
-    <p class="banner-text">✨ Customizing: <span>Modern Housewarming</span> — ₹500</p>
+    <p class="banner-text">Customizing: <span>Modern Housewarming</span> — ₹500</p>
     <button class="btn-buy" id="topBuyBtn">Complete Purchase →</button>
   </div>
 
@@ -275,9 +278,9 @@
         <div class="preview-bar"></div>
         <p class="preview-ceremony" id="pv-ceremony">Housewarming &amp; Open House</p>
 
-        <p class="preview-detail"><strong>📅</strong> <span id="pv-date">July 20, 2026</span></p>
-        <p class="preview-detail"><strong>🕐</strong> <span id="pv-time">11:00 AM</span></p>
-        <p class="preview-detail"><strong>📍</strong> <span id="pv-address">3B, Prestige Towers, Whitefield, Bangalore 560066</span></p>
+        <p class="preview-detail"><strong>Date:</strong> <span id="pv-date">July 20, 2026</span></p>
+        <p class="preview-detail"><strong>Time:</strong> <span id="pv-time">11:00 AM</span></p>
+        <p class="preview-detail"><strong>Venue:</strong> <span id="pv-address">3B, Prestige Towers, Whitefield, Bangalore 560066</span></p>
 
         <p class="preview-message" id="pv-message">Our home is your home — come celebrate with us!</p>
         <p class="preview-host">— <span id="pv-host">Anil &amp; Divya Mehta</span></p>

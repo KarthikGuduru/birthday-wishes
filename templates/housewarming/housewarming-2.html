@@ -104,7 +104,9 @@
     /* ── Purchase Banner ── */
     .purchase-banner {
       position: fixed; top: 0; right: 0; left: 0; z-index: 1050;
-      background: var(--bg-white);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       padding: 10px 20px;
       display: flex; align-items: center; justify-content: flex-end; gap: 12px;
       border-bottom: 1px solid rgba(201,148,42,0.2);
@@ -291,6 +293,7 @@
       font-size: clamp(1.6rem, 4vw, 2.4rem);
       font-weight: 600; color: var(--text-dark);
       text-align: center; margin-bottom: 8px;
+      letter-spacing: -0.03em;
     }
     .section-title .teal { color: var(--gold); }
     .section-subtitle {
@@ -765,7 +768,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Navbar -->
 <nav class="navbar">
-  <div class="navbar-logo">🏠 <span>Modern</span> Housewarming</div>
+  <div class="navbar-logo"><span>Modern</span> Housewarming</div>
   <div class="hamburger" onclick="document.getElementById('navLinks2').classList.toggle('open')">
     <span></span><span></span><span></span>
   </div>
@@ -835,7 +838,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <h1 class="hero-title">Our <span class="accent">New</span> Home</h1>
     <div class="hero-family" data-field="family">The Mehta Family</div>
     <div class="hero-badge">
-      📅 <span data-field="date">July 20, 2026</span> &nbsp;·&nbsp; ⏰ <span data-field="time">11:00 AM</span>
+      <span data-field="date">July 20, 2026</span> &nbsp;·&nbsp; <span data-field="time">11:00 AM</span>
     </div>
     <div class="countdown" id="countdown">
       <div class="countdown-unit"><span class="num" id="cd-days">--</span><span class="lbl">Days</span></div>
@@ -933,35 +936,35 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="open-house-note">🕐 Open House Hours: 11:00 AM – 8:00 PM — Come anytime, stay as long as you like!</div>
     <div class="details-grid">
       <div class="detail-row">
-        <div class="detail-icon">📅</div>
+        <div class="detail-icon">◆</div>
         <div>
           <div class="detail-label">Date</div>
           <div class="detail-value" data-field="date">July 20, 2026</div>
         </div>
       </div>
       <div class="detail-row">
-        <div class="detail-icon">⏰</div>
+        <div class="detail-icon">◆</div>
         <div>
           <div class="detail-label">Time</div>
           <div class="detail-value" data-field="time">11:00 AM</div>
         </div>
       </div>
       <div class="detail-row">
-        <div class="detail-icon">🎉</div>
+        <div class="detail-icon">✦</div>
         <div>
           <div class="detail-label">Occasion</div>
           <div class="detail-value" data-field="ceremony">Housewarming &amp; Open House</div>
         </div>
       </div>
       <div class="detail-row">
-        <div class="detail-icon">👥</div>
+        <div class="detail-icon">◆</div>
         <div>
           <div class="detail-label">Hosted By</div>
           <div class="detail-value" data-field="host">Anil &amp; Divya Mehta</div>
         </div>
       </div>
       <div class="detail-row full">
-        <div class="detail-icon">💬</div>
+        <div class="detail-icon">◆</div>
         <div>
           <div class="detail-label">Message</div>
           <div class="detail-value" data-field="message">Our home is your home — come celebrate with us!</div>
@@ -970,7 +973,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     </div>
     <div class="address-copy-box">
       <div class="address-text-small" data-field="address">3B, Prestige Towers, Whitefield, Bangalore 560066</div>
-      <button class="copy-btn" id="copyBtn" onclick="copyAddress()">📋 Copy Address</button>
+      <button class="copy-btn" id="copyBtn" onclick="copyAddress()">Copy Address</button>
     </div>
 
     <div class="venue-map" style="margin-top:1.5rem;border-radius:12px;overflow:hidden;border:1px solid rgba(201,148,42,0.2);">
@@ -985,22 +988,22 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
   <div class="section-subtitle reveal">Everything you need, right at your doorstep</div>
   <div class="neighborhood-grid">
     <div class="neighbor-card reveal">
-      <div class="neighbor-icon">🏫</div>
+      <div class="neighbor-icon">◆</div>
       <div class="neighbor-title">Top Schools</div>
       <div class="neighbor-desc">Within 1km — Delhi Public School Whitefield, Cambridge International School, and more great options.</div>
     </div>
     <div class="neighbor-card reveal">
-      <div class="neighbor-icon">🏥</div>
+      <div class="neighbor-icon">◆</div>
       <div class="neighbor-title">Healthcare</div>
       <div class="neighbor-desc">Apollo Hospital — 2km away. Manipal Clinic — 800m. 24/7 pharmacy just around the corner.</div>
     </div>
     <div class="neighbor-card reveal">
-      <div class="neighbor-icon">🛒</div>
+      <div class="neighbor-icon">◆</div>
       <div class="neighbor-title">Shopping</div>
       <div class="neighbor-desc">Phoenix Marketcity — 3km. Reliance Fresh — 500m. Decathlon — 4km. Everything within easy reach.</div>
     </div>
     <div class="neighbor-card reveal">
-      <div class="neighbor-icon">🌳</div>
+      <div class="neighbor-icon">◆</div>
       <div class="neighbor-title">Parks &amp; Nature</div>
       <div class="neighbor-desc">Whitefield Nature Park — 5 min walk. ITPL Central Park — 1.5km. Perfect for morning runs and evening strolls.</div>
     </div>
@@ -1009,13 +1012,13 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Room Tour -->
 <section class="rooms-section" id="rooms">
-  <div class="section-title reveal">A Peek Inside 🏠</div>
+  <div class="section-title reveal">A Peek Inside</div>
   <div class="section-subtitle reveal">Hover to explore each space</div>
   <div class="rooms-grid-2x2">
     <div class="room-card-modern reveal">
       <div class="room-bg" style="background:none;padding:0;">
         <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80" alt="Living Room" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;" onerror="this.parentElement.style.background='linear-gradient(135deg,#c07830 0%,#e09848 100%)';this.remove();">
-        <div class="room-icon" style="position:relative;z-index:1;">🛋️</div>
+        <div class="room-icon" style="position:relative;z-index:1;">◆</div>
         <div class="room-name-modern" style="position:relative;z-index:1;">Living Room</div>
       </div>
       <div class="room-overlay">
@@ -1025,7 +1028,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="room-card-modern reveal">
       <div class="room-bg" style="background:none;padding:0;">
         <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Kitchen" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;" onerror="this.parentElement.style.background='linear-gradient(135deg,#b05828 0%,#d07838 100%)';this.remove();">
-        <div class="room-icon" style="position:relative;z-index:1;">🍳</div>
+        <div class="room-icon" style="position:relative;z-index:1;">◆</div>
         <div class="room-name-modern" style="position:relative;z-index:1;">Kitchen</div>
       </div>
       <div class="room-overlay">
@@ -1035,7 +1038,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="room-card-modern reveal">
       <div class="room-bg" style="background:none;padding:0;">
         <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=80" alt="Master Bedroom" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a6070 0%,#2a8090 100%)';this.remove();">
-        <div class="room-icon" style="position:relative;z-index:1;">🛏️</div>
+        <div class="room-icon" style="position:relative;z-index:1;">◆</div>
         <div class="room-name-modern" style="position:relative;z-index:1;">Master Bedroom</div>
       </div>
       <div class="room-overlay">
@@ -1045,7 +1048,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="room-card-modern reveal">
       <div class="room-bg" style="background:none;padding:0;">
         <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80" alt="Garden / Balcony" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;" onerror="this.parentElement.style.background='linear-gradient(135deg,#3a6040 0%,#5a8060 100%)';this.remove();">
-        <div class="room-icon" style="position:relative;z-index:1;">🌿</div>
+        <div class="room-icon" style="position:relative;z-index:1;">◆</div>
         <div class="room-name-modern" style="position:relative;z-index:1;">Garden / Balcony</div>
       </div>
       <div class="room-overlay">
@@ -1057,17 +1060,17 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Potluck Signup -->
 <section class="potluck-section" id="potluck">
-  <div class="section-title reveal">Potluck Dinner — Join the Fun! 🍽️</div>
+  <div class="section-title reveal">Potluck Dinner — Join the Fun</div>
   <div class="section-subtitle reveal">Sign up to bring a dish</div>
   <div class="potluck-inner">
     <div class="potluck-desc reveal">
       We're doing a potluck dinner! <strong>Sign up below</strong> to bring your signature dish.<br>
-      Let's make it a feast to remember together 🎉
+      Let's make it a feast to remember together
     </div>
     <ul class="potluck-list reveal" id="potluckList">
-      <li class="potluck-item">🍛 <span>Dal Makhani</span> <span class="taken-badge">Anil Uncle ✓</span></li>
-      <li class="potluck-item">🥗 <span>Caesar Salad</span> <span class="taken-badge">Priya ✓</span></li>
-      <li class="potluck-item">🍰 <span>Chocolate Cake</span> <span class="taken-badge">The Kids ✓</span></li>
+      <li class="potluck-item"><span>Dal Makhani</span> <span class="taken-badge">Anil Uncle ✓</span></li>
+      <li class="potluck-item"><span>Caesar Salad</span> <span class="taken-badge">Priya ✓</span></li>
+      <li class="potluck-item"><span>Chocolate Cake</span> <span class="taken-badge">The Kids ✓</span></li>
     </ul>
     <div class="potluck-form reveal">
       <div class="potluck-form-title">Sign Up to Bring a Dish</div>
@@ -1078,10 +1081,10 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
         </div>
         <div class="form-group">
           <label>What You'll Bring</label>
-          <input type="text" id="potluckDish" placeholder="e.g. Biryani 🍛" />
+          <input type="text" id="potluckDish" placeholder="e.g. Biryani" />
         </div>
       </div>
-      <button class="btn-submit-modern" onclick="addPotluck()">🍽️ Sign Me Up!</button>
+      <button class="btn-submit-modern" onclick="addPotluck()">Sign Me Up</button>
     </div>
   </div>
 </section>
@@ -1094,7 +1097,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="mt-item reveal">
       <div class="mt-dot"></div>
       <div class="mt-content">
-        <span class="mt-emoji">📋</span>
+        <span class="mt-emoji">◆</span>
         <div class="mt-title">Found the Perfect Home</div>
         <div class="mt-desc">After months of searching and visiting dozens of places, we walked into Prestige Towers and knew instantly — this was it. The light, the space, the neighborhood. Perfect.</div>
       </div>
@@ -1102,7 +1105,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="mt-item reveal">
       <div class="mt-dot"></div>
       <div class="mt-content">
-        <span class="mt-emoji">🔑</span>
+        <span class="mt-emoji">◆</span>
         <div class="mt-title">Got the Keys!</div>
         <div class="mt-desc">The moment we held those keys, we couldn't stop smiling. Moving day was chaos, boxes everywhere — but filled with so much excitement and hope for what lay ahead.</div>
       </div>
@@ -1110,7 +1113,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="mt-item reveal">
       <div class="mt-dot"></div>
       <div class="mt-content">
-        <span class="mt-emoji">🖌️</span>
+        <span class="mt-emoji">◆</span>
         <div class="mt-title">Made It Ours</div>
         <div class="mt-desc">Weeks of painting, decorating, and debating over furniture placement later — we've turned four walls into a home that truly feels like us. Every detail, chosen with love.</div>
       </div>
@@ -1118,7 +1121,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     <div class="mt-item reveal">
       <div class="mt-dot" style="background:var(--gold);box-shadow:0 0 14px rgba(201,148,42,0.3)"></div>
       <div class="mt-content" style="border-color:rgba(201,148,42,0.25)">
-        <span class="mt-emoji">🏠</span>
+        <span class="mt-emoji">◆</span>
         <div class="mt-title" style="color:var(--gold)">Welcoming You Today!</div>
         <div class="mt-desc">And now we're ready to share it with you — our family and friends. Come, walk through our door, and make this house feel even more like a home.</div>
       </div>
@@ -1128,29 +1131,29 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- Smart Home Features -->
 <section class="smart-section" id="smart">
-  <div class="section-title reveal">Smart Living ✨</div>
+  <div class="section-title reveal">Smart Living</div>
   <div class="section-subtitle reveal">Our home, powered by technology</div>
   <div class="smart-grid">
     <div class="smart-card reveal">
-      <span class="smart-icon">💡</span>
+      <span class="smart-icon">◆</span>
       <div class="smart-title">Smart Lighting</div>
       <div class="smart-desc">Voice-controlled ambience throughout the house. Set the mood for dinner, movie night, or a quiet evening — instantly, with just your voice.</div>
       <span class="smart-badge">Philips Hue</span>
     </div>
     <div class="smart-card reveal">
-      <span class="smart-icon">🌡️</span>
+      <span class="smart-icon">◆</span>
       <div class="smart-title">Climate Control</div>
       <div class="smart-desc">Automated comfort — our smart thermostat learns our daily schedule and maintains the perfect temperature without us lifting a finger.</div>
       <span class="smart-badge">Google Nest</span>
     </div>
     <div class="smart-card reveal">
-      <span class="smart-icon">🔒</span>
+      <span class="smart-icon">◆</span>
       <div class="smart-title">Smart Security</div>
       <div class="smart-desc">Always protected. Smart locks, video doorbell, and motion sensors keep our home safe. We can monitor and control from anywhere in the world.</div>
       <span class="smart-badge">Ring + Yale</span>
     </div>
     <div class="smart-card reveal">
-      <span class="smart-icon">📱</span>
+      <span class="smart-icon">◆</span>
       <div class="smart-title">Home Hub</div>
       <div class="smart-desc">Control everything from one app — lights, locks, cameras, music, and more. One tap on your phone and the whole home responds.</div>
       <span class="smart-badge">Google Home</span>
@@ -1160,7 +1163,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
 
 <!-- RSVP -->
 <section class="rsvp-section" id="rsvp">
-  <div class="section-title reveal">RSVP 🎉</div>
+  <div class="section-title reveal">RSVP</div>
   <div class="section-subtitle reveal">Let us know you're coming!</div>
   <div class="rsvp-form reveal" id="rsvpFormWrap">
     <div id="rsvpFormInner">
@@ -1173,8 +1176,8 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
       <div class="form-group-mb">
         <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:8px;">Attending?</div>
         <div class="rsvp-attending">
-          <button class="attending-btn" id="yesBtn" onclick="selectAttending('yes')">✅ Yes, I'll be there!</button>
-          <button class="attending-btn" id="noBtn" onclick="selectAttending('no')">❌ Can't make it</button>
+          <button class="attending-btn" id="yesBtn" onclick="selectAttending('yes')">Yes, I'll be there!</button>
+          <button class="attending-btn" id="noBtn" onclick="selectAttending('no')">Can't make it</button>
         </div>
       </div>
       <div class="form-group-mb">
@@ -1190,7 +1193,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
         </div>
       </div>
       <div class="form-group-mb">
-        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:8px;">How excited are you? ⭐</div>
+        <div style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:8px;">How excited are you?</div>
         <div class="star-rating" id="starRating">
           <span class="star" data-val="1" onclick="setRating(1)">★</span>
           <span class="star" data-val="2" onclick="setRating(2)">★</span>
@@ -1205,10 +1208,10 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
           <input type="text" id="rsvpMessage" placeholder="So excited to see the new place!" />
         </div>
       </div>
-      <button class="btn-submit-modern" onclick="submitRSVP()">🎉 Send RSVP</button>
+      <button class="btn-submit-modern" onclick="submitRSVP()">Send RSVP</button>
     </div>
     <div class="rsvp-success" id="rsvpSuccess">
-      <div class="rsvp-success-emoji">🎉</div>
+      <div class="rsvp-success-emoji">✦</div>
       <div class="rsvp-success-msg" id="rsvpSuccessMsg">See you on July 20, 2026!</div>
       <div class="rsvp-success-sub">We've noted your RSVP. Can't wait to see you!</div>
     </div>
@@ -1342,7 +1345,7 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     if (attending === 'no') {
       document.getElementById('rsvpSuccessMsg').textContent = "We'll miss you — maybe next time!";
     } else {
-      document.getElementById('rsvpSuccessMsg').textContent = `🎉 See you on ${dateStr}!`;
+      document.getElementById('rsvpSuccessMsg').textContent = `See you on ${dateStr}!`;
     }
   }
 
@@ -1351,9 +1354,9 @@ button:active, .btn:active, [class*="btn"]:active { transform: scale(0.97) !impo
     const addr = document.querySelector('[data-field="address"]')?.textContent || '';
     navigator.clipboard.writeText(addr).then(() => {
       const btn = document.getElementById('copyBtn');
-      btn.textContent = '✅ Copied!';
+      btn.textContent = 'Copied!';
       btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = '📋 Copy Address'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(() => { btn.textContent = 'Copy Address'; btn.classList.remove('copied'); }, 2000);
     }).catch(() => {
       const ta = document.createElement('textarea');
       ta.value = addr; ta.style.position = 'fixed'; ta.style.opacity = '0';

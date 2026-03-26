@@ -129,11 +129,13 @@
     /* ── PURCHASE BANNER ── */
     .purchase-banner {
       position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
-      background: var(--bg-white);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-top: 3px solid var(--saffron);
       padding: 0.75rem 1.5rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      box-shadow: 0 -3px 25px rgba(0,0,0,0.04);
+      box-shadow: 0 -1px 0 rgba(0,0,0,0.06), 0 -8px 32px rgba(0,0,0,0.04);
     }
     .purchase-banner p { font-size: 0.8rem; color: var(--text-body); letter-spacing: 0.05em; }
     .purchase-banner strong { color: var(--saffron); }
@@ -153,10 +155,10 @@
       background: linear-gradient(135deg, var(--saffron) 0%, var(--marigold) 100%);
       color: var(--bg-white); font-weight: 600;
     }
-    .btn-customize:active, .btn-buy:active { transform: scale(0.97); }
+    .btn-customize:active, .btn-buy:active { transform: scale(0.95); }
     @media (hover: hover) and (pointer: fine) {
-      .btn-customize:hover { background: var(--saffron); color: var(--bg-white); }
-      .btn-buy:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(200,104,32,0.5); }
+      .btn-customize:hover { background: var(--saffron); color: var(--bg-white); transform: scale(1.05); }
+      .btn-buy:hover { transform: scale(1.05) translateY(-1px); box-shadow: 0 4px 16px rgba(200,104,32,0.5); }
     }
 
     /* ── NAVBAR ── */
@@ -262,7 +264,7 @@
     /* Hero text */
     .hero-shubh {
       font-family: 'Great Vibes', cursive;
-      font-size: 5.5rem; line-height: 1;
+      font-size: clamp(2rem, 5vw, 4rem); line-height: 1;
       background: linear-gradient(90deg, #c86820, #f0b030, #e8a020, #f8e0a0, #c86820);
       background-size: 300% auto;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -277,9 +279,9 @@
 
     .hero-names {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
       text-align: center;
-      line-height: 1.2; letter-spacing: 0.02em;
+      line-height: 0.95; letter-spacing: -0.03em;
       position: relative; z-index: 2; margin-bottom: 1.5rem;
       background: linear-gradient(90deg, #f8e0a0 0%, #f8e0a0 30%, #f0c050 50%, #f8e0a0 70%, #f8e0a0 100%);
       background-size: 300% auto;
@@ -345,7 +347,7 @@
     .section-title {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2rem, 4vw, 3rem);
-      color: var(--text-dark); margin-bottom: 0.4rem;
+      color: var(--text-dark); margin-bottom: 0.4rem; letter-spacing: -0.04em;
     }
     .section-subtitle {
       font-size: 1rem; color: var(--text-muted);
@@ -616,7 +618,7 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 0.55rem; color: rgba(255,255,255,0.8); font-weight: 600;
       letter-spacing: 0.05em; text-align: center; line-height: 1.3;
-      cursor: default; transition: transform 0.2s, border-color 0.2s;
+      cursor: default; transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     }
     @media (hover: hover) and (pointer: fine) {
       .swatch:hover { transform: scale(1.1); border-color: rgba(240,176,48,0.8); }
@@ -846,8 +848,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .hero-shubh { font-size: 3.2rem; }
-      .hero-names { font-size: 2.2rem; }
+      .hero-shubh { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+      .hero-names { font-size: clamp(2.6rem, 8vw, 3.5rem); }
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .events-grid { grid-template-columns: 1fr; }
@@ -1039,7 +1041,7 @@
 
 <!-- NAVBAR -->
 <nav class="navbar">
-  <div class="nav-logo"><span class="nav-logo-icon">🏰</span> Aryan <span style="color:var(--saffron)">♥</span> Priya</div>
+  <div class="nav-logo">Aryan <span style="color:var(--saffron)">♥</span> Priya</div>
   <ul class="nav-links">
     <li><a href="#invitation">Invitation</a></li>
     <li><a href="#events">Events</a></li>
@@ -1063,7 +1065,8 @@
 
 <!-- HERO -->
 <section id="hero">
-    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=1400&q=80');opacity:0.10;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
+    <div class="hero-img-layer" style="background-image:url('https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=1400&q=80');opacity:0.55;background-attachment:fixed;background-size:cover;background-position:center;position:absolute;inset:0;z-index:0;"></div>
+    <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(160deg, rgba(13,5,0,0.7) 0%, rgba(13,5,0,0.3) 50%, rgba(13,5,0,0.5) 100%);pointer-events:none;"></div>
   <div id="floats-container"></div>
   <div id="notes-container"></div>
 
@@ -1180,7 +1183,7 @@
     <h2 class="section-title" style="color:var(--royal)">Wedding Invitation</h2>
     <div class="divider">
       <div class="divider-line" style="background:var(--saffron);"></div>
-      <span class="divider-icon">🏵️</span>
+      <span class="divider-icon">✦</span>
       <div class="divider-line" style="background:var(--saffron);"></div>
     </div>
     <p class="section-subtitle" style="color:rgba(26,42,139,0.5)">Shubh Mangal Savadhan</p>
@@ -1222,7 +1225,7 @@
       <path d="M25,55 Q30,40 45,35" fill="none" stroke="#c86820" stroke-width="1" opacity="0.5"/>
     </svg>
 
-    <span class="inv-om">🕉️</span>
+    <span class="inv-om">ॐ</span>
     <div class="inv-ganesha">श्री गणेशाय नमः</div>
     <div class="inv-family" style="color:#555;">
       <strong data-field="groomFamily">Shri Vikram Sharma &amp; Smt. Kavita Sharma</strong><br>
@@ -1254,12 +1257,12 @@
 <section id="events">
   <div class="section-header reveal">
     <h2 class="section-title">उत्सव कार्यक्रम</h2>
-    <div class="divider"><div class="divider-line"></div><span class="divider-icon">🎊</span><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><span class="divider-icon">✦</span><div class="divider-line"></div></div>
     <p class="section-subtitle">Celebration Programme</p>
   </div>
   <div class="events-grid">
     <div class="event-card ev-1 reveal">
-      <span class="ev-icon">💛</span>
+      <span class="ev-icon">✦</span>
       <div class="ev-name">Haldi Ceremony</div>
       <div class="ev-hindi">हल्दी समारोह</div>
       <div class="ev-time">Day 1 &nbsp;•&nbsp; 10:00 AM</div>
@@ -1273,28 +1276,28 @@
       <div class="ev-desc">Intricate patterns of love traced on the bride's hands and feet. Legend says the darker the mehendi, the more the groom loves the bride.</div>
     </div>
     <div class="event-card ev-3 reveal">
-      <span class="ev-icon">🎵</span>
+      <span class="ev-icon">♪</span>
       <div class="ev-name">Sangeet Evening</div>
       <div class="ev-hindi">संगीत संध्या</div>
       <div class="ev-time">Day 1 &nbsp;•&nbsp; 8:00 PM</div>
       <div class="ev-desc">An enchanting evening of music, dance, and laughter. Both families unite to celebrate the couple with performances and Bollywood magic.</div>
     </div>
     <div class="event-card ev-4 reveal">
-      <span class="ev-icon">🔥</span>
+      <span class="ev-icon">✦</span>
       <div class="ev-name">Baraat Procession</div>
       <div class="ev-hindi">बारात</div>
       <div class="ev-time">Day 2 &nbsp;•&nbsp; 9:00 AM</div>
       <div class="ev-desc">The groom arrives with great pomp and fanfare — riding on a magnificent decorated horse, accompanied by the dhol and shehnai.</div>
     </div>
     <div class="event-card ev-5 reveal">
-      <span class="ev-icon">🌸</span>
+      <span class="ev-icon">✿</span>
       <div class="ev-name">Pheras &amp; Sacred Vows</div>
       <div class="ev-hindi">फेरे &amp; मंगलाष्टक</div>
       <div class="ev-time">Day 2 &nbsp;•&nbsp; <span data-field="weddingTime">11:00 AM</span></div>
       <div class="ev-desc">Seven sacred circles around the holy fire — seven vows, seven promises of love, loyalty, and devotion that bind two souls for eternity.</div>
     </div>
     <div class="event-card ev-6 reveal">
-      <span class="ev-icon">🥂</span>
+      <span class="ev-icon">✦</span>
       <div class="ev-name">Grand Reception</div>
       <div class="ev-hindi">स्वागत समारोह</div>
       <div class="ev-time">Day 2 &nbsp;•&nbsp; <span data-field="receptionTime">7:00 PM</span></div>
@@ -1338,24 +1341,24 @@
       </div>
       <div class="proc-separator">·····</div>
       <div class="proc-elem" style="animation-delay:0.05s;">
-        <div class="proc-emoji">🕯️</div>
+        <div class="proc-emoji">✦</div>
         <div class="proc-label">Torch Bearers</div>
       </div>
       <div class="proc-elem" style="animation-delay:0.1s;">
-        <div class="proc-emoji">🪔</div>
+        <div class="proc-emoji">✦</div>
         <div class="proc-label">Diya Procession</div>
       </div>
       <div class="proc-separator">·····</div>
       <div class="proc-elem">
-        <div class="proc-emoji">🏮</div>
+        <div class="proc-emoji">✦</div>
         <div class="proc-label">Flower Palanquin</div>
       </div>
       <div class="proc-elem" style="animation-delay:0.2s;">
-        <div class="proc-emoji">🌺</div>
+        <div class="proc-emoji">✿</div>
         <div class="proc-label">Petals</div>
       </div>
       <div class="proc-elem" style="animation-delay:0.1s;">
-        <div class="proc-emoji">🎊</div>
+        <div class="proc-emoji">✦</div>
         <div class="proc-label">Confetti</div>
       </div>
     </div>
@@ -1368,7 +1371,7 @@
     <h2 class="section-title">Royal Venues</h2>
     <div class="divider">
       <div class="divider-line" style="background:var(--saffron);"></div>
-      <span class="divider-icon">🏰</span>
+      <span class="divider-icon">✦</span>
       <div class="divider-line" style="background:var(--saffron);"></div>
     </div>
     <p class="section-subtitle">Where memories will be made</p>
@@ -1405,10 +1408,10 @@
       <div class="venue-badge">Wedding Ceremony</div>
       <div class="venue-name" data-field="venue">Umaid Bhawan Palace</div>
       <div class="venue-address">Jodhpur, Rajasthan<br>342 006</div>
-      <div class="venue-time">🕙 <span data-field="weddingTime">11:00 AM</span> onwards</div>
+      <div class="venue-time"><span data-field="weddingTime">11:00 AM</span> onwards</div>
       <div class="venue-map">
-        <a href="https://maps.google.com" target="_blank" class="venue-pill-btn">📍 View on Maps</a>
-        <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')">📅 Add to Calendar</button>
+        <a href="https://maps.google.com" target="_blank" class="venue-pill-btn">View on Maps</a>
+        <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')">Add to Calendar</button>
       </div>
       <div class="venue-map-embed">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="250" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -1436,10 +1439,10 @@
       <div class="venue-badge">Reception</div>
       <div class="venue-name" data-field="receptionVenue">Royal Heritage Banquet</div>
       <div class="venue-address">Jaipur, Rajasthan<br>302 001</div>
-      <div class="venue-time">🕖 <span data-field="receptionTime">7:00 PM</span> onwards</div>
+      <div class="venue-time"><span data-field="receptionTime">7:00 PM</span> onwards</div>
       <div class="venue-map">
-        <a href="https://maps.google.com" target="_blank" class="venue-pill-btn">📍 View on Maps</a>
-        <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')">📅 Add to Calendar</button>
+        <a href="https://maps.google.com" target="_blank" class="venue-pill-btn">View on Maps</a>
+        <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')">Add to Calendar</button>
       </div>
       <div class="venue-map-embed">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="250" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -1452,7 +1455,7 @@
 <section id="dresscode">
   <div class="section-header reveal">
     <h2 class="section-title">Royal Attire</h2>
-    <div class="divider"><div class="divider-line"></div><span class="divider-icon">👑</span><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><span class="divider-icon">✦</span><div class="divider-line"></div></div>
     <p class="section-subtitle">Dress to celebrate in royal style</p>
   </div>
   <div class="dresscode-inner">
@@ -1491,8 +1494,8 @@
 <!-- SANGEET PLAYLIST -->
 <section id="sangeet">
   <div class="section-header reveal">
-    <h2 class="section-title">🎵 Sangeet Night Playlist</h2>
-    <div class="divider"><div class="divider-line"></div><span class="divider-icon">🎶</span><div class="divider-line"></div></div>
+    <h2 class="section-title">Sangeet Night Playlist</h2>
+    <div class="divider"><div class="divider-line"></div><span class="divider-icon">♪</span><div class="divider-line"></div></div>
     <p class="section-subtitle">Songs that will fill the night with love</p>
   </div>
   <div class="playlist-grid">
@@ -1539,7 +1542,7 @@
 <section id="gallery">
   <div class="section-header reveal">
     <h2 class="section-title">Precious Moments</h2>
-    <div class="divider"><div class="divider-line"></div><span class="divider-icon">🖼️</span><div class="divider-line"></div></div>
+    <div class="divider"><div class="divider-line"></div><span class="divider-icon">✦</span><div class="divider-line"></div></div>
     <p class="section-subtitle">In the style of Rajput miniature paintings</p>
   </div>
   <div class="gallery-grid">
@@ -1584,7 +1587,7 @@
     <h2 class="section-title">RSVP</h2>
     <div class="divider">
       <div class="divider-line" style="background:var(--saffron);"></div>
-      <span class="divider-icon">💌</span>
+      <span class="divider-icon">✦</span>
       <div class="divider-line" style="background:var(--saffron);"></div>
     </div>
     <p class="section-subtitle" style="color:rgba(26,42,139,0.5);">Kindly respond by April 25, 2026</p>
@@ -1598,7 +1601,7 @@
       <div class="form-group">
         <label class="form-label">Will You Attend?</label>
         <div class="radio-group" id="attending-group">
-          <button type="button" class="radio-btn" data-val="yes" onclick="selectRadio('attending','yes')">Yes, I'll be there! 🙏</button>
+          <button type="button" class="radio-btn" data-val="yes" onclick="selectRadio('attending','yes')">Yes, I'll be there</button>
           <button type="button" class="radio-btn" data-val="no" onclick="selectRadio('attending','no')">Regretfully unable</button>
         </div>
       </div>
@@ -1625,10 +1628,10 @@
         <label class="form-label">Your Wishes for the Couple</label>
         <textarea class="form-textarea" id="rsvp-message" placeholder="Share your blessings and wishes..."></textarea>
       </div>
-      <button type="submit" class="submit-btn">Send My RSVP &nbsp;🙏</button>
+      <button type="submit" class="submit-btn">Send My RSVP</button>
     </form>
     <div class="rsvp-success" id="rsvp-success">
-      🙏 Dhanyavad! We'll see you there!<br>
+      Dhanyavad! We'll see you there!<br>
       <span style="font-size:0.9rem;color:#888;font-style:italic;">Your RSVP has been saved. Shubh Mangal!</span>
     </div>
   </div>
@@ -1660,7 +1663,7 @@
   /* ── Loading Screen ── */
   (function() {
     const lp = document.getElementById('loading-petals');
-    const petalEmojis = ['🌼','💛','🌸','🏵️','✨'];
+    const petalEmojis = ['✿','✦','◆','✧','✦'];
     for (let i = 0; i < 12; i++) {
       const p = document.createElement('div');
       p.className = 'load-petal';
@@ -1698,7 +1701,7 @@
   /* ── Floating marigolds & diya in hero ── */
   (function createFloats() {
     const container = document.getElementById('floats-container');
-    const emojis = ['🌼','💛','🪔','🌸','✨','🏵️','🎊'];
+    const emojis = ['✿','✦','◆','✧','✦','✿','✦'];
     for (let i = 0; i < 20; i++) {
       const el = document.createElement('div');
       el.className = 'float-elem';
@@ -1809,12 +1812,12 @@
 
   /* ── Gallery Lightbox ── */
   const lbData = [
-    { emoji: '💛', caption: 'Mehendi Night', bg: 'linear-gradient(135deg,#c86820,#8b4010)' },
-    { emoji: '🎊', caption: 'Sangeet',       bg: 'linear-gradient(135deg,#d4185a,#8b0030)' },
-    { emoji: '🐎', caption: 'Baraat',        bg: 'linear-gradient(135deg,#1a2a8b,#0d1440)' },
-    { emoji: '🔥', caption: 'Pheras',        bg: 'linear-gradient(135deg,#f0b030,#c86820)' },
-    { emoji: '🥂', caption: 'Reception',     bg: 'linear-gradient(135deg,#1a5a20,#0a3010)' },
-    { emoji: '💑', caption: 'The Couple',    bg: 'linear-gradient(135deg,#8b0030,#f0b030)' },
+    { emoji: '✿', caption: 'Mehendi Night', bg: 'linear-gradient(135deg,#c86820,#8b4010)' },
+    { emoji: '✦', caption: 'Sangeet',       bg: 'linear-gradient(135deg,#d4185a,#8b0030)' },
+    { emoji: '◆', caption: 'Baraat',        bg: 'linear-gradient(135deg,#1a2a8b,#0d1440)' },
+    { emoji: '✦', caption: 'Pheras',        bg: 'linear-gradient(135deg,#f0b030,#c86820)' },
+    { emoji: '✧', caption: 'Reception',     bg: 'linear-gradient(135deg,#1a5a20,#0a3010)' },
+    { emoji: '♥', caption: 'The Couple',    bg: 'linear-gradient(135deg,#8b0030,#f0b030)' },
   ];
   function openLightbox(i) {
     const lb = document.getElementById('lightbox');
