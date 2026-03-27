@@ -305,16 +305,94 @@
         <textarea class="form-textarea" id="f-message" data-preview="message" placeholder="Your personal invitation message" style="min-height:90px;">Shubh Vivah! With joy in our hearts, we invite you to witness this divine union</textarea>
       </div>
 
-      <p class="form-section-heading">Photos</p>
+      <p class="form-section-heading">Gallery Photos</p>
+      <p style="font-size:0.72rem;color:rgba(90,74,58,0.6);margin-bottom:12px;">Paste direct image URLs for each slot (e.g. from Google Photos, Dropbox, or any image host)</p>
       <div class="form-group">
-        <label class="form-label" for="f-photo">Couple / Hero Photo</label>
-        <input class="form-input" id="f-photo" type="file" accept="image/*" style="padding:0.5rem 0.8rem;cursor:pointer;">
-        <p style="font-size:0.72rem;color:rgba(90,74,58,0.6);margin-top:0.3rem;">Couple photo shown in the invitation header</p>
+        <label class="form-label" for="f-photo1">Photo 1 — Mehendi Night</label>
+        <input class="form-input" id="f-photo1" type="url" data-preview="photo1" placeholder="https://..." value="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&q=80" />
       </div>
       <div class="form-group">
-        <label class="form-label" for="f-gallery">Event / Gallery Photos</label>
-        <input class="form-input" id="f-gallery" type="file" accept="image/*" multiple style="padding:0.5rem 0.8rem;cursor:pointer;">
-        <p style="font-size:0.72rem;color:rgba(90,74,58,0.6);margin-top:0.3rem;">Pre-wedding &amp; event photos for the guest gallery</p>
+        <label class="form-label" for="f-photo2">Photo 2 — Sangeet</label>
+        <input class="form-input" id="f-photo2" type="url" data-preview="photo2" placeholder="https://..." value="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-photo3">Photo 3 — Baraat</label>
+        <input class="form-input" id="f-photo3" type="url" data-preview="photo3" placeholder="https://..." value="https://images.unsplash.com/photo-1604604557008-0cbb4e48a645?w=600&q=80" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-photo4">Photo 4 — Pheras</label>
+        <input class="form-input" id="f-photo4" type="url" data-preview="photo4" placeholder="https://..." value="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=80" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-photo5">Photo 5 — Reception</label>
+        <input class="form-input" id="f-photo5" type="url" data-preview="photo5" placeholder="https://..." value="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="f-photo6">Photo 6 — The Couple</label>
+        <input class="form-input" id="f-photo6" type="url" data-preview="photo6" placeholder="https://..." value="https://images.unsplash.com/photo-1525772764200-be829a350797?w=600&q=80" />
+      </div>
+
+      <p class="form-section-heading">Sangeet Playlist</p>
+      <p style="font-size:0.72rem;color:rgba(90,74,58,0.6);margin-bottom:12px;">Choose 6 songs that will fill the night with love</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-song1">Song 1</label>
+          <input class="form-input" id="f-song1" type="text" data-preview="song1" value="Tere Bina" placeholder="Song name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-song1Film">Film / Artist</label>
+          <input class="form-input" id="f-song1Film" type="text" data-preview="song1Film" value="Guru (2007)" placeholder="Film or artist" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-song2">Song 2</label>
+          <input class="form-input" id="f-song2" type="text" data-preview="song2" value="Suraj Hua Maddham" placeholder="Song name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-song2Film">Film / Artist</label>
+          <input class="form-input" id="f-song2Film" type="text" data-preview="song2Film" value="Kabhi Khushi Kabhie Gham" placeholder="Film or artist" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-song3">Song 3</label>
+          <input class="form-input" id="f-song3" type="text" data-preview="song3" value="Mitwa" placeholder="Song name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-song3Film">Film / Artist</label>
+          <input class="form-input" id="f-song3Film" type="text" data-preview="song3Film" value="Kabhi Kabhi" placeholder="Film or artist" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-song4">Song 4</label>
+          <input class="form-input" id="f-song4" type="text" data-preview="song4" value="Dholida" placeholder="Song name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-song4Film">Film / Artist</label>
+          <input class="form-input" id="f-song4Film" type="text" data-preview="song4Film" value="Gangubai Kathiawadi" placeholder="Film or artist" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-song5">Song 5</label>
+          <input class="form-input" id="f-song5" type="text" data-preview="song5" value="Morni Banke" placeholder="Song name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-song5Film">Film / Artist</label>
+          <input class="form-input" id="f-song5Film" type="text" data-preview="song5Film" value="Badhaai Ho (2018)" placeholder="Film or artist" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="f-song6">Song 6</label>
+          <input class="form-input" id="f-song6" type="text" data-preview="song6" value="Kesariya" placeholder="Song name" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-song6Film">Film / Artist</label>
+          <input class="form-input" id="f-song6Film" type="text" data-preview="song6Film" value="Brahmastra (2022)" placeholder="Film or artist" />
+        </div>
       </div>
 
       <button class="btn-primary" id="previewBtn">Preview Full Invitation ↗</button>
@@ -439,18 +517,6 @@
     document.getElementById('purchaseBtn').addEventListener('click', triggerPurchase);
     document.getElementById('topBuyBtn').addEventListener('click', triggerPurchase);
 
-    // Photo preview
-    document.getElementById('f-photo')?.addEventListener('change', function() {
-      const file = this.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = e => {
-        const img = document.getElementById('pv-hero-img');
-        const wrap = document.getElementById('pv-photo-wrap');
-        if (img && wrap) { img.src = e.target.result; wrap.style.display = 'block'; }
-      };
-      reader.readAsDataURL(file);
-    });
 
     // ── Init ──
     document.addEventListener('DOMContentLoaded', () => {
