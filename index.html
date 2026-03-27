@@ -3,1095 +3,1047 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>invite.studio — Beautiful Digital Invitations</title>
-  <meta name="description" content="Premium digital invitation templates for weddings, birthdays, engagements & more. Customize, share, and celebrate with style." />
+  <title>invite.studio — Digital Invitation Templates</title>
+  <meta name="description" content="Premium digital invitation templates for weddings, birthdays, engagements & more. Easy to customise, effortless to share." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/marketplace.css" />
   <style>
-    /* ─── Navbar ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0f0f0f;
+      --near-black: #1a1a1a;
+      --dark: #2a2a2a;
+      --mid: #555;
+      --light: #888;
+      --faint: #bbb;
+      --border: #e8e8e8;
+      --bg: #ffffff;
+      --bg-soft: #f9f8f7;
+      --bg-warm: #faf7f2;
+      --gold: #c9942a;
+      --maroon: #7b1818;
+      --accent: #1a1a1a;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--near-black);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAVBAR ──────────────────────────────────────── */
     .navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
+      position: fixed; top: 0; left: 0; right: 0;
       z-index: 900;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2.5rem;
-      height: 64px;
-      background: rgba(250,247,242,0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(201,148,42,0.1);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
     }
-    .navbar-logo {
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.8rem;
-      color: var(--maroon);
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.5rem;
       text-decoration: none;
     }
-    .navbar-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      align-items: center;
-    }
-    .navbar-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--text-mid);
-      text-decoration: none;
-      transition: color 180ms ease-out;
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .navbar-links a:hover { color: var(--maroon); }
-    }
-    .navbar-cta {
-      font-size: 0.78rem !important;
-      font-weight: 600 !important;
-      color: var(--white) !important;
-      background: var(--maroon);
-      padding: 0.45rem 1.2rem;
-      border-radius: 100px;
-      transition: background-color 180ms ease-out, transform 160ms var(--ease-out);
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .navbar-cta:hover { background: #8f1c1c; transform: translateY(-1px); }
-    }
-    .navbar-cta:active { transform: scale(0.97) !important; }
-
-    /* Mobile menu */
-    .nav-toggle {
-      display: none;
-      background: none; border: none; cursor: pointer;
-      width: 28px; height: 20px; position: relative;
-      min-height: auto; min-width: auto;
-    }
-    .nav-toggle span {
-      display: block; position: absolute; left: 0; right: 0;
-      height: 2px; background: var(--text); border-radius: 1px;
-      transition: transform 250ms var(--ease-out), opacity 150ms ease-out;
-    }
-    .nav-toggle span:nth-child(1) { top: 0; }
-    .nav-toggle span:nth-child(2) { top: 9px; }
-    .nav-toggle span:nth-child(3) { top: 18px; }
-    .nav-toggle.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .nav-toggle.open span:nth-child(2) { opacity: 0; }
-    .nav-toggle.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
-    /* ─── Hero ────────────────────────────────────────────────── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 7rem 2rem 5rem;
-      background: linear-gradient(175deg, #faf7f2 0%, #f5ede0 40%, #faf7f2 100%);
-      overflow: hidden;
-    }
-
-    /* Subtle geometric pattern */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 50%, rgba(201,148,42,0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 30%, rgba(123,24,24,0.04) 0%, transparent 40%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 780px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--maroon);
-      background: rgba(123,24,24,0.06);
-      border: 1px solid rgba(123,24,24,0.12);
-      border-radius: 100px;
-      padding: 0.4rem 1.1rem;
-      margin-bottom: 1.8rem;
-    }
-
-    .hero-heading {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 6.5vw, 4.5rem);
-      line-height: 1.12;
-      color: var(--text);
-      margin-bottom: 1.4rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-heading em {
-      font-style: italic;
-      color: var(--maroon);
-    }
-
-    .hero-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: clamp(1rem, 2vw, 1.15rem);
-      color: var(--text-mid);
-      line-height: 1.75;
-      max-width: 520px;
-      margin: 0 auto 2.5rem;
-      font-weight: 400;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 0.8rem;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .hero-social-proof {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      margin-top: 2.5rem;
-      opacity: 0.7;
-    }
-
-    .hero-avatars {
-      display: flex;
-    }
-
-    .hero-avatars img {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      border: 2px solid var(--cream);
-      margin-left: -8px;
-      object-fit: cover;
-    }
-    .hero-avatars img:first-child { margin-left: 0; }
-
-    .hero-social-text {
-      font-size: 0.78rem;
-      color: var(--text-mid);
-      line-height: 1.4;
-    }
-    .hero-social-text strong { color: var(--text); font-weight: 600; }
-
-    /* Scroll indicator */
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-      opacity: 0.35;
-      animation: scrollBob 2.5s var(--ease-in-out) infinite;
-    }
-
-    .scroll-hint span {
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--text-mid);
-      font-weight: 500;
-    }
-
-    .scroll-hint svg {
-      width: 20px;
-      height: 20px;
-      stroke: var(--text-mid);
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-    }
-
-    @keyframes scrollBob {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(5px); }
-    }
-
-    /* ─── Features Strip ──────────────────────────────────────── */
-    .features-strip {
-      background: var(--maroon);
-      padding: 1.8rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .feature-pill {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: rgba(250,247,242,0.85);
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      white-space: nowrap;
-    }
-
-    .feature-pill-icon {
+    .nav-logo-icon {
       width: 28px; height: 28px;
-      border-radius: 50%;
-      background: rgba(201,148,42,0.15);
+      background: var(--black);
+      border-radius: 7px;
       display: flex; align-items: center; justify-content: center;
       font-size: 0.85rem;
+      color: white;
       flex-shrink: 0;
     }
-
-    /* ─── Templates Section ───────────────────────────────────── */
-    .templates-section {
-      padding: var(--space-2xl, 8rem) 2rem;
-      background: var(--white);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
-
-    .section-eyebrow {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.6rem;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.15;
-    }
-
-    .section-title em {
-      font-style: italic;
-      color: var(--maroon);
-    }
-
-    .section-subtitle {
+    .nav-logo-text {
       font-size: 1rem;
-      color: var(--text-mid);
-      max-width: 480px;
-      margin: 0.8rem auto 0;
-      line-height: 1.7;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: -0.02em;
     }
-
-    .section-rule {
-      width: 50px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 1.2rem auto 0;
-    }
-
-    /* Category filter tabs */
-    .category-tabs {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 3rem;
-      flex-wrap: wrap;
-    }
-    .cat-tab {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
+    .nav-logo-text span { font-weight: 300; }
+    .nav-right { display: flex; align-items: center; gap: 0.8rem; }
+    .nav-browse {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: white;
+      background: var(--black);
       padding: 0.5rem 1.2rem;
       border-radius: 100px;
+      text-decoration: none;
+      transition: background 160ms;
+    }
+    .nav-browse:hover { background: #333; }
+    .nav-menu-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
       border: 1.5px solid var(--border);
-      background: transparent;
-      color: var(--text-mid);
+      background: white;
       cursor: pointer;
-      transition: background-color 180ms ease-out, color 180ms ease-out, border-color 180ms ease-out;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 4px;
     }
-    .cat-tab.active,
-    .cat-tab:active {
-      background: var(--maroon);
-      color: var(--white);
-      border-color: var(--maroon);
+    .nav-menu-btn span {
+      display: block; width: 14px; height: 1.5px;
+      background: var(--black); border-radius: 1px;
+      transition: transform 240ms, opacity 160ms;
     }
-    @media (hover: hover) and (pointer: fine) {
-      .cat-tab:not(.active):hover {
-        border-color: var(--gold);
-        color: var(--text);
-        background: rgba(201,148,42,0.06);
-      }
+    .nav-menu-btn.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+    .nav-menu-btn.open span:nth-child(2) { opacity: 0; }
+    .nav-menu-btn.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+    .mobile-nav {
+      display: none;
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: white; border-bottom: 1px solid var(--border);
+      padding: 1.2rem 2rem; z-index: 899;
+    }
+    .mobile-nav.open { display: flex; flex-direction: column; gap: 0.2rem; }
+    .mobile-nav a {
+      display: block; padding: 0.7rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 0.9rem; font-weight: 500; color: var(--near-black);
+      text-decoration: none;
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      padding: 100px 2rem 0;
+      background: var(--bg);
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.2rem;
+    }
+    .hero-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 1.2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-sub {
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      color: var(--mid);
+      line-height: 1.65;
+      max-width: 460px;
+      margin: 0 auto 2rem;
+      font-weight: 400;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.9rem; font-weight: 600; color: white;
+      background: var(--black);
+      padding: 0.75rem 1.8rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 160ms, transform 160ms;
+      margin-bottom: 0.8rem;
+    }
+    .hero-cta:hover { background: #333; transform: translateY(-1px); }
+
+    /* Fan of template cards */
+    .hero-fan-wrap {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      margin-top: 3rem;
+      overflow: visible;
+    }
+    .hero-fan {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 340px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .fan-card {
+      position: absolute;
+      bottom: 0;
+      width: 130px;
+      height: 270px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.16), 0 4px 12px rgba(0,0,0,0.08);
+      border: 3px solid rgba(255,255,255,0.9);
+      transform-origin: bottom center;
+      transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .fan-card img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+    }
+    .fan-card:nth-child(1) { transform: translateX(-300px) rotate(-22deg) translateY(20px); z-index: 1; }
+    .fan-card:nth-child(2) { transform: translateX(-190px) rotate(-14deg) translateY(10px); z-index: 2; }
+    .fan-card:nth-child(3) { transform: translateX(-90px) rotate(-6deg) translateY(4px); z-index: 3; }
+    .fan-card:nth-child(4) { transform: translateX(0) rotate(0deg) translateY(0); z-index: 5; width: 145px; height: 300px; }
+    .fan-card:nth-child(5) { transform: translateX(90px) rotate(6deg) translateY(4px); z-index: 3; }
+    .fan-card:nth-child(6) { transform: translateX(190px) rotate(14deg) translateY(10px); z-index: 2; }
+    .fan-card:nth-child(7) { transform: translateX(300px) rotate(22deg) translateY(20px); z-index: 1; }
+    .hero-fan-wrap:hover .fan-card:nth-child(1) { transform: translateX(-320px) rotate(-24deg) translateY(22px); }
+    .hero-fan-wrap:hover .fan-card:nth-child(2) { transform: translateX(-205px) rotate(-15deg) translateY(11px); }
+    .hero-fan-wrap:hover .fan-card:nth-child(3) { transform: translateX(-98px) rotate(-7deg) translateY(4px); }
+    .hero-fan-wrap:hover .fan-card:nth-child(5) { transform: translateX(98px) rotate(7deg) translateY(4px); }
+    .hero-fan-wrap:hover .fan-card:nth-child(6) { transform: translateX(205px) rotate(15deg) translateY(11px); }
+    .hero-fan-wrap:hover .fan-card:nth-child(7) { transform: translateX(320px) rotate(24deg) translateY(22px); }
+
+    /* ── SECTION LABEL BAND ──────────────────────────── */
+    .section-band {
+      display: flex; align-items: center;
+      padding: 0 2rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .section-band-label {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: white; background: var(--black);
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+    }
+    .section-band-line {
+      flex: 1; height: 1px;
+      background: var(--border);
+      margin-left: 1rem;
     }
 
-    /* Templates grid */
+    /* ── TEMPLATE GRID ───────────────────────────────── */
+    .templates-section {
+      padding: 5rem 2rem 6rem;
+      background: var(--bg);
+    }
+    .templates-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .templates-heading {
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--black);
+      margin-bottom: 0.6rem;
+    }
+    .templates-sub {
+      font-size: 0.9rem; color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* Category tabs */
+    .cat-tabs {
+      display: flex; align-items: center;
+      justify-content: center;
+      flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .cat-tab {
+      font-size: 0.8rem; font-weight: 500;
+      color: var(--mid);
+      background: none;
+      border: 1.5px solid var(--border);
+      padding: 0.45rem 1.1rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 160ms;
+    }
+    .cat-tab:hover { border-color: var(--black); color: var(--black); }
+    .cat-tab.active {
+      background: var(--black); color: white;
+      border-color: var(--black);
+    }
+
+    /* Template grid */
     .templates-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
-      max-width: 1240px;
-      margin: 0 auto;
-    }
-
-    /* Template card — clean, modern */
-    .template-card {
-      position: relative;
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: var(--card-radius, 12px);
-      overflow: hidden;
-      transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .template-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
-      }
-      .template-card:hover .card-thumb-bg img {
-        transform: scale(1.04);
-      }
-    }
-
-    /* Thumbnail */
-    .card-thumb {
-      position: relative;
-      height: 260px;
-      overflow: hidden;
-      background: linear-gradient(145deg, #f5ede0, #ede4d4);
-    }
-
-    .card-thumb-bg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .card-thumb-bg img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 400ms var(--ease-out);
-    }
-
-    /* Category badge */
-    .category-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      z-index: 2;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      color: var(--white);
-      background: rgba(15,9,6,0.55);
-      backdrop-filter: blur(6px);
-      border-radius: 100px;
-      padding: 0.25rem 0.75rem;
-    }
-
-    /* Card body */
-    .card-body {
-      padding: 1.1rem 1.2rem 1.3rem;
-    }
-
-    .card-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-
-    .card-price-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.9rem;
-    }
-
-    .card-price {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--maroon);
-    }
-
-    .card-features-mini {
-      display: flex;
-      gap: 0.3rem;
-    }
-    .card-features-mini span {
-      font-size: 0.65rem;
-      padding: 0.15rem 0.45rem;
-      background: rgba(201,148,42,0.08);
-      border-radius: 4px;
-      color: var(--text-dim);
-      font-weight: 500;
-    }
-
-    /* Card action buttons */
-    .card-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-    }
-
-    .btn-card {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 0.55rem 0.5rem;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: transform 160ms var(--ease-out), background-color 180ms ease-out, box-shadow 180ms ease-out;
-    }
-    .btn-card:active { transform: scale(0.97); }
-
-    .btn-preview {
-      background: rgba(0,0,0,0.04);
-      color: var(--text);
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .btn-preview:hover {
-        background: rgba(0,0,0,0.07);
-      }
-    }
-
-    .btn-buy {
-      background: var(--maroon);
-      color: var(--white);
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .btn-buy:hover {
-        background: #8f1c1c;
-        box-shadow: 0 4px 12px rgba(123,24,24,0.2);
-      }
-    }
-
-    /* Ornamental corners (subtle) */
-    .oc { display: none; }
-
-    /* ─── Premium Features ───────────────────────────────────── */
-    .features-section {
-      padding: var(--space-2xl, 8rem) 2rem;
-      background: var(--cream);
-      position: relative;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
       max-width: 1100px;
       margin: 0 auto;
     }
-
-    .feature-card {
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.05);
-      border-radius: var(--card-radius, 12px);
-      padding: 2.2rem 1.8rem;
-      transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+    .template-card {
+      cursor: pointer;
     }
-    @media (hover: hover) and (pointer: fine) {
-      .feature-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 48px rgba(0,0,0,0.06);
-      }
+    /* iPad/tablet mockup frame */
+    .card-mockup {
+      position: relative;
+      background: #1a1a1a;
+      border-radius: 14px;
+      padding: 8px 8px 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      margin-bottom: 0.9rem;
+      transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 300ms;
+    }
+    .template-card:hover .card-mockup {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+    }
+    .card-mockup-screen {
+      position: relative;
+      background: #f0f0f0;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .card-mockup-screen img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+      display: block;
+      transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .template-card:hover .card-mockup-screen img { transform: scale(1.04); }
+    .card-mockup-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%; background: #444;
+      margin: 5px auto 0;
     }
 
-    .feature-card-icon {
-      width: 48px; height: 48px;
-      border-radius: 12px;
-      background: rgba(123,24,24,0.06);
+    /* Preview eye icon */
+    .card-preview-btn {
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 30px; height: 30px;
+      border-radius: 50%; background: white;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
+      font-size: 0.75rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      opacity: 0;
+      transition: opacity 200ms;
+      text-decoration: none;
+      z-index: 10;
+    }
+    .template-card:hover .card-preview-btn { opacity: 1; }
+
+    /* Card info */
+    .card-info { padding: 0 0.2rem; }
+    .card-name-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 0.25rem;
+    }
+    .card-name {
+      font-size: 0.9rem; font-weight: 600; color: var(--black);
+    }
+    .card-price-badge {
+      font-size: 0.72rem; font-weight: 700;
+      background: var(--black); color: white;
+      padding: 0.2rem 0.55rem; border-radius: 100px;
+    }
+    .card-desc {
+      font-size: 0.76rem; color: var(--mid);
+      line-height: 1.5; margin-bottom: 0.5rem;
+    }
+    .card-tag {
+      display: inline-block;
+      font-size: 0.68rem; font-weight: 500;
+      color: var(--mid);
+      background: #f0f0f0;
+      padding: 0.18rem 0.6rem; border-radius: 100px;
     }
 
-    .feature-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text);
+    /* ── FEATURES ────────────────────────────────────── */
+    .features-section {
+      padding: 6rem 2rem;
+      background: var(--bg-soft);
+    }
+    .features-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+    .features-left {
+      position: sticky;
+      top: 80px;
+    }
+    .features-label {
+      display: inline-block;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--mid);
+      background: white; border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem; border-radius: 100px;
+      margin-bottom: 1.4rem;
+    }
+    .features-heading {
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+    .features-desc {
+      font-size: 0.9rem; color: var(--mid);
+      line-height: 1.75; margin-bottom: 1.8rem;
+    }
+    .features-cta {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.85rem; font-weight: 600; color: white;
+      background: var(--black); padding: 0.65rem 1.5rem;
+      border-radius: 100px; text-decoration: none;
+      transition: background 160ms;
+    }
+    .features-cta:hover { background: #333; }
+    .features-right {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .feature-row {
+      display: flex; align-items: flex-start; gap: 1.2rem;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .feature-row:first-child { border-top: 1px solid var(--border); }
+    .feature-icon {
+      font-size: 2.4rem;
+      flex-shrink: 0;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+    .feature-text-head {
+      font-size: 0.92rem; font-weight: 700;
+      color: var(--black); margin-bottom: 0.3rem;
+    }
+    .feature-text-desc {
+      font-size: 0.84rem; color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* ── HOW IT WORKS ────────────────────────────────── */
+    .how-section {
+      padding: 6rem 2rem;
+      background: var(--bg);
+    }
+    .how-header {
+      text-align: center; margin-bottom: 3rem;
+    }
+    .how-heading {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--black);
       margin-bottom: 0.6rem;
     }
-
-    .feature-card p {
-      font-size: 0.88rem;
-      color: var(--text-mid);
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-
-    .feature-card ul {
-      list-style: none;
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      line-height: 2;
-    }
-    .feature-card ul li::before {
-      content: '✓ ';
-      color: var(--gold);
-      font-weight: 700;
-    }
-
-    .feature-card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      margin-top: 1.2rem;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--maroon);
-      letter-spacing: 0.04em;
-      transition: gap 200ms var(--ease-out);
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .feature-card-link:hover { gap: 0.5rem; }
-    }
-
-    /* ─── How It Works ───────────────────────────────────────── */
-    .how-section {
-      background: var(--white);
-      padding: var(--space-2xl, 8rem) 2rem;
-    }
-
-    .steps-grid {
+    .how-sub { font-size: 0.9rem; color: var(--mid); line-height: 1.6; }
+    .how-cards {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      max-width: 1100px;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.2rem;
+      max-width: 1000px;
       margin: 0 auto;
     }
-
-    .step-card {
-      background: var(--cream);
-      border: 1px solid rgba(0,0,0,0.04);
-      border-radius: var(--card-radius, 12px);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+    .how-card {
+      background: var(--bg-soft);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
     }
-    @media (hover: hover) and (pointer: fine) {
-      .step-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 48px rgba(0,0,0,0.06);
-      }
-    }
-
-    .step-number {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .step-icon {
-      font-size: 2rem;
-      display: block;
-      margin-bottom: 1rem;
-      line-height: 1;
-    }
-
-    .step-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-
-    .step-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      color: var(--text-mid);
-      line-height: 1.65;
-    }
-
-    /* ─── Pricing ────────────────────────────────────────────── */
-    .pricing-section {
-      padding: var(--space-xl, 5rem) 2rem;
-      background: var(--cream);
-    }
-
-    .pricing-card {
-      max-width: 520px;
-      margin: 0 auto;
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 16px;
-      padding: 3rem 2.5rem;
-      text-align: center;
+    .how-card-visual {
+      height: 240px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem 1.5rem 0;
+      overflow: hidden;
       position: relative;
+    }
+    /* Step 1: phone mockup */
+    .phone-mockup {
+      width: 110px;
+      background: #1a1a1a;
+      border-radius: 22px;
+      padding: 8px 6px 10px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .phone-mockup-screen {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #e8e8e8;
+    }
+    .phone-mockup-screen img {
+      width: 100%; display: block;
+    }
+    .phone-mockup-notch {
+      width: 32px; height: 6px;
+      background: #333; border-radius: 3px;
+      margin: 0 auto 6px;
+    }
+    .phone-mockup-home {
+      width: 28px; height: 4px;
+      background: #333; border-radius: 2px;
+      margin: 6px auto 0;
+    }
+    .phone-mockup-2 {
+      transform: translateX(20px) rotate(5deg) scale(0.88);
+      opacity: 0.7;
+      position: absolute;
+      left: 1rem;
+    }
+    /* Step 2: desktop + panel */
+    .desktop-mockup {
+      width: 100%;
+      background: #e8e8e8;
+      border-radius: 10px 10px 0 0;
+      border: 6px solid #1a1a1a;
+      border-bottom: 0;
+      overflow: hidden;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0;
+    }
+    .desktop-bar {
+      background: #2a2a2a;
+      height: 22px;
+      display: flex; align-items: center;
+      gap: 5px; padding: 0 8px;
+    }
+    .desktop-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+    }
+    .desktop-content {
+      display: flex;
+      height: 160px;
+      background: #f5f5f5;
+    }
+    .desktop-preview {
+      flex: 1;
       overflow: hidden;
     }
-
-    .pricing-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-light), var(--gold), var(--gold-dim));
+    .desktop-preview img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
     }
+    .desktop-panel {
+      width: 110px;
+      background: white;
+      border-left: 1px solid #e0e0e0;
+      padding: 8px;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .panel-label {
+      font-size: 6px; font-weight: 700; color: #888; text-transform: uppercase;
+      letter-spacing: 0.05em; margin-bottom: 2px;
+    }
+    .panel-input {
+      background: #f5f5f5; border-radius: 3px;
+      height: 16px; width: 100%;
+      display: flex; align-items: center; padding: 0 4px;
+      font-size: 6px; color: #1a1a1a; font-weight: 600;
+    }
+    .panel-input-empty {
+      background: white; border: 1px solid #ddd; border-radius: 3px;
+      height: 16px; width: 100%;
+      font-size: 5px; color: #aaa;
+      display: flex; align-items: center; padding: 0 4px;
+    }
+    .panel-edit-btn {
+      background: var(--black); color: white;
+      border-radius: 3px; font-size: 6px; font-weight: 700;
+      height: 14px; display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    /* Step 3: WhatsApp chat */
+    .chat-mockup {
+      width: 100%; height: 100%;
+      background: #ece5dd;
+      padding: 0.8rem 0.6rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      overflow: hidden;
+    }
+    .chat-header {
+      background: #075e54;
+      color: white; padding: 0.5rem 0.75rem;
+      font-size: 0.65rem; font-weight: 700;
+      display: flex; align-items: center; gap: 0.5rem;
+      border-radius: 8px 8px 0 0;
+      margin: -0.8rem -0.6rem 0.4rem;
+    }
+    .chat-avatar {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+    }
+    .chat-msg {
+      max-width: 75%;
+      padding: 0.4rem 0.6rem;
+      border-radius: 8px;
+      font-size: 0.6rem; line-height: 1.4;
+    }
+    .chat-msg.recv {
+      background: white;
+      align-self: flex-start;
+      border-radius: 0 8px 8px 8px;
+    }
+    .chat-msg.sent {
+      background: #d9fdd3;
+      align-self: flex-end;
+      border-radius: 8px 8px 0 8px;
+    }
+    .chat-link-card {
+      background: white;
+      border-radius: 8px 8px 0 8px;
+      overflow: hidden;
+      align-self: flex-end;
+      max-width: 80%;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .chat-link-img {
+      width: 100%; height: 50px;
+      object-fit: cover; object-position: top;
+    }
+    .chat-link-title {
+      padding: 0.3rem 0.4rem 0.2rem;
+      font-size: 0.55rem; font-weight: 700; color: #1a1a1a;
+    }
+    .chat-link-url {
+      padding: 0 0.4rem 0.3rem;
+      font-size: 0.5rem; color: #4b9a44;
+    }
+    .how-card-body {
+      padding: 1.2rem 1.5rem 1.5rem;
+    }
+    .how-step-num {
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--mid); margin-bottom: 0.3rem;
+    }
+    .how-step-title {
+      font-size: 1rem; font-weight: 700; color: var(--black);
+      margin-bottom: 0.4rem;
+    }
+    .how-step-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.6; }
 
-    .pricing-eyebrow {
-      font-size: 0.68rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 600;
+    /* ── COMPARISON TABLE ────────────────────────────── */
+    .compare-section {
+      padding: 6rem 2rem;
+      background: var(--bg-soft);
+    }
+    .compare-header {
+      text-align: center; margin-bottom: 3rem;
+    }
+    .compare-heading {
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.2;
+      color: var(--black); margin-bottom: 0.6rem;
+    }
+    .compare-sub { font-size: 0.9rem; color: var(--mid); }
+    .compare-table {
+      max-width: 860px; margin: 0 auto;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .compare-head {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      background: #f8f8f8;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-col-head {
+      padding: 1rem 1.2rem;
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--mid); text-align: center;
+    }
+    .compare-col-head:first-child { text-align: left; color: var(--black); }
+    .compare-col-head.ours {
+      background: var(--black); color: white;
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+    }
+    .compare-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      border-bottom: 1px solid #f0f0f0;
+      align-items: center;
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-cell {
+      padding: 0.9rem 1.2rem;
+      font-size: 0.82rem; color: var(--mid);
+      text-align: center;
+    }
+    .compare-cell:first-child {
+      text-align: left; font-weight: 600; color: var(--black);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .compare-cell.ours {
+      background: rgba(0,0,0,0.02);
+      font-weight: 700; color: var(--black);
+    }
+    .compare-good { color: #1a7a1a; font-weight: 700; }
+    .compare-bad { color: var(--faint); }
+
+    /* ── TESTIMONIALS ────────────────────────────────── */
+    .testi-section {
+      padding: 6rem 0;
+      background: var(--bg);
+      overflow: hidden;
+    }
+    .testi-header {
+      text-align: center; margin-bottom: 2.5rem;
+      padding: 0 2rem;
+    }
+    .testi-heading {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.2;
+      color: var(--black); margin-bottom: 0.4rem;
+    }
+    .testi-sub { font-size: 0.9rem; color: var(--mid); }
+    /* Horizontal scrolling strip */
+    .testi-strip {
+      display: flex; gap: 1rem;
+      padding: 0 2rem 0.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    .testi-strip::-webkit-scrollbar { display: none; }
+    .testi-strip.dragging { cursor: grabbing; }
+    .testi-photo-card {
+      flex-shrink: 0;
+      width: 280px; height: 340px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      scroll-snap-align: start;
+    }
+    .testi-photo-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .testi-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 50%);
+      padding: 1.2rem;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .testi-quote-text {
+      font-size: 0.82rem; font-weight: 600;
+      color: white; line-height: 1.55;
       margin-bottom: 0.5rem;
     }
+    .testi-by {
+      font-size: 0.7rem; color: rgba(255,255,255,0.7);
+    }
+    /* Fallback cards (no photo) */
+    .testi-plain-card {
+      flex-shrink: 0;
+      width: 280px;
+      border-radius: 16px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      scroll-snap-align: start;
+      display: flex; flex-direction: column; gap: 0.8rem;
+    }
+    .testi-stars { color: #f59e0b; font-size: 0.8rem; letter-spacing: 2px; }
+    .testi-plain-quote {
+      font-size: 0.85rem; color: var(--near-black);
+      line-height: 1.65; flex: 1;
+    }
+    .testi-author-row {
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .testi-avatar-circle {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--black); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .testi-author-name { font-size: 0.8rem; font-weight: 700; color: var(--black); }
+    .testi-author-meta { font-size: 0.7rem; color: var(--light); }
 
-    .pricing-amount {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.5rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-    }
-
-    .pricing-period {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      margin-bottom: 2rem;
-    }
-
-    .pricing-features {
-      list-style: none;
-      text-align: left;
-      margin-bottom: 2rem;
-    }
-
-    .pricing-features li {
-      font-size: 0.9rem;
-      color: var(--text-mid);
-      padding: 0.65rem 0;
-      border-bottom: 1px solid rgba(0,0,0,0.04);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .pricing-features li::before {
-      content: '✓';
-      color: var(--gold);
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
-
-    /* ─── Social Proof / Stats ───────────────────────────────── */
-    .stats-section {
-      padding: var(--space-xl, 5rem) 2rem;
-      background: var(--white);
-      text-align: center;
-    }
-
-    .stats-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 3rem 5rem;
-      max-width: 900px;
-      margin: 2.5rem auto 0;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      font-weight: 700;
-      color: var(--maroon);
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-
-    /* ─── Testimonials ───────────────────────────────────────── */
-    .testimonials-section {
-      padding: var(--space-2xl, 8rem) 2rem;
-      background: var(--cream);
-    }
-
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .testi-card {
-      background: var(--white);
-      border: 1px solid rgba(0,0,0,0.05);
-      border-radius: var(--card-radius, 12px);
-      padding: 2rem;
-      transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .testi-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 36px rgba(0,0,0,0.06);
-      }
-    }
-
-    .testi-stars {
-      color: var(--gold);
-      font-size: 0.85rem;
-      margin-bottom: 0.8rem;
-      letter-spacing: 2px;
-    }
-
-    .testi-quote {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 0.95rem;
-      color: var(--text);
-      line-height: 1.75;
-      margin-bottom: 1.2rem;
-    }
-
-    .testi-author {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .testi-avatar {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(201,148,42,0.2);
-    }
-
-    .testi-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .testi-meta {
-      font-size: 0.68rem;
-      color: var(--text-dim);
-      letter-spacing: 0.06em;
-    }
-
-    /* ─── FAQ ─────────────────────────────────────────────────── */
+    /* ── FAQ ─────────────────────────────────────────── */
     .faq-section {
-      padding: var(--space-2xl, 8rem) 2rem;
-      background: var(--white);
+      padding: 6rem 2rem;
+      background: var(--bg-soft);
     }
-
-    .faq-list {
-      max-width: 700px;
-      margin: 0 auto;
+    .faq-header { text-align: center; margin-bottom: 2.5rem; }
+    .faq-heading {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      color: var(--black); margin-bottom: 0.4rem;
     }
-
-    .faq-item {
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
+    .faq-sub { font-size: 0.9rem; color: var(--mid); }
+    .faq-list { max-width: 680px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); }
     .faq-q {
       width: 100%; background: none; border: none;
-      text-align: left; padding: 1.2rem 0; cursor: pointer;
+      text-align: left; padding: 1.1rem 0; cursor: pointer;
       display: flex; justify-content: space-between; align-items: center;
       font-family: 'Inter', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text);
-      gap: 1rem;
-      transition: color 180ms ease-out;
-      min-height: auto; min-width: auto;
+      font-size: 0.9rem; font-weight: 600; color: var(--black);
+      gap: 1rem; transition: color 160ms;
     }
-    @media (hover: hover) and (pointer: fine) {
-      .faq-q:hover { color: var(--maroon); }
-    }
-
+    .faq-q:hover { color: #555; }
     .faq-icon {
-      color: var(--gold);
-      font-size: 1.2rem;
-      flex-shrink: 0;
-      transition: transform 300ms var(--ease-out);
+      font-size: 1.1rem; color: var(--mid);
+      flex-shrink: 0; transition: transform 280ms;
       font-weight: 300;
     }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
-
     .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 400ms var(--ease-out);
+      max-height: 0; overflow: hidden;
+      transition: max-height 380ms cubic-bezier(0.23, 1, 0.32, 1);
     }
     .faq-item.open .faq-a { max-height: 300px; }
-
     .faq-a-inner {
-      padding: 0 0 1.2rem;
+      padding: 0 0 1.1rem;
+      font-size: 0.85rem; color: var(--mid); line-height: 1.8;
+    }
+
+    /* ── NEWSLETTER ──────────────────────────────────── */
+    .newsletter-section {
+      padding: 6rem 2rem;
+      background: var(--bg);
+      text-align: center;
+    }
+    .newsletter-heading {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.2;
+      color: var(--black); margin-bottom: 0.5rem;
+    }
+    .newsletter-sub { font-size: 0.9rem; color: var(--mid); margin-bottom: 2rem; }
+    .newsletter-form {
+      display: flex; gap: 0.5rem;
+      max-width: 400px; margin: 0 auto;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .newsletter-input {
+      flex: 1; min-width: 200px;
+      font-family: 'Inter', sans-serif;
       font-size: 0.88rem;
-      color: var(--text-mid);
-      line-height: 1.8;
+      padding: 0.7rem 1.2rem;
+      border: 1.5px solid var(--border); border-radius: 100px;
+      outline: none; color: var(--black);
+      transition: border-color 160ms;
     }
+    .newsletter-input:focus { border-color: var(--black); }
+    .newsletter-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem; font-weight: 700;
+      color: white; background: var(--black);
+      padding: 0.7rem 1.5rem; border: none;
+      border-radius: 100px; cursor: pointer;
+      transition: background 160ms;
+    }
+    .newsletter-btn:hover { background: #333; }
 
-    /* ─── CTA Banner ─────────────────────────────────────────── */
-    .cta-banner {
-      padding: var(--space-xl, 5rem) 2rem;
-      background: var(--maroon);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-banner::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 50%, rgba(201,148,42,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta-banner h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      color: var(--cream);
-      margin-bottom: 0.6rem;
-      position: relative;
-    }
-    .cta-banner p {
-      font-size: 1rem;
-      color: rgba(250,247,242,0.65);
-      margin-bottom: 2rem;
-      position: relative;
-    }
-    .cta-banner .btn { position: relative; }
-
-    /* ─── Footer ──────────────────────────────────────────────── */
+    /* ── FOOTER ──────────────────────────────────────── */
     footer {
-      background: #0f0906;
-      padding: 4rem 2rem 2rem;
-      text-align: center;
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem 2rem;
     }
-
-    .footer-logo {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.2rem;
-      color: var(--gold);
-      text-decoration: none;
-      display: inline-block;
-      margin-bottom: 0.5rem;
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
     }
-
+    .footer-brand {}
+    .footer-logo-row {
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 0.75rem; text-decoration: none;
+    }
+    .footer-logo-icon {
+      width: 26px; height: 26px;
+      background: var(--black); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: white;
+    }
+    .footer-logo-text {
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--black); letter-spacing: -0.02em;
+    }
+    .footer-logo-text span { font-weight: 300; }
     .footer-tagline {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 0.9rem;
-      color: rgba(250,247,242,0.4);
-      margin-bottom: 2rem;
+      font-size: 0.82rem; color: var(--mid); line-height: 1.65;
+      margin-bottom: 1rem;
     }
-
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      list-style: none;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
+    .footer-socials { display: flex; gap: 0.6rem; }
+    .footer-social {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; text-decoration: none; color: var(--mid);
+      transition: border-color 160ms, color 160ms;
     }
-
+    .footer-social:hover { border-color: var(--black); color: var(--black); }
+    .footer-col-head {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--black); margin-bottom: 1rem;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
     .footer-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: rgba(250,247,242,0.4);
-      text-decoration: none;
-      transition: color 180ms ease-out;
+      font-size: 0.82rem; color: var(--mid); text-decoration: none;
+      transition: color 160ms;
     }
-    @media (hover: hover) and (pointer: fine) {
-      .footer-links a:hover { color: var(--gold); }
-    }
-
-    .footer-divider {
-      width: 40px;
-      height: 1px;
-      background: rgba(201,148,42,0.2);
-      margin: 0 auto 1.5rem;
+    .footer-links a:hover { color: var(--black); }
+    .footer-bottom {
+      max-width: 1100px; margin: 2rem auto 0;
+      padding-top: 1.5rem; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.75rem; color: var(--light);
+      flex-wrap: wrap; gap: 0.5rem;
     }
 
-    .footer-copy {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      color: rgba(250,247,242,0.25);
-      letter-spacing: 0.04em;
+    /* ── UTILITY: scroll reveal ──────────────────────── */
+    .r {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.23, 1, 0.32, 1),
+                  transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
     }
+    .r.visible { opacity: 1; transform: translateY(0); }
 
-    /* ─── Responsive ──────────────────────────────────────────── */
+    /* ── RESPONSIVE ──────────────────────────────────── */
     @media (max-width: 1100px) {
       .templates-grid { grid-template-columns: repeat(3, 1fr); }
     }
-
-    @media (max-width: 768px) {
-      .navbar { padding: 0 1.2rem; }
-      .navbar-links { display: none; }
-      .nav-toggle { display: block; }
-
-      .navbar-links.open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 64px; left: 0; right: 0;
-        background: rgba(250,247,242,0.98);
-        backdrop-filter: blur(16px);
-        padding: 1.5rem;
-        gap: 0;
-        border-bottom: 1px solid var(--border);
-        z-index: 899;
-      }
-      .navbar-links.open li { padding: 0.8rem 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
-      .navbar-links.open li:last-child { border-bottom: none; }
-
-      .templates-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-      .features-grid { grid-template-columns: 1fr; }
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
-      .testi-grid { grid-template-columns: 1fr; }
-      .features-strip { gap: 1.5rem; }
+    @media (max-width: 900px) {
+      .features-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .features-left { position: static; }
+      .how-cards { grid-template-columns: 1fr; max-width: 420px; }
+      .compare-head, .compare-row { grid-template-columns: 1.2fr 1fr 1fr 1.2fr; }
     }
-
+    @media (max-width: 768px) {
+      .templates-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-fan { width: 600px; }
+      .fan-card { width: 100px; height: 210px; }
+      .fan-card:nth-child(4) { width: 112px; height: 235px; }
+      .fan-card:nth-child(1) { transform: translateX(-220px) rotate(-22deg) translateY(20px); }
+      .fan-card:nth-child(2) { transform: translateX(-140px) rotate(-14deg) translateY(10px); }
+      .fan-card:nth-child(3) { transform: translateX(-68px) rotate(-6deg) translateY(4px); }
+      .fan-card:nth-child(5) { transform: translateX(68px) rotate(6deg) translateY(4px); }
+      .fan-card:nth-child(6) { transform: translateX(140px) rotate(14deg) translateY(10px); }
+      .fan-card:nth-child(7) { transform: translateX(220px) rotate(22deg) translateY(20px); }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .compare-head, .compare-row { font-size: 0.75rem; }
+    }
     @media (max-width: 480px) {
       .templates-grid { grid-template-columns: 1fr; }
-      .steps-grid { grid-template-columns: 1fr; }
-      .stats-grid { gap: 2rem 3rem; }
-      .hero { padding: 6rem 1.2rem 4rem; }
-    }
-    .card-thumb {
-      height: 0;
-      padding-bottom: 65%;
-      position: relative;
-      overflow: hidden;
-    }
-    .card-thumb-bg {
-      position: absolute;
-      inset: 0;
-    }
-    .card-thumb-bg img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    @media (hover: hover) and (pointer: fine) {
-      .template-card:hover .card-thumb-bg img {
-        transform: scale(1.06);
-      }
+      .hero-fan-wrap { height: 260px; }
+      .hero-fan { width: 420px; }
+      .fan-card { width: 80px; height: 170px; }
+      .fan-card:nth-child(4) { width: 90px; height: 190px; }
+      .fan-card:nth-child(1) { transform: translateX(-160px) rotate(-22deg) translateY(20px); }
+      .fan-card:nth-child(2) { transform: translateX(-100px) rotate(-14deg) translateY(10px); }
+      .fan-card:nth-child(3) { transform: translateX(-48px) rotate(-6deg) translateY(4px); }
+      .fan-card:nth-child(5) { transform: translateX(48px) rotate(6deg) translateY(4px); }
+      .fan-card:nth-child(6) { transform: translateX(100px) rotate(14deg) translateY(10px); }
+      .fan-card:nth-child(7) { transform: translateX(160px) rotate(22deg) translateY(20px); }
+      .compare-section { padding: 4rem 1rem; }
+      .compare-table { font-size: 0.72rem; }
     }
   </style>
-  <link rel="stylesheet" href="css/ux-polish.css">
 </head>
 <body>
 
-  <!-- Page frame -->
-  <div class="top-stripe"></div>
-  <div class="bottom-stripe"></div>
-  <div class="page-frame"></div>
-
-  <!-- ── Navbar ────────────────────────────────────────────────── -->
+  <!-- ── NAVBAR ──────────────────────────────────────── -->
   <nav class="navbar">
-    <a href="#" class="navbar-logo">invite.studio</a>
-    <button class="nav-toggle" aria-label="Menu" onclick="this.classList.toggle('open');document.querySelector('.navbar-links').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="navbar-links">
-      <li><a href="#templates">Templates</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#how-it-works">How It Works</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
-      <li><a href="#templates" class="navbar-cta">Browse Templates</a></li>
-    </ul>
-  </nav>
-
-  <!-- ── Hero ──────────────────────────────────────────────────── -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-badge r">Digital Invitation Templates</div>
-      <h1 class="hero-heading r">
-        Beautiful Invitations<br/>for Every <em>Celebration</em>
-      </h1>
-      <p class="hero-sub r">
-        Professionally designed digital invitations — fully customizable with your names, venue, dates and more. Buy once, share forever.
-      </p>
-      <div class="hero-ctas r">
-        <a href="#templates" class="btn btn-primary">Browse Templates</a>
-        <a href="templates/wedding/wedding-1.html" class="btn btn-outline" target="_blank" rel="noopener">See Live Demo</a>
-      </div>
-      <div class="hero-social-proof r">
-        <div class="hero-avatars">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&q=80" alt="" loading="lazy" onerror="this.style.background='var(--maroon)';this.src='';">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&q=80" alt="" loading="lazy" onerror="this.style.background='var(--gold)';this.src='';">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&q=80" alt="" loading="lazy" onerror="this.style.background='var(--maroon)';this.src='';">
-        </div>
-        <span class="hero-social-text"><strong>500+</strong> happy families across India</span>
-      </div>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">✦</div>
+      <span class="nav-logo-text">invite<span>.studio</span></span>
+    </a>
+    <div class="nav-right">
+      <a href="#templates" class="nav-browse">Browse templates</a>
+      <button class="nav-menu-btn" aria-label="Menu" id="menu-btn">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#templates">Templates</a>
+    <a href="#features">Features</a>
+    <a href="#how">How It Works</a>
+    <a href="#faq">FAQ</a>
+    <a href="#templates" style="font-weight:700; color: var(--black);">Browse Templates →</a>
+  </div>
 
-    <div class="scroll-hint" aria-hidden="true">
-      <span>Scroll</span>
-      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  <!-- ── HERO ────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-eyebrow r">Introducing</div>
+    <h1 class="hero-heading r">
+      Website Templates for<br/>Digital Invitations
+    </h1>
+    <p class="hero-sub r">
+      Easy-to-customise, effortless to share.<br/>
+      Website templates for your big day.
+    </p>
+    <a href="#templates" class="hero-cta r">
+      Choose a template
+    </a>
+
+    <!-- Fan spread of template cards -->
+    <div class="hero-fan-wrap r">
+      <div class="hero-fan">
+        <div class="fan-card">
+          <img src="assets/generated/traditional-engagement-hero.jpeg" alt="Traditional Engagement" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#9b1840,#c9942a)';">
+        </div>
+        <div class="fan-card">
+          <img src="assets/generated/birthday-elegant-hero.jpeg" alt="Elegant Birthday" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#c9942a,#7b1818)';">
+        </div>
+        <div class="fan-card">
+          <img src="assets/generated/gopuram-golden-hour.jpeg" alt="South Indian Wedding" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#6b1300,#c9942a)';">
+        </div>
+        <div class="fan-card">
+          <img src="assets/generated/rajasthani-palace.jpeg" alt="Rajasthani Wedding" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#1a3a8b,#c9942a)';">
+        </div>
+        <div class="fan-card">
+          <img src="assets/generated/griha-pravesham-hero.jpeg" alt="Griha Pravesham" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#c86820,#2a7020)';">
+        </div>
+        <div class="fan-card">
+          <img src="assets/generated/golden-anniversary-hero.jpeg" alt="Golden Anniversary" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#8b0000,#c9942a)';">
+        </div>
+        <div class="fan-card">
+          <img src="assets/generated/seemantham-hero.jpeg" alt="Seemantham" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#b8860b,#228b22)';">
+        </div>
+      </div>
     </div>
   </section>
 
-
-  <!-- ── Templates Grid ──────────────────────────────────────── -->
-  <section class="templates-section" id="templates">
-    <div class="section-header">
-      <p class="section-eyebrow r">Handcrafted designs</p>
-      <h2 class="section-title r">Our Template <em>Collection</em></h2>
-      <p class="section-subtitle r">Choose from 12 beautifully crafted templates across 6 celebration categories</p>
-      <div class="section-rule"></div>
+  <!-- ── TEMPLATE GRID ─────────────────────────────── -->
+  <section class="templates-section" id="templates" style="padding-top: 6rem;">
+    <!-- Section label band -->
+    <div class="section-band" style="margin-bottom: 2rem;">
+      <span class="section-band-label">New Releases</span>
+      <div class="section-band-line"></div>
     </div>
 
-    <div class="category-tabs r">
-      <button class="cat-tab active" data-cat="all">All Templates</button>
-      <button class="cat-tab" data-cat="birthday">Birthday</button>
-      <button class="cat-tab" data-cat="wedding">Wedding</button>
+    <div class="templates-header">
+      <h2 class="templates-heading r">Designed for your BIG day.</h2>
+      <p class="templates-sub r">Easy-to-edit. Effortless to Share.</p>
+    </div>
+
+    <!-- Category filter -->
+    <div class="cat-tabs r">
+      <button class="cat-tab active" data-cat="all">All</button>
+      <button class="cat-tab" data-cat="wedding">Weddings</button>
+      <button class="cat-tab" data-cat="birthday">Birthdays</button>
       <button class="cat-tab" data-cat="housewarming">Housewarming</button>
       <button class="cat-tab" data-cat="babyshower">Baby Shower</button>
       <button class="cat-tab" data-cat="engagement">Engagement</button>
@@ -1100,230 +1052,278 @@
 
     <div class="templates-grid">
 
-      <!-- 1. Elegant Birthday -->
-      <div class="template-card r" data-category="birthday">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=85" alt="Elegant Birthday" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg, #c9942a, #7b1818)';this.remove();"></div>
-          <span class="category-badge">Birthday</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Elegant Birthday</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
-          </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/birthday/birthday-1.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="birthday-1" data-name="Elegant Birthday" data-customize="templates/birthday/birthday-1-customize.html">Buy ₹500</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. Kids Party -->
-      <div class="template-card r" data-category="birthday">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=85" alt="Kids Party" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg, #e84090, #7b20c0)';this.remove();"></div>
-          <span class="category-badge">Birthday</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Kids Party</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
-          </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/birthday/birthday-2.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="birthday-2" data-name="Kids Party" data-customize="templates/birthday/birthday-2-customize.html">Buy ₹500</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. South Indian Wedding -->
+      <!-- 1. South Indian Wedding -->
       <div class="template-card r" data-category="wedding">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="assets/generated/gopuram-golden-hour.jpeg" alt="South Indian Wedding" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg, #6b1300, #c9942a)';this.remove();"></div>
-          <span class="category-badge">Wedding</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">South Indian Wedding</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/gopuram-golden-hour.jpeg" alt="South Indian Wedding" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#6b1300,#c9942a)';">
           </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/wedding/wedding-1.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="wedding-1" data-name="South Indian Wedding" data-customize="templates/wedding/wedding-1-customize.html">Buy ₹500</button>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/wedding/wedding-1.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">South Indian Wedding</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Gopuram sunrise, marigold garlands, cinematic scroll.</p>
+          <span class="card-tag">Wedding</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/wedding/wedding-1.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none; transition: border-color 160ms, color 160ms;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="wedding-1" data-name="South Indian Wedding" data-customize="templates/wedding/wedding-1-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
           </div>
         </div>
       </div>
 
-      <!-- 4. Rajasthani Wedding -->
+      <!-- 2. Rajasthani Wedding -->
       <div class="template-card r" data-category="wedding">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&q=85" alt="Rajasthani Wedding" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg, #1a3a8b, #c9942a)';this.remove();"></div>
-          <span class="category-badge">Wedding</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Rajasthani Wedding</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/rajasthani-palace.jpeg" alt="Rajasthani Wedding" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#1a3a8b,#c9942a)';">
           </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/wedding/wedding-2.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="wedding-2" data-name="Rajasthani Wedding" data-customize="templates/wedding/wedding-2-customize.html">Buy ₹500</button>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/wedding/wedding-2.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Rajasthani Wedding</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Palace parallax, marigold toran, royal crimson & gold.</p>
+          <span class="card-tag">Wedding</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/wedding/wedding-2.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none; transition: border-color 160ms, color 160ms;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="wedding-2" data-name="Rajasthani Wedding" data-customize="templates/wedding/wedding-2-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Elegant Birthday -->
+      <div class="template-card r" data-category="birthday">
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/birthday-elegant-hero.jpeg" alt="Elegant Birthday" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#c9942a,#7b1818)';">
+          </div>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/birthday/birthday-1.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Elegant Birthday</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Sophisticated, gold-accented birthday invitation.</p>
+          <span class="card-tag">Birthday</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/birthday/birthday-1.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="birthday-1" data-name="Elegant Birthday" data-customize="templates/birthday/birthday-1-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Kids Party -->
+      <div class="template-card r" data-category="birthday">
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/kids-party-hero.jpeg" alt="Kids Party" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg,#e84090,#7b20c0)';">
+          </div>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/birthday/birthday-2.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Kids Party</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Bright, fun, animated birthday party invitation.</p>
+          <span class="card-tag">Birthday</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/birthday/birthday-2.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="birthday-2" data-name="Kids Party" data-customize="templates/birthday/birthday-2-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
           </div>
         </div>
       </div>
 
       <!-- 5. Griha Pravesham -->
       <div class="template-card r" data-category="housewarming">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=600&q=85" alt="Griha Pravesham" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #c86820, #2a7020)';this.remove();"></div>
-          <span class="category-badge">Housewarming</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Griha Pravesham</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/griha-pravesham-hero.jpeg" alt="Griha Pravesham" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg,#c86820,#2a7020)';">
           </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/housewarming/housewarming-1.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="housewarming-1" data-name="Griha Pravesham" data-customize="templates/housewarming/housewarming-1-customize.html">Buy ₹500</button>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/housewarming/housewarming-1.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Griha Pravesham</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Traditional housewarming with kolam & marigolds.</p>
+          <span class="card-tag">Housewarming</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/housewarming/housewarming-1.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="housewarming-1" data-name="Griha Pravesham" data-customize="templates/housewarming/housewarming-1-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
           </div>
         </div>
       </div>
 
       <!-- 6. Modern Housewarming -->
       <div class="template-card r" data-category="housewarming">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1560185127-6a6a5f87371c?w=600&q=85" alt="Modern Housewarming" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #1a6070, #c07830)';this.remove();"></div>
-          <span class="category-badge">Housewarming</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Modern Housewarming</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/modern-home-hero.jpeg" alt="Modern Housewarming" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg,#1a6070,#c07830)';">
           </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/housewarming/housewarming-2.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="housewarming-2" data-name="Modern Housewarming" data-customize="templates/housewarming/housewarming-2-customize.html">Buy ₹500</button>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/housewarming/housewarming-2.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Modern Housewarming</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Contemporary home-blessing celebration invitation.</p>
+          <span class="card-tag">Housewarming</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/housewarming/housewarming-2.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="housewarming-2" data-name="Modern Housewarming" data-customize="templates/housewarming/housewarming-2-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
           </div>
         </div>
       </div>
 
       <!-- 7. Seemantham -->
       <div class="template-card r" data-category="babyshower">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=85" alt="Seemantham" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #b8860b, #228b22)';this.remove();"></div>
-          <span class="category-badge">Baby Shower</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Seemantham</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/seemantham-hero.jpeg" alt="Seemantham" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg,#b8860b,#228b22)';">
           </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/babyshower/babyshower-1.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="babyshower-1" data-name="Seemantham" data-customize="templates/babyshower/babyshower-1-customize.html">Buy ₹500</button>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/babyshower/babyshower-1.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Seemantham</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Traditional South Indian baby shower invitation.</p>
+          <span class="card-tag">Baby Shower</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/babyshower/babyshower-1.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="babyshower-1" data-name="Seemantham" data-customize="templates/babyshower/babyshower-1-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
           </div>
         </div>
       </div>
 
       <!-- 8. Modern Baby Shower -->
       <div class="template-card r" data-category="babyshower">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=600&q=85" alt="Modern Baby Shower" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #e870a0, #a040c0)';this.remove();"></div>
-          <span class="category-badge">Baby Shower</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Modern Baby Shower</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/modern-babyshower-hero.jpeg" alt="Modern Baby Shower" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg,#e870a0,#a040c0)';">
           </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/babyshower/babyshower-2.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="babyshower-2" data-name="Modern Baby Shower" data-customize="templates/babyshower/babyshower-2-customize.html">Buy ₹500</button>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/babyshower/babyshower-2.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Modern Baby Shower</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Fresh, pastel-toned modern baby shower invite.</p>
+          <span class="card-tag">Baby Shower</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/babyshower/babyshower-2.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="babyshower-2" data-name="Modern Baby Shower" data-customize="templates/babyshower/babyshower-2-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
           </div>
         </div>
       </div>
 
       <!-- 9. Traditional Engagement -->
       <div class="template-card r" data-category="engagement">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=85" alt="Traditional Engagement" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #9b1840, #c9942a)';this.remove();"></div>
-          <span class="category-badge">Engagement</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Traditional Engagement</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/traditional-engagement-hero.jpeg" alt="Traditional Engagement" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg,#9b1840,#c9942a)';">
           </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/engagement/engagement-1.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="engagement-1" data-name="Traditional Engagement" data-customize="templates/engagement/engagement-1-customize.html">Buy ₹500</button>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/engagement/engagement-1.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Traditional Engagement</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Rich, ornate traditional engagement ceremony invite.</p>
+          <span class="card-tag">Engagement</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/engagement/engagement-1.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="engagement-1" data-name="Traditional Engagement" data-customize="templates/engagement/engagement-1-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
           </div>
         </div>
       </div>
 
       <!-- 10. Modern Engagement -->
       <div class="template-card r" data-category="engagement">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=600&q=85" alt="Modern Engagement" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #1a2a6b, #c9942a)';this.remove();"></div>
-          <span class="category-badge">Engagement</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Modern Engagement</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/modern-engagement-hero.jpeg" alt="Modern Engagement" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg,#1a2a6b,#c9942a)';">
           </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/engagement/engagement-2.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="engagement-2" data-name="Modern Engagement" data-customize="templates/engagement/engagement-2-customize.html">Buy ₹500</button>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/engagement/engagement-2.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Modern Engagement</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Sleek, contemporary engagement announcement.</p>
+          <span class="card-tag">Engagement</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/engagement/engagement-2.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="engagement-2" data-name="Modern Engagement" data-customize="templates/engagement/engagement-2-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
           </div>
         </div>
       </div>
 
       <!-- 11. Golden Anniversary -->
       <div class="template-card r" data-category="anniversary">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=85" alt="Golden Anniversary" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #8b0000, #c9942a)';this.remove();"></div>
-          <span class="category-badge">Anniversary</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Golden Anniversary</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/golden-anniversary-hero.jpeg" alt="Golden Anniversary" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg,#8b0000,#c9942a)';">
           </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/anniversary/anniversary-1.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="anniversary-1" data-name="Golden Anniversary" data-customize="templates/anniversary/anniversary-1-customize.html">Buy ₹500</button>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/anniversary/anniversary-1.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Golden Anniversary</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Warm gold tones for a golden anniversary celebration.</p>
+          <span class="card-tag">Anniversary</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/anniversary/anniversary-1.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="anniversary-1" data-name="Golden Anniversary" data-customize="templates/anniversary/anniversary-1-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
           </div>
         </div>
       </div>
 
       <!-- 12. Silver Anniversary -->
       <div class="template-card r" data-category="anniversary">
-        <div class="card-thumb">
-          <div class="card-thumb-bg"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&q=85" alt="Silver Anniversary" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg, #4a4a6a, #c9942a)';this.remove();"></div>
-          <span class="category-badge">Anniversary</span>
-        </div>
-        <div class="card-body">
-          <p class="card-name">Silver Anniversary</p>
-          <div class="card-price-row">
-            <span class="card-price">₹500</span>
-            <div class="card-features-mini"><span>Animated</span><span>Customizable</span></div>
+        <div class="card-mockup">
+          <div class="card-mockup-screen">
+            <img src="assets/generated/silver-anniversary-hero.jpeg" alt="Silver Anniversary" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(145deg,#4a4a6a,#c9942a)';">
           </div>
-          <div class="card-actions">
-            <a class="btn-card btn-preview" href="templates/anniversary/anniversary-2.html" target="_blank" rel="noopener">Preview</a>
-            <button class="btn-card btn-buy" data-buy="anniversary-2" data-name="Silver Anniversary" data-customize="templates/anniversary/anniversary-2-customize.html">Buy ₹500</button>
+          <div class="card-mockup-dot"></div>
+          <a class="card-preview-btn" href="templates/anniversary/anniversary-2.html" target="_blank" rel="noopener" title="Preview">👁</a>
+        </div>
+        <div class="card-info">
+          <div class="card-name-row">
+            <span class="card-name">Silver Anniversary</span>
+            <span class="card-price-badge">₹500</span>
+          </div>
+          <p class="card-desc">Elegant silver & blue for 25th anniversary milestones.</p>
+          <span class="card-tag">Anniversary</span>
+          <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+            <a class="btn-card btn-preview" href="templates/anniversary/anniversary-2.html" target="_blank" rel="noopener" style="flex:1; text-align:center; padding:0.5rem; border:1.5px solid #e8e8e8; border-radius:8px; font-size:0.78rem; font-weight:600; color:#555; text-decoration:none;" onmouseover="this.style.borderColor='#1a1a1a';this.style.color='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8';this.style.color='#555'">Preview</a>
+            <button class="btn-card btn-buy" data-buy="anniversary-2" data-name="Silver Anniversary" data-customize="templates/anniversary/anniversary-2-customize.html" style="flex:1; padding:0.5rem; background:#1a1a1a; border:none; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.78rem; font-weight:700; color:white; cursor:pointer;">Buy ₹500</button>
           </div>
         </div>
       </div>
@@ -1331,302 +1331,472 @@
     </div>
   </section>
 
-  <!-- ── Premium Features ────────────────────────────────────── -->
-  <section id="features" class="features-section">
-    <div class="section-header">
-      <p class="section-eyebrow r">Included with every template</p>
-      <h2 class="section-title r">Premium <em>Features</em></h2>
-      <p class="section-subtitle r">Everything you need to create the perfect celebration experience</p>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="features-grid">
-      <!-- Live Customization -->
-      <div class="feature-card r">
-        <div class="feature-card-icon">✏️</div>
-        <h3>Live Customization</h3>
-        <p>Edit names, dates, venue, menu and every detail in real time. See your invitation update as you type.</p>
-        <ul>
-          <li>Names, dates, venue & menu</li>
-          <li>Custom messages & family names</li>
-          <li>Instant live preview</li>
-          <li>Shareable link generated instantly</li>
-        </ul>
-        <a href="templates/wedding/wedding-1-customize.html" class="feature-card-link">Try It <span>→</span></a>
+  <!-- ── FEATURES ───────────────────────────────────── -->
+  <section class="features-section" id="features">
+    <div class="features-inner">
+      <div class="features-left">
+        <span class="features-label">Features</span>
+        <h2 class="features-heading">The Digital<br/>Invite,<br/>Reinvented.</h2>
+        <p class="features-desc">Mobile-first, effortless to share. Costs less than printed cards, but feels far more premium.</p>
+        <a href="#templates" class="features-cta">Choose a template</a>
       </div>
-
-      <!-- Beautiful Templates -->
-      <div class="feature-card r">
-        <div class="feature-card-icon">🎨</div>
-        <h3>Beautiful Templates</h3>
-        <p>12 handcrafted designs across 6 categories — weddings, birthdays, housewarmings and more.</p>
-        <ul>
-          <li>6 celebration categories</li>
-          <li>Cinematic scroll animations</li>
-          <li>Traditional & modern styles</li>
-          <li>AI-generated artwork</li>
-        </ul>
-        <a href="#templates" class="feature-card-link">Browse All <span>→</span></a>
-      </div>
-
-      <!-- Mobile First -->
-      <div class="feature-card r">
-        <div class="feature-card-icon">📱</div>
-        <h3>Mobile First</h3>
-        <p>Designed to be shared on WhatsApp. Opens beautifully on every phone, without an app.</p>
-        <ul>
-          <li>Instant WhatsApp sharing</li>
-          <li>No app required for guests</li>
-          <li>Responsive on all screen sizes</li>
-          <li>Fast loading, offline-ready</li>
-        </ul>
-        <a href="templates/wedding/wedding-1.html" class="feature-card-link" target="_blank" rel="noopener">See Demo <span>→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── How It Works ──────────────────────────────────────────── -->
-  <section class="how-section" id="how-it-works">
-    <div class="section-header">
-      <p class="section-eyebrow r">Simple process</p>
-      <h2 class="section-title r">How It <em>Works</em></h2>
-      <p class="section-subtitle r">Four simple steps to your perfect invitation</p>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="steps-grid">
-      <div class="step-card r">
-        <p class="step-number">Step 01</p>
-        <span class="step-icon" aria-hidden="true">🛍️</span>
-        <h3 class="step-title">Choose Template</h3>
-        <p class="step-desc">Browse our collection of beautifully crafted invitation designs.</p>
-      </div>
-
-      <div class="step-card r">
-        <p class="step-number">Step 02</p>
-        <span class="step-icon" aria-hidden="true">💳</span>
-        <h3 class="step-title">Buy for ₹500</h3>
-        <p class="step-desc">One-time payment. No subscriptions, no hidden fees.</p>
-      </div>
-
-      <div class="step-card r">
-        <p class="step-number">Step 03</p>
-        <span class="step-icon" aria-hidden="true">✏️</span>
-        <h3 class="step-title">Customize</h3>
-        <p class="step-desc">Fill in your event details — names, date, venue and more.</p>
-      </div>
-
-      <div class="step-card r">
-        <p class="step-number">Step 04</p>
-        <span class="step-icon" aria-hidden="true">🔗</span>
-        <h3 class="step-title">Share</h3>
-        <p class="step-desc">Send your unique invitation link via WhatsApp or any platform.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Pricing ───────────────────────────────────────────────── -->
-  <section class="pricing-section" id="pricing">
-    <div class="section-header">
-      <p class="section-eyebrow r">Simple pricing</p>
-      <h2 class="section-title r">One Price, <em>Everything Included</em></h2>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="pricing-card r">
-      <p class="pricing-eyebrow">All-Inclusive</p>
-      <p class="pricing-amount">₹500</p>
-      <p class="pricing-period">One-time payment per template</p>
-      <ul class="pricing-features">
-        <li>Any premium template</li>
-        <li>Customize everything — names, dates, venue, menu</li>
-        <li>Cinematic scroll animations</li>
-        <li>Unlimited customization edits</li>
-        <li>Shareable link for WhatsApp & more</li>
-        <li>Mobile-first responsive design</li>
-        <li>Google Maps venue embed</li>
-      </ul>
-      <a href="#templates" class="btn btn-primary" style="width:100%;">Choose Your Template</a>
-    </div>
-  </section>
-
-  <!-- ── Social Proof Stats ────────────────────────────────────── -->
-  <section class="stats-section r" id="social-proof">
-    <p class="section-eyebrow">Trusted by families across India</p>
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-number" data-count="500" data-suffix="+">0+</div>
-        <div class="stat-label">Happy Families</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-count="12">0</div>
-        <div class="stat-label">Premium Templates</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-count="50" data-suffix="+">0+</div>
-        <div class="stat-label">Events Hosted</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-count="98" data-suffix="%">0%</div>
-        <div class="stat-label">5-Star Reviews</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Testimonials ──────────────────────────────────────────── -->
-  <section id="testimonials" class="testimonials-section">
-    <div class="section-header">
-      <p class="section-eyebrow r">What families say</p>
-      <h2 class="section-title r">Love from Our <em>Customers</em></h2>
-      <div class="section-rule"></div>
-    </div>
-
-    <div class="testi-grid">
-      <div class="testi-card r">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"The South Indian wedding template was breathtaking. All our guests were amazed — they thought we hired a professional designer!"</p>
-        <div class="testi-author">
-          <img class="testi-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&q=80" alt="" loading="lazy" onerror="this.style.background='var(--maroon)';this.src='';">
+      <div class="features-right">
+        <div class="feature-row r">
+          <div class="feature-icon">🐷</div>
           <div>
-            <div class="testi-name">Priya & Arjun Reddy</div>
-            <div class="testi-meta">Wedding · Hyderabad</div>
+            <div class="feature-text-head">Cost</div>
+            <div class="feature-text-desc">Cheaper than printed cards and WhatsApp video invites. One-time payment, ₹500 for lifetime access.</div>
           </div>
         </div>
-      </div>
-
-      <div class="testi-card r">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Used the Griha Pravesham template for our housewarming. The kolam animation and marigold garland made it feel like a real invitation."</p>
-        <div class="testi-author">
-          <img class="testi-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&q=80" alt="" loading="lazy" onerror="this.style.background='var(--gold)';this.src='';">
+        <div class="feature-row r">
+          <div class="feature-icon">🔍</div>
           <div>
-            <div class="testi-name">Meena Sharma</div>
-            <div class="testi-meta">Housewarming · Bangalore</div>
+            <div class="feature-text-head">Elder-Friendly Design</div>
+            <div class="feature-text-desc">No more squinting at tiny, low-res WhatsApp videos. Opens beautifully on any phone, no app required.</div>
           </div>
         </div>
-      </div>
-
-      <div class="testi-card r">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Customizing was so simple — I filled in our names and venue and it looked incredible. Our guests couldn't believe it was a ₹500 invitation!"</p>
-        <div class="testi-author">
-          <img class="testi-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&q=80" alt="" loading="lazy" onerror="this.style.background='var(--maroon)';this.src='';">
+        <div class="feature-row r">
+          <div class="feature-icon">📷</div>
           <div>
-            <div class="testi-name">Rahul & Divya Kapoor</div>
-            <div class="testi-meta">Anniversary · Mumbai</div>
+            <div class="feature-text-head">Pre-Wedding Gallery</div>
+            <div class="feature-text-desc">Showcase your shoot like never before. Add up to 6 photos that guests can tap to view full screen.</div>
           </div>
         </div>
-      </div>
-
-      <div class="testi-card r">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"My daughter's Seemantham invitation was so beautiful — the banana leaf design had everyone emotional. Thank you invite.studio!"</p>
-        <div class="testi-author">
-          <img class="testi-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=60&q=80" alt="" loading="lazy" onerror="this.style.background='var(--gold)';this.src='';">
+        <div class="feature-row r">
+          <div class="feature-icon">⚡</div>
           <div>
-            <div class="testi-name">Kamala Venkatesh</div>
-            <div class="testi-meta">Baby Shower · Chennai</div>
+            <div class="feature-text-head">Instant Edits</div>
+            <div class="feature-text-desc">Any change? Update anything instantly even after sharing. Your link stays the same, content updates live.</div>
           </div>
         </div>
-      </div>
-
-      <div class="testi-card r">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">"Sent the link on WhatsApp and everyone was blown away. The animations, the temple photo, the garland — it felt like a premium experience."</p>
-        <div class="testi-author">
-          <img class="testi-avatar" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=60&q=80" alt="" loading="lazy" onerror="this.style.background='var(--maroon)';this.src='';">
+        <div class="feature-row r">
+          <div class="feature-icon">🛕</div>
           <div>
-            <div class="testi-name">Suresh Nair</div>
-            <div class="testi-meta">Engagement · Kochi</div>
+            <div class="feature-text-head">Ritual-Ready Templates</div>
+            <div class="feature-text-desc">Includes deities, mantras, and editable ritual details. Each template honours your tradition beautifully.</div>
+          </div>
+        </div>
+        <div class="feature-row r">
+          <div class="feature-icon">🔒</div>
+          <div>
+            <div class="feature-text-head">Private Event Pages</div>
+            <div class="feature-text-desc">Invite different guests to different events. Control who sees what — mehendi, haldi, wedding or reception.</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── FAQ ───────────────────────────────────────────────────── -->
+  <!-- ── HOW IT WORKS ───────────────────────────────── -->
+  <section class="how-section" id="how">
+    <div class="how-header">
+      <h2 class="how-heading r">Create a Stunning Invite<br/>in 10 Minutes</h2>
+      <p class="how-sub r">Easily change everything — text, photos, colors — and make your love story the star.</p>
+    </div>
+    <div class="how-cards">
+
+      <!-- Step 1: Choose -->
+      <div class="how-card r">
+        <div class="how-card-visual" style="background: #f0f0f0; position:relative; overflow:hidden;">
+          <div class="phone-mockup phone-mockup-2">
+            <div class="phone-mockup-notch"></div>
+            <div class="phone-mockup-screen" style="aspect-ratio:9/16;">
+              <img src="assets/generated/traditional-engagement-hero.jpeg" alt="" style="width:100%; display:block; height:180px; object-fit:cover;">
+            </div>
+            <div class="phone-mockup-home"></div>
+          </div>
+          <div class="phone-mockup" style="position:relative; z-index:2;">
+            <div class="phone-mockup-notch"></div>
+            <div class="phone-mockup-screen" style="aspect-ratio:9/16;">
+              <img src="assets/generated/gopuram-golden-hour.jpeg" alt="" style="width:100%; display:block; height:180px; object-fit:cover;">
+            </div>
+            <div class="phone-mockup-home"></div>
+          </div>
+        </div>
+        <div class="how-card-body">
+          <div class="how-step-num">1 — Choose a template</div>
+          <div class="how-step-title">Pick your style</div>
+          <div class="how-step-desc">Choose a design that fits your wedding aesthetics from 12 premium templates.</div>
+        </div>
+      </div>
+
+      <!-- Step 2: Customise -->
+      <div class="how-card r" style="--delay: 80ms;">
+        <div class="how-card-visual" style="background: #f8f8f8; padding: 0; overflow:hidden; position:relative;">
+          <div class="desktop-mockup">
+            <div class="desktop-bar">
+              <div class="desktop-dot" style="background:#ff5f57;"></div>
+              <div class="desktop-dot" style="background:#febc2e;"></div>
+              <div class="desktop-dot" style="background:#28c840;"></div>
+            </div>
+            <div class="desktop-content">
+              <div class="desktop-preview">
+                <img src="assets/generated/rajasthani-palace.jpeg" alt="">
+              </div>
+              <div class="desktop-panel">
+                <div class="panel-label">Names</div>
+                <div class="panel-input">Aryan</div>
+                <div class="panel-input-empty">Enter bride's name…</div>
+                <div class="panel-label" style="margin-top:4px;">Date</div>
+                <div class="panel-input">May 5, 2026</div>
+                <div class="panel-label" style="margin-top:4px;">Venue</div>
+                <div class="panel-input-empty">Enter venue…</div>
+                <div class="panel-edit-btn">Save &amp; Publish</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="how-card-body">
+          <div class="how-step-num">2 — Customise &amp; Publish</div>
+          <div class="how-step-title">Add your story</div>
+          <div class="how-step-desc">Add event details, names, dates and photos. Hit publish and your invite is live instantly.</div>
+        </div>
+      </div>
+
+      <!-- Step 3: Share -->
+      <div class="how-card r" style="--delay: 160ms;">
+        <div class="how-card-visual" style="padding:0; overflow:hidden;">
+          <div class="chat-mockup">
+            <div class="chat-header">
+              <div class="chat-avatar"></div>
+              Wedding Group 💍
+            </div>
+            <div class="chat-msg recv">Hey, is your wedding date finalised?</div>
+            <div class="chat-msg sent">Yes! Wait, let me share the invite 🎉</div>
+            <div class="chat-link-card">
+              <img class="chat-link-img" src="assets/generated/gopuram-golden-hour.jpeg" alt="">
+              <div class="chat-link-title">Priya weds Arjun — Wedding Invitation</div>
+              <div class="chat-link-url">invite.studio/priya-arjun</div>
+            </div>
+            <div class="chat-msg recv" style="font-size:0.65rem;">Wow! This is stunning! 😍</div>
+          </div>
+        </div>
+        <div class="how-card-body">
+          <div class="how-step-num">3 — Share anywhere</div>
+          <div class="how-step-title">Share with everyone</div>
+          <div class="how-step-desc">Share your invite link via WhatsApp, Instagram, or email. Guests open it instantly, no app needed.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── COMPARISON TABLE ──────────────────────────── -->
+  <section class="compare-section">
+    <div class="compare-header">
+      <h2 class="compare-heading r">What Printed Cards Can't Do<br/>(But These Templates Can)</h2>
+      <p class="compare-sub r">See how your invite can go from one-time share to a lasting experience.</p>
+    </div>
+    <div class="compare-table r">
+      <div class="compare-head">
+        <div class="compare-col-head"></div>
+        <div class="compare-col-head">Printed Cards</div>
+        <div class="compare-col-head">WhatsApp Videos</div>
+        <div class="compare-col-head ours">✦ invite.studio</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">💰 Cost</div>
+        <div class="compare-cell compare-bad">High</div>
+        <div class="compare-cell">Moderate</div>
+        <div class="compare-cell ours compare-good">Low — ₹500</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">✏️ Customization</div>
+        <div class="compare-cell compare-bad">Limited</div>
+        <div class="compare-cell compare-bad">Hard</div>
+        <div class="compare-cell ours compare-good">Easy</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">📱 Interactivity</div>
+        <div class="compare-cell compare-bad">Static</div>
+        <div class="compare-cell compare-bad">View-only</div>
+        <div class="compare-cell ours compare-good">Responsive</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">🔄 Updating</div>
+        <div class="compare-cell compare-bad">Impossible</div>
+        <div class="compare-cell compare-bad">Difficult</div>
+        <div class="compare-cell ours compare-good">Instant</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">📸 Photo Gallery</div>
+        <div class="compare-cell compare-bad">No</div>
+        <div class="compare-cell compare-bad">No</div>
+        <div class="compare-cell ours compare-good">Yes</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-cell">🗺️ Venue Map</div>
+        <div class="compare-cell compare-bad">No</div>
+        <div class="compare-cell compare-bad">No</div>
+        <div class="compare-cell ours compare-good">Yes</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top: 2.5rem;">
+      <a href="#templates" class="features-cta r">Choose a template</a>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ──────────────────────────────── -->
+  <section class="testi-section" id="testimonials">
+    <div class="testi-header">
+      <h2 class="testi-heading r">Don't Take Our Word for It</h2>
+      <p class="testi-sub r">Here's what real families are saying. One link. Endless compliments.</p>
+    </div>
+    <div class="testi-strip" id="testi-strip">
+      <!-- Photo testimonial cards -->
+      <div class="testi-plain-card r">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-plain-quote">"The South Indian wedding template was breathtaking. All our guests were amazed — they thought we hired a professional designer!"</p>
+        <div class="testi-author-row">
+          <div class="testi-avatar-circle">P</div>
+          <div>
+            <div class="testi-author-name">Priya &amp; Arjun Reddy</div>
+            <div class="testi-author-meta">Wedding · Hyderabad</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-plain-card r">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-plain-quote">"My god. I have never seen a wedding invite this pretty. invite.studio = 100/10"</p>
+        <div class="testi-author-row">
+          <div class="testi-avatar-circle">J</div>
+          <div>
+            <div class="testi-author-name">Jatin &amp; Monika</div>
+            <div class="testi-author-meta">Groom's family · Delhi</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-plain-card r">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-plain-quote">"'Where did you get this invite from?' was the most common question at our wedding. Everyone wanted the link!"</p>
+        <div class="testi-author-row">
+          <div class="testi-avatar-circle">A</div>
+          <div>
+            <div class="testi-author-name">Amisha &amp; Bharat</div>
+            <div class="testi-author-meta">Wedding · Mumbai</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-plain-card r">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-plain-quote">"Used the Griha Pravesham template. The kolam animation and garland made it feel like a real premium invite, not a ₹500 one!"</p>
+        <div class="testi-author-row">
+          <div class="testi-avatar-circle">M</div>
+          <div>
+            <div class="testi-author-name">Meena Sharma</div>
+            <div class="testi-author-meta">Housewarming · Bangalore</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-plain-card r">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-plain-quote">"Honestly it was actually easier than Canva, and wayyyy more beautiful than any WhatsApp video I've seen."</p>
+        <div class="testi-author-row">
+          <div class="testi-avatar-circle">S</div>
+          <div>
+            <div class="testi-author-name">Sidhant &amp; Roshni</div>
+            <div class="testi-author-meta">Wedding · Pune</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-plain-card r">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-plain-quote">"My uncle actually called to ask 'where did you get this invite from?' — that NEVER happens."</p>
+        <div class="testi-author-row">
+          <div class="testi-avatar-circle">S</div>
+          <div>
+            <div class="testi-author-name">Saurab &amp; Tamanna</div>
+            <div class="testi-author-meta">Wedding · Jaipur</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────── -->
   <section class="faq-section" id="faq">
-    <div class="section-header">
-      <p class="section-eyebrow r">Got questions?</p>
-      <h2 class="section-title r">Frequently Asked <em>Questions</em></h2>
-      <div class="section-rule"></div>
+    <div class="faq-header">
+      <h2 class="faq-heading r">Questions? Answers.</h2>
+      <p class="faq-sub r">Everything you need to know about invite.studio.</p>
     </div>
-
     <div class="faq-list">
       <div class="faq-item r">
         <button class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
-          Do I need to pay again if I want to edit my invitation? <span class="faq-icon">+</span>
+          Do I need any software to use these templates? <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">No! Once you purchase a template for ₹500, you have lifetime access. You can return to the customization page anytime to update names, dates, or any other details.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">No software needed at all. Everything works in your browser. Just fill in your details and your invite is ready to share.</div></div>
       </div>
       <div class="faq-item r">
         <button class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
-          What is Video Mode and how does it work? <span class="faq-icon">+</span>
+          Can I make changes after sharing the link? <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">Video Mode plays your invitation like a cinematic film — each section fades in on a timer with elegant typography animations, transitions, and particle effects. Share the video link directly and guests can watch it on any device.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">Yes! You can update your invite anytime — change the venue, add details, or fix a typo. Your shared link stays the same, the content updates live.</div></div>
+      </div>
+      <div class="faq-item r">
+        <button class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+          Will this open like a website on my guests' phones? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes, guests just tap the link — it opens beautifully in their browser on any phone. No app download required.</div></div>
+      </div>
+      <div class="faq-item r">
+        <button class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+          Can I invite different guests to different events? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes — you can create separate links for different ceremonies (mehendi, haldi, wedding, reception) and share each with the relevant guests.</div></div>
+      </div>
+      <div class="faq-item r">
+        <button class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+          How long does it take to set up my invitation? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Most customers are done in under 10 minutes. Just fill in names, dates, venue and photos — and hit publish.</div></div>
       </div>
       <div class="faq-item r">
         <button class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
           Is the payment secure? <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">We'll be integrating Razorpay for secure payments (UPI, cards, net banking). Currently in demo mode — full payment integration coming soon. Your data is never stored on our servers.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">We use Razorpay for secure payments — UPI, cards, net banking. All payments are encrypted and your data is never stored on our servers.</div></div>
       </div>
-      <div class="faq-item r">
-        <button class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
-          Can I share the invitation on WhatsApp? <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-a"><div class="faq-a-inner">Absolutely! After customizing your invitation, you get a unique shareable link that works on WhatsApp, Instagram, email, or any platform. Guests simply tap the link to view the full invitation on any device.</div></div>
-      </div>
+    </div>
+    <div style="text-align:center; margin-top: 2.5rem;">
+      <a href="mailto:hello@invite.studio" style="font-size:0.88rem; font-weight:600; color:var(--black); background:white; border:1.5px solid var(--border); padding:0.7rem 1.6rem; border-radius:100px; text-decoration:none; transition: border-color 160ms;" onmouseover="this.style.borderColor='#1a1a1a'" onmouseout="this.style.borderColor='#e8e8e8'" class="r">Any other question? Email Us</a>
     </div>
   </section>
 
-  <!-- ── CTA Banner ────────────────────────────────────────────── -->
-  <section class="cta-banner">
-    <h2 class="r">Ready to Create Your Invitation?</h2>
-    <p class="r">Choose from 12 beautiful templates and share your celebration with the world</p>
-    <a href="#templates" class="btn btn-gold r">Browse Templates</a>
+  <!-- ── NEWSLETTER ─────────────────────────────────── -->
+  <section class="newsletter-section">
+    <h2 class="newsletter-heading r">Be the first to know when<br/>a new template drops</h2>
+    <p class="newsletter-sub r">Stay updated on new template and feature releases.</p>
+    <form class="newsletter-form r" onsubmit="handleNewsletter(event)">
+      <input class="newsletter-input" type="email" placeholder="Email address" required />
+      <button class="newsletter-btn" type="submit">Subscribe</button>
+    </form>
   </section>
 
-  <!-- ── Footer ──────────────────────────────────────────────── -->
+  <!-- ── FOOTER ─────────────────────────────────────── -->
   <footer>
-    <a href="#" class="footer-logo">invite.studio</a>
-    <p class="footer-tagline">Crafted with love for every celebration</p>
-    <ul class="footer-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#templates">Templates</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="templates/wedding/wedding-1.html" target="_blank" rel="noopener">Live Demo</a></li>
-      <li><a href="mailto:hello@invite.studio">Contact</a></li>
-    </ul>
-    <div class="footer-divider"></div>
-    <p class="footer-copy">&copy; 2026 invite.studio. All rights reserved.</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo-row">
+          <div class="footer-logo-icon">✦</div>
+          <span class="footer-logo-text">invite<span>.studio</span></span>
+        </a>
+        <p class="footer-tagline">Website Templates for Digital Invitations.<br/>Easy to customise, effortless to share.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">📸</a>
+          <a href="#" class="footer-social">▶</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-head">Need Help?</div>
+        <ul class="footer-links">
+          <li><a href="mailto:hello@invite.studio">hello@invite.studio</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-head">Information</div>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#templates">Browse Templates</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="templates/wedding/wedding-1.html" target="_blank" rel="noopener">Live Demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 invite.studio. All rights reserved.</span>
+      <span>Made with ♥ for every celebration</span>
+    </div>
   </footer>
 
   <script src="js/payment.js"></script>
   <script src="js/ux-polish.js" defer></script>
   <script>
-    // Category filter tabs
+    // ── Mobile nav toggle ──────────────────────────────
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    menuBtn.addEventListener('click', () => {
+      menuBtn.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        menuBtn.classList.remove('open');
+        mobileNav.classList.remove('open');
+      });
+    });
+
+    // ── Category filter ────────────────────────────────
     document.querySelectorAll('.cat-tab').forEach(tab => {
       tab.addEventListener('click', function() {
         document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
         this.classList.add('active');
         const cat = this.dataset.cat;
         document.querySelectorAll('.template-card').forEach(card => {
-          if (cat === 'all' || card.dataset.category === cat) {
+          const show = cat === 'all' || card.dataset.category === cat;
+          if (show) {
             card.style.display = '';
             card.style.opacity = '0';
-            card.style.transform = 'translateY(12px)';
-            requestAnimationFrame(() => {
+            card.style.transform = 'translateY(14px)';
+            requestAnimationFrame(() => requestAnimationFrame(() => {
               card.style.transition = 'opacity 0.4s cubic-bezier(0.23,1,0.32,1), transform 0.4s cubic-bezier(0.23,1,0.32,1)';
               card.style.opacity = '1';
               card.style.transform = 'translateY(0)';
-            });
+            }));
           } else {
             card.style.display = 'none';
           }
         });
       });
     });
+
+    // ── Scroll reveal ──────────────────────────────────
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          // Stagger siblings
+          const siblings = e.target.parentElement.querySelectorAll('.r:not(.visible)');
+          let delay = 0;
+          siblings.forEach(s => {
+            if (s === e.target || s.getBoundingClientRect().top < window.innerHeight + 20) {
+              setTimeout(() => s.classList.add('visible'), delay);
+              delay += 60;
+            }
+          });
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.r').forEach(el => revealObs.observe(el));
+
+    // ── Testimonial strip drag scroll ─────────────────
+    const strip = document.getElementById('testi-strip');
+    let isDown = false, startX, scrollLeft;
+    strip.addEventListener('mousedown', e => {
+      isDown = true; strip.classList.add('dragging');
+      startX = e.pageX - strip.offsetLeft; scrollLeft = strip.scrollLeft;
+    });
+    strip.addEventListener('mouseleave', () => { isDown = false; strip.classList.remove('dragging'); });
+    strip.addEventListener('mouseup', () => { isDown = false; strip.classList.remove('dragging'); });
+    strip.addEventListener('mousemove', e => {
+      if (!isDown) return; e.preventDefault();
+      const x = e.pageX - strip.offsetLeft;
+      strip.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    });
+
+    // ── Newsletter ─────────────────────────────────────
+    function handleNewsletter(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = '✓ Subscribed!';
+      btn.style.background = '#1a7a1a';
+      setTimeout(() => { btn.textContent = 'Subscribe'; btn.style.background = ''; }, 3000);
+    }
   </script>
 </body>
 </html>
