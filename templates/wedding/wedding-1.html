@@ -1052,17 +1052,30 @@
 #lanterns-container {
   position: absolute;
   inset: 0;
-  overflow: hidden;
   pointer-events: none;
   z-index: 3;
 }
 .hero-lantern {
   position: absolute;
-  mix-blend-mode: screen;
   pointer-events: none;
   will-change: transform, opacity;
-  filter: brightness(1.1) saturate(1.15);
+  filter: drop-shadow(0 0 12px rgba(255,160,30,0.55));
 }
+
+/* ── INVITATION 4-SIDE BORDERS ── */
+.inv-side-border {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 72px;
+  background-repeat: repeat-y;
+  background-size: 72px auto;
+  mix-blend-mode: multiply;
+  opacity: 0.82;
+  pointer-events: none;
+  z-index: 3;
+}
+.inv-side-left  { left: 0;  background-image: url('../../assets/bapu/bapu-border-1.png'); }
+.inv-side-right { right: 0; background-image: url('../../assets/bapu/bapu-border-2.png'); }
 @keyframes lanternRise {
   0%   { opacity: 0;   transform: translateY(0)      translateX(0px)   rotate(-2deg); }
   8%   { opacity: 0.88; }
@@ -1172,6 +1185,8 @@
   <img class="bapu-layer bapu-strip bapu-strip-top" src="../../assets/bapu/bapu-border-2.png" alt="" aria-hidden="true" loading="lazy">
   <img class="bapu-layer inv-arch-bg" src="../../assets/bapu/bapu-torana-dense.png" alt="" aria-hidden="true" loading="lazy">
   <img class="bapu-layer bapu-strip bapu-strip-bottom" src="../../assets/bapu/bapu-border-1.png" alt="" aria-hidden="true" loading="lazy">
+  <div class="inv-side-border inv-side-left"  aria-hidden="true"></div>
+  <div class="inv-side-border inv-side-right" aria-hidden="true"></div>
   <div class="invite-backdrop" aria-hidden="true">INVITE</div>
   <div class="section-header reveal">
     <p class="section-eyebrow">With the blessings of the Almighty</p>
@@ -1550,7 +1565,7 @@
   (function initLanterns() {
     const container = document.getElementById('lanterns-container');
     if (!container) return;
-    const SRC = '../../assets/bapu/bapu-lantern.png';
+    const SRC = '../../assets/bapu/bapu-lantern-transparent.png';
     const TOTAL = 9;
 
     for (let i = 0; i < TOTAL; i++) {
