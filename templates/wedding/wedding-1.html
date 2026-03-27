@@ -1136,7 +1136,7 @@
 
 <!-- NAVBAR -->
 <nav class="navbar">
-  <div class="nav-logo">Arjun <span style="color:rgba(201,148,42,0.7)">♥</span> Meghana</div>
+  <div class="nav-logo"><span data-field="navGroom">Arjun</span> <span style="color:rgba(201,148,42,0.7)">♥</span> <span data-field="navBride">Meghana</span></div>
   <ul class="nav-links">
     <li><a href="#invitation">Invitation</a></li>
     <li><a href="#ceremony">Events</a></li>
@@ -1735,6 +1735,8 @@ document.addEventListener('DOMContentLoaded', () => {
   InviteCustomize.initPreview({
     groom:"Arjun Kumar",
     bride:"Meghana Reddy",
+    navGroom:"Arjun",
+    navBride:"Meghana",
     weddingDate:"April 18, 2026",
     weddingTime:"10:30 AM",
     receptionDate:"April 18, 2026",
@@ -1749,6 +1751,36 @@ document.addEventListener('DOMContentLoaded', () => {
     mapUrl:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000",
     receptionMapUrl:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000"
   });
+
+  /* Sync nav logo first-names from full groom/bride fields */
+  (function syncNavLogo() {
+    const d = window._inviteData || {};
+    const groomFirst = (d.groom || 'Arjun').split(' ')[0];
+    const brideFirst = (d.bride || 'Meghana').split(' ')[0];
+    document.querySelectorAll('[data-field="navGroom"]').forEach(el => el.textContent = groomFirst);
+    document.querySelectorAll('[data-field="navBride"]').forEach(el => el.textContent = brideFirst);
+  })();
+
+  /* Show "Your invite link" banner when ?d= param is present */
+  (function showInviteLink() {
+    if (!new URLSearchParams(window.location.search).has('d')) return;
+    const banner = document.querySelector('.purchase-banner');
+    if (!banner) return;
+    const url = window.location.href;
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap;justify-content:center;';
+    row.innerHTML =
+      '<span style="font-size:0.72rem;opacity:0.75;">Your invite link:</span>' +
+      '<code id="invite-link-code" style="font-size:0.7rem;background:rgba(0,0,0,0.25);padding:3px 8px;border-radius:4px;word-break:break-all;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + url + '">' + url + '</code>' +
+      '<button id="copy-invite-link" style="font-size:0.7rem;padding:3px 10px;background:rgba(201,148,42,0.9);color:#2a1200;border:none;border-radius:4px;cursor:pointer;font-weight:600;">Copy</button>';
+    banner.appendChild(row);
+    document.getElementById('copy-invite-link').addEventListener('click', function() {
+      navigator.clipboard.writeText(url).then(() => {
+        this.textContent = 'Copied!';
+        setTimeout(() => { this.textContent = 'Copy'; }, 2000);
+      });
+    });
+  })();
 });
 </script>
 <script>
@@ -1776,6 +1808,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!e.data || e.data.type !== 'preview-update') return;
     if (typeof InviteCustomize !== 'undefined' && InviteCustomize.initPreview) {
       InviteCustomize.initPreview(e.data.data);
+      /* Keep nav logo first-names in sync */
+      const d = e.data.data || {};
+      const gf = (d.groom || '').split(' ')[0] || 'Arjun';
+      const bf = (d.bride || '').split(' ')[0] || 'Meghana';
+      document.querySelectorAll('[data-field="navGroom"]').forEach(el => el.textContent = gf);
+      document.querySelectorAll('[data-field="navBride"]').forEach(el => el.textContent = bf);
     }
   });
 })();
