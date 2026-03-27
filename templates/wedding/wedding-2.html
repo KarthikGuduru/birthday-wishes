@@ -1329,7 +1329,7 @@
         <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')">Add to Calendar</button>
       </div>
       <div class="venue-map-embed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="250" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe data-field-src="mapUrl" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="250" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
     <div class="venue-card reveal">
@@ -1342,7 +1342,7 @@
         <button class="venue-pill-btn" onclick="window.open('https://calendar.google.com','_blank')">Add to Calendar</button>
       </div>
       <div class="venue-map-embed">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="250" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe data-field-src="receptionMapUrl" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="250" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </div>
@@ -1374,17 +1374,6 @@
         </div>
       </div>
     </div>
-    <div class="reveal">
-      <div class="palette-title">Recommended Colour Palette</div>
-      <div class="color-swatches">
-        <div class="swatch" style="background:#1a2a8b;color:rgba(255,255,255,0.9);">Royal Blue</div>
-        <div class="swatch" style="background:#c86820;color:rgba(255,255,255,0.9);">Saffron</div>
-        <div class="swatch" style="background:#E5A820;color:rgba(0,0,0,0.8);">Gold</div>
-        <div class="swatch" style="background:#f0b030;color:rgba(0,0,0,0.8);">Marigold</div>
-        <div class="swatch" style="background:#fffbf0;color:rgba(0,0,0,0.7);">Ivory</div>
-        <div class="swatch" style="background:#1a5a20;color:rgba(255,255,255,0.9);">Forest</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1398,38 +1387,38 @@
   <div class="playlist-grid">
     <div class="song-card reveal" onclick="playSong(0)">
       <span class="song-note">♪</span>
-      <div class="song-name">Tere Bina</div>
-      <div class="song-movie">Guru (2007)</div>
+      <div class="song-name" data-field="song1">Tere Bina</div>
+      <div class="song-movie" data-field="song1Film">Guru (2007)</div>
       <div class="song-playing-indicator">♪ Now Playing...</div>
     </div>
     <div class="song-card reveal" onclick="playSong(1)">
       <span class="song-note">♫</span>
-      <div class="song-name">Suraj Hua Maddham</div>
-      <div class="song-movie">Kabhi Khushi Kabhie Gham</div>
+      <div class="song-name" data-field="song2">Suraj Hua Maddham</div>
+      <div class="song-movie" data-field="song2Film">Kabhi Khushi Kabhie Gham</div>
       <div class="song-playing-indicator">♪ Now Playing...</div>
     </div>
     <div class="song-card reveal" onclick="playSong(2)">
       <span class="song-note">♩</span>
-      <div class="song-name">Mitwa</div>
-      <div class="song-movie">Kabhi Kabhi</div>
+      <div class="song-name" data-field="song3">Mitwa</div>
+      <div class="song-movie" data-field="song3Film">Kabhi Kabhi</div>
       <div class="song-playing-indicator">♪ Now Playing...</div>
     </div>
     <div class="song-card reveal" onclick="playSong(3)">
       <span class="song-note">♬</span>
-      <div class="song-name">Dholida</div>
-      <div class="song-movie">Gangubai Kathiawadi</div>
+      <div class="song-name" data-field="song4">Dholida</div>
+      <div class="song-movie" data-field="song4Film">Gangubai Kathiawadi</div>
       <div class="song-playing-indicator">♪ Now Playing...</div>
     </div>
     <div class="song-card reveal" onclick="playSong(4)">
       <span class="song-note">♪</span>
-      <div class="song-name">Morni Banke</div>
-      <div class="song-movie">Badhaai Ho (2018)</div>
+      <div class="song-name" data-field="song5">Morni Banke</div>
+      <div class="song-movie" data-field="song5Film">Badhaai Ho (2018)</div>
       <div class="song-playing-indicator">♪ Now Playing...</div>
     </div>
     <div class="song-card reveal" onclick="playSong(5)">
       <span class="song-note">♫</span>
-      <div class="song-name">Kesariya</div>
-      <div class="song-movie">Brahmastra (2022)</div>
+      <div class="song-name" data-field="song6">Kesariya</div>
+      <div class="song-movie" data-field="song6Film">Brahmastra (2022)</div>
       <div class="song-playing-indicator">♪ Now Playing...</div>
     </div>
   </div>
@@ -1444,27 +1433,27 @@
   </div>
   <div class="gallery-grid">
     <div class="miniature-card reveal" onclick="openLightbox(0)">
-      <div class="miniature-photo m1"><img src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
+      <div class="miniature-photo m1"><img data-field-img="photo1" src="https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">Mehendi Night</div>
     </div>
     <div class="miniature-card reveal" onclick="openLightbox(1)">
-      <div class="miniature-photo m2"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
+      <div class="miniature-photo m2"><img data-field-img="photo2" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">Sangeet</div>
     </div>
     <div class="miniature-card reveal" onclick="openLightbox(2)">
-      <div class="miniature-photo m3"><img src="https://images.unsplash.com/photo-1604604557008-0cbb4e48a645?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
+      <div class="miniature-photo m3"><img data-field-img="photo3" src="https://images.unsplash.com/photo-1604604557008-0cbb4e48a645?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">Baraat</div>
     </div>
     <div class="miniature-card reveal" onclick="openLightbox(3)">
-      <div class="miniature-photo m4"><img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
+      <div class="miniature-photo m4"><img data-field-img="photo4" src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">Pheras</div>
     </div>
     <div class="miniature-card reveal" onclick="openLightbox(4)">
-      <div class="miniature-photo m5"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
+      <div class="miniature-photo m5"><img data-field-img="photo5" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">Reception</div>
     </div>
     <div class="miniature-card reveal" onclick="openLightbox(5)">
-      <div class="miniature-photo m6"><img src="https://images.unsplash.com/photo-1525772764200-be829a350797?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
+      <div class="miniature-photo m6"><img data-field-img="photo6" src="https://images.unsplash.com/photo-1525772764200-be829a350797?w=600&q=80" alt="Wedding memory" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.background='linear-gradient(145deg,#6b1300,#c9942a)';this.src='';"></div>
       <div class="miniature-caption">The Couple</div>
     </div>
   </div>
@@ -1764,7 +1753,22 @@
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  InviteCustomize.initPreview({groom:"Aryan Sharma",bride:"Priya Agarwal",weddingDate:"May 5, 2026",weddingTime:"11:00 AM",receptionDate:"May 5, 2026",receptionTime:"7:00 PM",venue:"Umaid Bhawan Palace, Jodhpur",receptionVenue:"Royal Heritage Banquet, Jaipur",groomFamily:"Shri Vikram Sharma & Smt. Kavita Sharma",brideFamily:"Shri Mahesh Agarwal & Smt. Sunita Agarwal",message:"Shubh Vivah! With joy in our hearts, we invite you to witness this divine union"});
+  InviteCustomize.initPreview({
+    groom:"Aryan Sharma", bride:"Priya Agarwal",
+    weddingDate:"May 5, 2026", weddingTime:"11:00 AM",
+    receptionDate:"May 5, 2026", receptionTime:"7:00 PM",
+    venue:"Umaid Bhawan Palace, Jodhpur",
+    receptionVenue:"Royal Heritage Banquet, Jaipur",
+    groomFamily:"Shri Vikram Sharma & Smt. Kavita Sharma",
+    brideFamily:"Shri Mahesh Agarwal & Smt. Sunita Agarwal",
+    message:"Shubh Vivah! With joy in our hearts, we invite you to witness this divine union",
+    song1:"Tere Bina", song1Film:"Guru (2007)",
+    song2:"Suraj Hua Maddham", song2Film:"Kabhi Khushi Kabhie Gham",
+    song3:"Mitwa", song3Film:"Kabhi Kabhi",
+    song4:"Dholida", song4Film:"Gangubai Kathiawadi",
+    song5:"Morni Banke", song5Film:"Badhaai Ho (2018)",
+    song6:"Kesariya", song6Film:"Brahmastra (2022)"
+  });
 });
 </script>
 <script src="../../js/ux-polish.js" defer></script>
