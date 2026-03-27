@@ -1095,14 +1095,6 @@
 }
 .inv-side-left  { left: 0;  background-image: url('../../assets/bapu/bapu-border-1.png'); }
 .inv-side-right { right: 0; background-image: url('../../assets/bapu/bapu-border-2.png'); }
-@keyframes lanternRise {
-  0%   { opacity: 0;   transform: translateY(0)      translateX(0px)   rotate(-2deg); }
-  8%   { opacity: 0.88; }
-  35%  {               transform: translateY(-32vh)  translateX(18px)  rotate(4deg);  }
-  65%  {               transform: translateY(-65vh)  translateX(-12px) rotate(-3deg); opacity: 0.65; }
-  92%  { opacity: 0.1; }
-  100% { opacity: 0;   transform: translateY(-108vh) translateX(8px)   rotate(2deg);  }
-}
 
 /* Responsive tweaks */
 @media (max-width: 768px) {
@@ -1583,47 +1575,49 @@
     update();
   })();
 
-  /* ── Floating Bapu Lanterns ── */
+  /* ── Scroll-driven Bapu Lanterns ── */
   (function initLanterns() {
     const container = document.getElementById('lanterns-container');
     if (!container) return;
-    const SRC = '../../assets/bapu/bapu-lantern-transparent.png';
+    const SRC   = '../../assets/bapu/bapu-lantern-transparent.png';
     const TOTAL = 9;
+    const items = [];   // { el, speed }
 
-    for (let i = 0; i < TOTAL; i++) {
-      const img = document.createElement('img');
+    for (var i = 0; i < TOTAL; i++) {
+      var img = document.createElement('img');
       img.src = SRC;
       img.className = 'hero-lantern';
       img.setAttribute('aria-hidden', 'true');
       img.setAttribute('loading', 'eager');
 
-      const size     = 38 + Math.random() * 52;      // 38–90 px
-      const xPct     = 4  + Math.random() * 92;      // 4–96 % from left
-      const duration = 9  + Math.random() * 9;       // 9–18 s per cycle
-      const delay    = -(Math.random() * duration);  // start mid-cycle so hero isn't empty
+      var size  = 38 + Math.random() * 52;   // 38–90 px wide
+      var xPct  = 4  + Math.random() * 92;   // 4–96 % from left
+      var yPct  = 8  + Math.random() * 78;   // 8–86 % from top — spread through hero
+      var speed = 0.18 + Math.random() * 0.32; // parallax factor per lantern
 
-      img.style.cssText = [
-        `width:${size.toFixed(1)}px`,
-        `bottom:${(-8 - Math.random() * 12).toFixed(1)}%`,
-        `left:${xPct.toFixed(1)}%`,
-        `animation:lanternRise ${duration.toFixed(2)}s ease-in ${delay.toFixed(2)}s infinite`,
-      ].join(';');
-      /* Pause immediately — inline animationPlayState overrides the shorthand */
-      img.style.animationPlayState = 'paused';
+      img.style.cssText =
+        'width:'   + size.toFixed(1) + 'px;' +
+        'left:'    + xPct.toFixed(1) + '%;' +
+        'top:'     + yPct.toFixed(1) + '%;' +
+        'position:absolute;' +
+        'will-change:transform;' +
+        'filter:drop-shadow(0 0 12px rgba(255,160,30,0.55));';
 
       container.appendChild(img);
+      items.push({ el: img, speed: speed });
     }
 
-    const lanterns = container.querySelectorAll('.hero-lantern');
-
-    /* Start floating on scroll, freeze when scrolling stops */
-    let _lanternScrollTimer = null;
+    /* RAF-throttled scroll: move each lantern up proportional to scrollY */
+    var ticking = false;
+    function update() {
+      var sy = window.scrollY;
+      for (var j = 0; j < items.length; j++) {
+        items[j].el.style.transform = 'translateY(' + (-sy * items[j].speed).toFixed(2) + 'px)';
+      }
+      ticking = false;
+    }
     window.addEventListener('scroll', function() {
-      lanterns.forEach(function(l) { l.style.animationPlayState = 'running'; });
-      clearTimeout(_lanternScrollTimer);
-      _lanternScrollTimer = setTimeout(function() {
-        lanterns.forEach(function(l) { l.style.animationPlayState = 'paused'; });
-      }, 250);
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
     }, { passive: true });
   })();
 
