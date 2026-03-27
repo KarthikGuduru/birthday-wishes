@@ -1628,8 +1628,9 @@
   })();
 
   /* ── Countdown ── */
+  window._weddingDateTime = '2026-04-18T10:30:00+05:30'; // updated by initPreview
   function updateCountdown() {
-    const weddingDate = new Date('2026-04-18T10:30:00+05:30');
+    const weddingDate = new Date(window._weddingDateTime || '2026-04-18T10:30:00+05:30');
     const now = new Date();
     const diff = weddingDate - now;
     if (diff <= 0) {
@@ -1752,13 +1753,27 @@ document.addEventListener('DOMContentLoaded', () => {
     receptionMapUrl:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.4!2d78.0421!3d27.1751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1700000000000"
   });
 
-  /* Sync nav logo first-names from full groom/bride fields */
-  (function syncNavLogo() {
+  /* Sync nav logo first-names + countdown date from loaded data */
+  (function syncFromData() {
     const d = window._inviteData || {};
+    // Nav logo first names
     const groomFirst = (d.groom || 'Arjun').split(' ')[0];
     const brideFirst = (d.bride || 'Meghana').split(' ')[0];
     document.querySelectorAll('[data-field="navGroom"]').forEach(el => el.textContent = groomFirst);
     document.querySelectorAll('[data-field="navBride"]').forEach(el => el.textContent = brideFirst);
+    // Countdown date — parse "April 18, 2026" or ISO formats
+    if (d.weddingDate) {
+      const parsed = new Date(d.weddingDate);
+      if (!isNaN(parsed)) {
+        const time = d.weddingTime || '10:30 AM';
+        const [hm, ap] = [time.slice(0, -3), time.slice(-2)];
+        let [h, m] = hm.split(':').map(Number);
+        if (ap === 'PM' && h !== 12) h += 12;
+        if (ap === 'AM' && h === 12) h = 0;
+        parsed.setHours(h, m || 0, 0, 0);
+        window._weddingDateTime = parsed.toISOString();
+      }
+    }
   })();
 
   /* Show "Your invite link" banner when ?d= param is present */
@@ -1808,12 +1823,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!e.data || e.data.type !== 'preview-update') return;
     if (typeof InviteCustomize !== 'undefined' && InviteCustomize.initPreview) {
       InviteCustomize.initPreview(e.data.data);
-      /* Keep nav logo first-names in sync */
+      /* Keep nav logo + countdown in sync */
       const d = e.data.data || {};
       const gf = (d.groom || '').split(' ')[0] || 'Arjun';
       const bf = (d.bride || '').split(' ')[0] || 'Meghana';
       document.querySelectorAll('[data-field="navGroom"]').forEach(el => el.textContent = gf);
       document.querySelectorAll('[data-field="navBride"]').forEach(el => el.textContent = bf);
+      if (d.weddingDate) {
+        const parsed = new Date(d.weddingDate);
+        if (!isNaN(parsed)) {
+          const time = d.weddingTime || '10:30 AM';
+          const [hm, ap] = [time.slice(0,-3), time.slice(-2)];
+          let [h, m] = hm.split(':').map(Number);
+          if (ap==='PM' && h!==12) h+=12; if (ap==='AM' && h===12) h=0;
+          parsed.setHours(h, m||0, 0, 0);
+          window._weddingDateTime = parsed.toISOString();
+        }
+      }
     }
   });
 })();
