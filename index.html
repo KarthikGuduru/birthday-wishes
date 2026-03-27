@@ -190,25 +190,27 @@
       box-shadow: 0 16px 48px rgba(0,0,0,0.16), 0 4px 12px rgba(0,0,0,0.08);
       border: 3px solid rgba(255,255,255,0.9);
       transform-origin: bottom center;
-      transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+      transition: transform 700ms cubic-bezier(0.23, 1, 0.32, 1),
+                  opacity 400ms ease,
+                  width 700ms cubic-bezier(0.23, 1, 0.32, 1),
+                  height 700ms cubic-bezier(0.23, 1, 0.32, 1),
+                  box-shadow 400ms ease;
     }
+    .fan-card.no-trans { transition: none !important; }
     .fan-card img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: top;
     }
-    .fan-card:nth-child(1) { transform: translateX(-300px) rotate(-22deg) translateY(20px); z-index: 1; }
-    .fan-card:nth-child(2) { transform: translateX(-190px) rotate(-14deg) translateY(10px); z-index: 2; }
-    .fan-card:nth-child(3) { transform: translateX(-90px) rotate(-6deg) translateY(4px); z-index: 3; }
-    .fan-card:nth-child(4) { transform: translateX(0) rotate(0deg) translateY(0); z-index: 5; width: 145px; height: 300px; }
-    .fan-card:nth-child(5) { transform: translateX(90px) rotate(6deg) translateY(4px); z-index: 3; }
-    .fan-card:nth-child(6) { transform: translateX(190px) rotate(14deg) translateY(10px); z-index: 2; }
-    .fan-card:nth-child(7) { transform: translateX(300px) rotate(22deg) translateY(20px); z-index: 1; }
-    .hero-fan-wrap:hover .fan-card:nth-child(1) { transform: translateX(-320px) rotate(-24deg) translateY(22px); }
-    .hero-fan-wrap:hover .fan-card:nth-child(2) { transform: translateX(-205px) rotate(-15deg) translateY(11px); }
-    .hero-fan-wrap:hover .fan-card:nth-child(3) { transform: translateX(-98px) rotate(-7deg) translateY(4px); }
-    .hero-fan-wrap:hover .fan-card:nth-child(5) { transform: translateX(98px) rotate(7deg) translateY(4px); }
-    .hero-fan-wrap:hover .fan-card:nth-child(6) { transform: translateX(205px) rotate(15deg) translateY(11px); }
-    .hero-fan-wrap:hover .fan-card:nth-child(7) { transform: translateX(320px) rotate(24deg) translateY(22px); }
+    /* Fan position slots — cycled by JS carousel via data-pos */
+    .fan-card[data-pos="0"] { transform: translateX(-300px) rotate(-22deg) translateY(20px); z-index: 1; }
+    .fan-card[data-pos="1"] { transform: translateX(-190px) rotate(-14deg) translateY(10px); z-index: 2; }
+    .fan-card[data-pos="2"] { transform: translateX(-90px) rotate(-6deg) translateY(4px); z-index: 3; }
+    .fan-card[data-pos="3"] { transform: translateX(0) rotate(0deg) translateY(0); z-index: 5; width: 145px; height: 300px; }
+    .fan-card[data-pos="4"] { transform: translateX(90px) rotate(6deg) translateY(4px); z-index: 3; }
+    .fan-card[data-pos="5"] { transform: translateX(190px) rotate(14deg) translateY(10px); z-index: 2; }
+    .fan-card[data-pos="6"] { transform: translateX(300px) rotate(22deg) translateY(20px); z-index: 1; }
+    /* Off-screen slot: card teleports here (no transition) before entering from right */
+    .fan-card[data-pos="7"] { transform: translateX(440px) rotate(30deg) translateY(30px); opacity: 0; z-index: 0; width: 130px; height: 270px; }
 
     /* ── SECTION LABEL BAND ──────────────────────────── */
     .section-band {
@@ -934,13 +936,14 @@
       .templates-grid { grid-template-columns: repeat(2, 1fr); }
       .hero-fan { width: 600px; }
       .fan-card { width: 100px; height: 210px; }
-      .fan-card:nth-child(4) { width: 112px; height: 235px; }
-      .fan-card:nth-child(1) { transform: translateX(-220px) rotate(-22deg) translateY(20px); }
-      .fan-card:nth-child(2) { transform: translateX(-140px) rotate(-14deg) translateY(10px); }
-      .fan-card:nth-child(3) { transform: translateX(-68px) rotate(-6deg) translateY(4px); }
-      .fan-card:nth-child(5) { transform: translateX(68px) rotate(6deg) translateY(4px); }
-      .fan-card:nth-child(6) { transform: translateX(140px) rotate(14deg) translateY(10px); }
-      .fan-card:nth-child(7) { transform: translateX(220px) rotate(22deg) translateY(20px); }
+      .fan-card[data-pos="3"] { width: 112px; height: 235px; }
+      .fan-card[data-pos="0"] { transform: translateX(-220px) rotate(-22deg) translateY(20px); }
+      .fan-card[data-pos="1"] { transform: translateX(-140px) rotate(-14deg) translateY(10px); }
+      .fan-card[data-pos="2"] { transform: translateX(-68px) rotate(-6deg) translateY(4px); }
+      .fan-card[data-pos="4"] { transform: translateX(68px) rotate(6deg) translateY(4px); }
+      .fan-card[data-pos="5"] { transform: translateX(140px) rotate(14deg) translateY(10px); }
+      .fan-card[data-pos="6"] { transform: translateX(220px) rotate(22deg) translateY(20px); }
+      .fan-card[data-pos="7"] { transform: translateX(330px) rotate(30deg) translateY(30px); }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
       .compare-head, .compare-row { font-size: 0.75rem; }
     }
@@ -949,13 +952,14 @@
       .hero-fan-wrap { height: 260px; }
       .hero-fan { width: 420px; }
       .fan-card { width: 80px; height: 170px; }
-      .fan-card:nth-child(4) { width: 90px; height: 190px; }
-      .fan-card:nth-child(1) { transform: translateX(-160px) rotate(-22deg) translateY(20px); }
-      .fan-card:nth-child(2) { transform: translateX(-100px) rotate(-14deg) translateY(10px); }
-      .fan-card:nth-child(3) { transform: translateX(-48px) rotate(-6deg) translateY(4px); }
-      .fan-card:nth-child(5) { transform: translateX(48px) rotate(6deg) translateY(4px); }
-      .fan-card:nth-child(6) { transform: translateX(100px) rotate(14deg) translateY(10px); }
-      .fan-card:nth-child(7) { transform: translateX(160px) rotate(22deg) translateY(20px); }
+      .fan-card[data-pos="3"] { width: 90px; height: 190px; }
+      .fan-card[data-pos="0"] { transform: translateX(-160px) rotate(-22deg) translateY(20px); }
+      .fan-card[data-pos="1"] { transform: translateX(-100px) rotate(-14deg) translateY(10px); }
+      .fan-card[data-pos="2"] { transform: translateX(-48px) rotate(-6deg) translateY(4px); }
+      .fan-card[data-pos="4"] { transform: translateX(48px) rotate(6deg) translateY(4px); }
+      .fan-card[data-pos="5"] { transform: translateX(100px) rotate(14deg) translateY(10px); }
+      .fan-card[data-pos="6"] { transform: translateX(160px) rotate(22deg) translateY(20px); }
+      .fan-card[data-pos="7"] { transform: translateX(240px) rotate(30deg) translateY(30px); }
       .compare-section { padding: 4rem 1rem; }
       .compare-table { font-size: 0.72rem; }
     }
@@ -998,28 +1002,28 @@
       Choose a template
     </a>
 
-    <!-- Fan spread of template cards -->
+    <!-- Fan spread of template cards — JS carousel cycles data-pos 0-6 -->
     <div class="hero-fan-wrap r">
       <div class="hero-fan">
-        <div class="fan-card">
+        <div class="fan-card" data-pos="0">
           <img src="assets/generated/traditional-engagement-hero.jpeg" alt="Traditional Engagement" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#9b1840,#c9942a)';">
         </div>
-        <div class="fan-card">
+        <div class="fan-card" data-pos="1">
           <img src="assets/generated/birthday-elegant-hero.jpeg" alt="Elegant Birthday" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#c9942a,#7b1818)';">
         </div>
-        <div class="fan-card">
+        <div class="fan-card" data-pos="2">
           <img src="assets/generated/gopuram-golden-hour.jpeg" alt="South Indian Wedding" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#6b1300,#c9942a)';">
         </div>
-        <div class="fan-card">
+        <div class="fan-card" data-pos="3">
           <img src="assets/generated/rajasthani-palace.jpeg" alt="Rajasthani Wedding" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#1a3a8b,#c9942a)';">
         </div>
-        <div class="fan-card">
+        <div class="fan-card" data-pos="4">
           <img src="assets/generated/griha-pravesham-hero.jpeg" alt="Griha Pravesham" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#c86820,#2a7020)';">
         </div>
-        <div class="fan-card">
+        <div class="fan-card" data-pos="5">
           <img src="assets/generated/golden-anniversary-hero.jpeg" alt="Golden Anniversary" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#8b0000,#c9942a)';">
         </div>
-        <div class="fan-card">
+        <div class="fan-card" data-pos="6">
           <img src="assets/generated/seemantham-hero.jpeg" alt="Seemantham" loading="eager" onerror="this.parentElement.style.background='linear-gradient(145deg,#b8860b,#228b22)';">
         </div>
       </div>
@@ -1797,6 +1801,52 @@
       btn.style.background = '#1a7a1a';
       setTimeout(() => { btn.textContent = 'Subscribe'; btn.style.background = ''; }, 3000);
     }
+
+    // ── Hero fan carousel ──────────────────────────────
+    (function() {
+      const fanWrap = document.querySelector('.hero-fan-wrap');
+      const cards = Array.from(document.querySelectorAll('.fan-card'));
+      if (!cards.length || !fanWrap) return;
+
+      // cardOrder[i] = the card element currently occupying fan position i
+      // Initially matches HTML order (data-pos 0-6 already set in HTML)
+      let cardOrder = cards.slice();
+      let paused = false;
+
+      fanWrap.addEventListener('mouseenter', () => { paused = true; });
+      fanWrap.addEventListener('mouseleave', () => { paused = false; });
+
+      function tick() {
+        if (paused) return;
+
+        const exitCard = cardOrder[0]; // leftmost card leaves
+
+        // 1. Instant teleport to off-screen right — no transition
+        exitCard.classList.add('no-trans');
+        exitCard.dataset.pos = '7';
+        void exitCard.offsetWidth; // force reflow so browser commits the above
+
+        // 2. Restore transition (exit card now sits invisibly off-screen)
+        exitCard.classList.remove('no-trans');
+
+        // 3. Rotate queue: [c0,c1,c2,c3,c4,c5,c6] → [c1,c2,c3,c4,c5,c6,c0]
+        cardOrder.push(cardOrder.shift());
+
+        // 4. Animate cards at positions 0-5 to their new slots
+        for (let i = 0; i < cardOrder.length - 1; i++) {
+          cardOrder[i].dataset.pos = String(i);
+        }
+
+        // 5. On the very next frame, animate exit card into rightmost slot (pos 6)
+        //    Transition carries it smoothly from pos-7 (off-screen) → pos-6 (rightmost)
+        requestAnimationFrame(() => {
+          cardOrder[cardOrder.length - 1].dataset.pos = '6';
+        });
+      }
+
+      // Kick off — first tick after a short pause so page load settles
+      setTimeout(() => { tick(); setInterval(tick, 2600); }, 1800);
+    })();
   </script>
 </body>
 </html>
