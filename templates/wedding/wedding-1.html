@@ -811,19 +811,19 @@
 
     /* ── RSVP SECTION ── */
     #rsvp {
-      background: var(--teal-deep);
+      background: #F8E8A0;
       padding: 7rem 2rem 8rem;
       position: relative;
       overflow: hidden;
     }
-    #rsvp.damask-bg::before { background-image: repeating-radial-gradient(circle at 50% 50%, rgba(201,148,42,0.05) 0%, rgba(201,148,42,0.05) 1px, transparent 1px, transparent 28px); }
+    #rsvp.damask-bg::before { background-image: repeating-radial-gradient(circle at 50% 50%, rgba(201,148,42,0.08) 0%, rgba(201,148,42,0.08) 1px, transparent 1px, transparent 28px); }
 
     .rsvp-backdrop {
       position: absolute;
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(5rem, 18vw, 12rem);
       font-weight: 700; text-transform: uppercase;
-      color: rgba(255,255,255,0.05);
+      color: rgba(180,100,0,0.07);
       letter-spacing: 0.03em;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
@@ -1769,6 +1769,53 @@ document.addEventListener('DOMContentLoaded', () => {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
   }
+
+  /* ── MUSIC TOGGLE ── */
+  #music-btn {
+    position: fixed; bottom: 5.5rem; right: 1.2rem;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(253,246,232,0.92);
+    border: 1.5px solid rgba(212,98,10,0.35);
+    box-shadow: 0 2px 12px rgba(45,20,0,0.18);
+    cursor: pointer; z-index: 9990;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; transition: transform 0.2s ease, background 0.2s ease;
+    backdrop-filter: blur(6px);
+  }
+  #music-btn:hover { transform: scale(1.1); background: rgba(253,246,232,1); }
+  #music-btn.muted { opacity: 0.5; }
 </style>
+
+<!-- Background music -->
+<audio id="bg-music" src="../../assets/audio/breathe.mp3" loop preload="auto"></audio>
+
+<!-- Music toggle -->
+<button id="music-btn" title="Toggle music" aria-label="Toggle background music">♪</button>
+
+<script>
+  (function() {
+    const audio = document.getElementById('bg-music');
+    const btn   = document.getElementById('music-btn');
+    audio.volume = 0.65;
+    let playing = false;
+
+    function startMusic() {
+      if (!playing) {
+        audio.play().then(() => { playing = true; btn.classList.remove('muted'); }).catch(() => {});
+      }
+    }
+
+    ['click','scroll','touchstart'].forEach(ev =>
+      document.addEventListener(ev, startMusic, { once: true, passive: true })
+    );
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!playing) { startMusic(); return; }
+      audio.muted = !audio.muted;
+      btn.classList.toggle('muted', audio.muted);
+    });
+  })();
+</script>
 </body>
 </html>
